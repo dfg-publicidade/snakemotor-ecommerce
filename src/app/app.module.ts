@@ -1,8 +1,10 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppCustomPreloader } from './_services/AppCustomPreloader';
+import { LayoutModule } from './layout/layout.module';
+import { AppCustomPreloader } from './service/AppCustomPreloader';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { AppCustomPreloader } from './_services/AppCustomPreloader';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    AppRoutingModule,
+    LayoutModule
   ],
   providers: [
     AppCustomPreloader

@@ -1,0 +1,232 @@
+// Core variables and mixins
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
+
+@import "../../../res/variables.scss";
+
+:host ::ng-deep {
+    @import "../../../../node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.carousel.scss";
+    @import "../../../../node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.theme.default.scss";
+}
+
+div.produtos {
+    z-index: 2;
+
+    &.geral {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        & > div.produto-item {
+            margin: 5px;
+            width: 190px;
+
+            & > a {
+                display: block;
+                width: 100%;
+                & > div.imagem,
+                & > div.imagem-empty {
+                    display: block;
+                    width: 100%;
+                    text-align: center;
+                }
+
+                & > span {
+                    display: block;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    div.produto-item {
+        background: #fff;
+        border-radius: 8px;
+        padding: 10px;
+        max-height: 330px;
+        position: relative;
+        & > a {
+            margin-bottom: 10px;
+            display: block;
+            width: 100%;
+            & > div.imagem,
+            & > div.imagem-empty {
+                background-size: 60%;
+                background-position: center;
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 155px;
+                overflow-y: hidden;
+                margin-bottom: 10px;
+            }
+
+            & > div.imagem-empty {
+                background-image: url("../../../res/imagens/imagem.svg");
+            }
+
+            & > span {
+                width: 100%;
+                display: block;
+
+                &.nome {
+                    color: #878787;
+                    line-height: 18px;
+                    height: 50px;
+                    overflow: hidden;
+                }
+                &.preco {
+                    color: #474747;
+                    font-size: 18px;
+                    font-weight: 600;
+                    display: flex;
+                    & > span {
+                        display: flex;
+                    }
+                    & > div.form-group {
+                        display: flex;
+
+                        & > label {
+                            font-size: 13px;
+                        }
+                    }
+                }
+            }
+        }
+
+        & > span {
+            &.login {
+                width: 100%;
+                text-align: center;
+                display: inline-block;
+                line-height: 15px;
+                & > a {
+                    color: #474747;
+                    text-align: center;
+                    font-style: italic;
+                    font-weight: bold;
+                    font-size: 13px;
+                }
+            }
+        }
+
+        & > button {
+            color: #fff;
+            background: #00cb92;
+            border: none;
+            border-radius: 5px;
+            padding: 8px;
+            display: flex;
+            width: 100%;
+            margin: 0;
+            justify-content: center;
+            text-transform: capitalize;
+
+            &:disabled {
+                opacity: 0.5;
+            }
+
+            &.disabled{
+                opacity: 0.5;
+            }
+
+            & > i {
+                display: flex;
+                align-self: center;
+                padding-right: 5px;
+            }
+            & > span {
+                display: flex;
+                align-self: center;
+            }
+        }
+    }
+    ::ng-deep {
+        div.owl-theme {
+            div.owl-stage-outer {
+                z-index: 2;
+
+                owl-stage {
+                    width: 100% !important;
+                    & > div {
+                        min-width: 100%;
+                        & > div.owl-stage {
+                            min-width: 100%;
+                            & > div.owl-item {
+                                // min-width: 212px;
+                                margin-bottom: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+            div.owl-nav {
+                position: absolute;
+                top: 50%;
+                width: 100%;
+                transform: translateY(-50%);
+
+                display: flex;
+                justify-content: space-between;
+
+                & > div.owl-prev {
+                    margin-left: -40px;
+                }
+
+                & > div.owl-next {
+                    margin-right: -40px;
+                }
+
+                & > div.owl-prev,
+                & > div.owl-next {
+                    background-color: #cccccc44;
+
+                    @include transition(all, linear, 0.3s);
+
+                    &:hover {
+                        background-color: #cccccc66;
+                    }
+
+                    & > i.fas,
+                    & > i.fab {
+                        font-size: 40px;
+                    }
+                }
+            }
+
+            div.owl-dots {
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+
+                & > div.owl-dot {
+                    &:hover {
+                        & > span {
+                            background-color: #cccccc66;
+                        }
+                    }
+
+                    &.active {
+                        & > span {
+                            background-color: #fbd744;
+                        }
+                    }
+
+                    & > span {
+                        width: 13px;
+                        height: 13px;
+                        border: 1px solid #f3f3f3;
+                        background-color: #cccccc44;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@import "responsive/produtos-lg.scss";
+@import "responsive/produtos-md.scss";
+@import "responsive/produtos-sm.scss";
+@import "responsive/produtos-xs.scss";
+@import "responsive/produtos-xss.scss";
+@import "responsive/produtos-print.scss";

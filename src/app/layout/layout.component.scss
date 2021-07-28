@@ -1,0 +1,20 @@
+// Core variables and mixins
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+
+@import "../../res/variables.scss";
+
+div.body-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #00000077;
+    z-index: 50;
+    visibility: hidden;
+    opacity: 0;
+
+    @include transition(all, linear, .3s);
+}

@@ -1,0 +1,59 @@
+<aside (scroll)="scrollPage($event)">
+    <nav class="menu-mobile">
+        <ul class="perfil">
+            <li class="principal" *ngIf="!getUsuario()">
+                <a [routerLink]="['/login']">
+                    <span>
+                        Olá, <strong>cadastre-se</strong> ou faça <strong>login</strong>
+                    </span>
+                </a>
+            </li>
+            <li class="principal" *ngIf="getUsuario()">
+                <a [routerLink]="['/perfil']">
+                    <span>
+                        Olá, <strong>{{getUsuario().nome | firstName}}</strong>
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <ul class="principal">
+            <!-- <li (click)="toggleMenu()"><a href="#">Fechar</a></li> -->
+            <li>
+                <a href="#">
+                    <i class="icon icon-capacete outline"></i>
+                    <span>Capacetes</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="icon icon-vestuario"></i>
+                    <span>Vestuário</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="icon icon-moto-bigtrail"></i>
+                    <span>Bigtrail</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="icon icon-moto"></i>
+                    <span>Street</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="icon icon-pneu"></i>
+                    <span>Pneus</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="icon icon-moto-frente"></i>
+                    <span>Motos 0Km e Usadas</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</aside>

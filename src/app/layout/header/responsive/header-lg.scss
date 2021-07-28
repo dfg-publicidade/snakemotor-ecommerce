@@ -1,0 +1,82 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(lg) {
+    header {
+        & > div.principal {
+            background-position-x: -150px;
+            & > div.container {
+                app-busca {
+                    padding: 0 20px;
+                }
+
+                & > div.icones {
+                    & > a {
+                        margin-right: 10px;
+
+                        &.acesso {
+                            width: 125px;
+
+                            & > i.icon {
+                                height: 25px;
+                                width: 25px;
+                            }
+                        }
+
+                        & > span {
+                            &.titulo {
+                                padding-left: 10px;
+                                width: 100%;
+                            }
+                            &.badge {
+                                height: 28px;
+                                width: 28px;
+                                text-align: center;
+                                & > span {
+                                    text-align: center;
+                                    margin-top: 3px;
+                                    display: inline-block;
+                                    font-size: 13px;
+                                }
+                            }
+                        }
+
+                        &.carrinho {
+                            & > i {
+                                font-size: 25px;
+                            }
+                        }
+
+                        &:last-of-type{
+                            margin-right: 0;
+                        }
+                    }
+                }
+
+                & > nav.menu-principal {
+                    & > ul {
+                        & > li {
+                            padding: 0;
+                            & > a {
+                                padding: 8px;
+
+                                & > i {
+                                    &.icon {
+                                        width: 25px;
+                                        height: 25px;
+                                    }
+                                }
+
+                                & > span {
+                                    font-size: 13px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

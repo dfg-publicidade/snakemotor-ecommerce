@@ -1,0 +1,50 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(xs) {
+    footer {
+        &>div.container {
+            &>nav.menu-rodape {
+                &>ul {
+                    &>li {
+                        &>ul {
+                            &>li {
+                                &.titulo {
+                                    &:not(:first-of-type) {
+                                    }
+                                }
+    
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            & > div.newsletter {
+                width: 100%;
+                padding-bottom: 0;
+                & > div.campo {
+                    & > i {
+                       display: none;
+                    }
+                    & > input {
+                        padding-left: 10px;
+                        padding-right: 85px;
+                    }
+                    & > button {
+                        width: 75px;
+                        font-size: 12px;
+                        top: 7px;
+
+                    }
+                }
+            }
+        }
+    }
+}

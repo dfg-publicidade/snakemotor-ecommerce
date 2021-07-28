@@ -1,0 +1,90 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(sm) {
+    footer {
+        padding: 40px 0 20px 0;
+
+        & > div.container {
+            & > nav.menu-rodape {
+                & > ul {
+                    display: block;
+
+                    & > li {
+                        & > ul {
+                            margin-bottom: 20px;
+
+                            & > li {
+                                &.titulo {
+                                    &:not(:first-of-type) {
+                                    }
+                                }
+
+                                & > a {
+                                    &:hover {
+                                    }
+                                }
+                                & > nav {
+                                    & > ul {
+                                        display: block !important;
+                                        width: 100%;
+                                        text-align: center;
+
+                                        & > li {
+                                            display: inline-block;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            & > div.newsletter {
+                width: 100%;
+                & > div.campo {
+                    & > i {
+                       
+                    }
+                    & > input {
+                        width: 100%;
+                    }
+                    & > button {
+                        
+                    }
+                }
+            }
+        }
+
+        &.inferior {
+            & > div.container {
+                & > div {
+                    display: block !important;
+                    width: 100%;
+                    text-align: center;
+
+                    & > div {
+                        margin-bottom: 10px;
+                        display: inline-block;
+
+                        &.info{
+                            &>span{
+                                margin-top: 15px;
+                            }
+                        }
+
+                        &.logo {
+                            width: 220px;
+                            background-size: 100%;
+                            background-position: center;
+                            margin-right: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

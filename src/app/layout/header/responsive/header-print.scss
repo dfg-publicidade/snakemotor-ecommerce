@@ -1,0 +1,126 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@media print {
+    header {
+        &.scrolled {
+            &>div.container {
+                &>div.principal {
+                    &>div.logo {
+                    }
+                }
+            }
+        }
+    
+        &>div.container {
+            &>div.superior {
+                &>nav {
+                    &::before {
+                    }
+    
+                    &::after {
+                    }
+    
+                    &>div {
+                        &>ul {
+                            &>li {
+                            }
+                        }
+                    }
+                }
+    
+                &>nav.telefones {
+                    &>div {
+                        &>ul {
+                            &>li {
+                                &.destaque {
+                                    &>a {
+                                        &:hover {
+                                            &::before {
+                                            }
+        
+                                            &::after {
+                                            }
+
+                                            &>span {
+                                            }
+                                        }
+    
+                                        &::before {
+                                        }
+    
+                                        &::after {
+                                        }
+                                    }        
+                                }
+    
+                                &>a {
+                                    &:hover {
+                                    }
+    
+                                    &>i.fas, &>i.fab {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &>div.principal {
+                &>div.logo {
+                }
+                &>nav.menu-principal {
+                    &>ul {
+                        &>li {
+                            &:hover {
+                                &>a {
+                                    &>span {
+                                    }
+                                }
+                            }
+    
+                            &.show {
+                                &>a {
+                                    &>span {
+                                    }
+                                }
+                            }
+    
+                            &.button {
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+
+                            &>a {
+                                &>span {
+                                }
+                            }
+    
+                            &>div.dropdown-menu {
+                                &>div {
+                                    &>a {
+                                        &:hover {
+                                            &>span {
+                                            }
+                                        }
+    
+                                        &>span {
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    header-offset {
+        &.scrolled {
+        }
+    }
+}

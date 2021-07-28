@@ -1,0 +1,301 @@
+// Core variables and mixins
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
+
+@import "../../../res/variables.scss";
+
+.btn-group-fab {
+    position: fixed;
+    width: 50px;
+    height: auto;
+    right: 20px;
+    bottom: 20px;
+    z-index: 150;
+
+    & > div {
+        position: relative;
+        width: 100%;
+        height: auto;
+
+        & > a {
+            &.btn {
+                position: absolute;
+                bottom: 0;
+                margin: 4px auto;
+
+                &.btn-main {
+                    border-radius: 50%;
+                    display: block;
+                    margin-bottom: 4px;
+                    background: #25d366;
+                    border-color: #25d366;
+                    width: 50px;
+                    height: 50px;
+                    right: 50%;
+                    margin-right: -25px;
+                    z-index: 9;
+
+                    & > button {
+                        background: #25d366;
+                        border-color: #25d366;
+                        padding: 0;
+                        & > i {
+                            font-size: 28px;
+                            margin-top: 4px;
+                        }
+                    }
+                }
+
+                &.btn-sub {
+                    display: none;
+                    width: 200px;
+                    bottom: 0;
+                    z-index: 8;
+                    right: 50%;
+                    margin-right: -20px;
+                    -webkit-transition: all 2s;
+                    transition: all 0.5s;
+                    background: #128c7e;
+                    border-color: #128c7e;
+
+                    & > button {
+                        background: #128c7e;
+                        border-color: #128c7e;
+                    }
+
+                    &:nth-child(2) {
+                        bottom: 60px;
+                    }
+                    &:nth-child(3) {
+                        bottom: 110px;
+                    }
+                    &:nth-child(4) {
+                        bottom: 160px;
+                    }
+                    &:nth-child(5) {
+                        bottom: 210px;
+                    }
+                }
+            }
+        }
+    }
+
+    &.active {
+        & > div {
+            & > a {
+                &.btn-sub {
+                    -webkit-transition: all 2s;
+                    transition: all 0.5s;
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+footer {
+    background-color: $primary;
+    padding: 40px 0 0 0;
+    max-width: 100vw;
+
+    @include transition(all, linear, 0.3s);
+
+    & > div.container {
+        & > nav.menu-rodape {
+            & > ul {
+                display: flex;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+
+                & > li {
+                    flex-grow: 1;
+
+                    & > ul {
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+
+                        & > li {
+                            font-size: 14px;
+                            flex-grow: 1;
+                            margin-bottom: 10px;
+
+                            &.titulo {
+                                color: #fff;
+                                text-transform: uppercase;
+                                font-weight: 600;
+                                margin-bottom: 20px;
+                                font-size: 16px;
+                                white-space: nowrap;
+
+                                &:not(:first-of-type) {
+                                    margin-top: 20px;
+                                }
+                            }
+
+                            & > a {
+                                display: block;
+                                color: #a7a9b8;
+                                font-weight: 300;
+                                line-height: 18px;
+
+                                @include transition(all, linear, 0.3s);
+
+                                &:hover {
+                                    color: #fff;
+                                }
+
+                                & > span {
+                                    & > i.fab,
+                                    & > i.far {
+                                        color: $secondary;
+                                        padding-left: 5px;
+                                    }
+                                }
+                            }
+
+                            & > nav.social {
+                                display: flex;
+                                flex-direction: column;
+
+                                & > ul {
+                                    display: flex;
+                                    justify-content: flex-start;
+                                    list-style: none;
+                                    margin: 0;
+                                    padding: 0;
+
+                                    & > li {
+                                        margin-left: 10px;
+
+                                        & > a {
+                                            &:hover {
+                                                & > span {
+                                                    & > i.fab,
+                                                    & > i.far {
+                                                        color: $secondary;
+                                                    }
+                                                }
+                                            }
+
+                                            & > span {
+                                                display: flex;
+                                                font-size: 30px;
+
+                                                & > i.fab {
+                                                    color: #fff;
+                                                    align-self: center;
+
+                                                    @include transition(all, linear, 0.3s);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        & > div.newsletter {
+            display: inline-block;
+            padding: 20px 0;
+            width: auto;
+
+            & > span {
+                color: #fff;
+                margin-bottom: 10px;
+                display: inline-block;
+            }
+            & > div.campo {
+                position: relative;
+                display: block;
+
+                & > i {
+                    color: #636363;
+                    position: absolute;
+                    left: 20px;
+                    top: 16px;
+                    font-size: 22px;
+                }
+                & > input {
+                    border-radius: 10px;
+                    padding: 15px;
+                    border: 0;
+                    width: 50vw;
+                    padding-right: 160px;
+                    padding-left: 50px;
+                }
+                & > button {
+                    position: absolute;
+                    right: 3px;
+                    top: 3px;
+                    background: $secondary;
+                    color: $primary;
+                    padding: 10px;
+                    border: 0;
+                    width: 150px;
+                    border-radius: 10px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    margin: 0;
+                    padding-bottom: 9px;
+                }
+            }
+        }
+    }
+
+    &.inferior {
+        padding: 30px 0;
+        background: #fff;
+
+        & > div.container {
+            & > div {
+                display: flex;
+                justify-content: space-between;
+
+                & > div.info {
+                    flex-wrap: wrap;
+                    text-align: center;
+                    & > img {
+                        width: 200px;
+                    }
+                    & > span {
+                        width: 100%;
+                        display: inline-block;
+                        color: #8c8c8c;
+                        font-size: 13px;
+                    }
+                }
+                & > div.dfgpublicidade {
+                    flex-wrap: wrap;
+                    text-align: center;
+
+                    & > a {
+                        color: #575656;
+
+                        & > span {
+                            width: 100%;
+                            display: inline-block;
+                            margin-bottom: 5px;
+                        }
+                        & > img {
+                            width: 80px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@import "responsive/footer-lg.scss";
+@import "responsive/footer-md.scss";
+@import "responsive/footer-sm.scss";
+@import "responsive/footer-xs.scss";
+@import "responsive/footer-xss.scss";
+@import "responsive/footer-print.scss";

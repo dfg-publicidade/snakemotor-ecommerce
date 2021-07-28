@@ -1,0 +1,142 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(xs) {
+    header {
+        &.scrolled {
+            & > div.principal {
+                & > div.container {
+                    & > div.logo {
+                        margin: auto;
+                    }
+                }
+            }
+        }
+
+        & > div.superior {
+            & > div.container {
+                & > button {
+                    margin: 0;
+                }
+                & > nav.telefones {
+                    & > ul {
+                        & > li {
+                            &.telefone {
+                                & > a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+
+                            &.whatsapp {
+                                & > a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+
+                            & > a {
+                                &:hover {
+                                }
+
+                                & > i.fas,
+                                & > i.fab {
+                                }
+                            }
+                        }
+                    }
+                }
+
+                & > a {
+                    &:hover {
+                    }
+                }
+            }
+        }
+
+        & > div.principal {
+            & > div.container {
+                &>button{
+                    margin: 0;
+                }
+                & > div.logo {
+                    margin-top: 5px !important;
+                    margin-bottom: 5px !important;
+                }
+
+                & > nav.menu-principal {
+                    & > ul {
+                        &.mobile-buttons {
+                            & > li {
+                            }
+                        }
+
+                        & > li {
+                            &:hover {
+                                & > a {
+                                    & > span {
+                                    }
+                                }
+                            }
+
+                            &.show {
+                                & > a {
+                                    & > span {
+                                    }
+
+                                    & > hr {
+                                    }
+                                }
+                            }
+
+                            &.button,
+                            &.button2 {
+                                & > a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+
+                            &.button {
+                                & > a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+
+                            &.button2 {
+                                & > a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+
+                            & > div.dropdown-menu {
+                                & > div {
+                                    & > a {
+                                        &:hover {
+                                            & > span {
+                                            }
+                                        }
+
+                                        & > span {
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    header-offset {
+        height: 50px;
+
+        &.scrolled {
+        }
+    }
+}

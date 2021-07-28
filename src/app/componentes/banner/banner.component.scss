@@ -1,0 +1,104 @@
+// Core variables and mixins
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
+
+@import "../../../res/variables.scss";
+
+:host ::ng-deep {
+    @import '../../../../node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+    @import '../../../../node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+}
+
+div.banner {
+    ::ng-deep {
+        div.owl-theme {
+            min-height: 250px;
+            div.banner-item{
+                display: block;
+                text-align: center;
+                width: 100%;
+                &>img{
+                    width: 100%;
+                    display: inline-block;
+                }
+            }
+            div.owl-stage-outer{
+                cursor: pointer;
+                z-index: 100;
+            }
+            div.owl-nav {
+                position: absolute;
+                top: 50%;
+                width: 100%;
+                transform: translateY(-50%);
+                z-index: 1;
+
+                display: flex;
+                justify-content: space-between;
+
+                & > div.owl-prev {
+                    margin-left: -40px;
+                }
+
+                & > div.owl-next {
+                    margin-right: -40px;
+                }
+
+                &>div.owl-prev,
+                &>div.owl-next {
+                    display: none;
+                    background-color: #CCCCCC44;
+
+                    @include transition(all, linear, .3s);
+
+                    &:hover {
+                        background-color: #CCCCCC66;
+                    }
+
+                    &>i.fas,
+                    &>i.fab {
+                        font-size: 40px;
+                    }
+                }
+            }
+
+            div.owl-dots {
+                z-index: 101;
+                display: none;
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+
+                &>div.owl-dot {
+                    &:hover {
+                        &>span {
+                            background-color: #CCCCCC66;
+                        }
+                    }
+
+                    &.active {
+                        &>span {
+                            background-color: #FBD744;
+                        }
+                    }
+
+                    &>span {
+                        width: 13px;
+                        height: 13px;
+                        border: 1px solid #F3F3F3;
+                        background-color: #CCCCCC44;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@import "responsive/banner-lg.scss";
+@import "responsive/banner-md.scss";
+@import "responsive/banner-sm.scss";
+@import "responsive/banner-xs.scss";
+@import "responsive/banner-xss.scss";
+@import "responsive/banner-print.scss";

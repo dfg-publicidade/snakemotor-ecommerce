@@ -1,0 +1,9 @@
+<div class="banner" *ngIf="items">
+    <owl-carousel-o [options]="options">
+        <ng-template carouselSlide *ngFor="let item of items">
+            <div class="banner-item" (click)="abrirBanner(item)">
+                <img [src]="item.imagem" [alt]="item.titulo" (load)="habilitarBanner()">
+            </div>
+        </ng-template>
+    </owl-carousel-o>
+</div>

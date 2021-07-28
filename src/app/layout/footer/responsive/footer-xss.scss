@@ -1,0 +1,174 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@media (max-width: 479px) {
+    footer {
+        &>div.container {
+            &>nav.menu-rodape {
+                text-align: center;
+
+                &>ul {
+                    &>li {
+                        &>ul {
+                            &>li {
+                                &.titulo {
+                                    &:not(:first-of-type) {
+                                    }
+                                }
+    
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    
+            &>div.inferior {
+                &>div {
+                    &>div.logo {
+                    }
+                    &>div.selo {
+                    }
+                }
+                &>nav.social {
+                    &>ul {
+                        &>li {
+                            &>a {
+                                &:hover {
+                                    &>span {
+                                        &>i.fab {
+                                        }
+                                    }
+                                }
+    
+                                &>span {
+                                    &>i.fab {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &>span.atualizacao {
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 380px) {
+    footer {
+        &>div.container {
+            &>nav.menu-rodape {
+                &>ul {
+                    &>li {
+                        &>ul {
+                            &>li {
+                                &.titulo {
+                                    &:not(:first-of-type) {
+                                    }
+                                }
+    
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    
+            &>div.inferior {
+                &>div {
+                    &>div.logo {
+                    }
+                    &>div.selo {
+                    }
+                }
+                &>nav.social {
+                    &>ul {
+                        &>li {
+                            &>a {
+                                &:hover {
+                                    &>span {
+                                        &>i.fab {
+                                        }
+                                    }
+                                }
+    
+                                &>span {
+                                    &>i.fab {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &>span.atualizacao {
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 330px) {
+    footer {
+        &>div.container {
+            &>nav.menu-rodape {
+                &>ul {
+                    &>li {
+                        &>ul {
+                            &>li {
+                                &.titulo {
+                                    &:not(:first-of-type) {
+                                    }
+                                }
+    
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    
+            &>div.inferior {
+                &>div {
+                    &>div.logo {
+                    }
+                    &>div.selo {
+                    }
+                }
+                &>nav.social {
+                    &>ul {
+                        &>li {
+                            &>a {
+                                &:hover {
+                                    &>span {
+                                        &>i.fab {
+                                        }
+                                    }
+                                }
+    
+                                &>span {
+                                    &>i.fab {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &>span.atualizacao {
+                    }
+                }
+            }
+        }
+    }
+}

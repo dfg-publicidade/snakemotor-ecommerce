@@ -1,0 +1,43 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(sm) {
+    div.loading {
+        & > div.item-loading {
+            &.loading-background {
+                & > div.produto-item {
+                    width: 45%;
+                }
+
+                & > div.produto {
+                    & > div.imagens {
+                        width: 100%;
+                    }
+    
+                    & > div.info {
+                        margin-top: 10px;
+                        padding-left: 0;
+                        width: 100%;
+    
+                        & > span {
+                            &.produto-nome {
+                                width: 100%;
+                            }
+                            &.produto-codigo {
+                                width: 100%;
+                            }
+                            &.produto-valor {
+                                width: 100%;
+                            }
+                            &.produto-botao {
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

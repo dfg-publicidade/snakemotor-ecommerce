@@ -1,0 +1,21 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(xs) {
+    div.busca {
+        &>div.container {
+            &>h2 {
+            }
+            &>div.campo-busca {
+                &>i.fas {
+                }
+                &>input {
+                    padding-top: 8px;
+                    padding-bottom: 8px;
+                }
+            }
+        }
+    } 
+}

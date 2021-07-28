@@ -1,0 +1,24 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(xs) {
+    div.loading {
+        & > div.item-loading {
+            &.loading-background {
+                & > div.produto {
+                    & > div.imagens {
+                        height: 200px;
+                    }
+    
+                    & > div.info {
+                        & > span {
+                            height: 30px important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,68 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(md) {
+    footer {
+        &>div.container {
+            &>nav.menu-rodape {
+                &>ul {
+                    &>li {
+                        &>ul {
+                            &>li {
+                                &.titulo {
+                                    font-size: 15px;
+
+                                    &:not(:first-of-type) {
+                                    }
+                                }
+    
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    
+            &>div.inferior {
+                &>div {
+                    &>div.logo {
+                        width: 90px;
+                        height: 65px;
+                    }
+                    &>div.selo {
+                        width: 118px;
+                        height: 58px;
+                    }
+                }
+                &>nav.social {
+                    &>ul {
+                        &>li {
+                            &>a {
+                                &:hover {
+                                    &>span {
+                                        &>i.fab {
+                                        }
+                                    }
+                                }
+    
+                                &>span {
+                                    &>i.fab {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &>span.atualizacao {
+                        margin-top: 8px;
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

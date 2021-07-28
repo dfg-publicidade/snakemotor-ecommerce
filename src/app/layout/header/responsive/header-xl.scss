@@ -1,0 +1,21 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(xl) {
+    header {
+        & > div.principal {
+            background-position-x: -160px;
+            & > div.container {
+                & > nav.menu-principal {
+                    & > ul {
+                        & > li {
+                            padding: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@media (max-width: 479px) {
+    div.busca {
+        &>div.container {
+            &>h2 {
+            }
+            &>div.campo-busca {
+                &>i.fas {
+                }
+                &>input {
+                }
+            }
+        }
+    } 
+}

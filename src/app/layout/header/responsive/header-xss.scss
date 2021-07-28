@@ -1,0 +1,418 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@media (max-width: 479px) {
+    header {
+        &.scrolled {
+            &>div.principal {
+                &>div.container {
+                    &>div.logo {
+                    }
+                }
+            }
+        }
+    
+        &>div.superior {
+            &>div.container {
+                &>nav.telefones {
+                    &>ul {
+                        &>li {
+                            &.telefone {
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+    
+                            &.whatsapp {
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+    
+                            &>a {
+                                &:hover {
+                                }
+    
+                                &>i.fas,
+                                &>i.fab {
+                                }
+                            }
+                        }
+                    }
+                }
+    
+                &>a {
+                    &:hover {
+                    }
+                }
+            }
+        }
+    
+        &>div.principal {
+            &>div.container {
+                &>button.button-menu {
+                    width: auto;
+                }
+
+                &>div.logo {
+                }
+    
+                &>nav.menu-principal {
+                    width: 30px;
+
+                    &>ul {
+                        &.mobile-buttons {
+                            &>li {
+                                padding: 10px;
+                            }
+                        }
+
+                        &>li {
+                            &:hover {
+                                &>a {
+                                    &>span {
+                                    }
+                                }
+                            }
+    
+                            &.show {
+                                &>a {
+                                    &>span {
+                                    }
+    
+                                    &>hr {
+                                    }
+                                }
+                            }
+    
+                            &.button, &.button2 {
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+    
+                            &.button {
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+    
+                            &.button2 {
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+    
+                            &.button-menu {
+                                &>a {
+                                }
+                            }
+    
+                            &>a {
+                                &>span {
+                                }
+    
+                                &>hr {
+                                }
+                            }
+    
+                            &>div.dropdown-menu {
+                                &>div {
+                                    &>a {
+                                        &:hover {
+                                            &>span {
+                                            }
+                                        }
+    
+                                        &>span {
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    header-offset {
+        &.scrolled {
+        }
+    }
+}
+
+@media (max-width: 380px) {
+    header {
+        &.scrolled {
+            &>div.principal {
+                &>div.container {
+                    &>div.logo {
+                    }
+                }
+            }
+        }
+    
+        &>div.superior {
+            &>div.container {
+                &>nav.telefones {
+                    &>ul {
+                        &>li {
+                            &.telefone {
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+    
+                            &.whatsapp {
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+    
+                            &>a {
+                                &:hover {
+                                }
+    
+                                &>i.fas,
+                                &>i.fab {
+                                }
+                            }
+                        }
+                    }
+                }
+    
+                &>a {
+                    &:hover {
+                    }
+                }
+            }
+        }
+    
+        &>div.principal {
+            &>div.container {
+                &>div.logo {
+                }
+    
+                &>nav.menu-principal {
+                    &>ul {
+                        &>li {
+                            &:hover {
+                                &>a {
+                                    &>span {
+                                    }
+                                }
+                            }
+    
+                            &.show {
+                                &>a {
+                                    &>span {
+                                    }
+    
+                                    &>hr {
+                                    }
+                                }
+                            }
+    
+                            &.button, &.button2 {
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+    
+                            &.button {
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+    
+                            &.button2 {
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+    
+                            &.button-menu {
+                                &>a {
+                                }
+                            }
+    
+                            &>a {
+                                &>span {
+                                }
+    
+                                &>hr {
+                                }
+                            }
+    
+                            &>div.dropdown-menu {
+                                &>div {
+                                    &>a {
+                                        &:hover {
+                                            &>span {
+                                            }
+                                        }
+    
+                                        &>span {
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    header-offset {
+        &.scrolled {
+        }
+    }
+}
+
+@media (max-width: 330px) {
+    header {
+        &.scrolled {
+            &>div.principal {
+                &>div.container {
+                    &>div.logo {
+                    }
+                }
+            }
+        }
+    
+        &>div.superior {
+            &>div.container {
+                &>nav.telefones {
+                    &>ul {
+                        &>li {
+                            &.telefone {
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+    
+                            &.whatsapp {
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+    
+                            &>a {
+                                &:hover {
+                                }
+    
+                                &>i.fas,
+                                &>i.fab {
+                                }
+                            }
+                        }
+                    }
+                }
+    
+                &>a {
+                    &:hover {
+                    }
+                }
+            }
+        }
+    
+        &>div.principal {
+            &>div.container {
+                &>div.logo {
+                }
+    
+                &>nav.menu-principal {
+                    &>ul {
+                        &>li {
+                            &:hover {
+                                &>a {
+                                    &>span {
+                                    }
+                                }
+                            }
+    
+                            &.show {
+                                &>a {
+                                    &>span {
+                                    }
+    
+                                    &>hr {
+                                    }
+                                }
+                            }
+    
+                            &.button, &.button2 {
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+    
+                            &.button {
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+    
+                            &.button2 {
+                                &>a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+    
+                            &.button-menu {
+                                &>a {
+                                }
+                            }
+    
+                            &>a {
+                                &>span {
+                                }
+    
+                                &>hr {
+                                }
+                            }
+    
+                            &>div.dropdown-menu {
+                                &>div {
+                                    &>a {
+                                        &:hover {
+                                            &>span {
+                                            }
+                                        }
+    
+                                        &>span {
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    header-offset {
+        &.scrolled {
+        }
+    }
+}

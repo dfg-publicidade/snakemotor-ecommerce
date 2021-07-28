@@ -1,0 +1,144 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(sm) {
+    header {
+        &.scrolled {
+            & > div.principal {
+                & > div.container {
+                    & > div.logo {
+                        max-width: inherit;
+                    }
+                }
+            }
+        }
+
+        & > div.superior {
+            & > div.container {
+                & > nav.telefones {
+                    & > ul {
+                        & > li {
+                            &.telefone {
+                                & > a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+
+                            &.whatsapp {
+                                & > a {
+                                    &:hover {
+                                    }
+                                }
+                            }
+
+                            & > a {
+                                &:hover {
+                                }
+
+                                & > i.fas,
+                                & > i.fab {
+                                }
+                            }
+                        }
+                    }
+                }
+
+                & > a {
+                    &:hover {
+                    }
+                }
+            }
+        }
+
+        & > div.principal {
+            background: $primary;
+            & > div.container {
+                &.segunda-linha{
+                    display: none;
+                }
+                & > button {
+                    &.button-menu {
+                        width: auto;
+                    }
+                }
+                & > div.logo {
+                    // background: url("/res/imagens/logo-conecta.svg") no-repeat center center;
+                    height: 50px;
+                    max-width: inherit;
+                    margin: 10px 0 !important;
+                    margin-bottom: 5px !important; 
+                }
+
+                &>div.icones{
+                    width: 100%;
+                    &>a{
+                        &:first-of-type{
+                            margin-right: 20px;
+                        }
+                    }
+                }
+
+                & > nav.menu-principal {
+                    & > ul {
+                        & > li {
+                            &:hover {
+                                & > a {
+                                    & > span {
+                                    }
+                                }
+                            }
+
+                            &.show {
+                                & > a {
+                                    & > span {
+                                    }
+
+                                    & > hr {
+                                    }
+                                }
+                            }
+
+                            &.button-menu {
+                                width: auto;
+                                & > a {
+                                }
+                            }
+
+                            & > a {
+                                & > span {
+                                }
+
+                                & > hr {
+                                }
+                            }
+
+                            & > div.dropdown-menu {
+                                & > div {
+                                    & > a {
+                                        &:hover {
+                                            & > span {
+                                            }
+                                        }
+
+                                        & > span {
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    header-offset {
+        height: 61px;
+
+        &.scrolled {
+        }
+    }
+}

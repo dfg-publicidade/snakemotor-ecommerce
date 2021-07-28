@@ -1,0 +1,50 @@
+// Core variables and mixins
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
+
+@import "../../../res/variables.scss";
+
+div.busca {
+    display: block;
+    width: 100%;
+    align-self: center;
+
+    & > div.container {
+        & > div.campo-busca {
+            display: block;
+            width: 100%;
+            border: none;
+            background-color: #fff;
+            border-radius: 30px;
+            padding: 8px;
+            position: relative;
+            & > i.fas {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 15px;
+                font-size: 25px;
+            }
+            & > input {
+                display: block;
+                width: 100%;
+                padding: 40px;
+                border: none;
+                background: none;
+                padding-left: 40px;
+
+                &::placeholder {
+                    color: #000;
+                }
+            }
+        }
+    }
+}
+
+@import "responsive/busca-lg.scss";
+@import "responsive/busca-md.scss";
+@import "responsive/busca-sm.scss";
+@import "responsive/busca-xs.scss";
+@import "responsive/busca-xss.scss";
+@import "responsive/busca-print.scss";

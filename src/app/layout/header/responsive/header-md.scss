@@ -1,0 +1,73 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(md) {
+    header {
+        &.scrolled {
+            top: 0;
+
+            & > div.principal {
+                & > div.container {
+                    & > div.logo {
+                        max-width: 170px;
+                        height: 50px;
+                        margin: 15px 0;
+                    }
+                }
+            }
+        }
+
+        & > div.superior {
+            font-size: 14px;
+        }
+
+        & > div.principal {
+            background-position-x: inherit;
+            & > div.container {
+                & > button {
+                    &.button-menu {
+                        width: auto;
+                    }
+                }
+
+                & > div.logo {
+                    height: 50px;
+                    max-width: inherit;
+                    margin: 10px 0 !important;
+                    margin-bottom: 5px !important;
+                    background-size: contain;
+                }
+
+                & > div.icones {
+                    width: 100%;
+                    & > a {
+                        &:first-of-type {
+                            margin-right: 20px;
+                        }
+                    }
+                }
+
+                & > nav.menu-principal {
+                    display: none;
+                }
+            }
+
+            app-busca {
+                display: block;
+                width: 100%;
+                padding: 0;
+                margin-bottom: 15px;
+                padding-bottom: 10px;
+            }
+        }
+    }
+
+    header-offset {
+        height: 124px;
+
+        &.scrolled {
+        }
+    }
+}

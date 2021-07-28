@@ -1,0 +1,17 @@
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(sm) {
+    div.produtos {
+        &.geral {
+            & > div.produto-item {
+                width: 48%;
+            }
+        }
+
+        & > div.produto-item {
+            min-width: 48%;
+        }
+    }
+}

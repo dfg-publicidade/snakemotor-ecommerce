@@ -1,0 +1,76 @@
+<div class="loading" *ngIf="loading">
+    <div class="item-loading spinner" *ngIf="tipoLoading === 'spinner'">
+        <img src="./res/imagens/spinner-primary.svg" />
+    </div>
+    <div class="item-loading spinner" *ngIf="tipoLoading === 'spinner-white'">
+        <img src="./res/imagens/spinner-white.svg" />
+    </div>
+    <div class="item-loading loading-background" *ngIf="tipoLoading === 'banner'">
+        <div class="banner-item">
+            <span></span>
+        </div>
+    </div>
+    <div class="item-loading loading-background" *ngIf="tipoLoading === 'lista-menu'">
+        <li class="list-group-item" *ngFor="let item of [1,2,3]"></li>
+    </div>
+    <div class="item-loading loading-background" *ngIf="tipoLoading === 'produtos'">
+        <div class="produto-item" *ngFor="let item of [1,2,3,5,6.7,8,9,10]">
+            <span class="produto-imagem loading-background"></span>
+            <span class="produto-nome loading-background"></span>
+            <span class="produto-valor loading-background"></span>
+            <span class="produto-botao loading-background"></span>
+        </div>
+    </div>
+    <div class="item-loading loading-background" *ngIf="tipoLoading === 'produtoView'">
+        <div class="produto">
+            <div class="imagens loading-background"></div>
+            <div class="info">
+                <span class="produto-nome loading-background"></span>
+                <span class="produto-codigo loading-background"></span>
+                <span class="produto-valor loading-background"></span>
+                <span class="produto-botao loading-background"></span>
+            </div>
+        </div>
+    </div>
+    <div class="item-loading loading-background" *ngIf="tipoLoading === 'perfilView'">
+        <div class="row">
+            <div class="col-xs-12" [ngClass]="{'col-lg-6': i < 2, 'col-lg-12': i === 2}" *ngFor="let item of [1,2,3]; let i = index">
+                <div class="form-group">
+                    <label>
+                        <span class="loading-background"></span>
+                    </label>
+                    <label class="info">
+                        <span class="loading-background"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="item-loading loading-background" *ngIf="tipoLoading === 'lista-geral'">
+        <div class="border-card">
+            <div class="content-wrapper">
+                <a>
+                    <div class="label-group fixed">
+                        <p class="oading-background"></p>
+                        <p class="oading-background"></p>
+                    </div>
+                    <div class="min-gap"></div>
+                    <div class="label-group fixed">
+                        <p class="oading-background"></p>
+                        <p class="oading-background"></p>
+                    </div>
+                    <div class="min-gap"></div>
+                    <div class="label-group fixed">
+                        <p class="oading-background"></p>
+                        <p class="oading-background"></p>
+                    </div>
+                    <div class="min-gap"></div>
+                    <div class="label-group fixed">
+                        <p class="oading-background"></p>
+                        <p class="oading-background"></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

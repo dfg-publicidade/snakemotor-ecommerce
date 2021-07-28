@@ -1,0 +1,36 @@
+i {
+    &.icon {
+        display: flex;
+        width: 38px;
+        height: 30px;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        filter: brightness(3);
+
+        &.icon-capacete {
+            background-image: url("../imagens/icones/capacete.png");
+            &.outline {
+                background-image: url("../imagens/icones/capacete_outline.png");
+            }
+        }
+        &.icon-vestuario {
+            background-image: url("../imagens/icones/vestuario.png");
+        }
+
+        &.icon-moto-bigtrail {
+            background-image: url("../imagens/icones/moto_bigtrail.png");
+        }
+
+        &.icon-moto {
+            background-image: url("../imagens/icones/moto.png");
+        }
+
+        &.icon-pneu {
+            background-image: url("../imagens/icones/pneu.png");
+        }
+        &.icon-moto-frente {
+            background-image: url("../imagens/icones/moto_frente.png");
+        }
+    }
+}

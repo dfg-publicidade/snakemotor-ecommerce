@@ -1,0 +1,28 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@media (max-width: 479px) {
+    aside {
+        width: 100%;
+        transform: translateX(-100%);
+
+        &.open {
+        }
+    
+        &>nav.menu-mobile {
+            &>ul {
+                &>li {
+                    &.voltar {
+                        &>a {
+                        }
+                    }
+    
+                    &>a {
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,182 @@
+// Core variables and mixins
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
+
+@import "../../../res/variables.scss";
+
+div.loading {
+    display: block;
+    width: 100%;
+    padding-bottom: 20px;
+    text-align: center;
+
+    & > div.item-loading {
+        &.spinner {
+            & > img {
+                width: 48px;
+            }
+        }
+
+        &.loading-background {
+            & > div.banner-item {
+                margin-bottom: 5px;
+                display: flex;
+                align-items: center;
+                height: 250px;
+                padding: 20px;
+                border: 1px solid #ddd;
+
+                &>span{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            & > li.list-group-item {
+                min-height: 48px;
+            }
+
+            & > div.produto-item {
+                display: inline-block;
+                margin: 5px;
+                width: 212px;
+                height: 250px;
+                text-align: center;
+                position: relative;
+                border-radius: 10px;
+
+                & > span {
+                    display: inline-block;
+
+                    &.produto-imagem {
+                        width: 120px;
+                        height: 80px;
+                        margin: 20px 0;
+                    }
+                    &.produto-nome {
+                        width: 90%;
+                        height: 20px;
+                        margin-top: 5px;
+                    }
+                    &.produto-valor {
+                        width: 60%;
+                        height: 20px;
+                        margin-top: 5px;
+                    }
+                    &.produto-botao {
+                        position: absolute;
+                        width: 90%;
+                        height: 50px;
+                        bottom: 10px;
+                        left: 10px;
+                    }
+                }
+            }
+
+            & > div.produto {
+                display: block;
+                width: 100%;
+                padding-top: 60px;
+
+                & > div.imagens {
+                    display: inline-block;
+                    vertical-align: top;
+                    padding: 10px;
+                    width: 40%;
+                    height: 275px;
+                    padding: 20px;
+                }
+
+                & > div.info {
+                    padding-left: 40px;
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 60%;
+
+                    & > span {
+                        display: inline-block;
+                        &.produto-nome {
+                            width: 100%;
+                            height: 40px;
+                        }
+                        &.produto-codigo {
+                            display: block;
+                            width: 100%;
+                            height: 40px;
+                        }
+                        &.produto-valor {
+                            width: 40%;
+                            height: 60px;
+                            margin-top: 5px;
+                            margin-right: 10px;
+                        }
+                        &.produto-botao {
+                            width: 58%;
+                            height: 60px;
+                        }
+                    }
+                }
+            }
+
+            & > div.row {
+                & > div {
+                    & > div.form-group {
+                        & > label {
+                            display: inline-block;
+                            width: 100%;
+                            height: 20px;
+                            margin-bottom: 5px;
+                            &.info {
+                                height: 30px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            & > div.border-card {
+                margin-bottom: 5px;
+                display: flex;
+                align-items: center;
+                font-size: 14px;
+                cursor: pointer;
+                border-radius: 4px;
+                box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1);
+                transition: all 0.25s ease;
+
+                & > div.content-wrapper {
+                    display: flex;
+                    justify-content: flex-start;
+                    width: 100%;
+                    & > a {
+                        display: flex;
+                        & > div.min-gap {
+                            flex: 0 0 40px;
+                        }
+
+                        & > div.label-group {
+                            &.fixed {
+                                flex-shrink: 0;
+                            }
+
+                            & > p {
+                                height: 15px;
+                                width: 100px;
+                                margin-left: 10px;
+                                margin-top: 10px;
+
+                                &:last-of-type {
+                                    margin-top: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@import "./responsive/loading-md.scss";
+@import "./responsive/loading-sm.scss";
+@import "./responsive/loading-xs.scss";

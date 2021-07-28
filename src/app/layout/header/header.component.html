@@ -1,0 +1,84 @@
+<header [ngClass]="{scrolled: scrolled}">
+    <div class="superior d-none d-md-flex">
+        <div class="container">
+            <nav class="itens">
+                <ul>
+                    <li class="item">
+                        <a [routerLink]="['/quemsomos']">Quem somos</a>
+                    </li>
+                    <li class="item">
+                        <a href="https://web.whatsapp.com/send?phone=5519996257084&text&app_absent=0" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            <strong class="pe-2">vendas</strong>
+                            (19) 99625-7084
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <a *ngIf="!getUsuario()" class="portal" [routerLink]="['/login']">Olá, <strong>cadastre-se</strong> ou faça <strong>login</strong></a>
+        </div>
+    </div>
+    <div class="principal">
+        <div class="container">
+            <button class="button-menu d-md-none" (click)="toggleMenu()"><i class="fas fa-bars"></i></button>
+            <div class="logo d-md-flex d-lg-flex" [routerLink]="['/']"></div>
+            <app-busca class="d-none d-md-flex d-lg-flex"></app-busca>
+            <div class="icones d-md-flex d-lg-flex">
+                <a class="acesso" [routerLink]="['/login']" *ngIf="!getUsuario()">
+                    <i class="icon icon-capacete"></i>
+                    <span class="titulo">minha conta</span>
+                </a>
+                <a class="carrinho" [routerLink]="['/carrinho']">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge position-absolute top-0 start-100 translate-middle bg-danger border border-light rounded-circle" *ngIf="getCarrinho() && getCarrinho().length > 0">
+                        <span>{{getCarrinho().length}}</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="container segunda-linha">
+            <nav class="menu-principal">
+                <ul class="d-none d-sm-flex">
+                    <li class="d-xl-block d-sm-none d-md-flex d-lg-flex">
+                        <a href="#">
+                            <i class="icon icon-capacete outline"></i>
+                            <span>Capacetes</span>
+                        </a>
+                    </li>
+                    <li class="d-xl-block d-sm-none d-md-flex d-lg-flex">
+                        <a href="#">
+                            <i class="icon icon-vestuario"></i>
+                            <span>Vestuário</span>
+                        </a>
+                    </li>
+                    <li class="d-xl-block d-sm-none d-md-flex  d-lg-flex">
+                        <a href="#">
+                            <i class="icon icon-moto-bigtrail"></i>
+                            <span>Bigtrail</span>
+                        </a>
+                    </li>
+                    <li class="d-xl-block d-sm-none d-md-flex  d-lg-flex">
+                        <a href="#">
+                            <i class="icon icon-moto"></i>
+                            <span>Street</span>
+                        </a>
+                    </li>
+                    <li class="d-xl-block d-sm-none d-md-flex d-lg-flex">
+                        <a href="#">
+                            <i class="icon icon-pneu"></i>
+                            <span>Pneus</span>
+                        </a>
+                    </li>
+                    <li class="d-xl-block d-sm-none d-md-flex  d-lg-flex">
+                        <a href="#">
+                            <i class="icon icon-moto-frente"></i>
+                            <span>Motos 0Km e Usadas</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <app-busca></app-busca>
+    </div>
+</header>
+<header-offset [ngClass]="{scrolled: scrolled}"></header-offset>

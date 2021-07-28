@@ -1,20 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppCustomPreloader } from './_services/AppCustomPreloader';
+import { LayoutComponent } from './layout/layout.component';
+import { AppCustomPreloader } from './service/AppCustomPreloader';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)
+      }
+    ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, 
+  imports: [RouterModule.forRoot(routes,
     {
       preloadingStrategy: AppCustomPreloader // Para realizar preloading de rotas. Adicione nas rotas o atributo preload
     }
-    )],
+  )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

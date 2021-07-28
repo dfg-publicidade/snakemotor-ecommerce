@@ -1,0 +1,7 @@
+<div class="alert {{config.css}}" id="{{config.id}}" role="alert" *ngIf="config">
+  <button type="button" class="close" data-hide="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="alert-heading">{{config.titulo}}</h4>
+  <p>{{config.mensagem}}</p>
+</div>

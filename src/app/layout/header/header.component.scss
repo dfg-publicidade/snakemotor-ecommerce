@@ -1,0 +1,348 @@
+// Core variables and mixins
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
+
+@import "../../../res/variables.scss";
+
+header {
+    display: block;
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 200;
+
+    @include transition(all, linear, 0.3s);
+
+    &.scrolled {
+        top: -42px;
+
+        & > div.principal {
+            & > div.container {
+                & > div.logo {
+                    align-self: center;
+                    height: 34px;
+                    cursor: pointer;
+                    align-self: center;
+                }
+            }
+        }
+    }
+
+    & > div.superior {
+        width: 100%;
+        height: 42px;
+        background-color: #f5f5f5;
+
+        & > div.container {
+            display: flex;
+            justify-content: space-between;
+
+            & > nav.itens {
+                & > ul {
+                    height: 100%;
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    display: flex;
+                    flex-wrap: nowrap;
+                    justify-content: flex-start;
+                    & > li {
+                        // padding: 0 1.5px;
+                        align-self: center;
+                        display: flex;
+
+                        &.item {
+                            & > a {
+                                &:hover {
+                                    color: $primary;
+                                }
+                            }
+                        }
+
+                        &.whatsapp {
+                            & > a {
+                                &:hover {
+                                    color: $primary;
+                                }
+                            }
+                        }
+
+                        & > span {
+                            display: flex;
+                            margin-right: 5px;
+                            align-self: center;
+                            font-size: 20px;
+                            line-height: 20px;
+                            padding-top: 3px;
+                        }
+
+                        & > a {
+                            color: #666;
+                            align-self: center;
+                            font-size: 14px;
+                            white-space: nowrap;
+                            padding-right: 20px;
+
+                            display: flex;
+                            justify-content: center;
+
+                            @include transition(all, linear, 0.3s);
+
+                            &:hover {
+                                color: #666;
+                            }
+
+                            & > i.fas,
+                            & > i.fab {
+                                align-self: center;
+                                padding-right: 10px;
+                                padding-top: 4px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            & > a {
+                align-self: center;
+                margin: 0 0 0 15px;
+                color: $primary;
+                width: auto;
+                text-transform: lowercase;
+
+                &.usuario {
+                    text-transform: inherit;
+                }
+
+                @include transition(all, linear, 0.3s);
+
+                &:hover {
+                    color: $secondary;
+                }
+            }
+        }
+    }
+
+    & > div.principal {
+        background: url("../../../res/imagens/bg_fibra_carbono.jpg") no-repeat center center;
+        background-size: cover;
+        & > div.container {
+            display: flex;
+            justify-content: space-between;
+
+            & > button.button-menu {
+                margin-right: 15px;
+                padding: 1px 0;
+                background-color: transparent;
+                border: none;
+                color: #fff;
+                font-size: 30px;
+
+                @include transition(all, linear, 0.3s);
+            }
+
+            & > div.logo {
+                width: 275px;
+                height: 115px;
+                background: url("../../../res/imagens/logo.png") no-repeat center center;
+                background-size: 100% auto;
+                cursor: pointer;
+                align-self: center;
+
+                @include transition(all, linear, 0.5s);
+            }
+
+            app-busca {
+                width: 100%;
+                padding: 0 60px;
+            }
+
+            & > div.icones {
+                display: flex;
+                justify-content: flex-end;
+                & > a {
+                    color: #fff;
+                    align-self: center;
+                    margin-right: 20px;
+                    position: relative;
+                    display: flex;
+
+                    &.acesso {
+                        width: 145px;
+                    }
+
+                    &:last-of-type {
+                        margin-right: 0;
+                    }
+
+                    & > span {
+                        &.titulo {
+                            padding-left: 10px;
+                            width: 100%;
+                        }
+                        &.badge {
+                            height: 28px;
+                            width: 28px;
+                            text-align: center;
+                            & > span {
+                                text-align: center;
+                                margin-top: 3px;
+                                display: inline-block;
+                                font-size: 13px;
+                            }
+                        }
+                    }
+
+                    &.carrinho {
+                        & > i {
+                            font-size: 25px;
+                        }
+                    }
+                }
+            }
+
+            & > nav.menu-principal {
+                width: 100%;
+                display: flex;
+                padding-bottom: 20px;
+
+                & > ul {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-self: center;
+                    width: 100%;
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+
+                    & > li {
+                        display: flex;
+                        align-self: center;
+                        justify-content: flex-start;
+                        padding: 0 15px;
+
+                        &:first-of-type {
+                            padding-left: 0;
+                        }
+
+                        &:last-of-type {
+                            width: 100%;
+                            padding-right: 0;
+
+                            & > a {
+                                width: 100%;
+                                justify-content: flex-end;
+                                padding-right: 0;
+                            }
+                        }
+
+                        & > a {
+                            display: flex;
+                            padding: 10px 13px;
+                            font-size: 16px;
+                            color: #e8e8e8;
+                            font-weight: 600;
+                            position: relative;
+                            font-size: 15px;
+
+                            & > span {
+                                padding-left: 10px;
+                                padding-top: 3px;
+                                font-size: 16px;
+                            }
+
+                            & > hr {
+                                display: none;
+                                position: absolute;
+                                border-top: 1px solid #fff;
+                                width: 100%;
+                                z-index: 2000;
+                                bottom: -14px;
+                            }
+                        }
+
+                        & > div.dropdown-menu {
+                            margin-top: -6px;
+                            border: 0;
+                            border-radius: 10px;
+                            left: 20px !important;
+                            padding: 0;
+                            overflow: hidden;
+                            top: 20px !important;
+
+                            & > h3 {
+                                padding-left: 30px;
+                                font-size: 15px;
+                                font-weight: bold;
+                                padding-bottom: 10px;
+                                padding-top: 20px;
+                            }
+                            & > div {
+                                padding: 1px;
+                                border-bottom: 3px solid $secondary;
+                                -webkit-column-count: 4;
+                                -moz-column-count: 4;
+                                column-count: 4;
+                                -webkit-column-width: 25%;
+                                -moz-column-width: 25%;
+                                column-width: 25%;
+                                -webkit-column-gap: 2em;
+                                -moz-column-gap: 2em;
+                                column-gap: 2em;
+
+                                & > a {
+                                    background-color: #fff;
+                                    padding: 8px 10px;
+                                    color: #666;
+
+                                    &:hover {
+                                        & > span {
+                                            background-color: $secondary;
+                                        }
+                                    }
+
+                                    & > span {
+                                        width: 4px;
+                                        height: 4px;
+                                        border-radius: 4px;
+                                        background-color: #eee;
+                                        align-self: center;
+                                        margin-right: 10px;
+
+                                        @include transition(all, linear, 0.3s);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        & > app-busca {
+            display: none;
+        }
+    }
+}
+
+header-offset {
+    height: 144px;
+    display: block;
+    background-color: #f6f6f6;
+
+    @include transition(all, linear, 0.3s);
+
+    &.scrolled {
+        height: 102px;
+    }
+}
+
+@import "responsive/header-xl.scss";
+@import "responsive/header-lg.scss";
+@import "responsive/header-md.scss";
+@import "responsive/header-sm.scss";
+@import "responsive/header-xs.scss";
+@import "responsive/header-xss.scss";
+@import "responsive/header-print.scss";

@@ -1,0 +1,47 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(sm) {
+    div.banner {
+        ::ng-deep {
+            div.owl-theme {
+                min-height: inherit;
+                div.owl-nav {
+                    &>div.owl-prev,
+                    &>div.owl-next {
+                        &:hover {
+                        }
+    
+                        &>i.fas,
+                        &>i.fab {
+                        }
+                    }
+                }
+    
+                div.owl-dots {
+                    position: inherit;
+                    transform: none;
+                    left: 0;
+                    bottom: 0;
+                    
+                    &>div.owl-dot {
+                        &:hover {
+                            &>span {
+                            }
+                        }
+    
+                        &.active {
+                            &>span {
+                            }
+                        }
+    
+                        &>span {
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

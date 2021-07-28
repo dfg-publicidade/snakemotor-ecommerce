@@ -1,0 +1,59 @@
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(xs) {
+    div.produtos {
+        &.geral {
+            justify-content: space-around;
+            & > div.produto-item {
+                margin: 0;
+                margin-bottom: 10px;
+            }
+        }
+        div.produto-item {
+            padding: 10px;
+            & > a {
+                margin-bottom: 8px;
+                & > div.imagem {
+                    background-size: 40%;
+                    margin-bottom: 8px;
+                }
+
+                & > span {
+                    text-align: center;
+                    &.nome {
+                    }
+                    &.preco {
+                    }
+                }
+            }
+
+            & > button {
+                padding: 6px;
+
+                & > i {
+                }
+                & > span {
+                }
+            }
+        }
+        ::ng-deep {
+            div.owl-theme {
+                div.owl-stage-outer {
+                    z-index: 2;
+                }
+                div.owl-nav {
+                    display: none;
+                }
+
+                div.owl-dots {
+                    position: inherit;
+                    bottom: -8px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+        }
+    }
+}

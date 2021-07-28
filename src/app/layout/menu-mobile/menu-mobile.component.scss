@@ -1,0 +1,98 @@
+// Core variables and mixins
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
+
+@import "../../../res/variables.scss";
+
+$aside-width: 280px;
+
+:host-context(body.aside-menu-open) {
+    div.body-overlay {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    main,
+    section,
+    footer {
+        transform: translateX($aside-width);
+    }
+}
+
+aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    width: $aside-width;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: darken($primary, 5%);
+    z-index: 100;
+
+    transform: translateX(-$aside-width);
+
+    @include transition(all, linear, 0.3s);
+
+    &.open {
+        transform: translateX(0);
+    }
+
+    & > nav.menu-mobile {
+        & > ul {
+            padding: 0 15px;
+            list-style: none;
+
+            &.perfil {
+                padding-top: 95px;
+            }
+
+            & > li {
+                font-size: 18px;
+                padding: 10px 0;
+                border-bottom: 1px solid $primary;
+                margin-bottom: 5px;
+                display: flex;
+
+                &.principal {
+                    background: #262e3b;
+                    padding: 8px 15px;
+                    border-radius: 5px;
+                }
+
+                &.destaque {
+                    & > a {
+                        color: $secondary;
+                    }
+                }
+
+                &.voltar {
+                    & > a {
+                        color: $tertiary;
+                    }
+                }
+
+                & > a {
+                    color: #fff;
+                    display: flex;
+
+                    & > span {
+                        padding-left: 10px;
+                    }
+
+                    @include transition(all, linear, 0.3s);
+                }
+            }
+        }
+    }
+}
+
+@import "responsive/menu-mobile-lg.scss";
+@import "responsive/menu-mobile-md.scss";
+@import "responsive/menu-mobile-sm.scss";
+@import "responsive/menu-mobile-xs.scss";
+@import "responsive/menu-mobile-xss.scss";
+@import "responsive/menu-mobile-print.scss";

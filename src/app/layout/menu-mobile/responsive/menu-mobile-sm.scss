@@ -1,0 +1,32 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(sm) {
+    aside {
+        &.open {
+        }
+    
+        &>nav.menu-mobile {
+            &>ul {
+                padding-bottom: 65px;
+
+                &.perfil{
+                    padding-bottom: 0;
+                    padding-top: 140px;
+                }
+
+                &>li {
+                    &.voltar {
+                        &>a {
+                        }
+                    }
+    
+                    &>a {
+                    }
+                }
+            }
+        }
+    }
+}
