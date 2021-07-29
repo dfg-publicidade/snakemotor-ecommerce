@@ -8,6 +8,7 @@
         ::ng-deep {
             div.owl-theme {
                 div.owl-nav {
+                    display: flex;
                     &>div.owl-prev,
                     &>div.owl-next {
                         &:hover {

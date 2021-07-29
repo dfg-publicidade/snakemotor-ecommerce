@@ -1,6 +1,6 @@
 import { Component, HostListener, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { UrlFormatPipe } from 'src/app/pipe/urlFormatPipe';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 declare var $: any;
 
 @Component({
@@ -9,16 +9,35 @@ declare var $: any;
   styleUrls: ['./banner.component.scss']
 })
 export class BannerComponent implements OnInit {
-  @Input() items: string;
-  @Input() options: string;
-  loadingImagemBanner: boolean;
+  @Input() items: any = [];
+  @Input() options: OwlOptions;
+  innerWidth: number = 0;
+  isMobile: boolean = false;
+  loadingImagemBanner: boolean = false;
 
   constructor(private router: Router) {
     this.loadingImagemBanner = true;
+
+    this.options = {
+      loop: true,
+      items: 1,
+      nav: true,
+      autoWidth: true,
+      dots: true,
+      autoplay: true,
+      navText: ['<i class="fas fa-angle-left"></i>', '<i class="fas fa-angle-right"></i>'],
+      responsive: {
+        0: {
+          items: 1
+        }
+      }
+    };
   }
 
   ngOnInit() {
+    this.innerWidth = window.innerWidth;
 
+    this.mobile();
   }
 
   ngAfterViewInit() {
@@ -33,27 +52,24 @@ export class BannerComponent implements OnInit {
     }
   }
 
-  habilitarBanner() {
-    this.loadingImagemBanner = false;
+  mobile() {
+    if (this.innerWidth < 575) {
+      this.isMobile = true
+    } else {
+      this.isMobile = false;
+    }
 
-    $('div.owl-dots').show();
-    $('div.owl-prev').show();
-    $('div.owl-next').show();
+    console.log(this.isMobile);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.innerWidth = window.innerWidth;
+
+    this.mobile();
 
     setTimeout(() => {
       window.dispatchEvent(new Event('resize'));
     }, 100);
-  }
-
-  abrirBanner(banner) {
-    if (banner.produto) {
-      let urlFormatPipe = new UrlFormatPipe();
-      this.router.navigate(['/produtos', banner.produto.id, urlFormatPipe.transform(banner.produto.nome)]);
-    }
-  }
-
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
   }
 }

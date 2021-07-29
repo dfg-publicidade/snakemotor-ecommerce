@@ -1,9 +1,29 @@
-<div class="banner" *ngIf="items">
+<div class="banner">
     <owl-carousel-o [options]="options">
         <ng-template carouselSlide *ngFor="let item of items">
-            <div class="banner-item" (click)="abrirBanner(item)">
-                <img [src]="item.imagem" [alt]="item.titulo" (load)="habilitarBanner()">
+            <div class="banner-item">
+                <img [src]="item.imagem" [alt]="item.titulo">
             </div>
+        </ng-template>
+
+        <!-- MOCKUP BANNER-->
+        <ng-template carouselSlide>
+            <a class="banner-item" href="#">
+                <img *ngIf="!isMobile" src="/res/imagens/temporarias/banner.jpg" [alt]="'Título do banner'">
+                <img *ngIf="isMobile" src="/res/imagens/temporarias/banner-mobile.jpg" [alt]="'Título do banner'">
+            </a>
+        </ng-template>
+        <ng-template carouselSlide>
+            <a class="banner-item" href="#">
+                <img *ngIf="!isMobile" src="/res/imagens/temporarias/banner.jpg" [alt]="'Título do banner'">
+                <img *ngIf="isMobile" src="/res/imagens/temporarias/banner-mobile.jpg" [alt]="'Título do banner'">
+            </a>
+        </ng-template>
+        <ng-template carouselSlide>
+            <a class="banner-item" href="#">
+                <img *ngIf="!isMobile" src="/res/imagens/temporarias/banner.jpg" [alt]="'Título do banner'">
+                <img *ngIf="isMobile" src="/res/imagens/temporarias/banner-mobile.jpg" [alt]="'Título do banner'">
+            </a>
         </ng-template>
     </owl-carousel-o>
 </div>

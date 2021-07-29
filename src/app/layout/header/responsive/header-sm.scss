@@ -56,7 +56,7 @@
         & > div.principal {
             background: $primary;
             & > div.container {
-                &.segunda-linha{
+                &.segunda-linha {
                     display: none;
                 }
                 & > button {
@@ -66,16 +66,19 @@
                 }
                 & > div.logo {
                     // background: url("/res/imagens/logo-conecta.svg") no-repeat center center;
-                    height: 50px;
+                    height: 70px;
                     max-width: inherit;
                     margin: 10px 0 !important;
-                    margin-bottom: 5px !important; 
+                    margin-bottom: 10px !important;
                 }
 
-                &>div.icones{
-                    width: 100%;
-                    &>a{
-                        &:first-of-type{
+                & > div.icones {
+                    width: 30px;
+                    & > a {
+                        &.acesso {
+                            display: none;
+                        }
+                        &:first-of-type {
                             margin-right: 20px;
                         }
                     }

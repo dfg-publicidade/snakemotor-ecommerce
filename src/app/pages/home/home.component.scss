@@ -1,0 +1,11 @@
+main {
+    padding-top: 100px;
+    z-index: 2;
+}
+
+@import "responsive/home-xl.scss";
+@import "responsive/home-lg.scss";
+@import "responsive/home-md.scss";
+@import "responsive/home-sm.scss";
+@import "responsive/home-xss.scss";
+@import "responsive/home-print.scss";

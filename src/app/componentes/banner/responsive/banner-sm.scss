@@ -9,6 +9,7 @@
             div.owl-theme {
                 min-height: inherit;
                 div.owl-nav {
+                    display: none;
                     &>div.owl-prev,
                     &>div.owl-next {
                         &:hover {
@@ -24,7 +25,7 @@
                     position: inherit;
                     transform: none;
                     left: 0;
-                    bottom: 0;
+                    bottom: 30px;
                     
                     &>div.owl-dot {
                         &:hover {
