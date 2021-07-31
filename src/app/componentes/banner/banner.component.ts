@@ -58,8 +58,6 @@ export class BannerComponent implements OnInit {
     } else {
       this.isMobile = false;
     }
-
-    console.log(this.isMobile);
   }
 
   @HostListener('window:resize', ['$event'])

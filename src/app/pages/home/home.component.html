@@ -3,3 +3,105 @@
         <app-banner [items]="banners" class="d-xs-block d-sm-block d-md-block d-lg-block"></app-banner>
     </div>
 </main>
+<section>
+    <div class="container">
+        <h1>
+            <strong>Destaques</strong>
+            de nossa loja virtual
+        </h1>
+        <div class="produtos">
+            <a href="#" class="produto tag" *ngFor="let number of [0,1,2,4]">
+                <span class="tag lancamento">Lançamento</span>
+                <div class="imagem" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
+                <div class="info">
+                    <p>
+                        Capacete Axxis Draken Bomb Preto Vermelho
+                        <span>
+                            <i class="fas fa-star pe-1"></i>
+                            <i class="fas fa-star pe-1"></i>
+                            <i class="fas fa-star pe-1"></i>
+                            <i class="fas fa-star pe-1"></i>
+                            <i class="fas fa-star"></i>
+                        </span>
+                    </p>
+
+                </div>
+                <div class="preco">
+                    <p class="valor-normal" [ngClass]="{empty: number === 2}">{{number !== 2 ? 'R$ 687,99' : '&nbsp;'}}</p>
+                    <p class="valor-vigente">R$ 522,41</p>
+                    <p class="valor-parcelado">10x R$ 54,99</p>
+                </div>
+            </a>
+        </div>
+        <div class="banners">
+            <a class="banner" href="#" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/banner-secundario-1.jpg)'}"></a>
+            <a class="banner" href="#" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/banner-secundario-2.jpg)'}"></a>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <h1>
+            <strong class="left">Escapamentos</strong>
+            <a href="#" class="right">veja mais +</a>
+        </h1>
+        <div class="produtos">
+            <a href="#" class="produto tag" *ngFor="let number of [0,1,2,4]">
+                <span class="tag lancamento">Lançamento</span>
+                <div class="imagem" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-2.jpg)'}"></div>
+                <div class="info">
+                    <p>
+                        {{number !== 2 ? 'Ponteira de Escape Jeskap Evolution Colors Suzuki GSX-R1000 Srad 2011/13' : 'Ponteira de Escape Jeskap Evolution'}}
+                        <span>
+                            <i class="fas fa-star pe-1"></i>
+                            <i class="fas fa-star pe-1"></i>
+                            <i class="fas fa-star pe-1"></i>
+                            <i class="fas fa-star pe-1"></i>
+                            <i class="fas fa-star"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="preco">
+                    <p class="valor-normal" [ngClass]="{empty: number === 2}">{{number !== 2 ? 'R$ R$ 2.850,00' : '&nbsp;'}}</p>
+                    <p class="valor-vigente">R$ 2.355,00</p>
+                    <p class="valor-parcelado">10x R$ 235,50</p>
+                </div>
+            </a>
+        </div>
+        <div class="banners">
+            <a class="banner full" href="#" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/banner-terciario.jpg)'}"></a>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h1>
+            <strong class="left">Equipe-se com estilo</strong>
+            <a href="#" class="right">veja mais +</a>
+        </h1>
+        <div class="produtos">
+            <a href="#" class="produto tag" *ngFor="let number of [0,1,2,4]">
+                <span class="tag lancamento">Lançamento</span>
+                <div class="imagem" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-3.jpg)'}"></div>
+                <div class="info">
+                    <p>
+                        Bota Alpinestars SMX-6 V2 Preta
+                        <span>
+                            <i class="fas fa-star pe-1"></i>
+                            <i class="fas fa-star pe-1"></i>
+                            <i class="fas fa-star pe-1"></i>
+                            <i class="fas fa-star pe-1"></i>
+                            <i class="fas fa-star"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="preco">
+                    <p class="valor-normal" [ngClass]="{empty: number === 2}">{{number !== 2 ? 'R$ R$ 2.850,00' : '&nbsp;'}}</p>
+                    <p class="valor-vigente">R$ 2.355,00</p>
+                    <p class="valor-parcelado">10x R$ 235,50</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>

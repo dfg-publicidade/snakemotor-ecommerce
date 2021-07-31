@@ -17,12 +17,12 @@ header {
 
     &.scrolled {
         top: -42px;
+        box-shadow: 0 0 1em #000 !important;
 
         & > div.principal {
             & > div.container {
                 & > div.logo {
                     align-self: center;
-                    height: 34px;
                     cursor: pointer;
                     align-self: center;
                 }
@@ -206,7 +206,6 @@ header {
             & > nav.menu-principal {
                 width: 100%;
                 display: flex;
-                padding-bottom: 20px;
 
                 & > ul {
                     display: flex;
@@ -216,6 +215,7 @@ header {
                     list-style: none;
                     padding: 0;
                     margin: 0;
+                    position: relative;
 
                     & > li {
                         display: flex;
@@ -244,76 +244,12 @@ header {
                             font-size: 16px;
                             color: #e8e8e8;
                             font-weight: 600;
-                            position: relative;
                             font-size: 15px;
 
                             & > span {
                                 padding-left: 10px;
                                 padding-top: 3px;
                                 font-size: 16px;
-                            }
-
-                            & > hr {
-                                display: none;
-                                position: absolute;
-                                border-top: 1px solid #fff;
-                                width: 100%;
-                                z-index: 2000;
-                                bottom: -14px;
-                            }
-                        }
-
-                        & > div.dropdown-menu {
-                            margin-top: -6px;
-                            border: 0;
-                            border-radius: 10px;
-                            left: 20px !important;
-                            padding: 0;
-                            overflow: hidden;
-                            top: 20px !important;
-
-                            & > h3 {
-                                padding-left: 30px;
-                                font-size: 15px;
-                                font-weight: bold;
-                                padding-bottom: 10px;
-                                padding-top: 20px;
-                            }
-                            & > div {
-                                padding: 1px;
-                                border-bottom: 3px solid $secondary;
-                                -webkit-column-count: 4;
-                                -moz-column-count: 4;
-                                column-count: 4;
-                                -webkit-column-width: 25%;
-                                -moz-column-width: 25%;
-                                column-width: 25%;
-                                -webkit-column-gap: 2em;
-                                -moz-column-gap: 2em;
-                                column-gap: 2em;
-
-                                & > a {
-                                    background-color: #fff;
-                                    padding: 8px 10px;
-                                    color: #666;
-
-                                    &:hover {
-                                        & > span {
-                                            background-color: $secondary;
-                                        }
-                                    }
-
-                                    & > span {
-                                        width: 4px;
-                                        height: 4px;
-                                        border-radius: 4px;
-                                        background-color: #eee;
-                                        align-self: center;
-                                        margin-right: 10px;
-
-                                        @include transition(all, linear, 0.3s);
-                                    }
-                                }
                             }
                         }
                     }
