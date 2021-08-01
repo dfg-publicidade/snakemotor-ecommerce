@@ -1,13 +1,8 @@
+// Core variables and mixins
 @import "../../../../../node_modules/bootstrap/scss/functions";
 @import "../../../../../node_modules/bootstrap/scss/variables";
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 
-@include media-breakpoint-down(md) {
-    div.produtos {
-        &.geral {
-            & > div.produto-item {
-                width: 185px;
-            }
-        }
-    }
+@include media-breakpoint-down(lg) {    
+    
 }

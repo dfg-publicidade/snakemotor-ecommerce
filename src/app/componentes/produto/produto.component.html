@@ -1,0 +1,22 @@
+<a href="#" class="produto tag">
+    <span class="tag lancamento">Lançamento</span>
+    <div class="imagem" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
+    <div class="info">
+        <p>
+            Capacete Axxis Draken Bomb Preto Vermelho
+            <span>
+                <i class="fas fa-star pe-1"></i>
+                <i class="fas fa-star pe-1"></i>
+                <i class="fas fa-star pe-1"></i>
+                <i class="fas fa-star pe-1"></i>
+                <i class="fas fa-star"></i>
+            </span>
+        </p>
+
+    </div>
+    <div class="preco">
+        <p class="valor-normal" [ngClass]="{empty: item === 2}">{{item !== 2 ? 'R$ 687,99' : '&nbsp;'}}</p>
+        <p class="valor-vigente">R$ 522,41</p>
+        <p class="valor-parcelado">10x R$ 54,99</p>
+    </div>
+</a>

@@ -1,5 +1,10 @@
 @import "../../../res/variables.scss";
 
+:host ::ng-deep {
+    @import "../../../../node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+    @import "../../../../node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+}
+
 main {
     padding-top: 100px;
     z-index: 2;
@@ -9,6 +14,14 @@ section {
     padding: 20px 0;
     &:first-of-type {
         padding-top: 40px;
+    }
+
+    & > h3 {
+        &.center {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
     }
 
     & > div.container {
@@ -38,93 +51,88 @@ section {
         }
 
         & > div.produtos {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
+            ::ng-deep {
+                div.owl-theme {
+                    min-height: 475px;
 
-            & > a.produto {
-                background: #fff;
-                width: 24%;
-                padding: 20px;
-                position: relative;
-
-                & > span.tag {
-                    padding: 2px 10px;
-                    color: #fff;
-                    width: auto;
-                    position: absolute;
-                    right: 10px;
-                    top: 10px;
-                    font-size: 17px;
-                }
-
-                &.tag {
-                    & > span.lancamento {
-                        background: #d602de;
+                    div.owl-stage-outer {
+                        cursor: pointer;
+                        z-index: 100;
                     }
-                    & > span.desconto {
-                        background: #de0205;
-                    }
-                    & > span.exclusivo {
-                        background: #b6df0e;
-                    }
-                }
+                    div.owl-nav {
+                        position: absolute;
+                        top: 50%;
+                        width: 100%;
+                        transform: translateY(-50%);
+                        z-index: 200;
 
-                & > div.imagem {
-                    width: 100%;
-                    height: 190px;
-                    background-size: contain;
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    margin-top: 20px;
-                }
-                & > div.info {
-                    margin-top: 20px;
+                        display: flex;
+                        justify-content: space-between;
+                        pointer-events: none;
 
-                    & > p {
-                        color: $text-primary;
-                        min-height: 93px;
-                        margin-bottom: 0;
-                        & > span {
-                            display: inline-block;
-                            width: 100%;
-                            margin-top: 5px;
+                        & > div.owl-prev {
+                            margin-left: -30px;
+                        }
+
+                        & > div.owl-next {
+                            margin-right: -30px;
+
                             & > i {
-                                color: #cccccc;
+                                padding-left: 3px;
+                            }
+                        }
+
+                        & > div.owl-prev,
+                        & > div.owl-next {
+                            background-color: #d2d2d2;
+                            pointer-events: all;
+                            border-radius: 50%;
+                            width: 45px;
+                            height: 45px;
+                            display: flex;
+                            align-items: center;
+
+                            @include transition(all, linear, 0.3s);
+
+                            &:hover {
+                                background-color: #cccccc66;
+                            }
+
+                            & > i.fas,
+                            & > i.fab {
+                                text-align: center;
+                                width: 100%;
+                                font-size: 30px;
                             }
                         }
                     }
-                }
 
-                & > div.preco {
-                    padding-top: 30px;
+                    div.owl-dots {
+                        z-index: 101;
+                        position: absolute;
+                        bottom: 10px;
+                        left: 50%;
+                        transform: translateX(-50%);
 
-                    & > p {
-                        margin-bottom: 0;
-                        color: $text-primary;
-
-                        &.valor-normal {
-                            font-size: 13px;
-                            text-decoration: line-through !important;
-                            color: #636363;
-
-                            &.empty {
-                                text-decoration: none !important;
+                        & > div.owl-dot {
+                            &:hover {
+                                & > span {
+                                    background-color: #d2d2d2;
+                                }
                             }
-                        }
-                        &.valor-vigente {
-                            font-size: 20px;
-                            font-weight: bold;
-                        }
 
-                        &.valor-vigente {
-                            font-size: 22px;
-                            font-weight: bold;
-                        }
+                            &.active {
+                                & > span {
+                                    background-color: #fe0000;
+                                }
+                            }
 
-                        &.valor-parcelado {
-                            font-size: 13px;
-                            color: #a5a5a5;
+                            & > span {
+                                width: 13px;
+                                height: 13px;
+                                border: 1px solid #f3f3f3;
+                                background-color: #cccccc44;
+                            }
                         }
                     }
                 }
@@ -146,6 +154,98 @@ section {
 
                 &.full {
                     width: 100%;
+                }
+            }
+        }
+    }
+
+    & > div.marcas {
+        margin: 40px 0;
+        ::ng-deep {
+            div.owl-theme {
+                min-height: 108px;
+                a.marca {
+                    height: 108px;
+                    background-size: contain;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    display: inherit;
+                }
+
+                div.owl-stage-outer {
+                    cursor: pointer;
+                    z-index: 100;
+                }
+                div.owl-nav {
+                    position: absolute;
+                    top: 50%;
+                    width: 100%;
+                    transform: translateY(-50%);
+                    z-index: 200;
+
+                    display: none;
+                    // display: flex;
+                    // justify-content: space-between;
+                    // pointer-events: none;
+
+                    & > div.owl-prev {
+                    }
+
+                    & > div.owl-next {
+                    }
+
+                    & > div.owl-prev,
+                    & > div.owl-next {
+                        background-color: #d2d2d2;
+                        pointer-events: all;
+                        border-radius: 50%;
+                        width: 45px;
+                        height: 45px;
+                        display: flex;
+                        align-items: center;
+
+                        @include transition(all, linear, 0.3s);
+
+                        &:hover {
+                            background-color: #cccccc66;
+                        }
+
+                        & > i.fas,
+                        & > i.fab {
+                            text-align: center;
+                            width: 100%;
+                            font-size: 30px;
+                        }
+                    }
+                }
+
+                div.owl-dots {
+                    z-index: 101;
+                    position: absolute;
+                    bottom: 10px;
+                    left: 50%;
+                    transform: translateX(-50%);
+
+                    & > div.owl-dot {
+                        &:hover {
+                            & > span {
+                                background-color: #d2d2d2;
+                            }
+                        }
+
+                        &.active {
+                            & > span {
+                                background-color: #fe0000;
+                            }
+                        }
+
+                        & > span {
+                            width: 13px;
+                            height: 13px;
+                            border: 1px solid #f3f3f3;
+                            background-color: #cccccc44;
+                        }
+                    }
                 }
             }
         }

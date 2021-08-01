@@ -7,19 +7,7 @@
         </ng-template>
 
         <!-- MOCKUP BANNER-->
-        <ng-template carouselSlide>
-            <a class="banner-item" href="#">
-                <img *ngIf="!isMobile" src="/res/imagens/temporarias/banner.jpg" [alt]="'Título do banner'">
-                <img *ngIf="isMobile" src="/res/imagens/temporarias/banner-mobile.jpg" [alt]="'Título do banner'">
-            </a>
-        </ng-template>
-        <ng-template carouselSlide>
-            <a class="banner-item" href="#">
-                <img *ngIf="!isMobile" src="/res/imagens/temporarias/banner.jpg" [alt]="'Título do banner'">
-                <img *ngIf="isMobile" src="/res/imagens/temporarias/banner-mobile.jpg" [alt]="'Título do banner'">
-            </a>
-        </ng-template>
-        <ng-template carouselSlide>
+        <ng-template carouselSlide *ngFor="let number of [0,1,2,4]">
             <a class="banner-item" href="#">
                 <img *ngIf="!isMobile" src="/res/imagens/temporarias/banner.jpg" [alt]="'Título do banner'">
                 <img *ngIf="isMobile" src="/res/imagens/temporarias/banner-mobile.jpg" [alt]="'Título do banner'">

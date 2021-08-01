@@ -3,12 +3,6 @@
 @import "../../../../../node_modules/bootstrap/scss/variables";
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 
-@include media-breakpoint-down(lg) {
-    div.produtos {
-        &.geral {
-            & > div.produto-item {
-                width: 220px;
-            }
-        }
-    }
+@media print {
+   
 }
