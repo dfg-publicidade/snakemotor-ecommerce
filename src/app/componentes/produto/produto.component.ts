@@ -2,7 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 declare var $: any;
 
 @Component({
-  selector: 'app-produto',
+  selector: 'app-produto-componente',
   templateUrl: './produto.component.html',
   styleUrls: ['./produto.component.scss']
 })

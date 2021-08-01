@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BannerModule } from 'src/app/componentes/banner/banner.module';
-import { ProdutoModule } from 'src/app/componentes/produto/produto.module';
+import { ProdutoComponentModule } from 'src/app/componentes/produto/produto.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 
@@ -15,7 +15,7 @@ import { HomeComponent } from './home.component';
     CommonModule,
     BannerModule,
     CarouselModule,
-    ProdutoModule
+    ProdutoComponentModule
   ],
   providers: []
 })

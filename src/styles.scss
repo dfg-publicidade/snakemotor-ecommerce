@@ -3,6 +3,9 @@
 @import "../node_modules/@fortawesome/fontawesome-free/css/regular.min.css";
 @import "../node_modules/@fortawesome/fontawesome-free/css/brands.min.css";
 
+@import "./res/scss/default/default.scss";
+@import "./res/scss/breadcrumb/breadcrumb.scss";
+
 @font-face {
     font-family: "Open Sans";
     font-style: normal;
@@ -29,10 +32,6 @@
     outline: none !important;
     box-shadow: none !important;
     text-decoration: none !important;
-
-    &::-webkit-scrollbar-track {
-        background-color: #f5f5f5;
-    }
 
     &::-webkit-scrollbar {
         width: 3px;

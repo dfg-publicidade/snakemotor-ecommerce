@@ -20,4 +20,4 @@ import { ProdutoCComponent } from './produto.component';
   ],
   providers: [],
 })
-export class ProdutoModule { }
+export class ProdutoComponentModule { }

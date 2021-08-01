@@ -1,0 +1,92 @@
+@import "../../../../res/variables.scss";
+
+section {
+    & > div.container {
+        & > div.catalogo {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            & > div.box-filtro {
+                width: 25%;
+                border: 1px solid #a7a7a7;
+                border-radius: 10px;
+                margin-right: 20px;
+                padding: 20px;
+
+                & > form {
+                    & > div.filtro {
+                        padding: 20px 0;
+                        border-bottom: 1px solid #dfdfdf;
+
+                        &:first-of-type{
+                            padding-top: 0;
+                        }
+                        &:last-of-type {
+                            border-bottom: 0;
+                        }
+                        & > p {
+                            margin: 0;
+                            margin-bottom: 20px;
+                            &.titulo {
+                                color: #747474;
+                                font-weight: bold;
+
+                                &:first-of-type {
+                                    margin-top: 0;
+                                }
+                            }
+                        }
+
+                        & > div.form-check {
+                            & > input[type="checkbox"] {
+                                border-radius: 0;
+                                width: 1.3em;
+                                height: 1.3em;
+                                margin-right: 10px;
+                                border-color: rgba(0, 0, 0, 0.25) !important;
+                                display: flex;
+                                padding-left: 1.5px;
+                                background: transparent;
+
+                                &:checked {
+                                    background: $text-primary;
+
+                                    &::after {
+                                        font-family: "Font Awesome 5 Free";
+                                        font-weight: 900;
+                                        content: "\f00c";
+                                        color: #fff;
+                                        width: 100%;
+                                        font-size: 14px;
+                                        margin-top: -1px;
+                                    }
+                                }
+                            }
+
+                            &>label{
+                                color: #686868;
+                            }
+                        }
+                    }
+                }
+            }
+            & > div.produtos {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                width: 75%;
+                & > app-produto-componente {
+                    width: 32%;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+}
+
+@import "responsive/produto-xl.scss";
+@import "responsive/produto-lg.scss";
+@import "responsive/produto-md.scss";
+@import "responsive/produto-sm.scss";
+@import "responsive/produto-xss.scss";
+@import "responsive/produto-print.scss";
