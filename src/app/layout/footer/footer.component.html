@@ -1,122 +1,96 @@
-<div class="btn-group-fab" role="group" aria-label="FAB Menu" *ngIf="configuracao">
-    <div>
-        <a href="javascript:void(0)" class="btn btn-main btn-success has-tooltip">
-            <button type="button" data-placement="left" title="Menu">
-                <i class="fab fa-whatsapp"></i>
-            </button>
-        </a>
-        <a href="https://wa.me/55{{getOnlyNumber(configuracao.telefone)}}" target="_blank" class="btn btn-sub btn-success has-tooltip" *ngIf="configuracao.whatsapp">
-            <button type="button" data-placement="left" title="Fullscreen">
-                <i class="fab fa-whatsapp"></i>
-                {{configuracao.telefone}}
-            </button>
-        </a>
-        <a href="https://wa.me/55{{getOnlyNumber(configuracao.telefone2)}}" target="_blank" class="btn btn-sub btn-success has-tooltip" *ngIf="configuracao.whatsapp2">
-            <button type="button" data-placement="left" title="Fullscreen">
-                <i class="fab fa-whatsapp"></i>
-                {{configuracao.telefone2}}
-            </button>
-        </a>
-        <a href="https://wa.me/55{{getOnlyNumber(configuracao.telefone3)}}" target="_blank" class="btn btn-sub btn-success has-tooltip" *ngIf="configuracao.whatsapp3">
-            <button type="button" data-placement="left" title="Fullscreen">
-                <i class="fab fa-whatsapp"></i>
-                {{configuracao.telefone3}}
-            </button>
-        </a>
-        <a href="https://wa.me/55{{getOnlyNumber(configuracao.telefone4)}}" target="_blank" class="btn btn-sub btn-success has-tooltip" *ngIf="configuracao.whatsapp4">
-            <button type="button" data-placement="left" title="Fullscreen">
-                <i class="fab fa-whatsapp"></i>
-                {{configuracao.telefone4}}
-            </button>
-        </a>
-    </div>
-</div>
-<footer>
+<footer class="newsletter">
     <div class="container">
-        <nav class="menu-rodape">
-            <ul>
-                <li>
-                    <ul>
-                        <li class="titulo">Conecta</li>
-                        <li><a [routerLink]="['/quemsomos']">Quem somos?</a></li>
-                        <li><a [routerLink]="['/troca-e-devolucao']">Troca e devoluções</a></li>
-                        <li><a [routerLink]="['/perfil']">Minha conta</a></li>
-                        <li><a [routerLink]="['/politica-de-privacidade']">Política de privacidade</a></li>
-                    </ul>
-                </li>
-                <li *ngIf="configuracao">
-                    <ul>
-                        <li class="titulo">Localização</li>
-                        <li>
-                            <a href="#">
-                                {{configuracao.endereco}}<br />
-                                {{configuracao.bairro}} - {{configuracao.cidade}}/{{configuracao.uf}}<br />
-                                CEP: {{configuracao.cep}}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Horário de Atendimento: <br />
-                                {{configuracao.horarioAtendimento}}
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li *ngIf="configuracao">
-                    <ul>
-                        <li class="titulo">Contato</li>
-                        <li>
-                            <a href="">
-                                <span>
-                                    <i class="far fa-envelope"></i>
-                                    {{configuracao.email}}
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span *ngIf="configuracao.telefone">{{configuracao.telefone}}</span> <br />
-                                <span *ngIf="configuracao.telefone2">{{configuracao.telefone2}}</span> <br />
-                                <span *ngIf="configuracao.telefone3">{{configuracao.telefone3}}</span> <br />
-                                <span *ngIf="configuracao.telefone4">{{configuracao.telefone4}}</span> <br />
-                            </a>
-                        </li>
-                        <li>
-                            <nav class="social">
-                                <ul>
-                                    <li>
-                                        <a href="https://www.facebook.com/conectacell" target="_blank">
-                                            <span><i class="fab fa-facebook-square"></i></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.instagram.com/conecta.cell" target="_blank">
-                                            <span><i class="fab fa-instagram"></i></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-        <!-- <div class="newsletter">
-            <span>Cadastre-se e receba nossas promoções!</span>
+        <div class="cadastro">
+            <span class="titulo">
+                <strong>Cadastre-se</strong>
+                e receba nossas ofertas!
+            </span>
             <div class="campo">
-                <i class="far fa-envelope"></i>
-                <input type="text" placeholder="Digite seu e-mail"/>
-                <button type="text">Enviar</button>
+                <div>
+                    <input type="text" placeholder="Whatsapp com DDD" />
+                    <button type="text">Enviar</button>
+                </div>
+                <span>Ao enviar, declaro que aceito receber informações sobre ofertas em meu whatsapp</span>
             </div>
-        </div> -->
+        </div>
+    </div>
+</footer>
+<footer class="central">
+    <div class="container">
+        <div class="colunas">
+            <div class="coluna coluna-1">
+                <div class="logo"></div>
+                <p>
+                    Desde 1982 no mercado de motocicletas! Referência nacional entre Concessionárias,
+                    Oficinas, Boutique Especializada e Acessórios e Peças. Solidez e Credibilidade
+                </p>
+                <div class="redes-sociais">
+                    <p><strong>siga nossas redes sociais</strong></p>
+                    <ul>
+                        <li><a href="" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
+                        <li><a href="" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                        <li><a href="" target="_blank"><i class="fab fa-tiktok"></i></a></li>
+                    </ul>
+                </div>
+                <p class="copyright">Copyright © 2021. Todos os direitos reservados</p>
+            </div>
+            <div class="coluna coluna-2">
+                <ul>
+                    <li class="titulo"><strong>SNAKE MOTORS</strong></li>
+                    <li><a href="">Capacetes</a></li>
+                    <li><a href="">Vestuário</a></li>
+                    <li><a href="">Big Trail</a></li>
+                    <li><a href="">Street</a></li>
+                    <li><a href="">Motos 0km e Usadas</a></li>
+                    <li><a href="">Marcas</a></li>
+
+                    <li class="pt-5"><a href="">Institucional</a></li>
+                    <li><a href="">Trocas e Devoluções</a></li>
+                    <li><a href="">Minha Conta</a></li>
+                    <li><a href="">Política de Privacidade</a></li>
+                </ul>
+            </div>
+            <div class="coluna coluna-3">
+                <p><strong>CONTATO</strong></p>
+                <p>
+                    <i class="fas fa-map-marker-alt pe-2 pt-1"></i>
+                    Rua João Barrocas Filho, 245 <br />
+                    Vila N. S. Aparecida. Cordeirópolis/SP <br />
+                    CEP: 13491-012
+                </p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1233.1453938136967!2d-47.456956943511095!3d-22.476672733411835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c7d605ac151821%3A0xf034ab225f14102!2sConcession%C3%A1ria%20Suzuki%20Snake%20Motos!5e0!3m2!1spt-BR!2sbr!4v1627788549870!5m2!1spt-BR!2sbr" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <p>
+                    <i class="fas fa-clock pe-2 pt-1"></i>
+                    Horário de Atendimento: <br />
+                    segunda a sexta das 08hrs30 às 18hrs <br />
+                    sábados 08hrs às 12hrs.
+                </p>
+                <p class="pt-4">
+                    <i class="far fa-envelope pe-2 pt-1"></i>
+                    contato@snakemotor.com.br
+                </p>
+                <p>
+                    <a href="#">
+                        <i class="fas fa-phone pe-2 pt-1"></i>
+                        (19) 3556-9262
+                    </a>
+                </p>
+                <p>
+                    <a href="#">
+                        <i class="fab fa-whatsapp pe-2 pt-1"></i>
+                        (19) 3556-9262
+                    </a>
+                </p>
+            </div>
+        </div>
     </div>
 </footer>
 <footer class="inferior">
     <div class="container">
         <div>
             <div class="info">
-                <img src="./res/imagens/formaspagamento.jpg" />
-                <span>Conecta Distribuidora - Tudo para Celulares - 2020 - Todos os direitos reservados - CNPJ: 29.734.462/0001-14</span>
+                <img src="./res/imagens/formas-pagamento.jpg" />
             </div>
             <div class="dfgpublicidade">
                 <a href="http://dfgpublicidade.com" target="_blank">

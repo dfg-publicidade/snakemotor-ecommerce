@@ -1,262 +1,204 @@
 // Core variables and mixins
-@import "../../../../node_modules/bootstrap/scss/functions";
-@import "../../../../node_modules/bootstrap/scss/variables";
-@import "../../../../node_modules/bootstrap/scss/mixins";
+// @import "../../../../node_modules/bootstrap/scss/functions";
+// @import "../../../../node_modules/bootstrap/scss/variables";
+// @import "../../../../node_modules/bootstrap/scss/mixins";
 
 @import "../../../res/variables.scss";
 
-.btn-group-fab {
-    position: fixed;
-    width: 50px;
-    height: auto;
-    right: 20px;
-    bottom: 20px;
-    z-index: 150;
-
-    & > div {
-        position: relative;
-        width: 100%;
-        height: auto;
-
-        & > a {
-            &.btn {
-                position: absolute;
-                bottom: 0;
-                margin: 4px auto;
-
-                &.btn-main {
-                    border-radius: 50%;
-                    display: block;
-                    margin-bottom: 4px;
-                    background: #25d366;
-                    border-color: #25d366;
-                    width: 50px;
-                    height: 50px;
-                    right: 50%;
-                    margin-right: -25px;
-                    z-index: 9;
-
-                    & > button {
-                        background: #25d366;
-                        border-color: #25d366;
-                        padding: 0;
-                        & > i {
-                            font-size: 28px;
-                            margin-top: 4px;
-                        }
-                    }
-                }
-
-                &.btn-sub {
-                    display: none;
-                    width: 200px;
-                    bottom: 0;
-                    z-index: 8;
-                    right: 50%;
-                    margin-right: -20px;
-                    -webkit-transition: all 2s;
-                    transition: all 0.5s;
-                    background: #128c7e;
-                    border-color: #128c7e;
-
-                    & > button {
-                        background: #128c7e;
-                        border-color: #128c7e;
-                    }
-
-                    &:nth-child(2) {
-                        bottom: 60px;
-                    }
-                    &:nth-child(3) {
-                        bottom: 110px;
-                    }
-                    &:nth-child(4) {
-                        bottom: 160px;
-                    }
-                    &:nth-child(5) {
-                        bottom: 210px;
-                    }
-                }
-            }
-        }
-    }
-
-    &.active {
-        & > div {
-            & > a {
-                &.btn-sub {
-                    -webkit-transition: all 2s;
-                    transition: all 0.5s;
-                    display: block;
-                }
-            }
-        }
-    }
-}
-
 footer {
     background-color: $primary;
-    padding: 40px 0 0 0;
+    padding: 40px 0;
     max-width: 100vw;
 
     @include transition(all, linear, 0.3s);
 
-    & > div.container {
-        & > nav.menu-rodape {
-            & > ul {
+    &.newsletter {
+        background: #282828;
+        & > div.container {
+            & > div.cadastro {
                 display: flex;
-                list-style: none;
-                margin: 0;
-                padding: 0;
+                justify-content: space-between;
+                align-items: center;
 
-                & > li {
-                    flex-grow: 1;
+                & > span.titulo {
+                    color: #fff;
+                    width: 50%;
+                    font-size: 22px;
+                    line-height: 26px;
+                    & > strong {
+                        display: inline-block;
+                        width: 100%;
+                        font-size: 45px;
+                    }
+                }
+                & > div.campo {
+                    width: 50%;
 
-                    & > ul {
-                        list-style: none;
-                        margin: 0;
-                        padding: 0;
+                    & > div {
+                        position: relative;
 
-                        & > li {
-                            font-size: 14px;
-                            flex-grow: 1;
-                            margin-bottom: 10px;
+                        & > input {
+                            padding: 15px;
+                            border: 0;
+                            width: 100%;
+                            padding-right: 160px;
+                        }
+                        & > button {
+                            position: absolute;
+                            right: 0;
+                            top: 0;
+                            background: #48ba80;
+                            color: #fff;
+                            padding: 10px;
+                            border: 0;
+                            width: 150px;
+                            height: 100%;
+                            font-weight: bold;
+                            text-transform: uppercase;
+                            margin: 0;
 
-                            &.titulo {
-                                color: #fff;
-                                text-transform: uppercase;
-                                font-weight: 600;
-                                margin-bottom: 20px;
-                                font-size: 16px;
-                                white-space: nowrap;
-
-                                &:not(:first-of-type) {
-                                    margin-top: 20px;
-                                }
+                            &:active {
+                                background: #328057;
                             }
+                        }
+                    }
 
-                            & > a {
-                                display: block;
-                                color: #a7a9b8;
-                                font-weight: 300;
-                                line-height: 18px;
+                    & > span {
+                        display: block;
+                        padding-top: 10px;
+                        width: 100%;
+                        color: #878585;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
 
-                                @include transition(all, linear, 0.3s);
+    &.central {
+        padding: 20px 0;
+        background: #000;
 
-                                &:hover {
-                                    color: #fff;
-                                }
+        & > div.container {
+            & > div.colunas {
+                display: flex;
+                justify-content: space-between;
 
-                                & > span {
-                                    & > i.fab,
-                                    & > i.far {
-                                        color: $secondary;
-                                        padding-left: 5px;
-                                    }
-                                }
+                & > div.coluna {
+                    width: 32%;
+
+                    & > p {
+                        color: #dadada;
+
+                        &.copyright {
+                            position: absolute;
+                            color: #5b5a5a;
+                            bottom: 0;
+                            margin: 0;
+                        }
+                    }
+
+                    &.coluna-1 {
+                        position: relative;
+                        padding-top: 40px;
+                        & > div.logo {
+                            width: 150px;
+                            height: 85px;
+                            background: url("../../../res/imagens/logo.png") no-repeat center center;
+                            background-size: 100% auto;
+                            margin-bottom: 20px;
+                        }
+
+                        & > div.redes-sociais {
+                            & > p {
+                                color: #dadada;
+                                margin-top: 40px;
                             }
-
-                            & > nav.social {
+                            & > ul {
                                 display: flex;
-                                flex-direction: column;
+                                list-style: none;
+                                padding: 0;
 
-                                & > ul {
-                                    display: flex;
-                                    justify-content: flex-start;
-                                    list-style: none;
-                                    margin: 0;
-                                    padding: 0;
+                                & > li {
+                                    padding-right: 15px;
+                                    font-size: 30px;
 
-                                    & > li {
-                                        margin-left: 10px;
-
-                                        & > a {
-                                            &:hover {
-                                                & > span {
-                                                    & > i.fab,
-                                                    & > i.far {
-                                                        color: $secondary;
-                                                    }
-                                                }
-                                            }
-
-                                            & > span {
-                                                display: flex;
-                                                font-size: 30px;
-
-                                                & > i.fab {
-                                                    color: #fff;
-                                                    align-self: center;
-
-                                                    @include transition(all, linear, 0.3s);
-                                                }
-                                            }
-                                        }
+                                    & > a {
+                                        color: #dadada;
                                     }
                                 }
                             }
                         }
                     }
-                }
-            }
-        }
 
-        & > div.newsletter {
-            display: inline-block;
-            padding: 20px 0;
-            width: auto;
+                    &.coluna-2 {
+                        padding-top: 40px;
+                        & > ul {
+                            border-left: 1px solid #28303c;
+                            list-style: none;
+                            padding: 0;
+                            padding-left: 40px;
 
-            & > span {
-                color: #fff;
-                margin-bottom: 10px;
-                display: inline-block;
-            }
-            & > div.campo {
-                position: relative;
-                display: block;
+                            &:first-of-type {
+                                margin-bottom: 40px;
+                            }
 
-                & > i {
-                    color: #636363;
-                    position: absolute;
-                    left: 20px;
-                    top: 16px;
-                    font-size: 22px;
-                }
-                & > input {
-                    border-radius: 10px;
-                    padding: 15px;
-                    border: 0;
-                    width: 50vw;
-                    padding-right: 160px;
-                    padding-left: 50px;
-                }
-                & > button {
-                    position: absolute;
-                    right: 3px;
-                    top: 3px;
-                    background: $secondary;
-                    color: $primary;
-                    padding: 10px;
-                    border: 0;
-                    width: 150px;
-                    border-radius: 10px;
-                    font-weight: bold;
-                    text-transform: uppercase;
-                    margin: 0;
-                    padding-bottom: 9px;
+                            & > li {
+                                color: #dadada;
+
+                                &.titulo {
+                                    padding-bottom: 20px;
+                                }
+
+                                &:last-of-type {
+                                    padding-bottom: 20px;
+                                }
+
+                                & > a {
+                                    color: #dadada;
+                                }
+                            }
+                        }
+                    }
+
+                    &.coluna-3 {
+                        background: #3b3b3b;
+                        padding: 30px;
+
+                        & > p {
+                            display: flex;
+                            margin-bottom: 5px;
+                            margin-top: 10px;
+
+                            & > strong {
+                                margin-bottom: 20px;
+                            }
+
+                            & > a {
+                                color: #dadada;
+                            }
+                        }
+
+                        & > iframe {
+                            width: 100%;
+                            margin: 15px 0;
+                            border-radius: 5px;
+                        }
+                    }
                 }
             }
         }
     }
 
     &.inferior {
-        padding: 30px 0;
+        padding: 15px 0;
         background: #fff;
 
         & > div.container {
             & > div {
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
 
                 & > div.info {
                     flex-wrap: wrap;
