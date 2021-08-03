@@ -47,17 +47,61 @@
                         </div>
                     </div>
 
-                    <!-- FILTRO POR Cor -->
+                    <!-- FILTRO POR PREÇO -->
+                    <div class="filtro">
+                        <p class="titulo">Preço</p>
+                        <div class="precos">
+                            <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"  (userChange)="getValue()"></ngx-slider>
+                        </div>
+                    </div>
+
+
+
+                    <!-- FILTRO POR COR -->
                     <div class="filtro">
                         <p class="titulo">Cores</p>
-                        
+                        <div class="cores">
+                            <div class="box-cor">
+                                <span class="cor full" [ngStyle]="{'background-color': '#fd27b9'}"></span>
+                            </div>
+                            <div class="box-cor">
+                                <span class="cor full" [ngStyle]="{'background-color': '#fe0000'}"></span>
+                            </div>
+                            <div class="box-cor">
+                                <span class="cor full" [ngStyle]="{'background-color': '#bcde02'}"></span>
+                            </div>
+                            <div class="box-cor">
+                                <span class="cor full" [ngStyle]="{'background-color': '#ffffff'}"></span>
+                            </div>
+                            <div class="box-cor">
+                                <span class="cor" [ngStyle]="{'background-color': '#ff910f'}"></span>
+                                <span class="cor" [ngStyle]="{'background-color': '#000000'}"></span>
+                            </div>
+                            <div class="box-cor">
+                                <span class="cor full" [ngStyle]="{'background-color': '#000000'}"></span>
+                            </div>
+                            <div class="box-cor">
+                                <span class="cor full" [ngStyle]="{'background-color': 'blue'}"></span>
+                            </div>
+                        </div>
+
                     </div>
                 </form>
             </div>
             <div class="produtos">
+                <h3>Capacetes</h3>
+                <div class="info">
+                    <span>899 produtos</span>
+                    <div class="ordenacao">
+                        <ng-select [multiple]="false" placeholder="Ordenar">
+                            <ng-option [value]="''">Mais vendido</ng-option>
+                            <ng-option [value]="''">Menor preço</ng-option>
+                            <ng-option [value]="''">Maior preço</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
                 <app-produto-componente [item]="number" *ngFor="let number of [0,1,2,4,5,6,7,8,9,10,11,12,13]"></app-produto-componente>
             </div>
         </div>
-
     </div>
 </section>

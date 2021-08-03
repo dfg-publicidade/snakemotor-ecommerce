@@ -3,10 +3,20 @@
 @import "../../../../../node_modules/bootstrap/scss/variables";
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 
+@media (min-width: 1400px) {
+    header {
+        & > div.principal {
+            background-size: cover;
+        }
+    }
+}
+
 @include media-breakpoint-down(xl) {
     header {
         & > div.principal {
-            background-position-x: -160px;
+            background-size: cover;
+            background-position-x: -100px;
+
             & > div.container {
                 & > nav.menu-principal {
                     & > ul {

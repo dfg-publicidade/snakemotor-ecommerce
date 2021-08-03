@@ -53,11 +53,13 @@ section {
         & > div.produtos {
             ::ng-deep {
                 div.owl-theme {
-                    min-height: 475px;
-
                     div.owl-stage-outer {
                         cursor: pointer;
                         z-index: 100;
+                    }
+
+                    div.owl-item {
+                       
                     }
                     div.owl-nav {
                         position: absolute;

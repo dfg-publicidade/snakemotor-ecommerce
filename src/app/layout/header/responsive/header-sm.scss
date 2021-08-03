@@ -55,6 +55,7 @@
 
         & > div.principal {
             background: $primary;
+            background-position-x: inherit;
             & > div.container {
                 &.segunda-linha {
                     display: none;

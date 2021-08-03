@@ -127,7 +127,7 @@ header {
 
     & > div.principal {
         background: url("../../../res/imagens/bg_fibra_carbono.jpg") no-repeat center center;
-        background-size: cover;
+        background-size: inherit;
         & > div.container {
             display: flex;
             justify-content: space-between;

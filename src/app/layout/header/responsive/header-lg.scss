@@ -6,7 +6,6 @@
 @include media-breakpoint-down(lg) {
     header {
         & > div.principal {
-            background-position-x: -150px;
             & > div.container {
                 app-busca {
                     padding: 0 20px;

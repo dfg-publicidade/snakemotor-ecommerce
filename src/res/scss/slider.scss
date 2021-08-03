@@ -1,0 +1,35 @@
+@import "../variables.scss";
+
+ngx-slider {
+    margin: 0 0 15px;
+    ::ng-deep {
+        & > span.ngx-slider-full-bar {
+            & > span.ngx-slider-span {
+                height: 10px;
+                background: #cdcdcd;
+            }
+        }
+        & > span.ngx-slider-selection-bar {
+            & > span.ngx-slider-span {
+                height: 10px;
+                background: #898989;
+            }
+        }
+
+        & > span.ngx-slider-pointer {
+            width: 20px;
+            height: 20px;
+            top: -6px;
+            background: #686868;
+            border-radius: 0;
+
+            &::after {
+                display: none;
+            }
+        }
+
+        & > span.ngx-slider-bubble {
+            bottom: -35px;
+        }
+    }
+}

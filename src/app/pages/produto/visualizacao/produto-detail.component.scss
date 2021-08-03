@@ -1,19 +1,14 @@
 @import "../../../../res/variables.scss";
 
 section {
-    padding: 20px 0;
-    &:first-of-type {
-        padding-top: 40px;
-    }
-
     & > div.container {
 
     }
 }
 
 @import "responsive/produto-detail-xl.scss";
-@import "responsive/hproduto-detailome-lg.scss";
+@import "responsive/produto-detail-lg.scss";
 @import "responsive/produto-detail-md.scss";
 @import "responsive/produto-detail-sm.scss";
 @import "responsive/produto-detail-xss.scss";
-@import "responsive/home-print.scss";
+@import "responsive/produto-detail-print.scss";
