@@ -1,5 +1,95 @@
+<nav class="breadcrumb">
+    <div class="container">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li class="separator">/</li>
+            <li><a href="#">Produtos</a></li>
+            <li class="separator">/</li>
+            <li><a href="#">Capacetes</a></li>
+            <li class="separator">/</li>
+            <li><a class="active" href="#">Capacete Agv</a></li>
+        </ul>
+    </div>
+</nav>
 <section>
     <div class="container">
-        <p>teste</p>
+        <div class="produto">
+            <div class="imagem"></div>
+            <div class="info">
+                <div class="descricao">
+                    <h3>CAPACETE AGV K-1 EDGE 46 58</h3>
+                    <span class="avaliacao">
+                        <i class="fas fa-star pe-1"></i>
+                        <i class="fas fa-star pe-1"></i>
+                        <i class="fas fa-star pe-1"></i>
+                        <i class="fas fa-star pe-1"></i>
+                        <i class="fas fa-star"></i>
+                    </span>
+                    <p>Projeto inovador, design ousado, grafismos top de linha.</p>
+                </div>
+                <div class="preco">
+                    <p class="valor-normal">R$ 687,99</p>
+                    <p class="valor-vigente">
+                        <span>R$ 522,41</span>
+                        <span class="tag desconto">-8%</span>
+                    </p>
+                    <p class="valor-parcelado">10x R$ 54,99 no cartão de crédito</p>
+                </div>
+                <div class="variacoes">
+                    <div class="tamanho">
+                        <label>Tamanho</label>
+                        <ng-select [multiple]="false" placeholder="Selecione">
+                            <ng-option [value]="''">P</ng-option>
+                            <ng-option [value]="''">M</ng-option>
+                            <ng-option [value]="''">G</ng-option>
+                        </ng-select>
+                    </div>
+                    <div class="cor">
+                        <label>Cor</label>
+                        <div class="itens">
+                            <div class="item" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
+                            <div class="item" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
+                            <div class="item" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
+                            <div class="item" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="custom buy">
+                    <i class="fas fa-shopping-cart"></i>
+                    Comprar
+                </button>
+            </div>
+        </div>
+        <div class="caracteristicas">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Messages</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Settings</button>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">1</div>
+                <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">2</div>
+                <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">3</div>
+                <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">4</div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="produtos">
+        <h3>Você também pode se <strong>interessar</strong> por</h3>
+        <app-produto-componente [item]="number" *ngFor="let number of [0,1,2,3]"></app-produto-componente>
     </div>
 </section>

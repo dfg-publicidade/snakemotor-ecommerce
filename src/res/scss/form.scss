@@ -14,13 +14,14 @@ ng-select.ng-select {
             font-size: 1rem;
 
             span.ng-clear-wrapper {
-                height: 18px;
+                height: 100%;
                 width: 18px;
-                right: 4px;
-
+                right: -10px;
+                text-align: center;
+                margin-right: 10px;
+                color: #a3a3a3;
                 & > span {
-                    left: 50%;
-                    transform: translateX(-50%);
+                    margin-top: 4px;
                 }
             }
             span.ng-arrow {
@@ -55,6 +56,32 @@ ng-select.ng-select {
                     padding: 0 10px;
                 }
             }
+
+            & > span.ng-arrow-wrapper {
+                cursor: pointer;
+                position: relative;
+                text-align: center;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                width: 26px;
+                height: 26px;
+                background: #ccc;
+                margin-left: 10px;
+                border-radius: 50%;
+                transition: transform 0.3s;
+
+                & > span.ng-arrow {
+                    border-style: solid;
+                    border-width: 0.1rem 0.1rem 0 0;
+                    height: 8px;
+                    width: 8px;
+                    top: -2px;
+                    transform: rotate(135deg);
+                    color: #444;
+                }
+            }
         }
 
         & > ng-dropdown-panel.ng-dropdown-panel {
@@ -72,6 +99,17 @@ ng-select.ng-select {
                 &.ng-option-marked {
                     background-color: $secondary;
                     color: #fff;
+                }
+            }
+        }
+    }
+
+    &.ng-select-opened {
+        ::ng-deep {
+            & > div.ng-select-container {
+                & > span.ng-arrow-wrapper {
+                    transform: rotate(180deg);
+                    opacity: 1;
                 }
             }
         }

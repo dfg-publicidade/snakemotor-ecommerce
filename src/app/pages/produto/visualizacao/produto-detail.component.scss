@@ -1,8 +1,133 @@
 @import "../../../../res/variables.scss";
+@import "../../../../res/scss/form.scss";
+@import "../../../../res/scss/buttons.scss";
 
 section {
+    &.produto-detail {
+        background: #fff;
+    }
     & > div.container {
+        & > div.produto {
+            background: #fff;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            & > div.imagem {
+                width: 70%;
+            }
+            & > div.info {
+                & > div.descricao {
+                    & > h3 {
+                        font-size: 25px;
+                        color: #747474;
+                        margin: 0;
+                        padding: 0;
+                    }
+                    & > span.avaliacao {
+                        display: inline-block;
+                        width: 100%;
+                        margin: 5px 0;
+                        & > i {
+                            color: #cccccc;
+                        }
+                    }
 
+                    & > p {
+                        color: #575757;
+                    }
+                }
+
+                & > div.preco {
+                    border-bottom: 1px solid #e7e7e7;
+                    padding-bottom: 20px;
+                    margin-bottom: 20px;
+                    & > p {
+                        margin-bottom: 0;
+                        color: $text-primary;
+
+                        &.valor-normal {
+                            font-size: 13px;
+                            text-decoration: line-through !important;
+                            color: #636363;
+
+                            &.empty {
+                                text-decoration: none !important;
+                            }
+                        }
+                        &.valor-vigente {
+                            font-size: 20px;
+                            font-weight: bold;
+                        }
+
+                        &.valor-vigente {
+                            display: flex;
+                            font-size: 22px;
+                            font-weight: bold;
+                            align-items: center;
+
+                            & > span.tag {
+                                font-size: 14px;
+                                color: #fff;
+                                padding: 1px 10px;
+                                margin-left: 10px;
+                                &.lancamento {
+                                    background: #d602de;
+                                }
+                                &.desconto {
+                                    background: #de0205;
+                                }
+                                &.exclusivo {
+                                    background: #b6df0e;
+                                }
+                            }
+                        }
+
+                        &.valor-parcelado {
+                            font-size: 13px;
+                            color: #a5a5a5;
+                        }
+                    }
+                }
+
+                & > div.variacoes {
+                    & > div.tamanho {
+                        margin-bottom: 20px;
+                        & > label {
+                            color: $text-primary;
+                            padding-bottom: 5px;
+                            font-weight: bold;
+                        }
+                    }
+                    & > div.cor {
+                        margin-bottom: 20px;
+                        & > label {
+                            color: $text-primary;
+                            padding-bottom: 5px;
+                            font-weight: bold;
+                        }
+
+                        & > div.itens {
+                            display: grid;
+                            grid-template-columns: repeat(4, 1fr);
+                            grid-column-gap: 10px;
+                            grid-row-gap: 10px;
+
+                            & > div.item {
+                                display: flex;
+                                width: 100%;
+                                height: 80px;
+                                background-size: 80%;
+                                background-position: center;
+                                background-repeat: no-repeat;
+                                border: 1px solid #c7c5c5;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

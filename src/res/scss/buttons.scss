@@ -1,0 +1,17 @@
+@import "../variables.scss";
+
+button.custom {
+    border: none;
+    padding: 10px 50px;
+
+    &.buy {
+        font-weight: bold;
+        font-size: 18px;
+        background: #ff0000;
+        color: #fff;
+
+        & > i {
+            padding-right: 10px;
+        }
+    }
+}
