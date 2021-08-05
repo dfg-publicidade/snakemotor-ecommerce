@@ -25,6 +25,7 @@
     "@popperjs/core": "^2.9.2",
     "bootstrap": "^5.0.2",
     "jquery": "^3.6.0",
+    "ngx-doe-gallery": "^1.1.2",
     "ngx-owl-carousel-o": "^6.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",

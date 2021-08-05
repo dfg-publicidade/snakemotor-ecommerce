@@ -14,9 +14,139 @@ section {
             justify-content: space-between;
             width: 100%;
             & > div.imagem {
-                width: 70%;
+                width: 60%;
+
+                & > doe-gallery {
+                    width: 100%;
+                    height: auto;
+
+                    ::ng-deep {
+                        & > doe-thumbs {
+                            background: #fff;
+                            border: 1px solid #e6e6e6;
+                            border-radius: 10px;
+                            overflow: hidden;
+
+                            & > ul {
+                                padding: 20px 0;
+                                height: 400px;
+                                & > li {
+                                    & > img {
+                                        object-fit: contain;
+                                        height: 70px;
+                                    }
+                                    &::after {
+                                        border: 0;
+                                    }
+
+                                    &.doe-thumbs-item--selected {
+                                        &::before {
+                                            font-family: "Font Awesome 5 Free";
+                                            font-weight: 900;
+                                            content: "\f111";
+                                            color: #ff0000;
+                                            font-size: 8px;
+                                            position: absolute;
+                                            right: 10px;
+                                            bottom: 50%;
+                                        }
+                                    }
+                                }
+                            }
+
+                            & > div.doe-thumbs-arrow {
+                                background: #fff;
+                                & > div {
+                                    background: #fff;
+                                    opacity: 1;
+                                    margin: 20px 0;
+
+                                    & > doe-chevron-icon {
+                                        & > svg {
+                                            display: none;
+                                        }
+                                    }
+                                }
+
+                                &.doe-thumbs-arrow-prev {
+                                    & > div {
+                                        & > doe-chevron-icon {
+                                            transform: rotate(0deg);
+                                            &::after {
+                                                font-family: "Font Awesome 5 Free";
+                                                font-weight: 900;
+                                                content: "\f078";
+                                                color: #000;
+                                                font-size: 20px;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                &.doe-thumbs-arrow-next {
+                                    & > div {
+                                        & > doe-chevron-icon {
+                                            transform: rotate(0deg);
+                                            &::after {
+                                                font-family: "Font Awesome 5 Free";
+                                                font-weight: 900;
+                                                content: "\f078";
+                                                color: #000;
+                                                font-size: 20px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        & > doe-viewer {
+                            background: #fff;
+
+                            & > div.doe-viewer-arrow {
+                                & > doe-chevron-icon {
+                                    & > svg {
+                                        display: none;
+                                    }
+                                }
+
+                                &.doe-viewer-arrow-prev,
+                                &.doe-viewer-arrow-next {
+                                    & > doe-chevron-icon {
+                                        transform: rotate(0deg);
+                                        &::after {
+                                            font-family: "Font Awesome 5 Free";
+                                            font-weight: 900;
+                                            content: "\f054";
+                                            color: #000;
+                                            font-size: 25px;
+                                        }
+                                    }
+                                }
+                            }
+
+                            & > ul {
+                                & > li {
+                                    & > picture {
+                                        & > img {
+                                            object-fit: none !important;
+                                            height: 395px;
+                                        }
+                                    }
+                                }
+                            }
+
+                            & > doe-counter {
+                                background: #efefef;
+                                color: $text-primary;
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
             }
             & > div.info {
+                width: 35%;
                 & > div.descricao {
                     & > h3 {
                         font-size: 25px;
@@ -121,10 +251,65 @@ section {
                                 background-position: center;
                                 background-repeat: no-repeat;
                                 border: 1px solid #c7c5c5;
+                                border-radius: 8px;
                                 cursor: pointer;
                             }
                         }
                     }
+                }
+            }
+        }
+
+        & > div.produto-extra-info {
+            background: #fff;
+            padding: 40px 20px;
+
+            & > ul#tab {
+                padding-left: 20px;
+                & > li {
+                    & > button {
+                        color: #636363;
+                        font-size: 20px;
+                        font-weight: bold;
+                        border: 0;
+
+                        &.active {
+                            border-bottom: 5px solid #636363;
+                        }
+                    }
+                }
+            }
+
+            & > div.tab-content {
+                padding: 20px;
+
+                & > div.tab-pane {
+                    color: #575757;
+                    & > p {
+                        color: #575757;
+                    }
+                }
+            }
+        }
+    }
+
+    &.outros-produtos {
+        padding: 40px 0;
+
+        & > div.container {
+            & > h1 {
+                font-size: 28px;
+                margin: 0;
+                padding-bottom: 40px;
+            }
+            & > div.produtos {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-column-gap: 15px;
+                grid-row-gap: 15px;
+
+                & > div.produto {
+                    width: 100%;
                 }
             }
         }
