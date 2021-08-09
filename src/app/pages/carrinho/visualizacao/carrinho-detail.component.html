@@ -1,0 +1,119 @@
+<nav class="breadcrumb">
+    <div class="container">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li class="separator">/</li>
+            <li><a href="#">Carrinho</a></li>
+        </ul>
+    </div>
+</nav>
+<section>
+    <div class="container">
+        <div class="carrinho">
+            <div class="itens">
+                <h3>Meu carrinho</h3>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <th scope="col">Produto</th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Preço</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let number of [1,2,3]">
+                                <td class="produto">
+                                    <div class="produto">
+                                        <div class="imagem" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
+                                        <p>
+                                            <a [routerLink]="['/produtos/visualizar']" target="_blank">CAPACETE AGV BLADE FIVE CONTINENTS</a> <br />
+                                            cor: preto/verde <br />
+                                            tamanho: S
+                                        </p>
+                                    </div>
+                                </td>
+                                <td class="qtde">
+                                    <div class="qtde">
+                                        <button type="button" class="btn btn-start">+</button>
+                                        <input class="qtde" type="text" value="1" />
+                                        <button type="button" class="btn btn-end">-</button>
+                                    </div>
+                                    <div class="remover">
+                                        <button type="button" class="btn">remover</button>
+                                    </div>
+                                </td>
+                                <td class="valor">
+                                    <div class="valor">
+                                        <strong>R$ 1000,00</strong>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="frete">
+                    <form>
+                        <div class="form-group row">
+                            <label class="titulo">calcule o frete/prazo</label>
+                            <div class="col-sm-12 col-md-6 col-lg-4 pe-0">
+                                <input type="email" class="form-control">
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-1 ms-2 ps-0">
+                                <button type="button" class="btn">OK</button>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-6 center">
+                                <a href=""><small id="emailHelp" class="form-text text-muted">não sei meu CEP</small></a>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="frete-tipos">
+                        <div class="form-group form-check mb-1">
+                            <input type="radio" name="freteTipo" class="form-check-input">
+                            <label>
+                                <span>Retirar na snake motor (3 dias úteis) <span>Grátis</span></span>
+                            </label>
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="radio" name="freteTipo" class="form-check-input">
+                            <label>
+                                <span>Sedex (5 a 10 dias) <strong>R$ 24,00</strong></span>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="cupom">
+                    <p>
+                        <strong>CUPONS E VALES</strong> <br/>
+                        Possui um Cupom de desconto ou Vale-troca? Utilize-o na página de pagamento e aproveite!
+                    </p>
+                </div>
+            </div>
+            <div class="info">
+                <h3>Resumo</h3>
+                <p class="info-produto">
+                    <span>2 produtos</span>
+                    <span>R$ 1500,00</span>
+                </p>
+                <p class="frete">
+                    <span><strong>Frete</strong></span>
+                    <span class="gratis">Grátis</span>
+                </p>
+                <p class="total">
+                    <span><strong>Total</strong></span>
+                    <span>
+                        <strong>R$ 1.500,00</strong> <br />
+                        <span>em até 10x de R$ 150,00</span>
+                    </span>
+                </p>
+                <div class="botoes">
+                    <button type="button" class="custom buy">
+                        Finalizar Compra
+                    </button>
+                    <a [routerLink]="['/']">
+                        <button type="button">escolher mais produtos</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
