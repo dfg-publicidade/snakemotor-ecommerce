@@ -14,7 +14,7 @@ export class FooterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.buscarConfiguracao();
+    // this.buscarConfiguracao();
   }
 
   buscarConfiguracao() {

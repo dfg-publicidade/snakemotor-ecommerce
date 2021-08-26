@@ -24,7 +24,7 @@ export class MenuMobileComponent implements OnInit {
 
   ngOnInit() {
     this.page = 1;
-    this.listarCategorias(false);
+    // this.listarCategorias(false);
   }
 
   listarCategorias(loadMore: boolean) {

@@ -21,13 +21,15 @@ export class AuthInterceptor implements HttpInterceptor {
         if (!this.usuario) {
             request = request.clone({
                 setHeaders: {
-                    'Clientid': environment.CLIENT_ID
+                    'CLIENT_ID': environment.CLIENT_ID,
+                    'domain': environment.domain
                 }
             });
         } else {
             request = request.clone({
                 setHeaders: {
                     'Clientid': environment.CLIENT_ID,
+                    'domain': environment.domain,
                     'Token': `${this.usuario ? this.usuario.token : ''}`
                 }
             });

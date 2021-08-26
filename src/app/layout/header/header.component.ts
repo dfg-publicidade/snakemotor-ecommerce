@@ -22,8 +22,8 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private categoriaService: CategoriaService, private perfilService: PerfilService, private carrinhoService: CarrinhoService, private configuracaoService: ConfiguracaoService) { }
 
   ngOnInit() {
-    this.buscarConfiguracao();
-    this.listarCategorias();
+    // this.buscarConfiguracao();
+    // this.listarCategorias();
   }
 
   buscarConfiguracao() {

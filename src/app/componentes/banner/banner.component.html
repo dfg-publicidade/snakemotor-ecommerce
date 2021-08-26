@@ -1,16 +1,10 @@
 <div class="banner">
     <owl-carousel-o [options]="options">
-        <ng-template carouselSlide *ngFor="let item of items">
-            <div class="banner-item">
-                <img [src]="item.imagem" [alt]="item.titulo">
-            </div>
-        </ng-template>
-
         <!-- MOCKUP BANNER-->
-        <ng-template carouselSlide *ngFor="let number of [0,1,2,4]">
-            <a class="banner-item" href="#">
-                <img *ngIf="!isMobile" src="/res/imagens/temporarias/banner-desktop.jpeg" [alt]="'Título do banner'">
-                <img *ngIf="isMobile" src="/res/imagens/temporarias/banner-mobile-2.jpeg" [alt]="'Título do banner'">
+        <ng-template carouselSlide *ngFor="let item of items">
+            <a class="banner-item" href="{{item.link ? item.link : '#'}}">
+                <img *ngIf="!isMobile" [src]="item.imagem.original" [alt]="item.titulo">
+                <img *ngIf="isMobile && item.imagemMobile" [src]="item.imagemMobile.original" [alt]="'Título do banner'">
             </a>
         </ng-template>
     </owl-carousel-o>

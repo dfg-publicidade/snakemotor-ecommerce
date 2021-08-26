@@ -1,6 +1,6 @@
 <main>
     <div class="container">
-        <app-banner [items]="banners" class="d-xs-block d-sm-block d-md-block d-lg-block"></app-banner>
+        <app-banner [items]="banners[tipoBannerIdPrincipal]" class="d-xs-block d-sm-block d-md-block d-lg-block"></app-banner>
     </div>
 </main>
 <section>
@@ -17,8 +17,8 @@
             </owl-carousel-o>
         </div>
         <div class="banners">
-            <a class="banner" href="#" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/banner-secundario-1.jpg)'}"></a>
-            <a class="banner" href="#" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/banner-secundario-2.jpg)'}"></a>
+            <a *ngIf="banners[tipoBannerIdSegundaRolagem] && banners[tipoBannerIdSegundaRolagem][0]" class="banner" href="#" [ngStyle]="{'background-image': 'url(' + banners[tipoBannerIdSegundaRolagem][0].imagem.original + ')'}"></a>
+            <a *ngIf="banners[tipoBannerIdSegundaRolagem] && banners[tipoBannerIdSegundaRolagem][1]" class="banner" href="#" [ngStyle]="{'background-image': 'url(' + banners[tipoBannerIdSegundaRolagem][1].imagem.original + ')'}"></a>
         </div>
     </div>
 </section>
@@ -36,12 +36,12 @@
             </owl-carousel-o>
         </div>
         <div class="banners">
-            <a class="banner full" href="#" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/banner-terciario.jpg)'}"></a>
+            <a *ngIf="banners[tipoBannerIdTerceiraRolagem] && banners[tipoBannerIdTerceiraRolagem][0]" class="banner full" href="#" [ngStyle]="{'background-image': 'url(' + (!isMobile ? banners[tipoBannerIdTerceiraRolagem][0].imagem.original : banners[tipoBannerIdTerceiraRolagem][0].imagemMobile.original) + ')'}"></a>
         </div>
     </div>
 </section>
 
-<section>
+<section *ngIf="banners[tipoBannerIdTerceiraRolagem] && banners[tipoBannerIdTerceiraRolagem][0] && banners[tipoBannerIdTerceiraRolagem][0].produtos">
     <div class="container">
         <!-- <h1>
             <strong class="left">Equipe-se com estilo</strong>
@@ -49,19 +49,19 @@
         </h1> -->
         <div class="produtos">
             <owl-carousel-o [options]="optionsRotativoProdutos">
-                <ng-template carouselSlide *ngFor="let number of [0,1,2,4]">
-                    <app-produto-componente [item]="number"></app-produto-componente>
+                <ng-template carouselSlide *ngFor="let produto of banners[tipoBannerIdTerceiraRolagem][0].produtos">
+                    <app-produto-componente [item]="produto"></app-produto-componente>
                 </ng-template>
             </owl-carousel-o>
         </div>
     </div>
 </section>
 <section>
-    <h3 class="center pt-3 pb-3"><strong>Compre por marca</strong></h3>
+    <h3 class="center pt-3"><strong>Compre por marca</strong></h3>
     <div class="marcas">
         <owl-carousel-o [options]="optionsRotativoMarcas">
-            <ng-template carouselSlide *ngFor="let number of [0,1,2,4,5]">
-                <a class="marca" href="#" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/marca-1.png)'}"></a>
+            <ng-template carouselSlide *ngFor="let marca of marcas">
+                <a class="marca" href="#" [ngStyle]="{'background-image': marca.logo ? 'url(' + marca.logo.original + ')' : 'url(res/images/sem-capa-thumb.png)'}"></a>
             </ng-template>
         </owl-carousel-o>
     </div>

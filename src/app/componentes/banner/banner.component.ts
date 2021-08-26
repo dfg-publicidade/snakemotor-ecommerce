@@ -13,11 +13,8 @@ export class BannerComponent implements OnInit {
   @Input() options: OwlOptions;
   innerWidth: number = 0;
   isMobile: boolean = false;
-  loadingImagemBanner: boolean = false;
 
   constructor(private router: Router) {
-    this.loadingImagemBanner = true;
-
     this.options = {
       loop: true,
       items: 1,

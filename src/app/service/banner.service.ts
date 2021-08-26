@@ -1,20 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class BannerService {
   urlServico: string;
+  prefix: string = 'banner';
 
   constructor(private http: HttpClient) {
-    this.urlServico = environment.urlServico + 'banner';
+    this.urlServico = `${environment.urlServico}${environment.apiCMS}/${environment.versao}/banners`;
   }
 
-  listar(posicao: string): Observable<any> {
-    let url = this.urlServico;
+  listarPorPosicao(tipoId: string): Observable<any> {
+    let url = `${this.urlServico}?${this.prefix}.tipo.id=${tipoId}&_sort=${this.prefix}.ordem:asc`;
 
-    url += '?filtro=true&filtro_posicaoTipo=SITE&filtro_posicaoNome=' + posicao;
+    // url += `&_fields=content(items(imagem,imagemMobile,_id,produtos,url))`;
 
     return this.http.get(url);
   }
