@@ -5,6 +5,7 @@ import { BannerModule } from 'src/app/componentes/banner/banner.module';
 import { ProdutoComponentModule } from 'src/app/componentes/produto/produto.module';
 import { BannerService } from 'src/app/service/banner.service';
 import { MarcaService } from 'src/app/service/marca.service';
+import { ProdutoOpcaoService } from 'src/app/service/produto-opcao.service';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 
@@ -21,7 +22,8 @@ import { HomeComponent } from './home.component';
   ],
   providers: [
     BannerService,
-    MarcaService
+    MarcaService,
+    ProdutoOpcaoService
   ]
 })
 export class HomeModule { }

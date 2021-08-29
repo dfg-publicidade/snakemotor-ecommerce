@@ -1,9 +1,13 @@
-<a href="#" class="produto tag">
-    <span class="tag lancamento">Lançamento</span>
-    <div class="imagem" [ngStyle]="{'background-image': 'url(https://files.snakemotor.com.br/app/produtos/6126478f3cd3985daada1c66/imagem.jpg)'}"></div>
+<a href="#" class="produto tag" *ngIf="item && item.produto">
+    <div class="tags">
+        <span class="tag lancamento" *ngIf="item.produto.lancamento">Lançamento</span>
+        <span class="tag exclusivo" *ngIf="item.produto.exclusivoSite">Exclusivo no site</span>
+        <span class="tag frete-gratis" *ngIf="item.produto.freteGratis">Frete Grátis</span>
+    </div>
+    <div class="imagem" [ngStyle]="{'background-image': 'url(' + item.imagem + ')'}"></div>
     <div class="info">
         <p>
-            Capacete Axxis Draken Bomb Preto Vermelho
+            {{item.produto.nome}}
             <span>
                 <i class="fas fa-star pe-1"></i>
                 <i class="fas fa-star pe-1"></i>
@@ -14,9 +18,16 @@
         </p>
 
     </div>
-    <div class="preco">
-        <p class="valor-normal" [ngClass]="{empty: item === 2}">{{item !== 2 ? 'R$ 687,99' : '&nbsp;'}}</p>
-        <p class="valor-vigente">R$ 522,41</p>
-        <p class="valor-parcelado">10x R$ 54,99</p>
+    <div class="preco" *ngIf="item.preco">
+        <!-- PRECO VALOR PADRÃO RISCADO, POIS EXISTE VALOR PROMOCIONAL -->
+        <p class="valor-normal" [ngClass]="{empty: !item.preco.desconto}">{{item.preco.desconto ? (item.preco.normal | currency:'BRL':'symbol':'0.2-2':'pt') : '&nbsp;'}}</p>
+        
+        <!-- PRECO VALOR PROMOCIONAL -->
+        <p class="valor-vigente" *ngIf="item.preco.desconto">{{item.preco.desconto | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
+        <p class="valor-parcelado" *ngIf="item.preco.desconto">10x R$ {{(item.preco.desconto/10) | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
+
+        <!-- PRECO VALOR PADRÃO -->
+        <p class="valor-vigente" *ngIf="!item.preco.desconto">{{item.preco.normal | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
+        <p class="valor-parcelado" *ngIf="!item.preco.desconto">10x R$ {{(item.preco.normal/10) | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
     </div>
 </a>

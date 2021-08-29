@@ -2,7 +2,7 @@
     <owl-carousel-o [options]="options">
         <!-- MOCKUP BANNER-->
         <ng-template carouselSlide *ngFor="let item of items">
-            <a class="banner-item" href="{{item.link ? item.link : '#'}}">
+            <a class="banner-item" href="{{item.url ? item.url : '#'}}">
                 <img *ngIf="!isMobile" [src]="item.imagem.original" [alt]="item.titulo">
                 <img *ngIf="isMobile && item.imagemMobile" [src]="item.imagemMobile.original" [alt]="'Título do banner'">
             </a>

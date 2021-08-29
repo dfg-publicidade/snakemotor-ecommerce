@@ -38,17 +38,6 @@ export class HeaderComponent implements OnInit {
   }
 
   listarCategorias() {
-    this.categoriaService.listarDestaques()
-      .subscribe(
-        result => {
-          if (result) {
-            this.categoria = result.categoria;
-            this.categoria2 = result.categoria2;
-            this.categoria3 = result.categoria3;
-            this.categoria4 = result.categoria4;
-          }
-        }
-      );
   }
 
   getCarrinho() {
@@ -59,7 +48,7 @@ export class HeaderComponent implements OnInit {
   scrollPage() {
     const win = $(window);
 
-    this.scrolled = win.scrollTop() > 100;
+    this.scrolled = win.scrollTop() > 50;
   }
 
   overMenu() {

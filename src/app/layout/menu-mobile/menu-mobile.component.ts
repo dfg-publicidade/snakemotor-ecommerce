@@ -28,53 +28,6 @@ export class MenuMobileComponent implements OnInit {
   }
 
   listarCategorias(loadMore: boolean) {
-    if (!loadMore) {
-      this.loadingCategoriaService = true;
-    } else {
-      this.load = true;
-    }
-
-    this.categoriaService.listar(this.page)
-      .subscribe(
-        result => {
-          this.loadingCategoriaService = false;
-          this.load = false;
-          if (result) {
-            if (!loadMore) {
-              this.categorias = result.entities;
-              this.total = result.total;
-
-              if (!this.categorias) {
-                this.configAlert = {
-                  id: 'categoria',
-                  titulo: 'Atenção',
-                  mensagem: result.message
-                }
-              }
-            } else {
-              result.entities.forEach((entity: any) => {
-                this.categorias.push(entity);
-              });
-            }
-
-            this.infiniteScroll = this.categorias.length < this.total;
-
-          } else {
-            this.configAlert = {
-              id: 'categoria',
-              titulo: 'Atenção',
-              mensagem: 'Ocorreu um erro ao listar as categorias'
-            }
-          }
-        },
-        (error) => {
-          this.configAlert = {
-            id: 'categoria',
-            titulo: 'Atenção',
-            mensagem: 'Ocorreu um erro ao listar as categorias'
-          }
-        }
-      );
   }
 
   loadData() {

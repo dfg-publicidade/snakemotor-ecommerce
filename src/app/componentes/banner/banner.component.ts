@@ -17,11 +17,11 @@ export class BannerComponent implements OnInit {
   constructor(private router: Router) {
     this.options = {
       loop: true,
-      items: 1,
       nav: true,
       autoWidth: true,
       dots: true,
       autoplay: true,
+      skip_validateItems: false,
       navText: ['<i class="fas fa-angle-left"></i>', '<i class="fas fa-angle-right"></i>'],
       responsive: {
         0: {

@@ -4,7 +4,13 @@
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 
 @include media-breakpoint-down(md) {
-   main{
-       padding-top: 15px;
-   }
+    main {
+        padding-top: 15px;
+
+        &>div.container {
+            & > div.loading-banner {
+                height: 185px;
+            }
+        }
+    }
 }

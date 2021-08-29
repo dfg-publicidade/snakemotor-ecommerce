@@ -6,25 +6,28 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class CategoriaService {
   urlServico: string;
+  prefix: string = 'categoria';
 
   constructor(private http: HttpClient) {
-    this.urlServico = environment.urlServico + 'categoria/';
+    this.urlServico = `${environment.urlServico}${environment.apiApp}/${environment.versao}/categorias`;
   }
 
-  listar(page: number): Observable<any> {
-    let url = this.urlServico + page;
+  buscarDestaque(limite: number, aleatorio: boolean): Observable<any> {
+    let url = `${this.urlServico}`;
+
+    url += `?_limit=${limite}`;
+    url += `&${this.prefix}.destaqueHome=true`;
+
+    if (aleatorio) {
+      url += `&aleatorio=${aleatorio}`;
+    }
 
     return this.http.get(url);
   }
-
-  listarDestaques(): Observable<any> {
-    let url =  environment.urlServico + 'categorias-destaque/';
-
-    return this.http.get(url);
-  }
-
 
   visualizar(id: number): Observable<any> {
-    return this.http.get(this.urlServico + id + '/visualizar');
+    let url = this.urlServico + 'produto/' + id + "/visualizar";
+
+    return this.http.get(url);
   }
 }

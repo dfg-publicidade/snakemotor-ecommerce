@@ -1,37 +1,45 @@
 <main>
     <div class="container">
+        <!-- BANNER PRINCIPAL -->
+        <div class="loading-banner skeleton-box" *ngIf="!banners[tipoBannerIdPrincipal] || (banners[tipoBannerIdPrincipal] && banners[tipoBannerIdPrincipal].length === 0)"></div>
         <app-banner [items]="banners[tipoBannerIdPrincipal]" class="d-xs-block d-sm-block d-md-block d-lg-block"></app-banner>
     </div>
 </main>
+
 <section>
     <div class="container">
+        <!-- PRODUTOS EM DESTQUE -->
         <h1>
             <strong>Destaques</strong>
             de nossa loja virtual
         </h1>
         <div class="produtos">
-            <owl-carousel-o [options]="optionsRotativoProdutos">
-                <ng-template carouselSlide *ngFor="let number of [0,1,2,4]">
-                    <app-produto-componente [item]="number"></app-produto-componente>
+            <owl-carousel-o *ngIf="optionsRotativoProdutos && produtosDestaque" [options]="optionsRotativoProdutos">
+                <ng-template carouselSlide *ngFor="let produto of produtosDestaque">
+                    <app-produto-componente [item]="produto"></app-produto-componente>
                 </ng-template>
             </owl-carousel-o>
         </div>
+
+        <!-- BANNER DE SEGUNDA ROLAGEM -->
         <div class="banners">
-            <a *ngIf="banners[tipoBannerIdSegundaRolagem] && banners[tipoBannerIdSegundaRolagem][0]" class="banner" href="#" [ngStyle]="{'background-image': 'url(' + banners[tipoBannerIdSegundaRolagem][0].imagem.original + ')'}"></a>
-            <a *ngIf="banners[tipoBannerIdSegundaRolagem] && banners[tipoBannerIdSegundaRolagem][1]" class="banner" href="#" [ngStyle]="{'background-image': 'url(' + banners[tipoBannerIdSegundaRolagem][1].imagem.original + ')'}"></a>
+            <a *ngIf="banners[tipoBannerIdSegundaRolagem] && banners[tipoBannerIdSegundaRolagem][0]" class="banner" href="{{banners[tipoBannerIdSegundaRolagem][0].url ? banners[tipoBannerIdSegundaRolagem][0].url : '#'}}" [ngStyle]="{'background-image': 'url(' + banners[tipoBannerIdSegundaRolagem][0].imagem.original + ')'}"></a>
+            <a *ngIf="banners[tipoBannerIdSegundaRolagem] && banners[tipoBannerIdSegundaRolagem][1]" class="banner" href="{{banners[tipoBannerIdSegundaRolagem][1].url ? banners[tipoBannerIdSegundaRolagem][1].url : '#'}}" [ngStyle]="{'background-image': 'url(' + banners[tipoBannerIdSegundaRolagem][1].imagem.original + ')'}"></a>
         </div>
     </div>
 </section>
-<section>
+
+<!-- PRODUTOS COMO DESTAQUE EM SEGUNDA ROLAGEM (CATEGORIA EM DESTAQUE)-->
+<section *ngIf="categoriaDestaque">
     <div class="container">
         <h1>
-            <strong class="left">Escapamentos</strong>
-            <a href="#" class="right">veja mais +</a>
+            <strong class="left">{{categoriaDestaque.nome}}</strong>
+            <a [routerLink]="[categoriaDestaque.permalink]" routerLinkActive="router-link-active"  class="right">veja mais +</a>
         </h1>
         <div class="produtos">
-            <owl-carousel-o [options]="optionsRotativoProdutos">
-                <ng-template carouselSlide *ngFor="let number of [0,1,2,4]">
-                    <app-produto-componente [item]="number"></app-produto-componente>
+            <owl-carousel-o *ngIf="optionsRotativoProdutos && produtosPorCategoriaDestaque" [options]="optionsRotativoProdutos">
+                <ng-template carouselSlide *ngFor="let produto of produtosPorCategoriaDestaque">
+                    <app-produto-componente [item]="produto"></app-produto-componente>
                 </ng-template>
             </owl-carousel-o>
         </div>
@@ -41,6 +49,7 @@
     </div>
 </section>
 
+<!-- BANNER TERCEIRA ROLAGEM  COM LISTA DE PRODUTOS RELACIONADOS -->
 <section *ngIf="banners[tipoBannerIdTerceiraRolagem] && banners[tipoBannerIdTerceiraRolagem][0] && banners[tipoBannerIdTerceiraRolagem][0].produtos">
     <div class="container">
         <!-- <h1>
@@ -48,8 +57,8 @@
             <a href="#" class="right">veja mais +</a>
         </h1> -->
         <div class="produtos">
-            <owl-carousel-o [options]="optionsRotativoProdutos">
-                <ng-template carouselSlide *ngFor="let produto of banners[tipoBannerIdTerceiraRolagem][0].produtos">
+            <owl-carousel-o *ngIf="optionsRotativoProdutos && produtosPorIdsProdutoPrincipal" [options]="optionsRotativoProdutos">
+                <ng-template carouselSlide *ngFor="let produto of produtosPorIdsProdutoPrincipal">
                     <app-produto-componente [item]="produto"></app-produto-componente>
                 </ng-template>
             </owl-carousel-o>
@@ -59,7 +68,7 @@
 <section>
     <h3 class="center pt-3"><strong>Compre por marca</strong></h3>
     <div class="marcas">
-        <owl-carousel-o [options]="optionsRotativoMarcas">
+        <owl-carousel-o *ngIf="optionsRotativoMarcas && marcas" [options]="optionsRotativoMarcas">
             <ng-template carouselSlide *ngFor="let marca of marcas">
                 <a class="marca" href="#" [ngStyle]="{'background-image': marca.logo ? 'url(' + marca.logo.original + ')' : 'url(res/images/sem-capa-thumb.png)'}"></a>
             </ng-template>

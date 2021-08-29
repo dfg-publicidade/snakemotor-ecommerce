@@ -1,7 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { BannerService } from 'src/app/service/banner.service';
+import { CategoriaService } from 'src/app/service/categoria.service';
 import { MarcaService } from 'src/app/service/marca.service';
+import { ProdutoOpcaoService } from 'src/app/service/produto-opcao.service';
 
 @Component({
   selector: 'app-home',
@@ -12,8 +14,13 @@ export class HomeComponent implements OnInit {
   innerWidth: number = 0;
   isMobile: boolean = false;
 
-  marcas: any;
   banners: any;
+  produtosDestaque: any;
+  produtosPorCategoriaDestaque: any;
+  produtosPorIdsProdutoPrincipal: any;
+  categoriaDestaque: any;
+  marcas: any;
+
   optionsRotativoProdutos: OwlOptions;
   optionsRotativoMarcas: OwlOptions;
 
@@ -23,7 +30,9 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private marcaService: MarcaService,
-    private bannerService: BannerService
+    private bannerService: BannerService,
+    private produtoOpcaoService: ProdutoOpcaoService,
+    private categoriaService: CategoriaService
   ) {
     this.optionsRotativoProdutos = {
       loop: true,
@@ -64,8 +73,12 @@ export class HomeComponent implements OnInit {
 
     this.banners = [];
     this.listarbanners(this.tipoBannerIdPrincipal);
+    this.listarProdutosDestaque(8);
+
     this.listarbanners(this.tipoBannerIdSegundaRolagem);
     this.listarbanners(this.tipoBannerIdTerceiraRolagem);
+
+    this.buscarCategoriaDestaque(1);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -73,10 +86,74 @@ export class HomeComponent implements OnInit {
     this.innerWidth = window.innerWidth;
 
     this.mobile();
-    
+
     setTimeout(() => {
       window.dispatchEvent(new Event('resize'));
     }, 100);
+  }
+
+  listarbanners(tipoId: string) {
+    this.bannerService.listarPorPosicao(tipoId)
+      .subscribe(
+        result => {
+          this.banners[tipoId] = result.content.items;
+
+          //LISTA PRODUTOS VINCULADOS AO BANNER DA TERCEIRA ROLAGEM
+          if (this.banners[tipoId][0] && tipoId === this.tipoBannerIdTerceiraRolagem) {
+            let produtos = this.banners[tipoId][0].produtos;
+
+            if (produtos && produtos.length > 0) {
+              let ids: any = [];
+              produtos.forEach((produto: any) => {
+                ids.push(produto.id);
+              });
+              this.listarProdutosPorIdsProdutoPrincipal(ids, true);
+            }
+          }
+        }
+      );
+  }
+
+  listarProdutosDestaque(limite: number) {
+    this.produtoOpcaoService.listarDestaques(limite, true)
+      .subscribe(
+        result => {
+          this.produtosDestaque = result.content.items;
+        }
+      );
+  }
+
+  buscarCategoriaDestaque(limite: number) {
+    this.categoriaService.buscarDestaque(limite, true)
+      .subscribe(
+        result => {
+          if (result.content.items && result.content.items.length > 0) {
+            this.categoriaDestaque = result.content.items[0];
+
+            if (this.categoriaDestaque) {
+              this.listarProdutosPorCategoria(this.categoriaDestaque.id, 8, true);
+            }
+          }
+        }
+      );
+  }
+
+  listarProdutosPorCategoria(categoriaId: string, limite: number, aleatorio: boolean) {
+    this.produtoOpcaoService.listarPorCategoria(categoriaId, limite, aleatorio)
+      .subscribe(
+        result => {
+          this.produtosPorCategoriaDestaque = result.content.items;
+        }
+      );
+  }
+
+  listarProdutosPorIdsProdutoPrincipal(produtoIds: any, aleatorio: boolean) {
+    this.produtoOpcaoService.listarPorIdsProdutoPrincipal(produtoIds, aleatorio)
+      .subscribe(
+        result => {
+          this.produtosPorIdsProdutoPrincipal = result.content.items;
+        }
+      );
   }
 
   listarMarcas() {
@@ -86,19 +163,6 @@ export class HomeComponent implements OnInit {
         result => {
           this.marcas = result.content.items;
           this.loadingServiceMarca = false;
-        }
-      );
-  }
-
-
-
-  listarbanners(tipoId: string) {
-    this.bannerService.listarPorPosicao(tipoId)
-      .subscribe(
-        result => {
-          this.banners[tipoId] = result.content.items;
-
-          console.log(this.banners);
         }
       );
   }

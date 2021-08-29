@@ -6,25 +6,34 @@ a.produto {
     padding: 20px;
     position: relative;
 
-    & > span.tag {
-        padding: 2px 10px;
-        color: #fff;
-        width: auto;
+    & > div.tags {
+        display: grid;
+        grid-column-gap: 2px;
+        grid-row-gap: 2px;
+        align-items: center;
         position: absolute;
-        right: 10px;
-        top: 10px;
-        font-size: 17px;
-    }
+        right: 20px;
+        & > span.tag {
+            display: flex;
+            padding: 4px 10px;
+            color: #fff;
+            width: auto;
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 16px;
 
-    &.tag {
-        & > span.lancamento {
-            background: #d602de;
-        }
-        & > span.desconto {
-            background: #de0205;
-        }
-        & > span.exclusivo {
-            background: #b6df0e;
+            &.lancamento {
+                background: #d602de;
+            }
+            &.desconto {
+                background: #de0205;
+            }
+            &.exclusivo {
+                background: #b6df0e;
+            }
+            &.frete-gratis {
+                background: #de0205;
+            }
         }
     }
 

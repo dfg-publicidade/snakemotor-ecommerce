@@ -1,5 +1,7 @@
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import localePt from '@angular/common/locales/pt';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -8,6 +10,7 @@ import { LayoutModule } from './layout/layout.module';
 import { AppCustomPreloader } from './service/AppCustomPreloader';
 import { AuthInterceptor } from './_interceptor/auth.interceptor';
 
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import { AuthInterceptor } from './_interceptor/auth.interceptor';
       useClass: AuthInterceptor,
       multi: true
     },
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
     AppCustomPreloader
   ],
   bootstrap: [AppComponent]

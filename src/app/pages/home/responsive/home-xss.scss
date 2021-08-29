@@ -4,10 +4,23 @@
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 
 @media (max-width: 479px) {
-    
+    main {
+        & > div.container {
+            & > div.loading-banner {
+                height: 230px;
+            }
+        }
+    }
 }
 
 @media (max-width: 380px) {
+    main {
+        & > div.container {
+            & > div.loading-banner {
+                height: 180px;
+            }
+        }
+    }
 }
 
 @media (max-width: 330px) {
