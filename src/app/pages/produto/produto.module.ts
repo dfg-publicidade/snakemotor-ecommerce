@@ -4,6 +4,9 @@ import { NgModule } from '@angular/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { GalleryModule } from 'ngx-doe-gallery';
 import { ProdutoComponentModule } from 'src/app/componentes/produto/produto.module';
+import { PipeModule } from 'src/app/pipe/pipeModule';
+import { ProdutoService } from 'src/app/service/produto.service';
+import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
 import { ProdutoComponent } from './listagem/produto.component';
 import { ProdutoRoutingModule } from './produto-routing.module';
 import { ProdutoDetailComponent } from './visualizacao/produto-detail.component';
@@ -19,8 +22,12 @@ import { ProdutoDetailComponent } from './visualizacao/produto-detail.component'
     ProdutoComponentModule,
     NgSelectModule,
     NgxSliderModule,
-    GalleryModule
+    GalleryModule,
+    PipeModule
   ],
-  providers: []
+  providers: [
+    ProdutoService,
+    ProdutoOpcaoService
+  ]
 })
 export class ProdutoModule { }

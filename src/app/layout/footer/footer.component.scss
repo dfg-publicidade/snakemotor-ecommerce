@@ -12,69 +12,6 @@ footer {
 
     @include transition(all, linear, 0.3s);
 
-    &.newsletter {
-        background: #282828;
-        & > div.container {
-            & > div.cadastro {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-
-                & > span.titulo {
-                    color: #fff;
-                    width: 50%;
-                    font-size: 22px;
-                    line-height: 26px;
-                    & > strong {
-                        display: inline-block;
-                        width: 100%;
-                        font-size: 45px;
-                    }
-                }
-                & > div.campo {
-                    width: 50%;
-
-                    & > div {
-                        position: relative;
-
-                        & > input {
-                            padding: 15px;
-                            border: 0;
-                            width: 100%;
-                            padding-right: 160px;
-                        }
-                        & > button {
-                            position: absolute;
-                            right: 0;
-                            top: 0;
-                            background: #48ba80;
-                            color: #fff;
-                            padding: 10px;
-                            border: 0;
-                            width: 150px;
-                            height: 100%;
-                            font-weight: bold;
-                            text-transform: uppercase;
-                            margin: 0;
-
-                            &:active {
-                                background: #328057;
-                            }
-                        }
-                    }
-
-                    & > span {
-                        display: block;
-                        padding-top: 10px;
-                        width: 100%;
-                        color: #878585;
-                        font-size: 14px;
-                    }
-                }
-            }
-        }
-    }
-
     &.central {
         padding: 20px 0;
         background: #000;

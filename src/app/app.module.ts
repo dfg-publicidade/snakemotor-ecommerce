@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { AppCustomPreloader } from './service/AppCustomPreloader';
+import { MetadataService } from './service/metaData.service';
 import { AuthInterceptor } from './_interceptor/auth.interceptor';
 
 registerLocaleData(localePt);
@@ -24,6 +25,7 @@ registerLocaleData(localePt);
     LayoutModule
   ],
   providers: [
+    MetadataService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

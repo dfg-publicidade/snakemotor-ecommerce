@@ -1,4 +1,4 @@
-<a href="#" class="produto tag" *ngIf="item && item.produto">
+<a [routerLink]="[url, item.produto.permalink]" [queryParams]="{op: item.id}" class="produto tag" *ngIf="item && item.produto">
     <div class="tags">
         <span class="tag lancamento" *ngIf="item.produto.lancamento">Lançamento</span>
         <span class="tag exclusivo" *ngIf="item.produto.exclusivoSite">Exclusivo no site</span>

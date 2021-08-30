@@ -1,25 +1,27 @@
 <nav class="breadcrumb">
     <div class="container">
-        <ul>
+        <ul *ngIf="produtoOpcao">
             <li><a href="#">Home</a></li>
             <li class="separator">/</li>
-            <li><a href="#">Produtos</a></li>
+            <li><a [routerLink]="[url]">Produtos</a></li>
+            <!-- 
             <li class="separator">/</li>
             <li><a href="#">Capacetes</a></li>
+             -->
             <li class="separator">/</li>
-            <li><a class="active" href="#">Capacete Agv</a></li>
+            <li><a class="active">{{produtoOpcao.produto.nome}}</a></li>
         </ul>
     </div>
 </nav>
 <section>
-    <div class="container">
+    <div class="container" *ngIf="produtoOpcao">
         <div class="produto">
             <div class="imagem">
-                <doe-gallery [items]="images" thumbsOrientation="left" [thumbsAutoScroll]="true"></doe-gallery>
+                <doe-gallery [items]="produtoOpcao.imagens" thumbsOrientation="left" [thumbsAutoScroll]="true"></doe-gallery>
             </div>
             <div class="info">
                 <div class="descricao">
-                    <h3>CAPACETE AGV K-1 EDGE 46 58</h3>
+                    <h3>{{produtoOpcao.produto.nome}}</h3>
                     <span class="avaliacao">
                         <i class="fas fa-star pe-1"></i>
                         <i class="fas fa-star pe-1"></i>
@@ -27,35 +29,41 @@
                         <i class="fas fa-star pe-1"></i>
                         <i class="fas fa-star"></i>
                     </span>
-                    <p>Projeto inovador, design ousado, grafismos top de linha.</p>
+                    <p>{{produtoOpcao.produto.descricaoCurta}}</p>
                 </div>
                 <div class="preco">
-                    <p class="valor-normal">R$ 687,99</p>
+                    <p class="valor-normal" *ngIf="produtoOpcao.preco.desconto">{{produtoOpcao.preco.normal | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
                     <p class="valor-vigente">
-                        <span>R$ 522,41</span>
-                        <span class="tag desconto">-8%</span>
+                        <span *ngIf="produtoOpcao.preco.desconto">{{produtoOpcao.preco.desconto | currency:'BRL':'symbol':'0.2-2':'pt'}}</span>
+                        <span *ngIf="!produtoOpcao.preco.desconto">{{produtoOpcao.preco.normal | currency:'BRL':'symbol':'0.2-2':'pt'}}</span>
+                        <span class="tag lancamento" *ngIf="produtoOpcao.produto.lancamento">Lançamento</span>
+                        <span class="tag exclusivo" *ngIf="produtoOpcao.produto.exclusivoSite">Exclusivo no site</span>
+                        <span class="tag frete-gratis" *ngIf="produtoOpcao.produto.freteGratis">Frete Grátis</span>
                     </p>
-                    <p class="valor-parcelado">10x R$ 54,99 no cartão de crédito</p>
+                    <p class="valor-parcelado" *ngIf="produtoOpcao.preco.desconto">10x R$ {{(produtoOpcao.preco.desconto/10) | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
+                    <p class="valor-parcelado" *ngIf="!produtoOpcao.preco.desconto">10x R$ {{(produtoOpcao.preco.normal/10) | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
                 </div>
-                <div class="variacoes">
-                    <div class="tamanho">
-                        <label>Tamanho</label>
-                        <ng-select [multiple]="false" placeholder="Selecione">
-                            <ng-option [value]="''">P</ng-option>
-                            <ng-option [value]="''">M</ng-option>
-                            <ng-option [value]="''">G</ng-option>
-                        </ng-select>
-                    </div>
-                    <div class="cor">
-                        <label>Cor</label>
-                        <div class="itens">
-                            <div class="item" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
-                            <div class="item" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
-                            <div class="item" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
-                            <div class="item" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
+                <!-- <form class="variacoes">
+                    <ng-container>
+                        <div class="tamanho">
+                            <label>Tamanho</label>
+                            <ng-select [multiple]="false" placeholder="Selecione">
+                                <ng-option [value]="''">P</ng-option>
+                                <ng-option [value]="''">M</ng-option>
+                                <ng-option [value]="''">G</ng-option>
+                            </ng-select>
                         </div>
-                    </div>
-                </div>
+                        <div class="cor">
+                            <label>Cor</label>
+                            <div class="itens">
+                                <div class="item" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
+                                <div class="item" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
+                                <div class="item" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
+                                <div class="item" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </form> -->
                 <button type="button" class="custom buy">
                     <i class="fas fa-shopping-cart"></i>
                     Comprar
@@ -76,18 +84,12 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane active" id="descricao" role="tabpanel" aria-labelledby="home-tab">
-                    <p>Projeto inovador, design ousado, grafismos top de linha.</p>
+                    <div *ngIf="produtoOpcao.produto.descricao" [innerHtml]="produtoOpcao.produto.descricao | sanitizeHtml"></div>
+                    <p *ngIf="!produtoOpcao.produto.descricao">Nenhuma descrição disponível</p>
                 </div>
                 <div class="tab-pane" id="caracteristicas" role="tabpanel" aria-labelledby="profile-tab">
-                    <p>
-                        -Capacete em HIR-TH resina termoplástica de alta resistência, com design arrojado, inspirado no Pista GP R <br />
-                        -Sistema de ventilação multicanais integrado ao EPS<br />
-                        -Forro em tecidos Dry-Lex com tratamento higiênico, removível e lavável<br />
-                        -Engate Duplo D<br />
-                        -Viseira transparente em policarbonato com preparação para Pinlock, proteção antirrisco e antiembaçante<br />
-                        -Sistema XQRS (Extra Quick Release System) permite a substituição da viseira sem ferramentas
-                    </p>
-
+                    <div *ngIf="produtoOpcao.produto.caracteristicas" [innerHtml]="produtoOpcao.produto.caracteristicas | sanitizeHtml"></div>
+                    <p *ngIf="!produtoOpcao.produto.caracteristicas">Nenhuma característica disponível</p>
                 </div>
             </div>
         </div>
@@ -97,7 +99,7 @@
     <div class="container">
         <h1>Você também pode se <strong>interessar</strong> por</h1>
         <div class="produtos">
-            <app-produto-componente [item]="number" *ngFor="let number of [0,1,2,3]"></app-produto-componente>
+            <app-produto-componente [item]="produto" *ngFor="let produto of produtosPorCategoria"></app-produto-componente>
         </div>
     </div>
 </section>

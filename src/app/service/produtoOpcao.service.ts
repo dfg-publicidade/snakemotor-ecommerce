@@ -9,11 +9,11 @@ export class ProdutoOpcaoService {
   prefix: string = 'produtoOpcao';
 
   constructor(private http: HttpClient) {
-    this.urlServico = `${environment.urlServico}${environment.apiApp}/${environment.versao}/produto-opcoes?loja=true`;
+    this.urlServico = `${environment.urlServico}${environment.apiApp}/${environment.versao}/produto-opcoes`;
   }
 
   listar(page: number): Observable<any> {
-    let url = `${this.urlServico}`;
+    let url = `${this.urlServico}?loja=true`;
 
     url += `&_page=${page}`;
 
@@ -21,7 +21,7 @@ export class ProdutoOpcaoService {
   }
 
   listarDestaques(limite: number, aleatorio: boolean): Observable<any> {
-    let url = `${this.urlServico}`;
+    let url = `${this.urlServico}?loja=true`;
 
     url += `&_limit=${limite}`;
     url += `&${this.prefix}.produto.destaque=true`;
@@ -36,7 +36,7 @@ export class ProdutoOpcaoService {
   }
 
   listarPorCategoria(categoriaId: string, limite: number, aleatorio: boolean): Observable<any> {
-    let url = `${this.urlServico}`;
+    let url = `${this.urlServico}?loja=true`;
 
     url += `&_limit=${limite}`;
     url += `&${this.prefix}.produto.categoria.id=${categoriaId}`;
@@ -51,9 +51,9 @@ export class ProdutoOpcaoService {
   }
 
   listarPorIdsProdutoPrincipal(ids: any, aleatorio: boolean): Observable<any> {
-    let url = `${this.urlServico}`;
+    let url = `${this.urlServico}?loja=true`;
 
-    url += `?produtos=${ids.join()}`;
+    url += `&produtos=${ids.join()}`;
 
     if (aleatorio) {
       url += `&aleatorio=${aleatorio}`;
@@ -64,8 +64,16 @@ export class ProdutoOpcaoService {
     return this.http.get(url);
   }
 
-  visualizar(id: number): Observable<any> {
-    let url = this.urlServico + 'produto/' + id + "/visualizar";
+  buscarPorPermalink(permalink: string): Observable<any> {
+    let url = `${this.urlServico}`
+
+    url += `&${this.prefix}.produto.permalink=${permalink}`;
+
+    return this.http.get(url);
+  }
+
+  visualizar(id: string): Observable<any> {
+    let url = `${this.urlServico}/${id}`
 
     return this.http.get(url);
   }

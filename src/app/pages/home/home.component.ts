@@ -1,9 +1,13 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { BannerService } from 'src/app/service/banner.service';
 import { CategoriaService } from 'src/app/service/categoria.service';
+import { LeadServiceService } from 'src/app/service/lead.service';
 import { MarcaService } from 'src/app/service/marca.service';
-import { ProdutoOpcaoService } from 'src/app/service/produto-opcao.service';
+import { MetadataService } from 'src/app/service/metaData.service';
+import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
 
 @Component({
   selector: 'app-home',
@@ -28,11 +32,22 @@ export class HomeComponent implements OnInit {
   tipoBannerIdSegundaRolagem = '611ea2da5c0f7ac1d41f64e9';
   tipoBannerIdTerceiraRolagem = '611ea35b5c0f7a834e1f64f6';
 
+  //FORMULÁRIO LEAD
+  formLead: any;
+  loadingServiceLead: boolean = false;
+  resultLead: any;
+
+  
+
   constructor(
+    private router: Router,
     private marcaService: MarcaService,
     private bannerService: BannerService,
     private produtoOpcaoService: ProdutoOpcaoService,
-    private categoriaService: CategoriaService
+    private categoriaService: CategoriaService,
+    private leadService: LeadServiceService,
+    private formBuilder: FormBuilder,
+    private metadataService: MetadataService
   ) {
     this.optionsRotativoProdutos = {
       loop: true,
@@ -69,6 +84,17 @@ export class HomeComponent implements OnInit {
   loadingServiceMarca: boolean = false;
 
   ngOnInit(): void {
+     //INICIALIZA META - default
+     this.metadataService.updateMetadata({
+      url: this.router.url
+    });
+
+    this.formLead = this.formBuilder.group({
+      celular: new FormControl('', [
+        Validators.required
+      ])
+    });
+
     this.listarMarcas();
 
     this.banners = [];
@@ -163,6 +189,33 @@ export class HomeComponent implements OnInit {
         result => {
           this.marcas = result.content.items;
           this.loadingServiceMarca = false;
+        }
+      );
+  }
+
+  cadastrarLead() {
+    delete this.resultLead;
+    this.loadingServiceLead = true;
+
+    this.leadService.inserir(this.formLead)
+      .subscribe(
+        result => {
+          this.loadingServiceLead = false;
+          
+          this.resultLead = result;
+
+          if (this.resultLead.status === 'success') {
+            this.formLead.patchValue({
+              celular: ''
+            })
+          }
+        },
+        (error) => {
+          this.loadingServiceLead = false;
+          
+          if (error.error) {
+            this.resultLead = error.error;
+          }
         }
       );
   }

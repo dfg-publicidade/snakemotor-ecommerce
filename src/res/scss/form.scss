@@ -1,5 +1,18 @@
 @import "../variables.scss";
 
+form {
+    & > button {
+        & > span.loading {
+            display: flex;
+            justify-content: center;
+            margin-top: -10px;
+            & > img {
+                width: 51px;
+            }
+        }
+    }
+}
+
 ng-select.ng-select {
     display: flex;
     flex-grow: 100;

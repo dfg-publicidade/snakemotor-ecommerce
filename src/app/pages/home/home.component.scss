@@ -1,4 +1,5 @@
 @import "../../../res/variables.scss";
+@import "../../../res/scss/form.scss";
 
 :host ::ng-deep {
     @import "../../../../node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
@@ -253,6 +254,94 @@ section {
                             height: 13px;
                             border: 1px solid #f3f3f3;
                             background-color: #cccccc44;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+footer {
+    background-color: $primary;
+    padding: 40px 0;
+    max-width: 100vw;
+
+    @include transition(all, linear, 0.3s);
+
+    &.newsletter {
+        background: #282828;
+        & > div.container {
+            & > div.cadastro {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                & > span.titulo {
+                    color: #fff;
+                    width: 50%;
+                    font-size: 22px;
+                    line-height: 26px;
+                    & > strong {
+                        display: inline-block;
+                        width: 100%;
+                        font-size: 45px;
+                    }
+                }
+                & > div.campo {
+                    width: 50%;
+
+                    & > form {
+                        position: relative;
+
+                        & > input {
+                            padding: 15px;
+                            border: 0;
+                            width: 100%;
+                            padding-right: 160px;
+                        }
+                        & > button {
+                            position: absolute;
+                            right: 0;
+                            top: 0;
+                            background: #48ba80;
+                            color: #fff;
+                            padding: 10px;
+                            border: 0;
+                            width: 150px;
+                            height: 100%;
+                            font-weight: bold;
+                            text-transform: uppercase;
+                            margin: 0;
+
+                            &:active {
+                                background: #328057;
+                            }
+
+                            &:disabled {
+                                background: #9ab5a7 !important;
+                            }
+                        }
+                    }
+
+                    & > span {
+                        display: block;
+                        padding-top: 10px;
+                        width: 100%;
+                        color: #878585;
+                        font-size: 14px;
+
+                        &.result {
+                            padding: 0;
+                            &.success {
+                                color: #28a745;
+                            }
+                            &.warning {
+                                color: #ffc107;
+                            }
+                            &.error {
+                                color: #dc3545;
+                            }
                         }
                     }
                 }

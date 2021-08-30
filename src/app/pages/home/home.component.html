@@ -34,7 +34,7 @@
     <div class="container">
         <h1>
             <strong class="left">{{categoriaDestaque.nome}}</strong>
-            <a [routerLink]="[categoriaDestaque.permalink]" routerLinkActive="router-link-active"  class="right">veja mais +</a>
+            <a [routerLink]="[categoriaDestaque.permalink]" routerLinkActive="router-link-active" class="right">veja mais +</a>
         </h1>
         <div class="produtos">
             <owl-carousel-o *ngIf="optionsRotativoProdutos && produtosPorCategoriaDestaque" [options]="optionsRotativoProdutos">
@@ -75,3 +75,24 @@
         </owl-carousel-o>
     </div>
 </section>
+<footer class="newsletter">
+    <div class="container">
+        <div class="cadastro">
+            <span class="titulo">
+                <strong>Cadastre-se</strong>
+                e receba nossas ofertas!
+            </span>
+            <div class="campo">
+                <form [formGroup]="formLead" (submit)="cadastrarLead()" *ngIf="!resultLead || (resultLead && resultLead.status !== 'success')">
+                    <input type="text" placeholder="Whatsapp com DDD" formControlName="celular" mask="(00) 00000-0000" />
+                    <button type="submit" [disabled]="formLead.status === 'INVALID' || loadingServiceLead">
+                        <span class="loading" [hidden]="!loadingServiceLead"><img src="/res/imagens/spinner-white.svg" /></span>
+                        <span *ngIf="!loadingServiceLead">Enviar</span>
+                    </button>
+                </form>
+                <span *ngIf="!resultLead || (resultLead && resultLead.status !== 'success')">Ao enviar, declaro que aceito receber informações sobre ofertas em meu whatsapp</span>
+                <span class="result {{resultLead.status}}" *ngIf="resultLead">{{resultLead.content.message}}</span>
+            </div>
+        </div>
+    </div>
+</footer>

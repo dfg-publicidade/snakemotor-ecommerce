@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
+import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
 
 declare var $: any;
 
@@ -17,15 +18,28 @@ export class ProdutoComponent implements OnInit {
     hideLimitLabels: true
   };
 
-  constructor() {
+  page: number = 1;
+  produtos: any;
+
+  constructor(private produtoOpcaoService: ProdutoOpcaoService) {
 
   }
 
   ngOnInit(): void {
+    this.listarProdutos();
   }
 
   getValue() {
     console.log('min: ', this.minValue);
     console.log('max: ', this.maxValue);
+  }
+
+  listarProdutos() {
+    this.produtoOpcaoService.listar(this.page)
+      .subscribe(
+        result => {
+          this.produtos = result.content.items;
+        }
+      );
   }
 }

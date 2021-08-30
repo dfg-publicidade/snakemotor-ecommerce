@@ -9,7 +9,7 @@ const routes: Routes = [
     component: ProdutoComponent
   },
   {
-    path: 'visualizar',
+    path: ':produtoPermalink',
     component: ProdutoDetailComponent
   }
 ];

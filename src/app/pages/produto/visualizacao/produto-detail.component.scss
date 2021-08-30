@@ -210,9 +210,11 @@ section {
 
                             & > span.tag {
                                 font-size: 14px;
+                                font-weight: bold;
+                                line-height: 15px;
                                 color: #fff;
-                                padding: 1px 10px;
-                                margin-left: 10px;
+                                padding: 4px 10px;
+                                margin-left: 3px;
                                 &.lancamento {
                                     background: #d602de;
                                 }
@@ -221,6 +223,9 @@ section {
                                 }
                                 &.exclusivo {
                                     background: #b6df0e;
+                                }
+                                &.frete-gratis {
+                                    background: #de0205;
                                 }
                             }
                         }
@@ -232,7 +237,7 @@ section {
                     }
                 }
 
-                & > div.variacoes {
+                & > form.variacoes {
                     & > div.tamanho {
                         margin-bottom: 20px;
                         & > label {
