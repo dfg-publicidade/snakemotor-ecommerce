@@ -1,0 +1,75 @@
+runtime: python27
+api_version: 1
+service: site-ecommerce
+threadsafe: true
+handlers:
+
+- url: /(.+\.js)
+  static_files: dist/\1
+  secure: always
+  upload: dist/(.+\.js)
+
+- url: /(.+\.css)
+  static_files: dist/\1
+  secure: always
+  upload: dist/(.+\.css)
+
+- url: /(.+\.png)
+  static_files: dist/\1
+  secure: always
+  upload: dist/(.+\.png)
+
+- url: /(.+\.jpg)
+  static_files: dist/\1
+  secure: always
+  upload: dist/(.+\.jpg)
+
+- url: /(.+\.svg)
+  static_files: dist/\1
+  secure: always
+  upload: dist/(.+\.svg)
+
+- url: /(.+\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$)
+  secure: always
+  static_files: dist/\1
+  upload: dist/(.+\.woff)
+
+- url: /(.+\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$)
+  secure: always
+  static_files: dist/\1
+  upload: dist/(.+\.woff2)
+
+- url: /(.+\.ttf(\?v=[0-9]\.[0-9]\.[0-9])?$)
+  secure: always
+  static_files: dist/\1
+  upload: dist/(.+\.ttf)
+
+- url: /(.+\.otf(\?\S*)?$/)
+  secure: always
+  static_files: dist/\1
+  upload: dist/(.+\.otf)
+
+- url: /favicon.ico
+  secure: always
+  static_files: dist/favicon.ico
+  upload: dist/favicon.ico
+
+- url: /(.+\.json)
+  secure: always
+  static_files: dist/\1
+  upload: dist/(.+\.json)
+
+- url: /(.+)
+  secure: always
+  static_files: dist/index.html
+  upload: dist/index.html
+
+- url: /
+  secure: always
+  static_files: dist/index.html
+  upload: dist/index.html
+
+- url: /.*
+  secure: always
+  redirect_http_response_code: 301
+  script: auto
