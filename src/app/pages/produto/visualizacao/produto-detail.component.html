@@ -43,17 +43,9 @@
                     <p class="valor-parcelado" *ngIf="produtoOpcao.preco.desconto">10x R$ {{(produtoOpcao.preco.desconto/10) | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
                     <p class="valor-parcelado" *ngIf="!produtoOpcao.preco.desconto">10x R$ {{(produtoOpcao.preco.normal/10) | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
                 </div>
-                <!-- <form class="variacoes">
-                    <ng-container>
-                        <div class="tamanho">
-                            <label>Tamanho</label>
-                            <ng-select [multiple]="false" placeholder="Selecione">
-                                <ng-option [value]="''">P</ng-option>
-                                <ng-option [value]="''">M</ng-option>
-                                <ng-option [value]="''">G</ng-option>
-                            </ng-select>
-                        </div>
-                        <div class="cor">
+                <!-- <form class="variacoes" [formGroup]="formVariacao">
+                    <ng-container *ngFor="let variacao of produtoOpcao.produto.variacoes">
+                        <div class="cor" *ngIf="variacao.permalink === 'cor'">
                             <label>Cor</label>
                             <div class="itens">
                                 <div class="item" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
@@ -61,6 +53,16 @@
                                 <div class="item" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
                                 <div class="item" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
                             </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngFor="let variacao of produtoOpcao.produto.variacoes">
+                        <div class="tamanho" *ngIf="variacao.permalink !== 'cor'">
+                            <label>{{variacao.nome}}</label>
+                            <ng-select [multiple]="false" placeholder="Selecione">
+                                <ng-option [value]="''">P</ng-option>
+                                <ng-option [value]="''">M</ng-option>
+                                <ng-option [value]="''">G</ng-option>
+                            </ng-select>
                         </div>
                     </ng-container>
                 </form> -->

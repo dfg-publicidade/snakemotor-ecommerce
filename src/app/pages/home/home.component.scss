@@ -37,6 +37,7 @@ section {
             display: flex;
             font-size: 28px;
             margin: 0;
+            margin-top: 20px;
             padding-bottom: 40px;
             justify-content: flex-start;
             width: 100%;
@@ -59,6 +60,7 @@ section {
         }
 
         & > div.produtos {
+            margin-top: 20px;
             ::ng-deep {
                 div.owl-theme {
                     div.owl-stage-outer {

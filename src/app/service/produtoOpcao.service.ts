@@ -20,6 +20,14 @@ export class ProdutoOpcaoService {
     return this.http.get(url);
   }
 
+  listarPorProduto(produtoOpcao: any): Observable<any> {
+    let url = `${this.urlServico}?_nopaginate=true&loja=true`;
+
+    url += `&${this.prefix}.produto.id=${produtoOpcao.id}`;
+
+    return this.http.get(url);
+  }
+
   listarDestaques(limite: number, aleatorio: boolean): Observable<any> {
     let url = `${this.urlServico}?loja=true`;
 

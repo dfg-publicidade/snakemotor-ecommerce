@@ -19,8 +19,8 @@ export interface PageMetadata {
 const defaultMetadata: PageMetadata = {
     title: environment.title,
     description: environment.description,
-    author: 'Claretiano',
-    keywords: ['cursos', 'graduação', 'pós-graduação', 'extensão', 'ead'],
+    author: 'Snake Motor',
+    keywords: ['motos', 'capacetes', 'acessórios', 'escamentos', 'loja', 'online'],
     type: 'website',
     image: environment.contextPath + '/res/imagens/fbdefault.png',
     url: environment.contextPath,

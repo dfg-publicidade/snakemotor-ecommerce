@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    contextPath: 'http://localhost:4000/',
+    contextPath: 'https://site-ecommerce-dot-snake-motor.uc.r.appspot.com',
     domain: 'https://snakemotor.com.br',
     title: 'Snake Motor',
     description: 'Tudo para você e sua moto',
