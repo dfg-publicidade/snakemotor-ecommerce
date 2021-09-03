@@ -23,25 +23,28 @@
                 <div class="descricao">
                     <h3>{{produtoOpcao.produto.nome}}</h3>
                     <span class="avaliacao">
-                        <i class="fas fa-star pe-1"></i>
-                        <i class="fas fa-star pe-1"></i>
-                        <i class="fas fa-star pe-1"></i>
-                        <i class="fas fa-star pe-1"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="far fa-star pe-1"></i>
+                        <i class="far fa-star pe-1"></i>
+                        <i class="far fa-star pe-1"></i>
+                        <i class="far fa-star pe-1"></i>
+                        <i class="far fa-star"></i>
                     </span>
                     <p>{{produtoOpcao.produto.descricaoCurta}}</p>
                 </div>
                 <div class="preco">
-                    <p class="valor-normal" *ngIf="produtoOpcao.preco.desconto">{{produtoOpcao.preco.normal | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
-                    <p class="valor-vigente">
-                        <span *ngIf="produtoOpcao.preco.desconto">{{produtoOpcao.preco.desconto | currency:'BRL':'symbol':'0.2-2':'pt'}}</span>
-                        <span *ngIf="!produtoOpcao.preco.desconto">{{produtoOpcao.preco.normal | currency:'BRL':'symbol':'0.2-2':'pt'}}</span>
-                        <span class="tag lancamento" *ngIf="produtoOpcao.produto.lancamento">Lançamento</span>
-                        <span class="tag exclusivo" *ngIf="produtoOpcao.produto.exclusivoSite">Exclusivo no site</span>
-                        <span class="tag frete-gratis" *ngIf="produtoOpcao.produto.freteGratis">Frete Grátis</span>
-                    </p>
-                    <p class="valor-parcelado" *ngIf="produtoOpcao.preco.desconto">10x R$ {{(produtoOpcao.preco.desconto/10) | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
-                    <p class="valor-parcelado" *ngIf="!produtoOpcao.preco.desconto">10x R$ {{(produtoOpcao.preco.normal/10) | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
+                    <!-- PRECO VALOR PADRÃO RISCADO, POIS EXISTE VALOR PROMOCIONAL -->
+                    <p class="valor-normal" [ngClass]="{empty: !produtoOpcao.precoPromocional}">{{produtoOpcao.precoPromocional ? produtoOpcao.precoVenda : '&nbsp;'}}</p>
+
+                    <!-- PRECO VALOR PROMOCIONAL -->
+                    <p class="valor-vigente" *ngIf="produtoOpcao.precoPromocional">{{produtoOpcao.precoPromocional}}</p>
+                    <p class="valor-parcelado" *ngIf="produtoOpcao.precoPromocional && produtoOpcao.precoPromocionalParcelado">{{produtoOpcao.precoPromocionalParcelado}}</p>
+                    <span class="tag lancamento" *ngIf="produtoOpcao.produto.lancamento">Lançamento</span>
+                    <span class="tag exclusivo" *ngIf="produtoOpcao.produto.exclusivoSite">Exclusivo no site</span>
+                    <span class="tag frete-gratis" *ngIf="produtoOpcao.produto.freteGratis">Frete Grátis</span>
+
+                    <!-- PRECO VALOR PADRÃO -->
+                    <p class="valor-vigente" *ngIf="!produtoOpcao.precoPromocional">{{produtoOpcao.precoVenda}}</p>
+                    <p class="valor-parcelado" *ngIf="!produtoOpcao.precoPromocional && produtoOpcao.precoVendaParcelado">{{produtoOpcao.precoVendaParcelado}}</p>
                 </div>
                 <!-- <form class="variacoes" [formGroup]="formVariacao">
                     <ng-container *ngFor="let variacao of produtoOpcao.produto.variacoes">

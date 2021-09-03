@@ -56,7 +56,6 @@ export class ProdutoDetailComponent implements OnInit {
       .subscribe(
         result => {
           this.produtoOpcao = result.content;
-          this.produtoOpcao.preco = ProdutoUtil.getPreco(this.produtoOpcao);
           this.produtoOpcao.imagem = ProdutoUtil.getImagemDestaque(this.produtoOpcao);
 
           if (!this.produtoOpcao.imagem) {

@@ -13,7 +13,7 @@ export class ProdutoOpcaoService {
   }
 
   listar(page: number): Observable<any> {
-    let url = `${this.urlServico}?loja=true`;
+    let url = `${this.urlServico}?agrupar=cor`;
 
     url += `&_page=${page}`;
 
@@ -21,7 +21,7 @@ export class ProdutoOpcaoService {
   }
 
   listarPorProduto(produtoOpcao: any): Observable<any> {
-    let url = `${this.urlServico}?_nopaginate=true&loja=true`;
+    let url = `${this.urlServico}?_nopaginate=true&agrupar=cor`;
 
     url += `&${this.prefix}.produto.id=${produtoOpcao.id}`;
 
@@ -29,7 +29,7 @@ export class ProdutoOpcaoService {
   }
 
   listarDestaques(limite: number, aleatorio: boolean): Observable<any> {
-    let url = `${this.urlServico}?loja=true`;
+    let url = `${this.urlServico}?agrupar=cor`;
 
     url += `&_limit=${limite}`;
     url += `&${this.prefix}.produto.destaque=true`;
@@ -44,7 +44,7 @@ export class ProdutoOpcaoService {
   }
 
   listarPorCategoria(categoriaId: string, limite: number, aleatorio: boolean): Observable<any> {
-    let url = `${this.urlServico}?loja=true`;
+    let url = `${this.urlServico}?agrupar=cor`;
 
     url += `&_limit=${limite}`;
     url += `&${this.prefix}.produto.categoria.id=${categoriaId}`;
@@ -59,7 +59,7 @@ export class ProdutoOpcaoService {
   }
 
   listarPorIdsProdutoPrincipal(ids: any, aleatorio: boolean): Observable<any> {
-    let url = `${this.urlServico}?loja=true`;
+    let url = `${this.urlServico}?agrupar=cor`;
 
     url += `&produtos=${ids.join()}`;
 

@@ -26,7 +26,6 @@ export class ProdutoCComponent implements OnInit {
       this.item = changes.item.currentValue;
       if (this.item && this.item.id) {
         setTimeout(() => {
-          this.item.preco = ProdutoUtil.getPreco(this.item);
           this.item.imagem = ProdutoUtil.getImagemDestaque(this.item);
 
           if (!this.item.imagem) {

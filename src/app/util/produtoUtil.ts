@@ -1,45 +1,6 @@
 import { GalleryImage } from "ngx-doe-gallery";
 
 export class ProdutoUtil {
-    static getPreco(item: any): any {
-        let normal: string = '';
-        let desconto: string = '';
-        let sobConsulta: boolean = false;
-
-        let produto = item.produto ? item.produto : item;
-
-        if (produto.precoVenda) {
-            normal = produto.precoVenda;
-        };
-
-        if (produto.precoPromocional) {
-            desconto = produto.precoPromocional;
-        };
-        if (produto.precoSobConsulta) {
-            normal = '';
-            desconto = '';
-            sobConsulta = true;
-        };
-        if (item.precoVenda) {
-            normal = item.precoVenda;
-        };
-        if (item.precoPromocional) {
-            desconto = item.precoPromocional;
-        };
-
-        if (item.precoSobConsulta) {
-            normal = '';
-            desconto = '';
-            sobConsulta = true;
-        }
-
-        return {
-            normal: normal,
-            desconto: desconto,
-            sobConsulta: sobConsulta
-        };
-    }
-
     static getImagemDestaque(item: any): string {
         let imagens = [];
 

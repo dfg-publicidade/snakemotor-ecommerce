@@ -18,16 +18,16 @@
         </p>
 
     </div>
-    <div class="preco" *ngIf="item.preco">
+    <div class="preco">
         <!-- PRECO VALOR PADRÃO RISCADO, POIS EXISTE VALOR PROMOCIONAL -->
-        <p class="valor-normal" [ngClass]="{empty: !item.preco.desconto}">{{item.preco.desconto ? (item.preco.normal | currency:'BRL':'symbol':'0.2-2':'pt') : '&nbsp;'}}</p>
-        
-        <!-- PRECO VALOR PROMOCIONAL -->
-        <p class="valor-vigente" *ngIf="item.preco.desconto">{{item.preco.desconto | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
-        <p class="valor-parcelado" *ngIf="item.preco.desconto">10x R$ {{(item.preco.desconto/10) | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
+        <p class="valor-normal" [ngClass]="{empty: !item.precoPromocional}">{{item.precoPromocional ? item.precoVenda : '&nbsp;'}}</p>
 
-        <!-- PRECO VALOR PADRÃO -->
-        <p class="valor-vigente" *ngIf="!item.preco.desconto">{{item.preco.normal | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
-        <p class="valor-parcelado" *ngIf="!item.preco.desconto">10x R$ {{(item.preco.normal/10) | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
+        <!-- PRECO VALOR PROMOCIONAL -->
+        <p class="valor-vigente" *ngIf="item.precoPromocional">{{item.precoPromocional}}</p>
+        <p class="valor-parcelado" *ngIf="item.precoPromocional && item.precoPromocionalParcelado">{{item.precoPromocionalParcelado}}</p>
+
+         <!-- PRECO VALOR PADRÃO -->
+         <p class="valor-vigente" *ngIf="!item.precoPromocional">{{item.precoVenda}}</p>
+         <p class="valor-parcelado" *ngIf="!item.precoPromocional && item.precoVendaParcelado">{{item.precoVendaParcelado}}</p>
     </div>
 </a>
