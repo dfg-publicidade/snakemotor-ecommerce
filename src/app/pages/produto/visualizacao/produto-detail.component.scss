@@ -260,16 +260,26 @@ section {
                             grid-column-gap: 10px;
                             grid-row-gap: 10px;
 
-                            & > div.item {
-                                display: flex;
-                                width: 100%;
-                                height: 80px;
-                                background-size: 80%;
-                                background-position: center;
-                                background-repeat: no-repeat;
-                                border: 1px solid #c7c5c5;
-                                border-radius: 8px;
-                                cursor: pointer;
+                            & > a {
+                                & > div.item {
+                                    display: flex;
+                                    width: 100%;
+                                    height: 80px;
+                                    background-size: 80%;
+                                    background-position: center;
+                                    background-repeat: no-repeat;
+                                    border: 1px solid #c7c5c5;
+                                    border-radius: 8px;
+                                    cursor: pointer;
+
+                                    &.active {
+                                        border: 2px solid #28a745;
+                                    }
+
+                                    & > div.loading {
+                                        width: 100%;
+                                    }
+                                }
                             }
                         }
                     }

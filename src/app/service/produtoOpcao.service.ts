@@ -6,7 +6,8 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class ProdutoOpcaoService {
   urlServico: string;
-  prefix: string = 'produtoOpcao';
+  prefix: any = 'produtoOpcao';
+
 
   constructor(private http: HttpClient) {
     this.urlServico = `${environment.urlServico}${environment.apiApp}/${environment.versao}/produto-opcoes`;
@@ -16,14 +17,15 @@ export class ProdutoOpcaoService {
     let url = `${this.urlServico}?agrupar=cor`;
 
     url += `&_page=${page}`;
+    url += `&_sort=${this.prefix}.produto.dataCriacao:desc`
 
     return this.http.get(url);
   }
 
-  listarPorProduto(produtoOpcao: any): Observable<any> {
+  listarPorProduto(produto: any): Observable<any> {
     let url = `${this.urlServico}?_nopaginate=true&agrupar=cor`;
 
-    url += `&${this.prefix}.produto.id=${produtoOpcao.id}`;
+    url += `&${this.prefix}.produto.id=${produto.id}`;
 
     return this.http.get(url);
   }
@@ -76,6 +78,31 @@ export class ProdutoOpcaoService {
     let url = `${this.urlServico}`
 
     url += `&${this.prefix}.produto.permalink=${permalink}`;
+
+    return this.http.get(url);
+  }
+
+  listarPorProdutoComAgrupamento(produtoId: string, agrupamento: string, filtros: any, ignore?: string): Observable<any> {
+    let url = `${this.urlServico}`
+
+    url += `?${this.prefix}.produto.id=${produtoId}`;
+    url += `&agrupar=${agrupamento}`;
+
+    if (ignore) {
+      url += `&ignore=${ignore}`;
+    }
+
+    if (filtros && filtros.length > 0) {
+      filtros.forEach((filtro: any) => {
+        let f = `&${this.prefix}.${filtro.permalink}.id=${filtro.id}`;
+        url += `${f}`;
+      });
+
+    }
+
+    let sort = `${this.prefix}.${agrupamento}.nome:asc`;
+
+    url += `&_sort=${sort}`;
 
     return this.http.get(url);
   }
