@@ -17,6 +17,8 @@ export class ProdutoDetailComponent implements OnInit {
   url: string = '/produtos';
 
   produtoOpcao: any;
+  cores: any;
+  tamanhos: any;
   produtosPorCategoria: any;
 
   variacaoOpcoes: any;
@@ -55,12 +57,17 @@ export class ProdutoDetailComponent implements OnInit {
     this.produtoOpcaoService.visualizar(this.op)
       .subscribe(
         result => {
-          this.produtoOpcao = result.content;
-          this.produtoOpcao.imagem = ProdutoUtil.getImagemDestaque(this.produtoOpcao);
+          this.produtoOpcao = result.content.entity;
+          this.cores = result.content.cores;
+          this.tamanhos = result.content.tamanhos;
 
-          if (!this.produtoOpcao.imagem) {
-            this.produtoOpcao.imagem = '/res/imagens/sem-imagem.png';
-          }
+          this.cores.forEach((pOpcao: any, index: number) => {
+            this.cores[index].imagem = ProdutoUtil.getImagemDestaque(pOpcao);
+
+            if (!this.cores[index].imagem) {
+              this.cores[index].imagem = '/res/imagens/sem-imagem.png';
+            }
+          });
 
           this.produtoOpcao.imagens = ProdutoUtil.getGaleriaImagens(this.produtoOpcao);
 
@@ -80,13 +87,6 @@ export class ProdutoDetailComponent implements OnInit {
             this.produtoOpcao.produto.variacoes.forEach((variacao: any, index: number) => {
               this.formVariacao.addControl(variacao.permalink, new FormControl(null));
               this.formVariacao.controls[variacao.permalink].disable();
-
-              //lista agrupamento por cor e o proximo da lista, no caso tamanho de cor
-              this.listarPorProdutoComAgrupamento(variacao.permalink, index);
-              this.idsVariacaoSelecionada.push({
-                permalink: variacao.permalink,
-                id: this.produtoOpcao[variacao.permalink].id
-              })
             });
           }
         }
@@ -94,29 +94,10 @@ export class ProdutoDetailComponent implements OnInit {
   }
 
   listarProdutosPorCategoria(categoriaId: string, limite: number, aleatorio: boolean) {
-    this.produtoOpcaoService.listarPorCategoria(categoriaId, limite, aleatorio)
+    this.produtoOpcaoService.listarPorCategoria(categoriaId, limite, aleatorio, this.op)
       .subscribe(
         result => {
           this.produtosPorCategoria = result.content.items;
-        }
-      );
-  }
-
-  listarPorProdutoComAgrupamento(agrupamento: string, index: number) {
-    this.produtoOpcao.produto.variacoes[index].loadingVariacaoOpcaoService = true;
-
-    this.produtoOpcaoService.listarPorProdutoComAgrupamento(this.produtoOpcao.produto.id, agrupamento, this.idsVariacaoSelecionada)
-      .subscribe(
-        result => {
-          this.produtosPorCategoria = result.content.items;
-          this.produtoOpcao.produto.variacoes[index].produtoOpcoes = result.content.items;
-          this.formVariacao.controls[agrupamento].enable();
-
-          this.produtoOpcao.produto.variacoes[index].produtoOpcoes.forEach((produtoopcao: any, indexOpcao: number) => {
-            this.produtoOpcao.produto.variacoes[index].produtoOpcoes[indexOpcao].imagem = ProdutoUtil.getGaleriaImagens(produtoopcao);
-          });
-
-          this.produtoOpcao.produto.variacoes[index].loadingVariacaoOpcaoService = false;
         }
       );
   }
@@ -128,7 +109,5 @@ export class ProdutoDetailComponent implements OnInit {
         this.idsVariacaoSelecionada[index].id = variacaoSelecionadaId;
       }
     });
-
-    this.listarPorProdutoComAgrupamento(agrupamento, index);
   }
 }

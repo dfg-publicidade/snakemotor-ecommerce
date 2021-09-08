@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
+declare var $: any;
+
 @Injectable()
 export class ProdutoOpcaoService {
   urlServico: string;
@@ -13,9 +15,18 @@ export class ProdutoOpcaoService {
     this.urlServico = `${environment.urlServico}${environment.apiApp}/${environment.versao}/produto-opcoes`;
   }
 
-  listar(page: number): Observable<any> {
-    let url = `${this.urlServico}?agrupar=cor`;
+  listar(page: number, filter: any): Observable<any> {
+    let url = `${this.urlServico}?agrupar=cor&filtros=true`;
 
+    let params = '';
+
+    $.each(filter, function (index: string, value: string) {
+      if (value) {
+        params += '&' + index + '=' + value;
+      }
+    });
+
+    url += `${params}`;
     url += `&_page=${page}`;
     url += `&_sort=${this.prefix}.produto.dataCriacao:desc`
 
@@ -45,7 +56,7 @@ export class ProdutoOpcaoService {
     return this.http.get(url);
   }
 
-  listarPorCategoria(categoriaId: string, limite: number, aleatorio: boolean): Observable<any> {
+  listarPorCategoria(categoriaId: string, limite: number, aleatorio: boolean, ignore?: string): Observable<any> {
     let url = `${this.urlServico}?agrupar=cor`;
 
     url += `&_limit=${limite}`;
@@ -53,6 +64,10 @@ export class ProdutoOpcaoService {
 
     if (aleatorio) {
       url += `&aleatorio=${aleatorio}`;
+    }
+
+    if (ignore) {
+      url += `&ignore=${ignore}`;
     }
 
     url += `&_sort:${this.prefix}.produto.nome:asc`;

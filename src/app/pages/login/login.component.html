@@ -1,0 +1,44 @@
+<header>
+    <div class="container">
+        <div class="logo"></div>
+    </div>
+</header>
+<main>
+    <div class="container">
+        <div class="box-login">
+            <div class="login">
+                <div class="title">
+                    <h5>Faça o Login</h5>
+                </div>
+                <form [formGroup]="form" (submit)="login()">
+                    <div class="form-floating mb-3">
+                        <input type="email" formControlName="email" class="form-control" placeholder="E-mail">
+                        <label>E-mail</label>
+                        <small class="form-text text-danger" *ngIf="form.controls.email.touched && form.controls.email.hasError('required')">Preencha o e-mail</small>
+                        <small class="form-text text-danger" *ngIf="form.controls.email.touched && form.controls.email.hasError('email')">O e-mail digitado é inválido</small>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" formControlName="senha" class="form-control" placeholder="Senha">
+                        <label>Senha</label>
+                        <small class="form-text text-danger" *ngIf="form.controls.senha.touched && form.controls.senha.hasError('required')">Preencha a senha</small>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-lg btn-block">Entrar</button>
+                    <div class="esqueci-senha">
+                        <a href="javascript:void(0)">Esqueci minha senha</a>
+                    </div>
+                </form>
+                <div class="nova-conta">
+                    <div class="line-dots">
+                        <div class="dots-left"></div><span>ou</span>
+                        <div class="dots-right"></div>
+                    </div>
+                    <div class="title">
+                        <h4>Crie uma conta</h4>
+                        <p>Ainda não tem conta na Snake Motor?</p>
+                    </div>
+                    <button type="button" class="btn btn-outline-success btn-block">CADASTRE-SE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

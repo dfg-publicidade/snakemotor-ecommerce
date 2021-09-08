@@ -21,7 +21,11 @@ const routes: Routes = [
         loadChildren: () => import('./pages/carrinho/carrinho.module').then(m => m.CarrinhoModule)
       }
     ]
-  }
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)
+  },
 ];
 
 @NgModule({

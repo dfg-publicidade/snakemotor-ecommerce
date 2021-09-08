@@ -10,89 +10,49 @@
 <section class="principal">
     <div class="container">
         <div class="catalogo">
-            
             <!-- FILTROS -->
             <div class="box-filtro">
-                <form>
-                    <!-- FILTRO POR CATEGORIA -->
-                    <div class="filtro">
-                        <p class="titulo">Categoria</p>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="">
-                            <label class="form-check-label">
-                                Abertos (31)
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="">
-                            <label class="form-check-label">
-                                Fechado (20)
-                            </label>
-                        </div>
-                    </div>
-
-
-                    <!-- FILTRO POR MARCA -->
-                    <div class="filtro">
-                        <p class="titulo">Marca</p>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="">
-                            <label class="form-check-label">
-                                Shark
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="">
-                            <label class="form-check-label">
-                                Axxis
-                            </label>
-                        </div>
-                    </div>
-
+                <form *ngIf="opcoesFiltro">
                     <!-- FILTRO POR PREÇO -->
                     <div class="filtro">
                         <p class="titulo">Preço</p>
-                        <div class="precos">
-                            <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"  (userChange)="getValue()"></ngx-slider>
+                        <div>
+                            <div class="precos">
+                                <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChangeEnd)="setFilterPreco()"></ngx-slider>
+                            </div>
                         </div>
                     </div>
 
-
-
-                    <!-- FILTRO POR COR -->
-                    <div class="filtro">
-                        <p class="titulo">Cores</p>
-                        <div class="cores">
-                            <div class="box-cor">
-                                <span class="cor full" [ngStyle]="{'background-color': '#fd27b9'}"></span>
-                            </div>
-                            <div class="box-cor">
-                                <span class="cor full" [ngStyle]="{'background-color': '#fe0000'}"></span>
-                            </div>
-                            <div class="box-cor">
-                                <span class="cor full" [ngStyle]="{'background-color': '#bcde02'}"></span>
-                            </div>
-                            <div class="box-cor">
-                                <span class="cor full" [ngStyle]="{'background-color': '#ffffff'}"></span>
-                            </div>
-                            <div class="box-cor">
-                                <span class="cor" [ngStyle]="{'background-color': '#ff910f'}"></span>
-                                <span class="cor" [ngStyle]="{'background-color': '#000000'}"></span>
-                            </div>
-                            <div class="box-cor">
-                                <span class="cor full" [ngStyle]="{'background-color': '#000000'}"></span>
-                            </div>
-                            <div class="box-cor">
-                                <span class="cor full" [ngStyle]="{'background-color': 'blue'}"></span>
+                    <!-- FILTRO POR VARIAÇÕES -->
+                    <div class="filtro" [hidden]="filtro[1].length === 0" *ngFor="let filtro of opcoesFiltro; let i = index">
+                        <p class="titulo">{{getNomeVariacao(i)}}</p>
+                        <div *ngIf="filtro[0] !== 'cor'">
+                            <div class="form-check" *ngFor="let item of filtro[1]">
+                                <input type="checkbox" class="form-check-input" id="filter_{{filtro[0]}}_{{item.id}}" [value]="item.id" (change)="setFilterVariacao(filtro[0])" [checked]="possuiFiltro(filtro[0], item.id) || filtro[1].length === 1">
+                                <label class="form-check-label">
+                                    {{item.nome}}
+                                </label>
                             </div>
                         </div>
 
+                        <!-- FILTRO POR COR -->
+                        <div *ngIf="filtro[0] === 'cor'">
+                            <div class="cores">
+                                <div class="box-cor" *ngFor="let item of filtro[1]">
+                                    <div class="cor" [ngClass]="{active: possuiFiltro(filtro[0], item.id) || filtro[1].length === 2}" id="filter_{{filtro[0]}}_{{item.id}}" (click)="setFilterVariacao(filtro[0], item.id)">
+                                        <span class="cor" [ngClass]="{full: !item.valor2}" [ngStyle]="{'background-color': item.valor}"></span>
+                                        <span *ngIf="item.valor2" class="cor" [ngStyle]="{'background-color': item.valor2}"></span>
+                                    </div>
+                                    <span>{{item.nome}}</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
 
             <!-- LISTA DE PRODUTOS -->
-            <div class="produtos">
+            <div class="box-produtos">
                 <h3>Capacetes</h3>
                 <div class="info">
                     <span *ngIf="total && total > 0">{{total}} produto{{total > 1 ? 's' : ''}}</span>
@@ -104,7 +64,9 @@
                         </ng-select>
                     </div>
                 </div>
-                <app-produto-componente [item]="produto" *ngFor="let produto of produtoOpcoes"></app-produto-componente>
+                <div class="produtos">
+                    <app-produto-componente [item]="produto" *ngFor="let produto of produtoOpcoes"></app-produto-componente>
+                </div>
             </div>
         </div>
     </div>

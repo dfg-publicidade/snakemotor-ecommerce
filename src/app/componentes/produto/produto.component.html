@@ -8,6 +8,8 @@
     <div class="info">
         <p>
             {{item.produto.nome}}
+            <ng-container *ngIf="item.cor">{{item.cor.nome}} </ng-container>
+            <ng-container *ngIf="item.tipo_de_pintura">{{item.tipo_de_pintura.nome}}</ng-container>
             <span>
                 <i class="fas fa-star pe-1"></i>
                 <i class="fas fa-star pe-1"></i>
@@ -25,8 +27,8 @@
         <p class="valor-vigente" *ngIf="item.precoPromocional">{{item.precoPromocional}}</p>
         <p class="valor-parcelado" *ngIf="item.precoPromocional && item.precoPromocionalParcelado">{{item.precoPromocionalParcelado}}</p>
 
-         <!-- PRECO VALOR PADRÃO -->
-         <p class="valor-vigente" *ngIf="!item.precoPromocional">{{item.precoVenda}}</p>
-         <p class="valor-parcelado" *ngIf="!item.precoPromocional && item.precoVendaParcelado">{{item.precoVendaParcelado}}</p>
+        <!-- PRECO VALOR PADRÃO -->
+        <p class="valor-vigente" *ngIf="!item.precoPromocional">{{item.precoVenda}}</p>
+        <p class="valor-parcelado" *ngIf="!item.precoPromocional && item.precoVendaParcelado">{{item.precoVendaParcelado}}</p>
     </div>
 </a>

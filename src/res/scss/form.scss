@@ -1,7 +1,73 @@
 @import "../variables.scss";
 
 form {
-    & > button {
+    & > div.form-group,
+    & > div.form-floating {
+        & > label {
+            & > span {
+                & > sup {
+                    color: #dc3545;
+                }
+            }
+
+            &.large {
+                font-size: 1.2rem;
+            }
+
+            &.full {
+                display: block;
+                width: 100%;
+            }
+        }
+
+        & > input {
+            border: 1px solid #ccc;
+            border-radius: 0;
+            box-shadow: none !important;
+            position: relative;
+
+            &.ng-invalid {
+                // border-color: 
+            }
+        }
+
+        & > input[type="text"] {
+            &.large {
+                font-size: 1.3rem;
+                height: calc(1.5em + 1.7rem + 2px);
+            }
+        }
+
+        & > input[type="file"] {
+            border-radius: 0;
+            border: none;
+            padding: 11px;
+            border: 1px solid #ced4da;
+            width: 100%;
+            height: calc(1.5em + 1.75rem + 2px);
+            font-size: 1rem;
+            border-radius: 0.25rem;
+        }
+
+        & > button {
+            &.btn-block {
+                width: 100%;
+            }
+            & > img {
+                &.loading {
+                    width: 100%;
+                    height: 24px;
+                }
+            }
+
+            &:disabled {
+                opacity: 0.3;
+                color: #fff !important;
+            }
+        }
+    }
+
+    button {
         & > span.loading {
             display: flex;
             justify-content: center;

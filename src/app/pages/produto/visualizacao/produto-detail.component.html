@@ -21,7 +21,11 @@
             </div>
             <div class="info">
                 <div class="descricao">
-                    <h3>{{produtoOpcao.produto.nome}}</h3>
+                    <h3>
+                        {{produtoOpcao.produto.nome}}
+                        <ng-container *ngIf="produtoOpcao.cor">{{produtoOpcao.cor.nome}} </ng-container>
+                        <ng-container *ngIf="produtoOpcao.tipo_de_pintura">{{produtoOpcao.tipo_de_pintura.nome}}</ng-container>
+                    </h3>
                     <span class="avaliacao">
                         <i class="far fa-star pe-1"></i>
                         <i class="far fa-star pe-1"></i>
@@ -47,28 +51,24 @@
                     <p class="valor-parcelado" *ngIf="!produtoOpcao.precoPromocional && produtoOpcao.precoVendaParcelado">{{produtoOpcao.precoVendaParcelado}}</p>
                 </div>
                 <form class="variacoes" [formGroup]="formVariacao">
-                    <ng-container *ngFor="let variacao of produtoOpcao.produto.variacoes">
-                        <div class="cor" *ngIf="variacao.permalink === 'cor'">
-                            <label>Cor</label>
-                            <div class="itens">
-                                <!-- loading -->
-                                <a *ngFor="let item of [1,2,3]" [hidden]="!variacao.loadingVariacaoOpcaoService">
-                                    <div class="item loading skeleton-box"></div>
-                                </a>
-                                <a [routerLink]="[url, produtoOpcao.produto.permalink]" [queryParams]="{op: pOpcao.id}" *ngFor="let pOpcao of variacao.produtoOpcoes">
-                                    <div class="item" [ngClass]="{active: produtoOpcao.id === pOpcao.id || produtoOpcao[variacao.permalink].id === pOpcao[variacao.permalink].id}" [ngStyle]="{'background-image': 'url(' + pOpcao.imagem + ')'}"></div>
-                                </a>
-                            </div>
+                    <div class="cor">
+                        <label>Cor</label>
+                        <div class="itens">
+                            <!-- loading -->
+                            <a *ngFor="let item of [1,2,3,4]" [hidden]="cores">
+                                <div class="item loading skeleton-box"></div>
+                            </a>
+                            <a [routerLink]="[url, pOpcao.produto.permalink]" [queryParams]="{op: pOpcao.id}" *ngFor="let pOpcao of cores">
+                                <div class="item" [ngClass]="{active: produtoOpcao.id === pOpcao.id}" [ngStyle]="{'background-image': 'url(' + pOpcao.imagem + ')'}"></div>
+                            </a>
                         </div>
-                    </ng-container>
-                    <ng-container *ngFor="let variacao of produtoOpcao.produto.variacoes; let i = index">
-                        <div class="tamanho" *ngIf="variacao.permalink !== 'cor'">
-                            <label>{{variacao.nome}}</label>
-                            <ng-select [multiple]="false" [formControlName]="variacao.permalink" placeholder="Selecione" [loading]="variacao.loadingVariacaoOpcaoService" loadingText="Carregando..." (change)="trocarProdutoOpcao($event, variacao.permalink, i)">
-                                <ng-option [value]="pOpcao[variacao.permalink].id" *ngFor="let pOpcao of variacao.produtoOpcoes">{{pOpcao[variacao.permalink].nome}}</ng-option>
-                            </ng-select>
-                        </div>
-                    </ng-container>
+                    </div>
+                    <!-- <div class="tamanho">
+                        <label>{{variacao.nome}}</label>
+                        <ng-select [multiple]="false" [formControlName]="variacao.permalink" placeholder="Selecione" [loading]="variacao.loadingVariacaoOpcaoService" loadingText="Carregando..." (change)="trocarProdutoOpcao($event, variacao.permalink, i)">
+                            <ng-option [value]="pOpcao.id" *ngFor="let pOpcao of tamanhos">{{pOpcao.tamanho.nome}}</ng-option>
+                        </ng-select>
+                    </div> -->
                 </form>
                 <button type="button" class="custom buy">
                     <i class="fas fa-shopping-cart"></i>

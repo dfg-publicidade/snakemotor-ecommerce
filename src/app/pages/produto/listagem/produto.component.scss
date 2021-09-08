@@ -34,6 +34,7 @@ section {
                             &.titulo {
                                 color: #747474;
                                 font-weight: bold;
+                                text-transform: capitalize;
 
                                 &:first-of-type {
                                     margin-top: 0;
@@ -41,59 +42,100 @@ section {
                             }
                         }
 
-                        & > div.form-check {
-                            & > input[type="checkbox"] {
-                                border-radius: 0;
-                                width: 1.3em;
-                                height: 1.3em;
-                                margin-right: 10px;
-                                border-color: rgba(0, 0, 0, 0.25) !important;
-                                display: flex;
-                                padding-left: 1.5px;
-                                background: transparent;
+                        & > div {
+                            max-height: 290px;
+                            overflow-y: auto;
+                            & > div.form-check {
+                                & > input[type="checkbox"],
+                                & > input[type="radio"] {
+                                    border-radius: 0;
+                                    width: 1.3em;
+                                    height: 1.3em;
+                                    margin-right: 10px;
+                                    border-color: rgba(0, 0, 0, 0.25) !important;
+                                    display: flex;
+                                    padding-left: 1.5px;
+                                    background: transparent;
+                                    cursor: pointer;
 
-                                &:checked {
-                                    background: $text-primary;
+                                    &:checked {
+                                        background: $text-primary;
 
-                                    &::after {
-                                        font-family: "Font Awesome 5 Free";
-                                        font-weight: 900;
-                                        content: "\f00c";
-                                        color: #fff;
-                                        width: 100%;
-                                        font-size: 14px;
-                                        margin-top: -1px;
+                                        &::after {
+                                            font-family: "Font Awesome 5 Free";
+                                            font-weight: 900;
+                                            content: "\f00c";
+                                            color: #fff;
+                                            width: 100%;
+                                            font-size: 14px;
+                                            margin-top: -1px;
+                                        }
                                     }
+                                }
+
+                                & > input[type="radio"] {
+                                    border-radius: 50%;
+                                    width: 1.3em;
+                                    height: 1.3em;
+                                    margin-right: 10px;
+                                    border-color: rgba(0, 0, 0, 0.25) !important;
+                                    display: flex;
+                                    padding-left: 1.5px;
+                                    background: transparent;
+                                    cursor: pointer;
+
+                                    &:checked {
+                                        background: $text-primary;
+                                    }
+                                }
+
+                                & > label {
+                                    color: #686868;
                                 }
                             }
 
-                            & > label {
-                                color: #686868;
+                            & > div.precos {
+                                padding-bottom: 20px;
                             }
-                        }
 
-                        &>div.precos{
-                            padding-bottom: 20px;
-                        }
+                            & > div.cores {
+                                display: grid;
+                                grid-template-columns: repeat(4, 1fr);
+                                // grid-column-gap: 5px;
+                                // grid-row-gap: 10px;
 
-                        & > div.cores {
-                            display: grid;
-                            grid-template-columns: repeat(5, 1fr);
-                            grid-column-gap: 5px;
-                            grid-row-gap: 10px;
+                                & > div.box-cor {
+                                    display: block;
+                                    width: 100%;
+                                    text-align: center;
+                                    margin-bottom: 10px;
+                                    & > div.cor {
+                                        width: 35px;
+                                        height: 35px;
+                                        border-radius: 50%;
+                                        overflow: hidden;
+                                        cursor: pointer;
+                                        border: 2px solid #fff;
+                                        display: inline-block;
 
-                            & > div.box-cor {
-                                display: flex;
-                                width: 35px;
-                                height: 35px;
-                                border-radius: 50%;
-                                overflow: hidden;
-                                cursor: pointer;
-                                & > span {
-                                    width: 50%;
-                                    height: 48px;
-                                    &.full {
+                                        &.active {
+                                            border: 2px solid #28a745;
+                                        }
+                                        & > span {
+                                            display: inline-block;
+                                            width: 50%;
+                                            height: 48px;
+                                            &.full {
+                                                width: 100%;
+                                            }
+                                        }
+                                    }
+                                    & > span {
+                                        display: inline-block;
                                         width: 100%;
+                                        text-align: center;
+                                        font-size: 10px;
+                                        line-height: 12px;
                                     }
                                 }
                             }
@@ -101,12 +143,8 @@ section {
                     }
                 }
             }
-            & > div.produtos {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
+            & > div.box-produtos {
                 width: 75%;
-
                 & > h3 {
                     display: block;
                     width: 100%;
@@ -135,9 +173,12 @@ section {
                         justify-content: flex-end;
                     }
                 }
-                & > app-produto-componente {
-                    width: 32%;
-                    margin-bottom: 20px;
+                & > div.produtos {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    grid-column-gap: 20px;
+                    grid-row-gap: 20px;
+                    justify-content: flex-start;
                 }
             }
         }
