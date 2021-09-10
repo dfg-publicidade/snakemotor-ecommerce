@@ -1,0 +1,141 @@
+<header>
+    <div class="container">
+        <div class="logo"></div>
+    </div>
+</header>
+<main>
+    <div class="container">
+        <form [formGroup]="form" (submit)="cadastrar()">
+            <div class="accordion" id="accordion">
+                <p class="pt-4 pb-4 m-0 text-center"><strong>Preencha os dados abaixo para realizar o seu cadastro na Snake Motor</strong></p>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingDadosPessoais">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#dadosPessoais" aria-expanded="true" aria-controls="dadosPessoais">
+                            DADOS PESSOAIS
+                        </button>
+                    </h2>
+                    <div id="dadosPessoais" class="accordion-collapse collapse show" aria-labelledby="headingDadosPessoais" data-bs-parent="#accordion">
+                        <div class="accordion-body">
+                            <div class="col-xs-12 col-sm-12 col-lg-6 mb-2">
+                                <ng-select class="large" formControlName="tipo" placeholder="Tipo de cadastro" required>
+                                    <ng-option [value]="'FISICA'">Pessoa Física</ng-option>
+                                    <ng-option [value]="'JURIDICA'">Pessoa Jurídica</ng-option>
+                                </ng-select>
+                                <small class="form-text text-danger" *ngIf="form.controls.tipo.touched && form.controls.tipo.hasError('required')">Preencha o tipo de cadastro</small>
+                            </div>
+                            <div class="form-floating col-xs-12 col-sm-12 col-lg-6 mb-2">
+                                <input type="text" formControlName="cpfCnpj" class="form-control" [mask]="form.value.tipo === 'JURIDICA' ? '00.000.000/0000-00' : '000.000.000-00'" [placeholder]="form.value.tipo === 'JURIDICA' ? 'CNPJ' : 'CPF'" required>
+                                <label>{{form.value.tipo === 'JURIDICA' ? 'CNPJ' : 'CPF'}}</label>
+                                <small class="form-text text-danger" *ngIf="form.controls.cpfCnpj.touched && form.controls.cpfCnpj.hasError('required')">Preencha o {{form.value.tipo === 'JURIDICA' ? 'CNPJ' : 'CPF'}}</small>
+                            </div>
+                            <div class="form-floating  col-xs-12 col-sm-12 col-lg-12 mb-2">
+                                <input type="text" formControlName="nome" class="form-control" placeholder="Nome completo" required>
+                                <label>{{form.value.tipo === 'JURIDICA' ? 'Nome da empresa' : 'Nome completo'}}</label>
+                                <small class="form-text text-danger" *ngIf="form.controls.nome.touched && form.controls.nome.hasError('required')">Preencha o nome</small>
+                            </div>
+                            <div class="form-floating  col-xs-12 col-sm-12 col-lg-4 mb-2" *ngIf="form.value.tipo === 'FISICA'">
+                                <input type="text" formControlName="dataNascto" mask="00/00/0000" class="form-control" placeholder="Data de nascimento" required>
+                                <label>Data de nascimento</label>
+                                <small class="form-text text-danger" *ngIf="form.controls.dataNascto.touched && form.controls.dataNascto.hasError('required')">Preencha a data de nascimento</small>
+                            </div>
+                            <div class="form-floating  col-xs-12 col-sm-12 col-lg-6 mb-2">
+                                <input type="tel" formControlName="celular" mask="(00) 00000-0000" class="form-control" placeholder="Celular" required>
+                                <label>Celular</label>
+                                <small class="form-text text-danger" *ngIf="form.controls.celular.touched && form.controls.celular.hasError('required')">Preencha o celular</small>
+                                <small class="form-text text-danger" *ngIf="form.controls.celular.touched && form.controls.celular.hasError('minlength')">O celular digitado é inválido</small>
+                            </div>
+                            <div class="form-floating  col-xs-12 col-sm-12 col-lg-6 mb-2">
+                                <input type="tel" formControlName="telefone" mask="(00) 0000-0000" class="form-control" placeholder="Telefone">
+                                <label>Telefone</label>
+                            </div>
+                            <div class="form-floating col-xs-12 col-sm-12 col-lg-12 mb-2">
+                                <input type="email" formControlName="email" class="form-control" placeholder="E-mail">
+                                <label>E-mail</label>
+                                <small class="form-text text-danger" *ngIf="form.controls.email.touched && form.controls.email.hasError('required')">Preencha o e-mail</small>
+                                <small class="form-text text-danger" *ngIf="form.controls.email.touched && form.controls.email.hasError('email')">O e-mail digitado é inválido</small>
+                            </div>
+                            <div class="form-floating  col-xs-12 col-sm-12 col-lg-4 mb-2">
+                                <input type="password" formControlName="senha" class="form-control" placeholder="Senha" required>
+                                <label>Senha</label>
+                                <small class="form-text text-danger" *ngIf="form.controls.senha.touched && form.controls.senha.hasError('required')">Preencha a senha</small>
+                            </div>
+                            <div class="form-floating  col-xs-12 col-sm-12 col-lg-4 mb-2">
+                                <input type="password" formControlName="confirmacaoSenha" class="form-control" placeholder="Senha" required>
+                                <label>Confirmação de senha</label>
+                                <small class="form-text text-danger" *ngIf="form.controls.confirmacaoSenha.touched && form.controls.senha.hasError('required')">Preencha a confirmação de senha</small>
+                                <small class="form-text text-danger" *ngIf="form.controls.confirmacaoSenha.hasError('mismatch')">As senhas devem ser iguais</small>
+                            </div>
+                            <div class="form-check pt-3">
+                                <input type="checkbox" formControlName="aceiteOferta" class="form-check-input" value="true">
+                                <label class="form-check-label">
+                                    Desejo receber ofertas, promoções e informações da Snake Motor e de parceiros.
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" formControlName="aceiteContato" class="form-check-input" value="true">
+                                <label class="form-check-label">
+                                    Desejo receber informações da FastShop por SMS/Whatsapp.
+                                </label>
+                            </div>
+                            <button type="button" class="btn btn-success btn-lg btn-block mt-4" (click)="trocarEtapa('endereco')">
+                                CONTINUAR
+                                <i class="fas fa-long-arrow-alt-down ps-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingEndereco">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#endereco" aria-expanded="false" aria-controls="endereco">
+                            ENDEREÇO
+                        </button>
+                    </h2>
+                    <div id="endereco" class="accordion-collapse collapse" aria-labelledby="headingEndereco" data-bs-parent="#accordion">
+                        <div class="accordion-body">
+                            <div class="form-floating col-xs-12 col-sm-12 col-lg-4 mb-2">
+                                <input type="text" formControlName="cep" mask="00.000-000" class="form-control" placeholder="CEP" required>
+                                <label>CEP</label>
+                                <small class="form-text text-danger" *ngIf="form.controls.cep.touched && form.controls.cep.hasError('required')">Preencha o CEP</small>
+                            </div>
+                            <div class="form-floating col-xs-12 col-sm-12 col-lg-12 mb-2">
+                                <input type="text" formControlName="logradouro" class="form-control" placeholder="Endereço" required>
+                                <label>Endereço</label>
+                                <small class="form-text text-danger" *ngIf="form.controls.logradouro.touched && form.controls.logradouro.hasError('required')">Preencha o endereço</small>
+                            </div>
+                            <div class="form-floating col-xs-12 col-sm-12 col-lg-4 mb-2">
+                                <input type="text" formControlName="numero" class="form-control" placeholder="Número" required>
+                                <label>Número</label>
+                                <small class="form-text text-danger" *ngIf="form.controls.numero.touched && form.controls.numero.hasError('required')">Preencha o número</small>
+                            </div>
+                            <div class="form-floating col-xs-12 col-sm-12 col-lg-6 mb-2">
+                                <input type="text" formControlName="bairro" class="form-control" placeholder="Bairro" required>
+                                <label>Bairro</label>
+                                <small class="form-text text-danger" *ngIf="form.controls.bairro.touched && form.controls.bairro.hasError('required')">Preencha o bairro</small>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-6 mb-2">
+                                <ng-select class="large" formControlName="uf" placeholder="Selecione o Estado" [loading]="loadingServiceEstado" (change)="listarCidades()" notFoundText="Nenhum item encontrado" required>
+                                    <ng-option [value]="estado.id" *ngFor="let estado of estados">{{estado.nome}}</ng-option>
+                                </ng-select>
+                                <small class="form-text text-danger" *ngIf="form.controls.uf.touched && form.controls.uf.hasError('required')">Selecione o estado</small>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-6 mb-2">
+                                <ng-select class="large" formControlName="cidade" placeholder="Selecione a Cidade" [loading]="loadingServiceCidade" notFoundText="Nenhum item encontrado" required>
+                                    <ng-option [value]="cidade.id" *ngFor="let cidade of cidades">{{cidade.nome}}</ng-option>
+                                </ng-select>
+                                <small class="form-text text-danger" *ngIf="form.controls.cidade.touched && form.controls.cidade.hasError('required')">Selecione a cidade</small>
+                            </div>
+                            <div class="form-floating col-xs-12 col-sm-12 col-lg-12 mb-2">
+                                <input type="text" formControlName="complemento" class="form-control" placeholder="Complemento">
+                                <label>Complemento</label>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-lg btn-block mt-4">
+                                <i class="fas fa-check pe-2"></i>
+                                FINALIZAR CADASTRO
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>

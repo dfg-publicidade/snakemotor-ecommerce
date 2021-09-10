@@ -16,7 +16,7 @@ export class ProdutoOpcaoService {
   }
 
   listar(page: number, filter: any): Observable<any> {
-    let url = `${this.urlServico}?agrupar=cor&filtros=true`;
+    let url = `${this.urlServico}?filtros=true`;
 
     let params = '';
 
@@ -34,7 +34,7 @@ export class ProdutoOpcaoService {
   }
 
   listarPorProduto(produto: any): Observable<any> {
-    let url = `${this.urlServico}?_nopaginate=true&agrupar=cor`;
+    let url = `${this.urlServico}?_nopaginate=true`;
 
     url += `&${this.prefix}.produto.id=${produto.id}`;
 
@@ -42,9 +42,9 @@ export class ProdutoOpcaoService {
   }
 
   listarDestaques(limite: number, aleatorio: boolean): Observable<any> {
-    let url = `${this.urlServico}?agrupar=cor`;
+    let url = `${this.urlServico}`;
 
-    url += `&_limit=${limite}`;
+    url += `?_limit=${limite}`;
     url += `&${this.prefix}.produto.destaque=true`;
 
     if (aleatorio) {
@@ -57,9 +57,9 @@ export class ProdutoOpcaoService {
   }
 
   listarPorCategoria(categoriaId: string, limite: number, aleatorio: boolean, ignore?: string): Observable<any> {
-    let url = `${this.urlServico}?agrupar=cor`;
+    let url = `${this.urlServico}`;
 
-    url += `&_limit=${limite}`;
+    url += `?_limit=${limite}`;
     url += `&${this.prefix}.produto.categoria.id=${categoriaId}`;
 
     if (aleatorio) {
@@ -76,9 +76,9 @@ export class ProdutoOpcaoService {
   }
 
   listarPorIdsProdutoPrincipal(ids: any, aleatorio: boolean): Observable<any> {
-    let url = `${this.urlServico}?agrupar=cor`;
+    let url = `${this.urlServico}`;
 
-    url += `&produtos=${ids.join()}`;
+    url += `?produtos=${ids.join()}`;
 
     if (aleatorio) {
       url += `&aleatorio=${aleatorio}`;

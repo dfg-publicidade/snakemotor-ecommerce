@@ -1,0 +1,58 @@
+@import "../../../res/variables.scss";
+@import "../../../res/scss/form.scss";
+@import "../../../res/scss/buttons.scss";
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    background-color: #1c1c1c;
+    box-shadow: -3px -1px 10px -2px rgb(56 51 56 / 30%) !important;
+    padding: 10px 0;
+    z-index: 1100;
+
+    & > div.container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        & > div.logo {
+            width: 130px;
+            height: 75px;
+            background: url("../../../res/imagens/logo.png") no-repeat center center;
+            background-size: 100% auto;
+            cursor: pointer;
+            align-self: center;
+
+            @include transition(all, linear, 0.5s);
+        }
+    }
+}
+main {
+    margin-top: 100px;
+    background: #eeeeee;
+    & > div.container {
+        & > form {
+            & > div.accordion {
+                z-index: 1;
+                margin: 0 25vh;
+
+                & > div.accordion-item {
+                    & > div {
+                        & > div.accordion-body {
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@import "responsive/cadastro-xl.scss";
+@import "responsive/cadastro-lg.scss";
+@import "responsive/cadastro-md.scss";
+@import "responsive/cadastro-sm.scss";
+@import "responsive/cadastro-xss.scss";
+@import "responsive/cadastro-print.scss";

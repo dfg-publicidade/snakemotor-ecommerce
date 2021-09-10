@@ -23,8 +23,8 @@
 
         <!-- BANNER DE SEGUNDA ROLAGEM -->
         <div class="banners">
-            <a *ngIf="banners[tipoBannerIdSegundaRolagem] && banners[tipoBannerIdSegundaRolagem][0]" class="banner" href="{{banners[tipoBannerIdSegundaRolagem][0].url ? banners[tipoBannerIdSegundaRolagem][0].url : '#'}}" [ngStyle]="{'background-image': 'url(' + banners[tipoBannerIdSegundaRolagem][0].imagem.original + ')'}"></a>
-            <a *ngIf="banners[tipoBannerIdSegundaRolagem] && banners[tipoBannerIdSegundaRolagem][1]" class="banner" href="{{banners[tipoBannerIdSegundaRolagem][1].url ? banners[tipoBannerIdSegundaRolagem][1].url : '#'}}" [ngStyle]="{'background-image': 'url(' + banners[tipoBannerIdSegundaRolagem][1].imagem.original + ')'}"></a>
+            <a *ngIf="banners[tipoBannerIdSegundaRolagem] && banners[tipoBannerIdSegundaRolagem][0]" class="banner" href="{{banners[tipoBannerIdSegundaRolagem][0].url ? banners[tipoBannerIdSegundaRolagem][0].url : '#'}}" [ngStyle]="{'background-image': 'url(' + banners[tipoBannerIdSegundaRolagem][0].imagem.original + '?timestamp='+ timestamp +')'}"></a>
+            <a *ngIf="banners[tipoBannerIdSegundaRolagem] && banners[tipoBannerIdSegundaRolagem][1]" class="banner" href="{{banners[tipoBannerIdSegundaRolagem][1].url ? banners[tipoBannerIdSegundaRolagem][1].url : '#'}}" [ngStyle]="{'background-image': 'url(' + banners[tipoBannerIdSegundaRolagem][1].imagem.original + '?timestamp='+ timestamp +')'}"></a>
         </div>
     </div>
 </section>

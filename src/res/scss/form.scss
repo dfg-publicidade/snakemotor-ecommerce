@@ -1,8 +1,8 @@
 @import "../variables.scss";
 
 form {
-    & > div.form-group,
-    & > div.form-floating {
+    div.form-group,
+    div.form-floating {
         & > label {
             & > span {
                 & > sup {
@@ -26,8 +26,13 @@ form {
             box-shadow: none !important;
             position: relative;
 
-            &.ng-invalid {
-                // border-color: 
+            &.ng-touched {
+                &.ng-valid {
+                    border-color: #198754;
+                }
+                &.ng-invalid {
+                    border-color: #dc3545;
+                }
             }
         }
 
@@ -50,6 +55,7 @@ form {
         }
 
         & > button {
+            border-radius: 0;
             &.btn-block {
                 width: 100%;
             }
@@ -68,6 +74,7 @@ form {
     }
 
     button {
+        border-radius: 0;
         & > span.loading {
             display: flex;
             justify-content: center;
@@ -75,6 +82,15 @@ form {
             & > img {
                 width: 51px;
             }
+        }
+
+        &.btn-md {
+            padding: 0.5rem 1rem;
+            font-size: 1.25rem;
+        }
+
+        &.btn-lg {
+            padding: 20px 60px;
         }
     }
 }
@@ -183,12 +199,66 @@ ng-select.ng-select {
         }
     }
 
+    &.large {
+        ::ng-deep {
+            & > div.ng-select-container {
+                padding: 1rem 0.75rem;
+                border-radius: 0.25rem;
+            }
+
+            & > ng-dropdown-panel.ng-dropdown-panel {
+                margin-top: 60px;
+            }
+        }
+    }
+
     &.ng-select-opened {
         ::ng-deep {
             & > div.ng-select-container {
                 & > span.ng-arrow-wrapper {
                     transform: rotate(180deg);
                     opacity: 1;
+                }
+            }
+        }
+    }
+
+    &.ng-select-disabled {
+        background: #e9ecef;
+
+        ::ng-deep {
+            & > div.ng-select-container {
+                & > span.ng-arrow-wrapper {
+                    background: #ddd;
+
+                    & > span.ng-arrow {
+                        color: #ccc;
+                    }
+                }
+
+                & > div.ng-value-container {
+                    & > div.ng-input {
+                        & > input {
+                            cursor: no-drop;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.ng-touched {
+        &.ng-valid {
+            ::ng-deep {
+                & > div.ng-select-container {
+                    border-color: #198754;
+                }
+            }
+        }
+        &.ng-invalid {
+            ::ng-deep {
+                & > div.ng-select-container {
+                    border-color: #dc3545;
                 }
             }
         }

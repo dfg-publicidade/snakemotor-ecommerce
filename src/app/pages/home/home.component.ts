@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
   loadingServiceLead: boolean = false;
   resultLead: any;
 
-  
+  timestamp: any = new Date().getTime();
 
   constructor(
     private router: Router,

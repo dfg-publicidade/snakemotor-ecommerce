@@ -22,7 +22,7 @@
                         <label>Senha</label>
                         <small class="form-text text-danger" *ngIf="form.controls.senha.touched && form.controls.senha.hasError('required')">Preencha a senha</small>
                     </div>
-                    <button type="submit" class="btn btn-success btn-lg btn-block">Entrar</button>
+                    <button type="submit" class="btn btn-success btn-md btn-block">Entrar</button>
                     <div class="esqueci-senha">
                         <a href="javascript:void(0)">Esqueci minha senha</a>
                     </div>
@@ -36,7 +36,9 @@
                         <h4>Crie uma conta</h4>
                         <p>Ainda não tem conta na Snake Motor?</p>
                     </div>
-                    <button type="button" class="btn btn-outline-success btn-block">CADASTRE-SE</button>
+                    <a [routerLink]="['/cadastro']">
+                        <button type="button" class="btn btn-outline-success btn-block">CADASTRE-SE</button>
+                    </a>
                 </div>
             </div>
         </div>

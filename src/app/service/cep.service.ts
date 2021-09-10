@@ -4,14 +4,17 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable()
-export class UfService {
+export class CepService {
   urlServico: string;
+  prefix: string = 'cep';
 
   constructor(private http: HttpClient) {
-    this.urlServico = environment.urlServico  + 'uf/todos';
+    this.urlServico = `${environment.urlServico}${environment.apiSYS}/${environment.versao}/cep`;
   }
 
-  listar(): Observable<any> {
-    return this.http.get(this.urlServico);
+  buscarEndereco(cep: string): Observable<any> {
+    let url = `${this.urlServico}/${cep}`;
+
+    return this.http.get(url);
   }
 }

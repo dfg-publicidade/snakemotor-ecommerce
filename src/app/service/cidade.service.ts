@@ -6,13 +6,19 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class CidadeService {
   urlServico: string;
+  prefix: string = 'cidade';
 
   constructor(private http: HttpClient) {
-    this.urlServico = environment.urlServico;
+    this.urlServico = `${environment.urlServico}${environment.apiSYS}/${environment.versao}/cidades`;
   }
 
-  listarPorUf(idUf: number): Observable<any> {
-    let url = this.urlServico + 'uf/' + idUf + '/cidades';
+  listarPorEstado(estadoId: string, cidadeNome?: string): Observable<any> {
+    let url = `${this.urlServico}?_nopaginate=true`;
+    url += `&${this.prefix}.estado.id=${estadoId}`;
+
+    if (cidadeNome) {
+      url += `&${this.prefix}.cidade.nome=${cidadeNome}`;
+    }
 
     return this.http.get(url);
   }
