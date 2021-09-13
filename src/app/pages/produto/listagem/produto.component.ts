@@ -76,7 +76,7 @@ export class ProdutoComponent implements OnInit {
   setFilterPreco(): void {
     this.filter[`preco`] = {
       nome: 'Preço',
-      id: `${this.minValue}:${this.maxValue}`
+      id: `${this.minValue};${this.maxValue}`
     };
     this.filter = Object.assign({}, this.filter);
 

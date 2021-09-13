@@ -162,6 +162,23 @@ header {
             & > div.icones {
                 display: flex;
                 justify-content: flex-end;
+                & > div.dropdown {
+                    display: flex;
+                    align-items: center;
+                    & > button {
+                        color: #fff;
+
+                        & > i {
+                            display: inline-block;
+                        }
+                        & > span {
+                            display: inline-block;
+                            text-align: left;
+                            margin-left: 10px;
+                            line-height: 18px;
+                        }
+                    }
+                }
                 & > a {
                     color: #fff;
                     align-self: center;

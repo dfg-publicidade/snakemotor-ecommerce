@@ -1,6 +1,6 @@
-@import "../../../../res/variables.scss";
-@import "../../../../res/scss/form.scss";
-@import "../../../../res/scss/buttons.scss";
+@import "../../../res/variables.scss";
+@import "../../../res/scss/form.scss";
+@import "../../../res/scss/buttons.scss";
 
 section {
     &.produto-detail {
@@ -307,6 +307,39 @@ section {
                             font-weight: bold;
                         }
                     }
+                }
+            }
+
+            & > div.carrinho-vazio {
+                width: 100%;
+                display: block;
+                text-align: center;
+                padding: 60px 0;
+
+                & > span.icone {
+                    background: #fff;
+                    display: inline-block;
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    padding: 5px;
+
+                    & > i {
+                        border-radius: 50%;
+                        width: 100px;
+                        height: 100px;
+                        background: #efefef;
+                        color: #2d3f48;
+                        font-size: 40px;
+                        padding-top: 30px;
+                        padding-left: 0;
+                    }
+                } 
+
+                & > h3,
+                & > p {
+                    margin: 0;
+                    color: #807f7f;
                 }
             }
         }

@@ -41,7 +41,7 @@ export class PerfilService {
     body.append('aceiteOferta', entity.value.aceiteOferta);
     body.append('aceiteContato', entity.value.aceiteContato);
 
-    if (entity.value.tipo === 'F') {
+    if (entity.value.tipo === 'FISICA') {
       body.append('dataNascto', entity.value.dataNascto);
     }
 
@@ -54,14 +54,24 @@ export class PerfilService {
     return this.http.post(url, body);
   }
 
-  recuperarSenha(entity: any): Observable<any> {
-    let url = this.urlServico + 'recuperacao-senha';
+  envioEmailRecuperacaoSenha(entity: any): Observable<any> {
+    let url = `${this.urlServicoAutenticacao}/recuperacao-senha`;
 
     let body = new FormData();
-
-    body.append('email', entity.value.emailRecuperacaoSenha);
+    body.append('email', entity.value.email);
 
     return this.http.post(url, body);
+  }
+
+  recuperarSenha(entity: any): Observable<any> {
+    let url = `${this.urlServicoAutenticacao}/recuperacao-senha`;
+
+    let body = new FormData();
+    body.append('id', entity.value.id);
+    body.append('hash', entity.value.hash);
+    body.append('senha', entity.value.senha);
+
+    return this.http.put(url, body);
   }
 
   visualizar(): Observable<any> {
@@ -83,7 +93,7 @@ export class PerfilService {
     body.append('celular', entity.value.celular);
     body.append('telefone', entity.value.telefone);
 
-    if (entity.value.tipo === 'F') {
+    if (entity.value.tipo === 'FISICA') {
       body.append('dataNascto', entity.value.dataNascto);
     }
 

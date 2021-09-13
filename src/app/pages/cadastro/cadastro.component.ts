@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import Helpers from 'src/app/helpers';
 import { CepService } from 'src/app/service/cep.service';
 import { CidadeService } from 'src/app/service/cidade.service';
 import { EstadoService } from 'src/app/service/estado.service';
 import { PerfilService } from 'src/app/service/perfil.service';
+import { Util } from 'src/app/util/util';
 declare var $: any;
 
 @Component({
@@ -26,6 +28,7 @@ export class CadastroComponent implements OnInit {
   response: any;
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     private estadoService: EstadoService,
     private cidadeService: CidadeService,
@@ -117,6 +120,7 @@ export class CadastroComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    Util.loadCss('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
     this.listarEstados();
   }
 
@@ -245,12 +249,21 @@ export class CadastroComponent implements OnInit {
           this.loadingServiceCadastro = false;
 
           if (this.response && this.response.status === 'success') {
-            if (this.response.content.entity) {
-              this.perfilService.setSession(this.response.content.entity);
+            if (this.response.content) {
+              this.perfilService.setSession(this.response.content);
 
               setTimeout(() => {
                 $('#modalCadastroSucesso').modal('show');
               }, 100);
+
+              setTimeout(() => {
+                $('#modalCadastroSucesso').modal('hide');
+
+                setTimeout(() => {
+                  this.router.navigate(['/']);
+                }, 500);
+
+              }, 5000);
 
             }
 

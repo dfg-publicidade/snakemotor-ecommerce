@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CarrinhoDetailComponent } from './carrinho-detail.component';
+import { RecuperacaoSenhaComponent } from './recuperacao-senha.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: CarrinhoDetailComponent
+    path: ':id/:hash',
+    component: RecuperacaoSenhaComponent
   }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CarrinhoRoutingModule { }
+export class RecuperacaoSenhaRoutingModule { }

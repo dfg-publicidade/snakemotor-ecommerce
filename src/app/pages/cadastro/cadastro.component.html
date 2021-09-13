@@ -1,6 +1,8 @@
 <header>
     <div class="container">
-        <div class="logo"></div>
+        <a [routerLink]="['/']">
+            <div class="logo"></div>
+        </a>
     </div>
 </header>
 <main>
@@ -18,7 +20,7 @@
                     <div id="dadosPessoais" class="accordion-collapse collapse show" aria-labelledby="headingDadosPessoais" data-bs-parent="#accordion">
                         <div class="accordion-body">
                             <div class="col-xs-12 col-sm-12 col-lg-6 mb-2">
-                                <ng-select class="large" formControlName="tipo" placeholder="Tipo de cadastro" required>
+                                <ng-select class="large" formControlName="tipo" placeholder="Tipo de cadastro" notFoundText="Nenhum item encontrado" required>
                                     <ng-option [value]="'FISICA'">Pessoa Física</ng-option>
                                     <ng-option [value]="'JURIDICA'">Pessoa Jurídica</ng-option>
                                 </ng-select>
@@ -147,21 +149,24 @@
     </div>
 </main>
 
-<!-- Modal CADASTRO SUCESSO -->
+<!-- MODAL CADASTRO SUCESSO -->
 <div class="modal fade" id="modalCadastroSucesso" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Sucesso</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Cadastro</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <app-alert-message *ngIf="response" [result]='response'></app-alert-message>
-            </div>
-            <div class="modal-footer">
-                <a [routerLink]="['/']">
-                    <button type="button" class="btn btn-primary">Acessar produtos</button>
-                </a>
+                <div class="message" *ngIf="response && response.status === 'success'">
+                    <div class="icon animate__animated animate__heartBeat">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <h3>Cadastro realizado com sucesso</h3>
+                    <p class="text-primary">
+                        <a [routerLink]="['/']">Ir para a página inicial</a> 
+                    </p>
+                </div>
             </div>
         </div>
     </div>

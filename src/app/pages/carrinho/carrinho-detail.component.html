@@ -10,10 +10,10 @@
 <section>
     <div class="container">
         <div class="carrinho">
-            <div class="itens">
+            <div class="itens" *ngIf="carrinho && carrinho.produtos">
                 <h3>Meu carrinho</h3>
                 <div class="table-responsive">
-                    <table class="table" *ngIf="carrinho">
+                    <table class="table">
                         <thead>
                             <th scope="col">Produto</th>
                             <th scope="col">Quantidade</th>
@@ -41,7 +41,7 @@
                                         <button type="button" class="btn btn-end">-</button>
                                     </div>
                                     <div class="remover">
-                                        <button type="button" class="btn">remover</button>
+                                        <button type="button" class="btn" (click)="removerCarrinho(item)">remover</button>
                                     </div>
                                 </td>
                                 <td class="valor">
@@ -114,7 +114,7 @@
                     </p>
                 </div>
             </div>
-            <div class="info" *ngIf="carrinho">
+            <div class="info" *ngIf="carrinho && carrinho.produtos">
                 <h3>Resumo</h3>
                 <p class="info-produto">
                     <span>{{carrinho.produtos.length}} produto{{carrinho.produtos.length > 1 ? 's' : ''}}</span>
@@ -142,7 +142,18 @@
                     </a>
                 </div>
             </div>
+            <div class="carrinho-vazio" *ngIf="carrinho && (!carrinho.produtos || (carrinho.produtos && carrinho.produtos.length === 0))">
+                <span class="icone">
+                    <i class="fas fa-shopping-cart"></i>
+                </span>
+                <h3>Carrinho Vazio</h3>
+                <p>Continue buscando os produtos desejados</p>
+                <a [routerLink]="['/']">
+                    <button class="info btn btn-primary btn-lg mt-4 ps-5 pe-5">
+                        <span>Página inicial</span>
+                    </button>
+                </a>
+            </div>
         </div>
-
     </div>
 </section>

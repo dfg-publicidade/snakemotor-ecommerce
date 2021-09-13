@@ -12,8 +12,12 @@ declare var $: any;
 })
 export class LoginComponent implements OnInit {
   form: any;
+  formRecuperacaoSenha: any;
+
   loadingService: boolean = false;
+  loadingServiceRecuperacaoSenha: boolean = false;
   response: any;
+  responseRecuperacaoSenha: any;
 
   constructor(
     private router: Router,
@@ -27,6 +31,13 @@ export class LoginComponent implements OnInit {
       ]),
       senha: new FormControl('', [
         Validators.required
+      ])
+    });
+
+    this.formRecuperacaoSenha = formBuilder.group({
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email
       ])
     });
   };
@@ -63,6 +74,29 @@ export class LoginComponent implements OnInit {
           this.response = error.error;
 
           this.scrollTop();
+        }
+      );
+  }
+
+  recuperarSenha() {
+    delete this.responseRecuperacaoSenha;
+    this.loadingServiceRecuperacaoSenha = true;
+    this.perfilService.envioEmailRecuperacaoSenha(this.formRecuperacaoSenha)
+      .subscribe(
+        result => {
+          this.responseRecuperacaoSenha = result;
+          this.loadingServiceRecuperacaoSenha = false;
+
+          this.formRecuperacaoSenha.reset();
+
+          setTimeout(() => {
+            delete this.responseRecuperacaoSenha;
+            $('#modalRecuperacaoSenha').modal('hide');
+          }, 5000);
+        },
+        (error) => {
+          this.loadingServiceRecuperacaoSenha = false;
+          this.responseRecuperacaoSenha = error.error;
         }
       );
   }

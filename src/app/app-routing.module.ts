@@ -29,6 +29,10 @@ const routes: Routes = [
   {
     path: 'cadastro',
     loadChildren: () => import('./pages/cadastro/cadastro.module').then(m => m.CadastroModule)
+  },
+  {
+    path: 'recuperacao-senha',
+    loadChildren: () => import('./pages/recuperacao-senha/recuperacao-senha.module').then(m => m.RecuperacaoSenhaModule)
   }
 ];
 

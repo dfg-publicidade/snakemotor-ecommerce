@@ -56,15 +56,15 @@ export class CarrinhoService {
     });
   }
 
-  removerItemCarrinho(item: any) {
+  removerItemCarrinho(produto: any) {
     let carrinho = this.getCarrinho();
 
-    let itemSelecionado = carrinho.find((produto: any) => produto.id === item.id);
-    let indexItem = carrinho.indexOf(itemSelecionado);
+    let itemSelecionado = carrinho.produtos.find((p: any) => p.id === produto.id);
+    let indexItem = carrinho.produtos.indexOf(itemSelecionado);
 
-    carrinho.splice(indexItem, 1);
+    carrinho.produtos.splice(indexItem, 1);
 
-    if (carrinho.length > 0) {
+    if (carrinho.produtos.length > 0) {
       this.setCarrinho(carrinho);
     } else {
       this.removerCarrinho();

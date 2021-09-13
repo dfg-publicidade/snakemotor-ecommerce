@@ -1,0 +1,65 @@
+<header>
+    <div class="container">
+        <a [routerLink]="['/']">
+            <div class="logo"></div>
+        </a>
+    </div>
+</header>
+<main>
+    <div class="container">
+        <app-alert-message *ngIf="response && response.status !== 'success'" [result]='response'></app-alert-message>
+        <div class="box-login">
+            <div class="login">
+                <div class="title">
+                    <h5>Recuperação de senha</h5>
+                </div>
+                <form [formGroup]="form" (submit)="recuperarSenha()">
+                    <div class="form-floating  col-xs-12 col-sm-12 col-lg-12 mb-2">
+                        <input type="password" formControlName="senha" class="form-control" placeholder="Senha" required>
+                        <label>Senha</label>
+                        <small class="form-text text-danger" *ngIf="form.controls.senha.touched && form.controls.senha.hasError('required')">Preencha a senha</small>
+                    </div>
+                    <div class="form-floating  col-xs-12 col-sm-12 col-lg-12 mb-2">
+                        <input type="password" formControlName="confirmacaoSenha" class="form-control" placeholder="Senha" required>
+                        <label>Confirmação de senha</label>
+                        <small class="form-text text-danger" *ngIf="form.controls.confirmacaoSenha.touched && form.controls.senha.hasError('required')">Preencha a confirmação de senha</small>
+                        <small class="form-text text-danger" *ngIf="form.controls.confirmacaoSenha.hasError('mismatch')">As senhas devem ser iguais</small>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-md btn-block" [disabled]="form.status === 'INVALID' || loadingService">
+                        <span *ngIf="!loadingService">ENVIAR</span>
+                        <span *ngIf="loadingService" class="loading">
+                            <img src="/res/imagens/spinner-white.svg" />
+                            enviando... Aguarde!
+                        </span>
+                    </button>
+                    <p class="text-primary text-center mt-3 mb-0 pb-0">
+                        <a [routerLink]="['/login']"><small>Ir para o Login</small></a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- MODAL CADASTRO SUCESSO -->
+<div class="modal fade" id="modalRecuperaSenhaSucesso" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Senha</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="message" *ngIf="response && response.status === 'success'">
+                    <div class="icon animate__animated animate__heartBeat">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <h3>Registro alterado com sucesso</h3>
+                    <p class="text-primary">
+                        <a [routerLink]="['/login']">Fazer login</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

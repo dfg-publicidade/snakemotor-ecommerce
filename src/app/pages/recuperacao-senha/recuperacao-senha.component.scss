@@ -136,9 +136,45 @@ main {
     }
 }
 
-@import "responsive/login-xl.scss";
-@import "responsive/login-lg.scss";
-@import "responsive/login-md.scss";
-@import "responsive/login-sm.scss";
-@import "responsive/login-xss.scss";
-@import "responsive/login-print.scss";
+div.modal {
+    & > div.modal-dialog {
+        & > div.modal-content {
+            & > div.modal-body {
+                & > div.message {
+                    display: block;
+                    text-align: center;
+                    width: 100%;
+                    & > div.icon {
+                        background: #efefef;
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 50%;
+                        padding: 10px;
+                        margin: auto;
+                        margin-bottom: 20px;
+                        & > i {
+                            color: #2f9646;
+                            font-size: 40px;
+                            align-items: center;
+                            display: flex;
+                            width: 100%;
+                            height: 100%;
+                            justify-content: center;
+                        }
+                    }
+
+                    & > h3 {
+                        color: #383d41;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@import "responsive/recuperacao-senha-xl.scss";
+@import "responsive/recuperacao-senha-lg.scss";
+@import "responsive/recuperacao-senha-md.scss";
+@import "responsive/recuperacao-senha-sm.scss";
+@import "responsive/recuperacao-senha-xss.scss";
+@import "responsive/recuperacao-senha-print.scss";

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CarrinhoService } from 'src/app/service/carrinho.service';
+import { ProdutoUtil } from 'src/app/util/produtoUtil';
 
 @Component({
   selector: 'app-carrinho-detail',
@@ -49,6 +50,15 @@ export class CarrinhoDetailComponent implements OnInit {
         result => {
           this.carrinho = result.content;
 
+          this.carrinho.produtos.forEach((produto: any, index: number) => {
+            this.carrinho.produtos[index].imagem = ProdutoUtil.getImagemDestaque(produto);
+
+            if (!this.carrinho.produtos[index].imagem) {
+              this.carrinho.produtos[index].imagem = '/res/imagens/sem-imagem.png';
+            }
+          });
+
+
           this.getFormaEntrega();
 
           this.loadingServiceFrete = false;
@@ -75,7 +85,7 @@ export class CarrinhoDetailComponent implements OnInit {
     if (this.carrinho) {
       if (this.carrinho.formasEntrega && this.carrinho.formasEntrega.length > 0) {
         this.formaEntrega = this.carrinho.formasEntrega.find((formaEntrega: any) => formaEntrega && formaEntrega.permalink === this.formFrete.value.formaEntrega);
-      } else if (this.carrinho.formaEntrega){
+      } else if (this.carrinho.formaEntrega) {
         this.formaEntrega = this.carrinho.formaEntrega;
       }
     }
@@ -96,6 +106,13 @@ export class CarrinhoDetailComponent implements OnInit {
 
       this.carrinhoService.setCarrinho(carrinho);
     }
+  }
 
+  removerCarrinho(produto: any) {
+    this.carrinhoService.removerItemCarrinho(produto);
+
+    this.carrinho = this.carrinhoService.getCarrinho();
+
+    this.atualizaValorCarrinho();
   }
 }

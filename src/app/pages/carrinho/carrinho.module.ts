@@ -5,8 +5,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxMaskModule } from 'ngx-mask';
 import { ProdutoComponentModule } from 'src/app/componentes/produto/produto.module';
 import { CarrinhoService } from 'src/app/service/carrinho.service';
+import { CarrinhoDetailComponent } from './carrinho-detail.component';
 import { CarrinhoRoutingModule } from './carrinho-routing.module';
-import { CarrinhoDetailComponent } from './visualizacao/carrinho-detail.component';
 
 @NgModule({
   declarations: [
