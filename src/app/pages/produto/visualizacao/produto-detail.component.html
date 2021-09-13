@@ -42,13 +42,15 @@
                     <!-- PRECO VALOR PROMOCIONAL -->
                     <p class="valor-vigente" *ngIf="produtoOpcao.precoPromocional">{{produtoOpcao.precoPromocional}}</p>
                     <p class="valor-parcelado" *ngIf="produtoOpcao.precoPromocional && produtoOpcao.precoPromocionalParcelado">{{produtoOpcao.precoPromocionalParcelado}}</p>
-                    <span class="tag lancamento" *ngIf="produtoOpcao.produto.lancamento">Lançamento</span>
-                    <span class="tag exclusivo" *ngIf="produtoOpcao.produto.exclusivoSite">Exclusivo no site</span>
-                    <span class="tag frete-gratis" *ngIf="produtoOpcao.produto.freteGratis">Frete Grátis</span>
 
                     <!-- PRECO VALOR PADRÃO -->
                     <p class="valor-vigente" *ngIf="!produtoOpcao.precoPromocional">{{produtoOpcao.precoVenda}}</p>
                     <p class="valor-parcelado" *ngIf="!produtoOpcao.precoPromocional && produtoOpcao.precoVendaParcelado">{{produtoOpcao.precoVendaParcelado}}</p>
+
+                    <!-- TAGS de destaque -->
+                    <span class="tag lancamento" *ngIf="produtoOpcao.produto.lancamento">Lançamento</span>
+                    <span class="tag exclusivo" *ngIf="produtoOpcao.produto.exclusivoSite">Exclusivo no site</span>
+                    <span class="tag frete-gratis" *ngIf="produtoOpcao.produto.freteGratis">Frete Grátis</span>
                 </div>
                 <form class="variacoes" [formGroup]="formVariacao">
                     <div class="cor">
@@ -63,14 +65,22 @@
                             </a>
                         </div>
                     </div>
-                    <!-- <div class="tamanho">
-                        <label>{{variacao.nome}}</label>
-                        <ng-select [multiple]="false" [formControlName]="variacao.permalink" placeholder="Selecione" [loading]="variacao.loadingVariacaoOpcaoService" loadingText="Carregando..." (change)="trocarProdutoOpcao($event, variacao.permalink, i)">
-                            <ng-option [value]="pOpcao.id" *ngFor="let pOpcao of tamanhos">{{pOpcao.tamanho.nome}}</ng-option>
-                        </ng-select>
-                    </div> -->
+                    <div class="variacao">
+                        <div *ngIf="tamanhos && tamanhos[0].tamanhoOpcao">
+                            <label>Tamanho</label>
+                            <ng-select formControlName="tamanho" loadingText="Carregando..." [loading]="!tamanhos" placeholder="Selecione" notFoundText="Nenhum item encontrado" (change)="selecionarOpcao($event)">
+                                <ng-option [value]="pOpcao.id" *ngFor="let pOpcao of tamanhos">{{pOpcao.tamanhoOpcao.nome}}</ng-option>
+                            </ng-select>
+                        </div>
+                        <div>
+                            <label>Quantidade</label>
+                            <ng-select formControlName="qtde" placeholder="Selecione" notFoundText="Nenhum item encontrado">
+                                <ng-option [value]="qtde" *ngFor="let qtde of qtdes">{{qtde}}</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
                 </form>
-                <button type="button" class="custom buy">
+                <button type="button" class="custom buy" (click)="adicionarCarrinho()" [disabled]="formVariacao.status === 'INVALID' || jaPossuiCarrinho(op) || (produtoOpcaoSelecionado && produtoOpcaoSelecionado.adicionadoCarrinho)">
                     <i class="fas fa-shopping-cart"></i>
                     Comprar
                 </button>
@@ -109,3 +119,6 @@
         </div>
     </div>
 </section>
+
+<!-- TOAST MESSAGE -->
+<app-toast-message *ngIf="toastMessage" [message]='toastMessage'></app-toast-message>

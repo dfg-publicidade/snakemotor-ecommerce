@@ -10,6 +10,11 @@ button.custom {
         background: #ff0000;
         color: #fff;
 
+        &:disabled{
+            background: #e68181;
+            cursor: no-drop;
+        }
+
         & > i {
             padding-right: 10px;
         }

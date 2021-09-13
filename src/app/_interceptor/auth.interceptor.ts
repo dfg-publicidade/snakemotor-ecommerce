@@ -28,9 +28,9 @@ export class AuthInterceptor implements HttpInterceptor {
         } else {
             request = request.clone({
                 setHeaders: {
-                    'Clientid': environment.CLIENT_ID,
+                    'CLIENT_ID': environment.CLIENT_ID,
                     'domain': environment.domain,
-                    'Token': `${this.usuario ? this.usuario.token : ''}`
+                    'Authorization': `${this.usuario ? this.usuario.token : ''}`
                 }
             });
         }

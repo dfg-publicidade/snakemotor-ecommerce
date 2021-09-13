@@ -11,7 +11,7 @@ header {
     background-color: #1c1c1c;
     box-shadow: -3px -1px 10px -2px rgb(56 51 56 / 30%) !important;
     padding: 10px 0;
-    z-index: 1200;
+    z-index: 1059;
 
     & > div.container {
         display: flex;
@@ -35,12 +35,13 @@ main {
     overflow: hidden;
     width: 100%;
     min-height: 100vh;
+    padding-top: 100px;
 
     & > div.container {
         & > div.box-login {
             width: 100%;
             max-width: 420px;
-            margin: 120px auto 0;
+            margin: 20px auto 0;
             padding-bottom: 30px;
             background: #fff;
             box-shadow: 0 5px 20px -1px rgb(56 51 56 / 30%) !important;

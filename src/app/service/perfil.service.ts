@@ -5,48 +5,51 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class PerfilService {
+  urlServicoAutenticacao: string;
   urlServico: string;
-  urlServicoCliente: string;
   KEY_SESSION: string = "USUARIO";
   watchAutenticacaoService = new Subject();
   watchAutenticacaoService$ = this.watchAutenticacaoService.asObservable();
 
   constructor(private http: HttpClient) {
-    this.urlServico = environment.urlServico + 'api/';
-    this.urlServicoCliente = environment.urlServico;
+    this.urlServicoAutenticacao = `${environment.urlServico}${environment.apiAUTH}/${environment.versao}`;
+    this.urlServico = `${environment.urlServico}${environment.apiApp}/${environment.versao}`;
   }
 
   login(entity: any): Observable<any> {
+    let url = `${this.urlServicoAutenticacao}/access-token`
     let body = new FormData();
 
     body.append('email', entity.value.email);
     body.append('senha', entity.value.senha);
 
-    return this.http.post(this.urlServico + 'access-token', body);
+    return this.http.post(url, body);
   }
 
   inserir(entity: any): Observable<any> {
-    let url = this.urlServicoCliente + 'cliente/inserir';
+    let url = `${this.urlServico}/clientes`;
 
     let body = new FormData();
 
-    body.append('origem', 'site');
-    body.append('tipo', entity.value.tipo);
     body.append('nome', entity.value.nome);
-    body.append('apelido', entity.value.apelido);
     body.append('email', entity.value.email);
+    body.append('senha', entity.value.senha);
+    body.append('tipo', entity.value.tipo);
+    body.append('cpfCnpj', entity.value.cpfCnpj);
+    body.append('celular', entity.value.celular);
+    body.append('telefone', entity.value.telefone);
+    body.append('aceiteOferta', entity.value.aceiteOferta);
+    body.append('aceiteContato', entity.value.aceiteContato);
+
     if (entity.value.tipo === 'F') {
       body.append('dataNascto', entity.value.dataNascto);
-      body.append('cpfCnpj', entity.value.cpf);
-      body.append('rgIe', entity.value.rg);
-    } else if (entity.value.tipo === 'J') {
-      body.append('cpfCnpj', entity.value.cnpj);
-      body.append('rgIe', entity.value.ie);
     }
-    body.append('telefone', entity.value.telefone);
-    body.append('celular', entity.value.celular);
-    body.append('senha', entity.value.senha);
-    body.append('email', entity.value.email);
+
+    body.append('logradouro', entity.value.logradouro);
+    body.append('numero', entity.value.numero);
+    body.append('complemento', entity.value.complemento);
+    body.append('bairro', entity.value.bairro);
+    body.append('cidade', entity.value.cidade);
 
     return this.http.post(url, body);
   }
@@ -68,27 +71,29 @@ export class PerfilService {
   }
 
   alterar(entity: any): Observable<any> {
-    let url = this.urlServico + 'cliente/alterar';
+    let url = `${this.urlServico}/cliente`;
 
     let body = new FormData();
 
-    body.append('tipo', entity.value.tipo);
     body.append('nome', entity.value.nome);
-    body.append('apelido', entity.value.apelido);
     body.append('email', entity.value.email);
+    body.append('senha', entity.value.senha);
+    body.append('tipo', entity.value.tipo);
+    body.append('cpfCnpj', entity.value.cnpj);
+    body.append('celular', entity.value.celular);
+    body.append('telefone', entity.value.telefone);
+
     if (entity.value.tipo === 'F') {
       body.append('dataNascto', entity.value.dataNascto);
-      body.append('cpfCnpj', entity.value.cpf);
-      body.append('rgIe', entity.value.rg);
-    } else if (entity.value.tipo === 'J') {
-      body.append('cpfCnpj', entity.value.cnpj);
-      body.append('rgIe', entity.value.ie);
     }
-    body.append('telefone', entity.value.telefone);
-    body.append('celular', entity.value.celular);
-    body.append('email', entity.value.email);
 
-    return this.http.post(url, body);
+    body.append('logradouro', entity.value.logradouro);
+    body.append('numero', entity.value.numero);
+    body.append('complemento', entity.value.complemento);
+    body.append('bairro', entity.value.bairro);
+    body.append('cidade', entity.value.cidade);
+
+    return this.http.put(url, body);
   }
 
   alterarSenha(entity: any): Observable<any> {

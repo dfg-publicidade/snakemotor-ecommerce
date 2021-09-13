@@ -56,6 +56,8 @@ form {
 
         & > button {
             border-radius: 0;
+            transition: all 0.25s ease;
+
             &.btn-block {
                 width: 100%;
             }
@@ -75,12 +77,11 @@ form {
 
     button {
         border-radius: 0;
+        transition: all 0.25s ease;
+
         & > span.loading {
-            display: flex;
-            justify-content: center;
-            margin-top: -10px;
             & > img {
-                width: 51px;
+                width: 30px;
             }
         }
 

@@ -13,28 +13,31 @@
             <div class="itens">
                 <h3>Meu carrinho</h3>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" *ngIf="carrinho">
                         <thead>
                             <th scope="col">Produto</th>
                             <th scope="col">Quantidade</th>
                             <th scope="col">Preço</th>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let number of [1,2,3]">
+                            <tr *ngFor="let item of carrinho.produtos">
                                 <td class="produto">
                                     <div class="produto">
-                                        <div class="imagem" [ngStyle]="{'background-image': 'url(/res/imagens/temporarias/produto-1.jpg)'}"></div>
+                                        <div class="imagem" [ngStyle]="{'background-image': 'url(' + item.imagem + ')'}"></div>
                                         <p>
-                                            <a [routerLink]="['/produtos/visualizar']" target="_blank">CAPACETE AGV BLADE FIVE CONTINENTS</a> <br />
-                                            cor: preto/verde <br />
-                                            tamanho: S
+                                            <a [routerLink]="[urlProduto, item.produto.permalink]" [queryParams]="{op: item.id}" target="_blank">
+                                                {{item.produto.nome}}
+                                                <ng-container *ngIf="item.tipo_de_pintura">{{item.tipo_de_pintura.nome}}</ng-container>
+                                            </a> <br />
+                                            <ng-container *ngIf="item.cor"><strong>cor</strong>: {{item.cor.nome}} </ng-container> <br />
+                                            <ng-container *ngIf="item.tamanhoOpcao"><strong>tamanho</strong>: {{item.tamanhoOpcao.nome}} </ng-container>
                                         </p>
                                     </div>
                                 </td>
                                 <td class="qtde">
                                     <div class="qtde">
                                         <button type="button" class="btn btn-start">+</button>
-                                        <input class="qtde" type="text" value="1" />
+                                        <input class="qtde" type="text" [value]="item.qtde" />
                                         <button type="button" class="btn btn-end">-</button>
                                     </div>
                                     <div class="remover">
@@ -42,71 +45,97 @@
                                     </div>
                                 </td>
                                 <td class="valor">
-                                    <div class="valor">
-                                        <strong>R$ 1000,00</strong>
+                                    <div class="preco">
+                                        <!-- PRECO VALOR PADRÃO RISCADO, POIS EXISTE VALOR PROMOCIONAL -->
+                                        <p class="valor-normal" *ngIf="item.precoPromocional">{{item.precoVenda}}</p>
+
+                                        <!-- PRECO VALOR PROMOCIONAL -->
+                                        <p class="valor-vigente" *ngIf="item.precoPromocional">{{item.precoPromocional}}</p>
+
+                                        <!-- PRECO VALOR PADRÃO -->
+                                        <p class="valor-vigente" *ngIf="!item.precoPromocional">{{item.precoVenda}}</p>
                                     </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="frete">
-                    <form>
+                <div class="frete" *ngIf="carrinho">
+                    <form [formGroup]="formFrete" (submit)="consultarFrete()">
                         <div class="form-group row">
                             <label class="titulo">calcule o frete/prazo</label>
                             <div class="col-sm-12 col-md-6 col-lg-4 pe-0">
-                                <input type="email" class="form-control">
+                                <input type="text" class="form-control" formControlName="cep" mask="00.000-000">
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-1 ms-2 ps-0">
-                                <button type="button" class="btn">OK</button>
+                                <button type="submit" class="btn" [disabled]="formFrete.status === 'INVALID' || loadingServiceFrete">
+                                    <span *ngIf="!loadingServiceFrete">OK</span>
+                                    <span *ngIf="loadingServiceFrete" class="loading">
+                                        <img src="/res/imagens/spinner-white.svg" style="width: 22px;" />
+                                    </span>
+                                </button>
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-6 center">
-                                <a href=""><small id="emailHelp" class="form-text text-muted">não sei meu CEP</small></a>
+                                <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank"><small id="emailHelp" class="form-text text-muted">não sei meu CEP</small></a>
                             </div>
                         </div>
-                    </form>
-                    <form class="frete-tipos">
-                        <div class="form-group form-check mb-1">
-                            <input type="radio" name="freteTipo" class="form-check-input">
-                            <label>
-                                <span>Retirar na snake motor (3 dias úteis) <span>Grátis</span></span>
-                            </label>
-                        </div>
-                        <div class="form-group form-check">
-                            <input type="radio" name="freteTipo" class="form-check-input">
-                            <label>
-                                <span>Sedex (5 a 10 dias) <strong>R$ 24,00</strong></span>
-                            </label>
+
+                        <div class="frete-tipos">
+                            <!-- LISTA DE FORMAS DE ENTREGA -->
+                            <div class="form-group form-check mb-1" *ngFor="let formaEntrega of carrinho.formasEntrega">
+                                <label>
+                                    <input type="radio" class="form-check-input" name="formaEntrega" formControlName="formaEntrega" [value]="formaEntrega.permalink">
+                                    <span>
+                                        {{formaEntrega.nome}}:
+                                        <span [ngClass]="{gratis: !formaEntrega.valor}"> {{formaEntrega.valor ? formaEntrega.valor : 'Grátis'}} </span>
+                                        <ng-container *ngIf="formaEntrega.prazoEntrega">({{formaEntrega.prazoEntrega}})</ng-container>
+                                    </span>
+                                </label>
+                            </div>
+
+                            <!-- FORMA DE ENTREGA SELECIONADA -->
+                            <div class="form-group form-check mb-1" *ngIf="carrinho.formaEntrega">
+                                <label>
+                                    <span>
+                                        {{carrinho.formaEntrega.nome}}:
+                                        <span [ngClass]="{gratis: !carrinho.formaEntrega.valor}"> {{carrinho.formaEntrega.valor ? carrinho.formaEntrega.valor : 'Grátis'}} </span>
+                                        <ng-container *ngIf="carrinho.formaEntrega.prazoEntrega">({{carrinho.formaEntrega.prazoEntrega}})</ng-container>
+                                    </span>
+                                </label>
+                                <small><strong>selecionado</strong></small>
+                            </div>
                         </div>
                     </form>
                 </div>
                 <div class="cupom">
                     <p>
-                        <strong>CUPONS E VALES</strong> <br/>
+                        <strong>CUPONS E VALES</strong> <br />
                         Possui um Cupom de desconto ou Vale-troca? Utilize-o na página de pagamento e aproveite!
                     </p>
                 </div>
             </div>
-            <div class="info">
+            <div class="info" *ngIf="carrinho">
                 <h3>Resumo</h3>
                 <p class="info-produto">
-                    <span>2 produtos</span>
-                    <span>R$ 1500,00</span>
+                    <span>{{carrinho.produtos.length}} produto{{carrinho.produtos.length > 1 ? 's' : ''}}</span>
+                    <span>{{carrinho.valor}}</span>
                 </p>
                 <p class="frete">
                     <span><strong>Frete</strong></span>
-                    <span class="gratis">Grátis</span>
+                    <span class="gratis" *ngIf="formaEntrega && !formaEntrega.valor">Grátis</span>
+                    <span *ngIf="formaEntrega && formaEntrega.valor">{{formaEntrega.valor}}</span>
+                    <span *ngIf="!formaEntrega">-</span>
                 </p>
                 <p class="total">
                     <span><strong>Total</strong></span>
                     <span>
-                        <strong>R$ 1.500,00</strong> <br />
-                        <span>em até 10x de R$ 150,00</span>
+                        <strong>{{carrinho.valorTotal}}</strong> <br />
+                        <span>em até {{carrinho.valorTotalParcelado}}</span>
                     </span>
                 </p>
                 <div class="botoes">
                     <button type="button" class="custom buy">
-                        Finalizar Compra
+                        Continuar
                     </button>
                     <a [routerLink]="['/']">
                         <button type="button">escolher mais produtos</button>

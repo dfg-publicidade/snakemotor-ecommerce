@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import Helpers from './helpers';
 declare var $: any;
 
 @Component({
@@ -19,7 +20,7 @@ export class AppComponent {
         $('.modal').modal('hide');
       }
       else if (route instanceof NavigationEnd) {
-        $('html, body').animate({ scrollTop: $('body').offset().top }, 300);
+        Helpers.scrollPageTop();
       }
     });
   }

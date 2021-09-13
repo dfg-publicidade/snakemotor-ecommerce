@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
+import Helpers from 'src/app/helpers';
 
 declare var $: any;
 
@@ -25,6 +26,8 @@ export class ProdutoComponent implements OnInit {
   categoriasFiltro: any;
   marcasFiltro: any;
   filter: any = {};
+  order: any;
+  filtrosSelecionados: any;
 
   loadingService: boolean = false;
   infiniteScroll: boolean = false;
@@ -42,11 +45,15 @@ export class ProdutoComponent implements OnInit {
 
   listarProdutos(loadMore: boolean) {
     if (!loadMore) {
+      Helpers.scrollPageTop();
       this.loadingService = true;
     } else {
       this.load = true;
     }
-    this.produtoOpcaoService.listar(this.page, this.filter)
+
+    this.filtrosSelecionados = Object.entries(this.filter);
+
+    this.produtoOpcaoService.listar(this.page, this.filter, this.order)
       .subscribe(
         result => {
           this.loadingService = false;
@@ -67,7 +74,10 @@ export class ProdutoComponent implements OnInit {
   }
 
   setFilterPreco(): void {
-    this.filter[`${this.prefix}.precoVenda`] = `${this.minValue}:${this.maxValue}`;
+    this.filter[`preco`] = {
+      nome: 'Preço',
+      id: `${this.minValue}:${this.maxValue}`
+    };
     this.filter = Object.assign({}, this.filter);
 
     this.page = 1;
@@ -78,13 +88,16 @@ export class ProdutoComponent implements OnInit {
     this.opcoesFiltro.forEach((opcaoFiltro: any, index: number) => {
       if (opcaoFiltro[0] === variacao) {
         let variacoes = '';
+        let nomeOpcao = '';
         opcaoFiltro[1].forEach((opcao: any, index: number) => {
           let value = !val ? $(`#filter_${variacao}_${opcao.id}:checked`).val() : val;
           if (!val && value) {
             variacoes += `${value},`;
+            nomeOpcao = opcao.nome;
           } else {
-            if (opcao.id == val) {
+            if (opcao.id === val) {
               variacoes += `${val},`;
+              nomeOpcao = opcao.nome;
             }
           }
         });
@@ -93,7 +106,7 @@ export class ProdutoComponent implements OnInit {
           let prefix = this.prefix;
           switch (variacao) {
             case 'categorias': {
-              prefix += `.produto.categoria`;
+              prefix = `categoria`;
               break
             }
             case 'marcas': {
@@ -101,9 +114,17 @@ export class ProdutoComponent implements OnInit {
               break
             }
           }
-          this.filter[`${prefix}.id`] = variacoes.slice(0, -1);
+          this.filter[`${prefix}.id`] = {
+            nome: nomeOpcao,
+            id: variacoes.slice(0, -1)
+          };
+
+
         } else {
-          this.filter[`${this.prefix}.${variacao}.id`] = variacoes.slice(0, -1);
+          this.filter[`${this.prefix}.${variacao}.id`] = {
+            nome: nomeOpcao,
+            id: variacoes.slice(0, -1)
+          };
         }
 
         this.filter = Object.assign({}, this.filter);
@@ -119,12 +140,26 @@ export class ProdutoComponent implements OnInit {
 
     if (this.filter[`${this.prefix}.${variacao}.id`]) {
       let filtros = new Array();
-      filtros = this.filter[`${this.prefix}.${variacao}.id`].split(",");
+      filtros = (this.filter[`${this.prefix}.${variacao}.id`].id).split(',');
 
       possuiFiltro = filtros.find((filtro: any) => filtro === opcaoId);
     }
 
     return possuiFiltro;
+  }
+
+  removerFiltroSelecionado(filtro: string) {
+    delete this.filter[filtro];
+
+    this.filter = Object.assign({}, this.filter);
+
+    this.listarProdutos(false);
+  }
+
+  setOrder(order: string){
+    this.order = order;
+
+    this.listarProdutos(false);
   }
 
   getNomeVariacao(index: number) {

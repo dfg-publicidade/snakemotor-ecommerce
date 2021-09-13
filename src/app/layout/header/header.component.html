@@ -24,14 +24,17 @@
             <div class="logo d-md-flex d-lg-flex" [routerLink]="['/']"></div>
             <app-busca class="d-none d-md-flex d-lg-flex"></app-busca>
             <div class="icones d-md-flex d-lg-flex">
-                <a class="acesso" [routerLink]="['/login']" *ngIf="!getUsuario()">
+                <a class="acesso" [routerLink]="['/minhaconta']" *ngIf="getUsuario()">
                     <i class="icon icon-capacete"></i>
-                    <span class="titulo">minha conta</span>
+                    <span class="titulo">
+                        Olá, <strong>{{getUsuario().nome.split(' ')}}</strong> <br/>
+                        minha conta
+                    </span>
                 </a>
                 <a class="carrinho" [routerLink]="['/carrinho']">
                     <i class="fas fa-shopping-cart"></i>
-                    <span class="badge position-absolute top-0 start-100 translate-middle bg-danger border border-light rounded-circle" *ngIf="getCarrinho() && getCarrinho().length > 0">
-                        <span>{{getCarrinho().length}}</span>
+                    <span class="badge position-absolute top-0 start-100 translate-middle bg-danger border border-light rounded-circle" *ngIf="getCarrinho() && getCarrinho().produtos.length > 0">
+                        <span>{{getCarrinho().produtos.length}}</span>
                     </span>
                 </a>
             </div>

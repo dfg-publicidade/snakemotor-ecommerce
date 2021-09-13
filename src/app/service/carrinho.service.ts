@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -12,11 +12,11 @@ export class CarrinhoService {
   watchCarrinhoService$ = this.watchCarrinhoService.asObservable();
 
   constructor(private http: HttpClient) {
-    this.urlServico = environment.urlServico + 'api/';
+    this.urlServico = `${environment.urlServico}${environment.apiApp}/${environment.versao}`;
   }
 
   calcularFrete(entity: any): Observable<any> {
-    let url = this.urlServico + 'cliente/inserir';
+    let url = this.urlServico + 'carrinho';
 
     let body = new FormData();
 
@@ -33,6 +33,27 @@ export class CarrinhoService {
   getCarrinho(): any {
     let item: any = localStorage.getItem(this.KEY_SESSION);
     return JSON.parse(item);
+  }
+
+  getCarrinhoVazio(): any {
+    return {
+      produtos: [],
+      cep: '',
+      formaEntrega: '',
+      cupom: ''
+    };
+  }
+
+  atualizaCarrinho(): Observable<any> {
+    let carrinho = this.getCarrinho();
+
+    let url = `${this.urlServico}/carrinho`;
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+
+    return this.http.post(url, { carrinho: carrinho }, {
+      headers: headers
+    });
   }
 
   removerItemCarrinho(item: any) {

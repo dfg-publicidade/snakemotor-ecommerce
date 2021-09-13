@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { PipeModule } from 'src/app/pipe/pipeModule';
 import { AlertMessageComponent } from './alert-message.component';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { AlertMessageComponent } from './alert-message.component';
     FormsModule,
     RouterModule,
     CommonModule,
+    PipeModule
   ],
   providers: [],
 })

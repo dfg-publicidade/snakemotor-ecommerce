@@ -144,9 +144,23 @@ section {
                                         }
                                     }
 
-                                    & > div.valor {
+                                    & > div.preco {
                                         text-align: center;
                                         min-width: 100px;
+                                        & > p {
+                                            margin-bottom: 0;
+                                            color: $text-primary;
+
+                                            &.valor-normal {
+                                                font-size: 13px;
+                                                text-decoration: line-through !important;
+                                                color: #636363;
+
+                                                &.empty {
+                                                    text-decoration: none !important;
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -183,16 +197,34 @@ section {
                             }
                         }
 
-                        &.frete-tipos {
+                        & > div.frete-tipos {
                             margin-top: 20px;
                             & > div.form-group {
                                 background: #f2f2f2;
                                 padding: 15px;
 
                                 &.form-check {
-                                    & > input {
-                                        margin-left: 0;
-                                        margin-right: 10px;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    & > label {
+                                        display: flex;
+                                        & > input {
+                                            margin-left: 0;
+                                            margin-right: 10px;
+                                        }
+
+                                        & > span {
+                                            & > span {
+                                                font-weight: bold;
+                                                &.gratis {
+                                                    color: #22ea27;
+                                                }
+                                            }
+                                        }
+
+                                        & > small {
+                                            display: flex;
+                                        }
                                     }
                                 }
                             }

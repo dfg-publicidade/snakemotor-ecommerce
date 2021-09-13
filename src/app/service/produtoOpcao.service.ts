@@ -15,20 +15,25 @@ export class ProdutoOpcaoService {
     this.urlServico = `${environment.urlServico}${environment.apiApp}/${environment.versao}/produto-opcoes`;
   }
 
-  listar(page: number, filter: any): Observable<any> {
-    let url = `${this.urlServico}?filtros=true`;
+  listar(page: number, filter: any, order: any): Observable<any> {
+    let url = `${this.urlServico}?filtros=true&_limit=21`;
 
     let params = '';
 
-    $.each(filter, function (index: string, value: string) {
-      if (value) {
-        params += '&' + index + '=' + value;
+    $.each(filter, function (index: string, value: any) {
+      if (value && value.id) {
+        params += '&' + index + '=' + value.id;
       }
     });
 
     url += `${params}`;
     url += `&_page=${page}`;
-    url += `&_sort=${this.prefix}.produto.dataCriacao:desc`
+
+    if (order) {
+      url += `&_sort=${order}`;
+    } else {
+      url += `&_sort=${this.prefix}.produto.dataCriacao:desc`
+    }
 
     return this.http.get(url);
   }

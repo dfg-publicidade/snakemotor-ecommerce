@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import Helpers from 'src/app/helpers';
 import { CepService } from 'src/app/service/cep.service';
 import { CidadeService } from 'src/app/service/cidade.service';
 import { EstadoService } from 'src/app/service/estado.service';
+import { PerfilService } from 'src/app/service/perfil.service';
 declare var $: any;
 
 @Component({
@@ -16,15 +18,19 @@ export class CadastroComponent implements OnInit {
   cidades: any;
   cep: any;
 
+  loadingServiceCadastro: boolean = false;
   loadingServiceCep: boolean = false;
   loadingServiceEstado: boolean = false;
   loadingServiceCidade: boolean = false;
+
+  response: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private estadoService: EstadoService,
     private cidadeService: CidadeService,
-    private cepService: CepService
+    private cepService: CepService,
+    private perfilService: PerfilService
   ) {
     this.form = formBuilder.group({
       //DADOS PESSOAIS
@@ -51,12 +57,8 @@ export class CadastroComponent implements OnInit {
       confirmacaoSenha: new FormControl('', [
         Validators.required,
       ]),
-      aceiteOferta: new FormControl('', [
-        Validators.required
-      ]),
-      aceiteContato: new FormControl('', [
-        Validators.required
-      ]),
+      aceiteOferta: new FormControl(''),
+      aceiteContato: new FormControl(''),
       email: new FormControl('', [
         Validators.required,
         Validators.email
@@ -116,10 +118,6 @@ export class CadastroComponent implements OnInit {
 
   ngOnInit(): void {
     this.listarEstados();
-  }
-
-  cadastrar() {
-
   }
 
   buscarEnderecoPorCep() {
@@ -236,5 +234,43 @@ export class CadastroComponent implements OnInit {
     this.cidades = [];
     this.form.controls.cidade.setValue(null);
     this.form.controls.cidade.disable();
+  }
+
+  cadastrar() {
+    this.loadingServiceCadastro = true;
+    this.perfilService.inserir(this.form)
+      .subscribe(
+        result => {
+          this.response = result;
+          this.loadingServiceCadastro = false;
+
+          if (this.response && this.response.status === 'success') {
+            if (this.response.content.entity) {
+              this.perfilService.setSession(this.response.content.entity);
+
+              setTimeout(() => {
+                $('#modalCadastroSucesso').modal('show');
+              }, 100);
+
+            }
+
+            this.form.reset();
+          } else {
+            this.scrollTop();
+          }
+        },
+        (error) => {
+          this.loadingServiceCadastro = false;
+          this.response = error.error;
+
+          this.scrollTop();
+        }
+      );
+  }
+
+  scrollTop() {
+    setTimeout(() => {
+      $('html, body').animate({ scrollTop: $('.alert-message').offset().top - 300 }, 300);
+    }, 100);
   }
 }

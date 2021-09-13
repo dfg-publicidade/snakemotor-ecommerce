@@ -6,33 +6,16 @@ declare var $: any;
   templateUrl: './alert-message.component.html',
   styleUrls: ['./alert-message.component.scss']
 })
-export class AlertMessageComponent {
-  @Input() config: any;
+export class AlertMessageComponent implements OnInit {
+  @Input() result: any;
+  constructor() {
+  }
 
-  constructor() { }
+  ngOnInit() {
+    
+  }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.config) {
-      this.config = changes.config.currentValue;
-
-      if (this.config.status !== 'error') {
-        this.config.css = 'alert-' + this.config.status;
-      } else {
-        this.config.css = 'alert-danger';
-      }
-
-      setTimeout(() => {
-        let component = this;
-        $('#' + this.config.id).show();
-
-        $("[data-hide]").on("click", function () {
-          $('#' + component.config.id).hide();
-        });
-      }, 100);
-
-      setTimeout(() => {
-        $('#' + this.config.id).hide();
-      }, 5000);
-    }
+    this.result = changes.result.currentValue;
   }
 }

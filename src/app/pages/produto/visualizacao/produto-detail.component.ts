@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CarrinhoService } from 'src/app/service/carrinho.service';
 import { MetadataService } from 'src/app/service/metaData.service';
 import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
 import { ProdutoUtil } from 'src/app/util/produtoUtil';
@@ -20,9 +21,10 @@ export class ProdutoDetailComponent implements OnInit {
   cores: any;
   tamanhos: any;
   produtosPorCategoria: any;
-
-  variacaoOpcoes: any;
-  idsVariacaoSelecionada: any = [];
+  produtoOpcaoSelecionado: any;
+  carrinho: any;
+  qtdes: any = [];
+  toastMessage: any;
 
   metatag: any = {};
 
@@ -33,9 +35,19 @@ export class ProdutoDetailComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private produtoOpcaoService: ProdutoOpcaoService,
+    private carrinhoService: CarrinhoService,
     private metadataService: MetadataService
   ) {
-    this.formVariacao = this.formBuilder.group({});
+    this.formVariacao = this.formBuilder.group({
+      tamanho: new FormControl(null, [
+        Validators.required
+      ]),
+      qtde: new FormControl(null, [
+        Validators.required
+      ])
+    });
+
+    this.formVariacao.controls.qtde.disable();
   };
 
   ngOnInit(): void {
@@ -53,7 +65,6 @@ export class ProdutoDetailComponent implements OnInit {
   }
 
   buscarProdutoOpcao() {
-    this.idsVariacaoSelecionada = [];
     this.produtoOpcaoService.visualizar(this.op)
       .subscribe(
         result => {
@@ -71,6 +82,10 @@ export class ProdutoDetailComponent implements OnInit {
 
           this.produtoOpcao.imagens = ProdutoUtil.getGaleriaImagens(this.produtoOpcao);
 
+          if (this.tamanhos && this.tamanhos.length === 1) {
+            this.getQtdes();
+          }
+
           //INICIO META TAG
           this.metatag.url = this.router.url;
           this.metatag.title = `${this.produtoOpcao.produto.nome} | ${environment.title}`;
@@ -81,14 +96,6 @@ export class ProdutoDetailComponent implements OnInit {
 
           //PRODUTO RELACIONADOS
           this.listarProdutosPorCategoria(this.produtoOpcao.produto.categoria.id, 4, true);
-
-          //VARIAÇÕES
-          if (this.produtoOpcao.produto && this.produtoOpcao.produto.variacoes) {
-            this.produtoOpcao.produto.variacoes.forEach((variacao: any, index: number) => {
-              this.formVariacao.addControl(variacao.permalink, new FormControl(null));
-              this.formVariacao.controls[variacao.permalink].disable();
-            });
-          }
         }
       );
   }
@@ -102,12 +109,67 @@ export class ProdutoDetailComponent implements OnInit {
       );
   }
 
-  trocarProdutoOpcao(variacaoSelecionadaId: any, agrupamento: string, index: number) {
+  selecionarOpcao(event: any) {
+    this.formVariacao.controls.qtde.setValue(null);
+    this.op = event;
+    this.produtoOpcaoSelecionado = this.tamanhos.find((pOpcao: any) => pOpcao && pOpcao.id === this.op);
 
-    this.idsVariacaoSelecionada.find((variacao: any, index: number) => {
-      if (variacao.permalink === agrupamento) {
-        this.idsVariacaoSelecionada[index].id = variacaoSelecionadaId;
+    this.produtoOpcaoSelecionado.adicionadoCarrinho = this.jaPossuiCarrinho(this.produtoOpcaoSelecionado.id);
+
+    this.getQtdes();
+  }
+
+  getQtdes() {
+    this.qtdes = [];
+
+    if (this.produtoOpcaoSelecionado) {
+      for (let qtde = 1; qtde <= this.produtoOpcaoSelecionado.estoqueAtual; qtde++) {
+        this.qtdes.push(qtde);
       }
+
+      if (this.qtdes.length > 0) {
+        this.formVariacao.controls.qtde.enable();
+      }
+    } else {
+      this.formVariacao.controls.qtde.disable();
+    }
+  }
+
+  adicionarCarrinho() {
+    delete this.toastMessage;
+
+    let carrinho = this.carrinhoService.getCarrinho();
+
+    if (!carrinho) {
+      carrinho = this.carrinhoService.getCarrinhoVazio();
+    }
+
+    carrinho.produtos.push({
+      qtde: this.formVariacao.value.qtde,
+      produto: this.produtoOpcaoSelecionado.id
     });
+
+    this.carrinhoService.setCarrinho(carrinho);
+
+    this.produtoOpcaoSelecionado.adicionadoCarrinho = true;
+
+    this.produtoOpcaoSelecionado.adicionadoCarrinho = this.jaPossuiCarrinho(this.produtoOpcaoSelecionado.id);
+
+    this.toastMessage = {
+      status: 'success',
+      message: 'Produto adicionado com sucesso!'
+    };
+  }
+
+  jaPossuiCarrinho(produtoOpcaoId: string): boolean {
+    this.carrinho = this.carrinhoService.getCarrinho();
+
+    let possuiCarrinho = false;
+
+    if (this.carrinho) {
+      possuiCarrinho = this.carrinho.produtos.find((pOpcao: any) => pOpcao && pOpcao.produto === produtoOpcaoId);
+    }
+
+    return possuiCarrinho;
   }
 }

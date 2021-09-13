@@ -5,6 +5,7 @@
 </header>
 <main>
     <div class="container">
+        <app-alert-message *ngIf="response && response.status !== 'success'" [result]='response'></app-alert-message>
         <div class="box-login">
             <div class="login">
                 <div class="title">
@@ -22,7 +23,13 @@
                         <label>Senha</label>
                         <small class="form-text text-danger" *ngIf="form.controls.senha.touched && form.controls.senha.hasError('required')">Preencha a senha</small>
                     </div>
-                    <button type="submit" class="btn btn-success btn-md btn-block">Entrar</button>
+                    <button type="submit" class="btn btn-success btn-md btn-block" [disabled]="form.status === 'INVALID' || loadingService">
+                        <span *ngIf="!loadingService">ENTRAR</span>
+                        <span *ngIf="loadingService" class="loading">
+                            <img src="/res/imagens/spinner-white.svg" />
+                            Acessando... Aguarde!
+                        </span>
+                    </button>
                     <div class="esqueci-senha">
                         <a href="javascript:void(0)">Esqueci minha senha</a>
                     </div>

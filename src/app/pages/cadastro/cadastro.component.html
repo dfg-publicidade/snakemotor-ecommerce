@@ -5,6 +5,7 @@
 </header>
 <main>
     <div class="container">
+        <app-alert-message *ngIf="response" [result]='response'></app-alert-message>
         <form [formGroup]="form" (submit)="cadastrar()">
             <div class="accordion" id="accordion">
                 <p class="pt-4 pb-4 m-0 text-center"><strong>Preencha os dados abaixo para realizar o seu cadastro na Snake Motor</strong></p>
@@ -74,7 +75,7 @@
                             <div class="form-check">
                                 <input type="checkbox" formControlName="aceiteContato" class="form-check-input" value="true">
                                 <label class="form-check-label">
-                                    Desejo receber informações da FastShop por SMS/Whatsapp.
+                                    Desejo receber informações da Snake Motor por SMS/Whatsapp.
                                 </label>
                             </div>
                             <button type="button" class="btn btn-success btn-lg btn-block mt-4" (click)="trocarEtapa('endereco')">
@@ -128,9 +129,15 @@
                                 <input type="text" formControlName="complemento" class="form-control" placeholder="Complemento">
                                 <label>Complemento</label>
                             </div>
-                            <button type="submit" class="btn btn-success btn-lg btn-block mt-4">
-                                <i class="fas fa-check pe-2"></i>
-                                FINALIZAR CADASTRO
+                            <button type="submit" class="btn btn-success btn-lg btn-block mt-4" [disabled]="form.status === 'INVALID' || loadingServiceCadastro">
+                                <span *ngIf="!loadingServiceCadastro">
+                                    <i class="fas fa-check pe-2"></i>
+                                    FINALIZAR CADASTRO
+                                </span>
+                                <span *ngIf="loadingServiceCadastro" class="loading">
+                                    <img src="/res/imagens/spinner-white.svg" />
+                                    Enviando... Aguarde!
+                                </span>
                             </button>
                         </div>
                     </div>
@@ -139,3 +146,23 @@
         </form>
     </div>
 </main>
+
+<!-- Modal CADASTRO SUCESSO -->
+<div class="modal fade" id="modalCadastroSucesso" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sucesso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <app-alert-message *ngIf="response" [result]='response'></app-alert-message>
+            </div>
+            <div class="modal-footer">
+                <a [routerLink]="['/']">
+                    <button type="button" class="btn btn-primary">Acessar produtos</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

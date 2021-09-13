@@ -238,12 +238,22 @@ section {
                 }
 
                 & > form.variacoes {
-                    & > div.tamanho {
+                    & > div.variacao {
                         margin-bottom: 20px;
-                        & > label {
-                            color: $text-primary;
-                            padding-bottom: 5px;
-                            font-weight: bold;
+                        display: flex;
+                        justify-content: flex-start;
+                        & > div {
+                            width: 40%;
+                            &:first-of-type {
+                                width: 60%;
+                                margin-right: 10px;
+                            }
+
+                            & > label {
+                                color: $text-primary;
+                                padding-bottom: 5px;
+                                font-weight: bold;
+                            }
                         }
                     }
                     & > div.cor {
@@ -341,6 +351,10 @@ section {
             }
         }
     }
+}
+
+div.toast-container{
+    z-index: 9999;
 }
 
 @import "responsive/produto-detail-xl.scss";
