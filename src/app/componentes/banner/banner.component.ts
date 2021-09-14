@@ -14,6 +14,8 @@ export class BannerComponent implements OnInit {
   innerWidth: number = 0;
   isMobile: boolean = false;
 
+  timestamp: any = new Date().getTime();
+
   constructor(private router: Router) {
     this.options = {
       loop: true,
@@ -47,6 +49,8 @@ export class BannerComponent implements OnInit {
     if (changes.options) {
       this.options = changes.options.currentValue;
     }
+
+    this.timestamp = new Date().getTime();
   }
 
   mobile() {

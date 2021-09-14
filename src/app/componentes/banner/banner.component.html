@@ -3,8 +3,8 @@
         <!-- MOCKUP BANNER-->
         <ng-template carouselSlide *ngFor="let item of items">
             <a class="banner-item" href="{{item.url ? item.url : '#'}}">
-                <img *ngIf="!isMobile" [src]="item.imagem.original" [alt]="item.titulo">
-                <img *ngIf="isMobile && item.imagemMobile" [src]="item.imagemMobile.original" [alt]="'Título do banner'">
+                <img *ngIf="!isMobile" src="{{item.imagem.original}}?timestamp={{timestamp}}" [alt]="item.titulo">
+                <img *ngIf="isMobile && item.imagemMobile" src="{{item.imagemMobile.original}}?timestamp={{timestamp}}" [alt]="'Título do banner'">
             </a>
         </ng-template>
     </owl-carousel-o>

@@ -22,9 +22,8 @@
         </div>
 
         <!-- BANNER DE SEGUNDA ROLAGEM -->
-        <div class="banners">
-            <a *ngIf="banners[tipoBannerIdSegundaRolagem] && banners[tipoBannerIdSegundaRolagem][0]" class="banner" href="{{banners[tipoBannerIdSegundaRolagem][0].url ? banners[tipoBannerIdSegundaRolagem][0].url : '#'}}" [ngStyle]="{'background-image': 'url(' + banners[tipoBannerIdSegundaRolagem][0].imagem.original + '?timestamp='+ timestamp +')'}"></a>
-            <a *ngIf="banners[tipoBannerIdSegundaRolagem] && banners[tipoBannerIdSegundaRolagem][1]" class="banner" href="{{banners[tipoBannerIdSegundaRolagem][1].url ? banners[tipoBannerIdSegundaRolagem][1].url : '#'}}" [ngStyle]="{'background-image': 'url(' + banners[tipoBannerIdSegundaRolagem][1].imagem.original + '?timestamp='+ timestamp +')'}"></a>
+        <div class="banners half" *ngIf="banners[tipoBannerIdSegundaRolagem]">
+            <a *ngFor="let banner of banners[tipoBannerIdSegundaRolagem].slice(0,4)" class="banner" href="{{banner.url ? banner.url : '#'}}" [ngStyle]="{'background-image': 'url(' + banner.imagem.original + '?timestamp='+ timestamp +')'}"></a>
         </div>
     </div>
 </section>
@@ -47,14 +46,14 @@
 </section>
 
 <!-- BANNER TERCEIRA ROLAGEM  COM LISTA DE PRODUTOS RELACIONADOS -->
-<section *ngIf="banners[tipoBannerIdTerceiraRolagem] && banners[tipoBannerIdTerceiraRolagem][0] && banners[tipoBannerIdTerceiraRolagem][0].produtos">
-    <div class="container">
-        <div class="banners mt-0">
-            <a *ngIf="banners[tipoBannerIdTerceiraRolagem] && banners[tipoBannerIdTerceiraRolagem][0]" class="banner full" href="#" [ngStyle]="{'background-image': 'url(' + (!isMobile ? banners[tipoBannerIdTerceiraRolagem][0].imagem.original : banners[tipoBannerIdTerceiraRolagem][0].imagemMobile.original) + ')'}"></a>
+<section *ngIf="banners[tipoBannerIdTerceiraRolagem] && banners[tipoBannerIdTerceiraRolagem]">
+    <div class="container" *ngFor="let banner of banners[tipoBannerIdTerceiraRolagem]; let i = index">
+        <div class="banners" [ngClass]="{'mt-0': i === 0, 'mt-5': i > 0}">
+            <a class="banner" href="{{banner.url ? banner.url : '#'}}" [ngStyle]="{'background-image': 'url(' + (!isMobile ? banner.imagem.original + '?timestamp=' + timestamp  : banner.imagemMobile.original + '?timestamp=' + timestamp) + ')'}"></a>
         </div>
-        <div class="produtos">
-            <owl-carousel-o *ngIf="optionsRotativoProdutos && produtosPorIdsProdutoPrincipal" [options]="optionsRotativoProdutos">
-                <ng-template carouselSlide *ngFor="let produto of produtosPorIdsProdutoPrincipal">
+        <div class="produtos" *ngIf="banner.produtos">
+            <owl-carousel-o *ngIf="optionsRotativoProdutos" [options]="optionsRotativoProdutos">
+                <ng-template carouselSlide *ngFor="let produto of banner.produtos">
                     <app-produto-componente [item]="produto"></app-produto-componente>
                 </ng-template>
             </owl-carousel-o>

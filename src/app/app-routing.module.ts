@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { AppCustomPreloader } from './service/AppCustomPreloader';
+import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -18,7 +19,12 @@ const routes: Routes = [
       },
       {
         path: 'carrinho',
-        loadChildren: () => import('./pages/carrinho/carrinho.module').then(m => m.CarrinhoModule)
+        loadChildren: () => import('./pages/checkout/carrinho/carrinho.module').then(m => m.CarrinhoModule)
+      },
+      {
+        path: 'endereco',
+        'canActivate': [AuthGuard],
+        loadChildren: () => import('./pages/checkout/endereco/endereco.module').then(m => m.EnderecoModule)
       }
     ]
   },

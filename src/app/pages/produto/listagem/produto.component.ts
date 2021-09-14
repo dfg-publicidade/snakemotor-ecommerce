@@ -2,6 +2,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
 import Helpers from 'src/app/helpers';
+import { Router } from '@angular/router';
+import { MetadataService } from 'src/app/service/metaData.service';
 
 declare var $: any;
 
@@ -34,12 +36,23 @@ export class ProdutoComponent implements OnInit {
   load: boolean = true;
 
   prefix: string = 'produtoOpcao';
+  metatag: any = {};
 
-  constructor(private produtoOpcaoService: ProdutoOpcaoService) {
+  constructor(
+    private router: Router,
+    private produtoOpcaoService: ProdutoOpcaoService,
+    private metadataService: MetadataService
+    ) {
 
   }
 
   ngOnInit(): void {
+    //INICIO META TAG
+    this.metatag.url = this.router.url;
+    this.metatag.title = `Produtos`;
+    this.metadataService.updateMetadata(this.metatag);
+    //FIM META TAG
+    
     this.listarProdutos(false);
   }
 

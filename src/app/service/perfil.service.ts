@@ -31,25 +31,26 @@ export class PerfilService {
 
     let body = new FormData();
 
-    body.append('nome', entity.value.nome);
-    body.append('email', entity.value.email);
-    body.append('senha', entity.value.senha);
-    body.append('tipo', entity.value.tipo);
-    body.append('cpfCnpj', entity.value.cpfCnpj);
-    body.append('celular', entity.value.celular);
-    body.append('telefone', entity.value.telefone);
-    body.append('aceiteOferta', entity.value.aceiteOferta);
-    body.append('aceiteContato', entity.value.aceiteContato);
+    body.append('nome', entity.value.nome ? entity.value.nome : '');
+    body.append('email', entity.value.email ? entity.value.email : '');
+    body.append('senha', entity.value.senha ? entity.value.senha : '');
+    body.append('tipo', entity.value.tipo ? entity.value.tipo : '');
+    body.append('cpfCnpj', entity.value.cpfCnpj ? entity.value.cpfCnpj : '');
+    body.append('celular', entity.value.celular ? entity.value.celular : '');
+    body.append('telefone', entity.value.telefone ? entity.value.telefone : '');
+    body.append('aceiteOferta', entity.value.aceiteOferta ? entity.value.aceitaOferta : false);
+    body.append('aceiteContato', entity.value.aceiteContato ? entity.value.aceiteContato : false);
 
     if (entity.value.tipo === 'FISICA') {
-      body.append('dataNascto', entity.value.dataNascto);
+      body.append('dataNascto', entity.value.dataNascto ? entity.value.dataNascto : '');
     }
 
-    body.append('logradouro', entity.value.logradouro);
-    body.append('numero', entity.value.numero);
-    body.append('complemento', entity.value.complemento);
-    body.append('bairro', entity.value.bairro);
-    body.append('cidade', entity.value.cidade);
+    body.append('cep', entity.value.cep ? entity.value.cep : '');
+    body.append('logradouro', entity.value.logradouro ? entity.value.logradouro : '');
+    body.append('numero', entity.value.numero ? entity.value.numero : '');
+    body.append('complemento', entity.value.complemento ? entity.value.complemento : '');
+    body.append('bairro', entity.value.bairro ? entity.value.bairro : '');
+    body.append('cidade', entity.value.cidade ? entity.value.cidade : '');
 
     return this.http.post(url, body);
   }
@@ -85,23 +86,24 @@ export class PerfilService {
 
     let body = new FormData();
 
-    body.append('nome', entity.value.nome);
-    body.append('email', entity.value.email);
-    body.append('senha', entity.value.senha);
-    body.append('tipo', entity.value.tipo);
-    body.append('cpfCnpj', entity.value.cnpj);
-    body.append('celular', entity.value.celular);
-    body.append('telefone', entity.value.telefone);
+    body.append('nome', entity.value.nome ? entity.value.nome : '');
+    body.append('email', entity.value.email ? entity.value.email : '');
+    body.append('senha', entity.value.senha ? entity.value.senha : '');
+    body.append('tipo', entity.value.tipo ? entity.value.tipo : '');
+    body.append('cpfCnpj', entity.value.cpfCnpj ? entity.value.cpfCnpj : '');
+    body.append('celular', entity.value.celular ? entity.value.celular : '');
+    body.append('telefone', entity.value.telefone ? entity.value.telefone : '');
 
     if (entity.value.tipo === 'FISICA') {
-      body.append('dataNascto', entity.value.dataNascto);
+      body.append('dataNascto', entity.value.dataNascto ? entity.value.dataNascto : '');
     }
 
-    body.append('logradouro', entity.value.logradouro);
-    body.append('numero', entity.value.numero);
-    body.append('complemento', entity.value.complemento);
-    body.append('bairro', entity.value.bairro);
-    body.append('cidade', entity.value.cidade);
+    body.append('cep', entity.value.cep ? entity.value.cep : '');
+    body.append('logradouro', entity.value.logradouro ? entity.value.logradouro : '');
+    body.append('numero', entity.value.numero ? entity.value.numero : '');
+    body.append('complemento', entity.value.complemento ? entity.value.complemento : '');
+    body.append('bairro', entity.value.bairro ? entity.value.bairro : '');
+    body.append('cidade', entity.value.cidade ? entity.value.cidade : '');
 
     return this.http.put(url, body);
   }

@@ -156,16 +156,19 @@ section {
             flex-direction: row;
             justify-content: space-between;
 
+            &.half {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-column-gap: 15px;
+                grid-row-gap: 5px;
+            }
+
             & > a.banner {
-                width: 49.3%;
+                width: 100%;
                 height: 265px;
                 background-size: 100%;
                 background-position: center;
                 background-repeat: no-repeat;
-
-                &.full {
-                    width: 100%;
-                }
             }
         }
     }

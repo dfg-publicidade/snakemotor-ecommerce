@@ -1,23 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CarrinhoService } from 'src/app/service/carrinho.service';
+import { EnderecoService } from 'src/app/service/endereco.service';
+import { MetadataService } from 'src/app/service/metaData.service';
 import { ProdutoUtil } from 'src/app/util/produtoUtil';
 
 @Component({
-  selector: 'app-carrinho-detail',
-  templateUrl: './carrinho-detail.component.html',
-  styleUrls: ['./carrinho-detail.component.scss']
+  selector: 'app-checkout-endereco',
+  templateUrl: './endereco.component.html',
+  styleUrls: ['./endereco.component.scss']
 })
-export class CarrinhoDetailComponent implements OnInit {
+export class EnderecoComponent implements OnInit {
   carrinho: any
-  urlProduto: string = '/produtos'
+  title: string = 'Endereço de entrega';
+  urlProduto: string = '/endereco'
   formFrete: any;
   formaEntrega: any;
-  loadingServiceFrete: boolean = false;
+  enderecos: any;
+
+  loadingServiceCarrinho: boolean = false;
+  loadingServiceEndereco: boolean = false;
+
   private subscription: any;
 
-  constructor(private formBuilder: FormBuilder, private carrinhoService: CarrinhoService) {
+  metatag: any = {};
+
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private carrinhoService: CarrinhoService,
+    private metadataService: MetadataService,
+    private enderecoService: EnderecoService
+  ) {
     this.formFrete = formBuilder.group({
+      endereco: new FormControl('', [
+        Validators.required
+      ]),
       cep: new FormControl('', [
         Validators.required
       ]),
@@ -33,6 +52,12 @@ export class CarrinhoDetailComponent implements OnInit {
 
 
   ngOnInit(): void {
+    //INICIO META TAG
+    this.metatag.url = this.router.url;
+    this.metatag.title = this.title;
+    this.metadataService.updateMetadata(this.metatag);
+    //FIM META TAG
+
     this.subscription = [];
 
     let carrinho = this.carrinhoService.getCarrinho();
@@ -43,6 +68,7 @@ export class CarrinhoDetailComponent implements OnInit {
       }
     }
 
+    this.listarEnderecos();
     this.atualizaValorCarrinho();
   }
 
@@ -50,47 +76,48 @@ export class CarrinhoDetailComponent implements OnInit {
     this.subscription.forEach((subscription: any) => {
       subscription.unsubscribe();
     });
-    this.loadingServiceFrete = true;
+    this.loadingServiceCarrinho = true;
     let sub = this.carrinhoService.atualizaCarrinho()
       .subscribe(
         result => {
           this.carrinho = result.content;
 
-          this.carrinho.produtos.forEach((produto: any, index: number) => {
-            this.carrinho.produtos[index].imagem = ProdutoUtil.getImagemDestaque(produto);
-
-            if (!this.carrinho.produtos[index].imagem) {
-              this.carrinho.produtos[index].imagem = '/res/imagens/sem-imagem.png';
-            }
-          });
-
-
           this.getFormaEntrega();
 
-          this.loadingServiceFrete = false;
+          this.loadingServiceCarrinho = false;
         },
         () => {
-          this.loadingServiceFrete = false;
+          this.loadingServiceCarrinho = false;
         }
       );
 
-      this.subscription.push(sub);
+    this.subscription.push(sub);
   }
 
-  alterarQtde(acao: string, index: number) {
-    this.carrinho.produtos[index].estoqueAtual = 10;
-    if (acao === 'aumentar') {
-      if (this.carrinho.produtos[index].qtde < this.carrinho.produtos[index].estoqueAtual) {
-        this.carrinho.produtos[index].qtde++
-      }
-    } else if (acao === 'diminuir') {
-      if (this.carrinho.produtos[index].qtde > 1) {
-        this.carrinho.produtos[index].qtde--
-      }
-    }
+  listarEnderecos() {
+    this.subscription.forEach((subscription: any) => {
+      subscription.unsubscribe();
+    });
+    this.loadingServiceEndereco = true;
+    this.enderecoService.listarTodos()
+      .subscribe(
+        result => {
+          this.enderecos = result.content.items;
 
-    this.getCarrinho();
-    this.atualizaValorCarrinho();
+          if (this.enderecos && this.enderecos.length === 1) {
+            this.formFrete.controls.endereco.setValue(this.enderecos[0].id);
+            this.formFrete.controls.cep.setValue(this.enderecos[0].cep);
+            this.consultarFrete();
+          }
+
+          this.getFormaEntrega();
+
+          this.loadingServiceEndereco = true;
+        },
+        () => {
+          this.loadingServiceEndereco = true;
+        }
+      );
   }
 
   consultarFrete() {
@@ -130,13 +157,5 @@ export class CarrinhoDetailComponent implements OnInit {
 
       this.carrinhoService.setCarrinho(carrinho);
     }
-  }
-
-  removerCarrinho(produto: any) {
-    this.carrinhoService.removerItemCarrinho(produto);
-
-    this.carrinho = this.carrinhoService.getCarrinho();
-
-    this.atualizaValorCarrinho();
   }
 }

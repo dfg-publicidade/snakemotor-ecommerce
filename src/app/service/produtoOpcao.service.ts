@@ -47,9 +47,9 @@ export class ProdutoOpcaoService {
   }
 
   listarDestaques(limite: number, aleatorio: boolean): Observable<any> {
-    let url = `${this.urlServico}`;
+    let url = `${this.urlServico}?agrupar=true`;
 
-    url += `?_limit=${limite}`;
+    url += `&_limit=${limite}`;
     url += `&${this.prefix}.produto.destaque=true`;
 
     if (aleatorio) {

@@ -123,19 +123,6 @@ export class HomeComponent implements OnInit {
       .subscribe(
         result => {
           this.banners[tipoId] = result.content.items;
-
-          //LISTA PRODUTOS VINCULADOS AO BANNER DA TERCEIRA ROLAGEM
-          if (this.banners[tipoId][0] && tipoId === this.tipoBannerIdTerceiraRolagem) {
-            let produtos = this.banners[tipoId][0].produtos;
-
-            if (produtos && produtos.length > 0) {
-              let ids: any = [];
-              produtos.forEach((produto: any) => {
-                ids.push(produto.id);
-              });
-              this.listarProdutosPorIdsProdutoPrincipal(ids, true);
-            }
-          }
         }
       );
   }
@@ -169,15 +156,6 @@ export class HomeComponent implements OnInit {
       .subscribe(
         result => {
           this.produtosPorCategoriaDestaque = result.content.items;
-        }
-      );
-  }
-
-  listarProdutosPorIdsProdutoPrincipal(produtoIds: any, aleatorio: boolean) {
-    this.produtoOpcaoService.listarPorIdsProdutoPrincipal(produtoIds, aleatorio)
-      .subscribe(
-        result => {
-          this.produtosPorIdsProdutoPrincipal = result.content.items;
         }
       );
   }

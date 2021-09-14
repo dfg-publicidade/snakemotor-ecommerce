@@ -1,6 +1,6 @@
-@import "../../../res/variables.scss";
-@import "../../../res/scss/form.scss";
-@import "../../../res/scss/buttons.scss";
+@import "../../../../res/variables.scss";
+@import "../../../../res/scss/form.scss";
+@import "../../../../res/scss/buttons.scss";
 
 section {
     &.produto-detail {
@@ -104,6 +104,13 @@ section {
                                             padding: 5px 0;
                                             width: 64px;
                                             height: 45px;
+
+                                            &:read-only {
+                                                border: 2px solid #e0e0e0;
+                                                border-right: 0;
+                                                border-left: 0;
+                                                opacity: 0.65;
+                                            }
                                         }
 
                                         & > button.btn {
@@ -130,7 +137,7 @@ section {
                                                 border-left: 0;
                                             }
 
-                                            &:disabled{
+                                            &:disabled {
                                                 cursor: not-allowed;
                                             }
                                         }
@@ -297,18 +304,23 @@ section {
                     display: block;
                     width: 100%;
                     text-align: center;
-                    & > button {
-                        padding: 15px 0;
-                        width: 100%;
-                        margin: 20px 0;
+
+                    & > p {
+                        color: #7a7a7a;
+                        margin: 0;
+                        padding: 0;
                     }
 
                     & > a {
                         & > button {
-                            color: #575757;
-                            background: none;
-                            border: none;
-                            font-weight: bold;
+                            padding: 15px 0;
+                            width: 100%;
+                        }
+
+                        &.link {
+                            margin-top: 20px;
+                            display: flex;
+                            justify-content: center;
                         }
                     }
                 }
@@ -338,7 +350,7 @@ section {
                         padding-top: 30px;
                         padding-left: 0;
                     }
-                } 
+                }
 
                 & > h3,
                 & > p {
