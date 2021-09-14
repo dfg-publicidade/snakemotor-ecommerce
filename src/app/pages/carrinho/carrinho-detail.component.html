@@ -20,7 +20,7 @@
                             <th scope="col">Preço</th>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of carrinho.produtos">
+                            <tr *ngFor="let item of carrinho.produtos; let i = index">
                                 <td class="produto">
                                     <div class="produto">
                                         <div class="imagem" [ngStyle]="{'background-image': 'url(' + item.imagem + ')'}"></div>
@@ -36,9 +36,9 @@
                                 </td>
                                 <td class="qtde">
                                     <div class="qtde">
-                                        <button type="button" class="btn btn-start">+</button>
-                                        <input class="qtde" type="text" [value]="item.qtde" />
-                                        <button type="button" class="btn btn-end">-</button>
+                                        <button type="button" class="btn btn-start" (click)="alterarQtde('diminuir', i)"  [disabled]="item.qtde === 1">-</button>
+                                        <input class="qtde" type="text" [value]="item.qtde" readonly />
+                                        <button type="button" class="btn btn-end" (click)="alterarQtde('aumentar', i)" [disabled]="item.qtde === item.estoqueAtual">+</button>
                                     </div>
                                     <div class="remover">
                                         <button type="button" class="btn" (click)="removerCarrinho(item)">remover</button>

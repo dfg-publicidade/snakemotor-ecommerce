@@ -42,12 +42,11 @@ export class ProdutoDetailComponent implements OnInit {
       tamanho: new FormControl(null, [
         Validators.required
       ]),
-      qtde: new FormControl(null, [
+      qtde: new FormControl(1, [
         Validators.required
       ])
     });
-
-    this.formVariacao.controls.qtde.disable();
+    
   };
 
   ngOnInit(): void {
@@ -65,6 +64,10 @@ export class ProdutoDetailComponent implements OnInit {
   }
 
   buscarProdutoOpcao() {
+    this.formVariacao.controls.qtde.disable();
+    this.formVariacao.controls.tamanho.setValue(null);
+    this.formVariacao.controls.qtde.setValue(1);
+
     this.produtoOpcaoService.visualizar(this.op)
       .subscribe(
         result => {
@@ -83,6 +86,11 @@ export class ProdutoDetailComponent implements OnInit {
           this.produtoOpcao.imagens = ProdutoUtil.getGaleriaImagens(this.produtoOpcao);
 
           if (this.tamanhos && this.tamanhos.length === 1) {
+            this.produtoOpcaoSelecionado = this.tamanhos[0];
+            
+            this.formVariacao.get('tamanho').clearValidators();
+            this.formVariacao.get('tamanho').updateValueAndValidity();
+
             this.getQtdes();
           }
 

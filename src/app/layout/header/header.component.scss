@@ -178,6 +178,25 @@ header {
                             line-height: 18px;
                         }
                     }
+
+                    & > ul.dropdown-menu {
+                        padding: 0;
+                        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 7%), 0 4px 6px -2px rgb(0 0 0 / 5%) !important;
+
+                        & > li {
+                            &.divider {
+                                padding: 0;
+
+                                & > hr {
+                                    margin: 0;
+                                }
+                            }
+
+                            & > a {
+                                padding: 10px 20px;
+                            }
+                        }
+                    }
                 }
                 & > a {
                     color: #fff;

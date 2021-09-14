@@ -14,6 +14,7 @@ export class CarrinhoDetailComponent implements OnInit {
   formFrete: any;
   formaEntrega: any;
   loadingServiceFrete: boolean = false;
+  private subscription: any;
 
   constructor(private formBuilder: FormBuilder, private carrinhoService: CarrinhoService) {
     this.formFrete = formBuilder.group({
@@ -32,6 +33,8 @@ export class CarrinhoDetailComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.subscription = [];
+
     let carrinho = this.carrinhoService.getCarrinho();
 
     if (carrinho) {
@@ -44,8 +47,11 @@ export class CarrinhoDetailComponent implements OnInit {
   }
 
   atualizaValorCarrinho() {
+    this.subscription.forEach((subscription: any) => {
+      subscription.unsubscribe();
+    });
     this.loadingServiceFrete = true;
-    this.carrinhoService.atualizaCarrinho()
+    let sub = this.carrinhoService.atualizaCarrinho()
       .subscribe(
         result => {
           this.carrinho = result.content;
@@ -67,6 +73,24 @@ export class CarrinhoDetailComponent implements OnInit {
           this.loadingServiceFrete = false;
         }
       );
+
+      this.subscription.push(sub);
+  }
+
+  alterarQtde(acao: string, index: number) {
+    this.carrinho.produtos[index].estoqueAtual = 10;
+    if (acao === 'aumentar') {
+      if (this.carrinho.produtos[index].qtde < this.carrinho.produtos[index].estoqueAtual) {
+        this.carrinho.produtos[index].qtde++
+      }
+    } else if (acao === 'diminuir') {
+      if (this.carrinho.produtos[index].qtde > 1) {
+        this.carrinho.produtos[index].qtde--
+      }
+    }
+
+    this.getCarrinho();
+    this.atualizaValorCarrinho();
   }
 
   consultarFrete() {
