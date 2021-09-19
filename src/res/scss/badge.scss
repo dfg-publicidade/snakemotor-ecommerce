@@ -1,0 +1,34 @@
+.badge {
+    color: #fff;
+
+    &.large{
+        font-size: 18px;
+    }
+    &.EM_CRIACAO {
+        background: #6c757d;
+    }
+    &.NOVO {
+        background: #007bff;
+    }
+    &.AGUARDANDO_PAGAMENTO {
+        background: #ffc107;
+    }
+    &.PAGO {
+        background: #28a745;
+    }
+    &.EM_SEPARACAO {
+        background: #17a2b8;
+    }
+    &.EM_TRANSPORTE {
+        background: #0055b0;
+    }
+    &.ENTREGUE {
+        background: #02dfe3;
+    }
+    &.CANCELADO {
+        background: #393e42;
+    }
+    &.ERRO {
+        background: #dc3545;
+    }
+}

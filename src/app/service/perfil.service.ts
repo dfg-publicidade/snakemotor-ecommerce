@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
 export class PerfilService {
   urlServicoAutenticacao: string;
   urlServico: string;
+  urlServicoUsuario: string;
   KEY_SESSION: string = "USUARIO";
   watchAutenticacaoService = new Subject();
   watchAutenticacaoService$ = this.watchAutenticacaoService.asObservable();
@@ -14,6 +15,7 @@ export class PerfilService {
   constructor(private http: HttpClient) {
     this.urlServicoAutenticacao = `${environment.urlServico}${environment.apiAUTH}/${environment.versao}`;
     this.urlServico = `${environment.urlServico}${environment.apiApp}/${environment.versao}`;
+    this.urlServicoUsuario = `${environment.urlServico}${environment.apiCrp}/${environment.versao}`;
   }
 
   login(entity: any): Observable<any> {
@@ -38,7 +40,7 @@ export class PerfilService {
     body.append('cpfCnpj', entity.value.cpfCnpj ? entity.value.cpfCnpj : '');
     body.append('celular', entity.value.celular ? entity.value.celular : '');
     body.append('telefone', entity.value.telefone ? entity.value.telefone : '');
-    body.append('aceiteOferta', entity.value.aceiteOferta ? entity.value.aceitaOferta : false);
+    body.append('aceiteOferta', entity.value.aceiteOferta ? entity.value.aceiteOferta : false);
     body.append('aceiteContato', entity.value.aceiteContato ? entity.value.aceiteContato : false);
 
     if (entity.value.tipo === 'FISICA') {
@@ -76,7 +78,7 @@ export class PerfilService {
   }
 
   visualizar(): Observable<any> {
-    let url = this.urlServico + 'cliente';
+    let url = `${this.urlServico}/cliente`;
 
     return this.http.get(url);
   }
@@ -86,37 +88,31 @@ export class PerfilService {
 
     let body = new FormData();
 
-    body.append('nome', entity.value.nome ? entity.value.nome : '');
+    // body.append('nome', entity.value.nome ? entity.value.nome : '');
     body.append('email', entity.value.email ? entity.value.email : '');
-    body.append('senha', entity.value.senha ? entity.value.senha : '');
-    body.append('tipo', entity.value.tipo ? entity.value.tipo : '');
-    body.append('cpfCnpj', entity.value.cpfCnpj ? entity.value.cpfCnpj : '');
+    // body.append('tipo', entity.value.tipo ? entity.value.tipo : '');
+    // body.append('cpfCnpj', entity.value.cpfCnpj ? entity.value.cpfCnpj : '');
     body.append('celular', entity.value.celular ? entity.value.celular : '');
     body.append('telefone', entity.value.telefone ? entity.value.telefone : '');
+    body.append('aceiteOferta', entity.value.aceiteOferta ? entity.value.aceiteOferta : false);
+    body.append('aceiteContato', entity.value.aceiteContato ? entity.value.aceiteContato : false);
 
     if (entity.value.tipo === 'FISICA') {
       body.append('dataNascto', entity.value.dataNascto ? entity.value.dataNascto : '');
     }
 
-    body.append('cep', entity.value.cep ? entity.value.cep : '');
-    body.append('logradouro', entity.value.logradouro ? entity.value.logradouro : '');
-    body.append('numero', entity.value.numero ? entity.value.numero : '');
-    body.append('complemento', entity.value.complemento ? entity.value.complemento : '');
-    body.append('bairro', entity.value.bairro ? entity.value.bairro : '');
-    body.append('cidade', entity.value.cidade ? entity.value.cidade : '');
-
     return this.http.put(url, body);
   }
 
   alterarSenha(entity: any): Observable<any> {
-    let url = this.urlServico + 'cliente/alterar-senha';
+    let url = `${this.urlServicoUsuario}/usuario/senha`;
 
     let body = new FormData();
 
     body.append('senhaAtual', entity.value.senhaAtual);
     body.append('senha', entity.value.senha);
 
-    return this.http.post(url, body);
+    return this.http.put(url, body);
   }
 
   setSession(usuario: any) {

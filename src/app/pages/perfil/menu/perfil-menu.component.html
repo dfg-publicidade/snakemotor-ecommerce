@@ -1,0 +1,7 @@
+<div class="list-group">
+    <a [routerLink]="['/perfil']" class="list-group-item list-group-item-action" [ngClass]="{active: active === '/perfil'}">Dados pessoais</a>
+    <a [routerLink]="['/pedidos']" class="list-group-item list-group-item-action" [ngClass]="{active: active === '/pedidos'}">Meus pedidos</a>
+    <a [routerLink]="['/perfil/enderecos']" class="list-group-item list-group-item-action" [ngClass]="{active: active === '/perfil/enderecos'}">Endereço</a>
+    <a [routerLink]="['/perfil/senha']" class="list-group-item list-group-item-action" [ngClass]="{active: active === '/perfil/senha'}">Alteração de senha</a>
+    <a href="javascript:void(0)" (click)= "logout()" class="list-group-item list-group-item-action">Sair</a>
+</div>

@@ -1,0 +1,30 @@
+@import "../../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(sm) {
+    main {
+        padding-top: 90px;
+    }
+
+    section {
+        &.principal {
+            padding: 0;
+            padding-bottom: 20px;
+            & > div.container {
+                & > h3 {
+                    padding: 20px 0;
+                }
+            }
+        }
+        &.secundario {
+            padding: 0;
+            padding-bottom: 20px;
+            & > div.container {
+                & > h3 {
+                    padding: 20px 0;
+                }
+            }
+        }
+    }
+}

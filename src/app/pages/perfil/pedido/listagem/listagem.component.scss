@@ -1,0 +1,93 @@
+@import "../../../../../res/variables.scss";
+@import "../../../../../res/scss/form.scss";
+@import "../../../../../res/scss/slider.scss";
+@import "../../../../../res/scss/badge.scss";
+
+section {
+    & > div.container {
+        & > div.row {
+            padding-bottom: 40px;
+            & > div {
+                display: inline-block;
+                text-align: left;
+                & > h3 {
+                    &.titulo {
+                        text-transform: uppercase;
+                        font-weight: bold;
+                        margin: 0;
+                    }
+                }
+
+                & > div.border-card {
+                    background: #fff;
+                    margin-bottom: 5px;
+                    display: flex;
+                    align-items: center;
+                    font-size: 14px;
+                    padding: 12px 16px;
+                    cursor: pointer;
+                    border-radius: 4px;
+                    border: 1px solid #eaeaea;
+                    box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1);
+                    transition: all 0.25s ease;
+
+                    &:hover {
+                        background: #fafafa;
+                    }
+
+                    & > div.content-wrapper {
+                        display: flex;
+                        justify-content: space-between;
+                        width: 100%;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        transition: all 0.25s ease;
+                        & > a {
+                            display: flex;
+                            width: 100%;
+                            justify-content: space-between;
+                            
+                            & > div.label-group {
+                                white-space: nowrap;
+                                overflow: hidden;
+                                min-width: 20%;
+
+                                &.fixed {
+                                    flex-shrink: 0;
+                                }
+
+                                & > p {
+                                    margin: 0px;
+                                    line-height: 21px;
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+
+                                    &.title {
+                                        color: #323232;
+                                        font-weight: 500;
+                                    }
+                                    &.caption {
+                                        font-weight: 400;
+                                        color: #aeaeae;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    & > i.end-icon {
+                        margin-left: 16px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@import "responsive/listagem-xl.scss";
+@import "responsive/listagem-lg.scss";
+@import "responsive/listagem-md.scss";
+@import "responsive/listagem-sm.scss";
+@import "responsive/listagem-xss.scss";
+@import "responsive/listagem-print.scss";

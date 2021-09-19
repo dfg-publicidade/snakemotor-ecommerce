@@ -35,6 +35,29 @@ const routes: Routes = [
         path: 'resumo',
         'canActivate': [AuthGuard],
         loadChildren: () => import('./pages/checkout/resumo/resumo.module').then(m => m.PedidoResumoModule)
+      },
+      {
+        path: 'perfil',
+        'canActivate': [AuthGuard],
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('./pages/perfil/meus-dados/meusDados.module').then(m => m.MeusDadosModule)
+          },
+          {
+            path: 'enderecos',
+            loadChildren: () => import('./pages/perfil/endereco/endereco.module').then(m => m.EnderecoModule)
+          },
+          {
+            path: 'senha',
+            loadChildren: () => import('./pages/perfil/alteracao-senha/alteracaoSenha.module').then(m => m.AlteracaoSenhaModule)
+          }
+        ]
+      },
+      {
+        path: 'pedidos',
+        'canActivate': [AuthGuard],
+        loadChildren: () => import('./pages/perfil/pedido/pedido.module').then(m => m.PedidoModule)
       }
     ]
   },

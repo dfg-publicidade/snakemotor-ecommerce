@@ -1,0 +1,78 @@
+<nav class="breadcrumb">
+    <div class="container">
+        <ul>
+            <li><a [routerLink]="['/']">Home</a></li>
+            <li class="separator">/</li>
+            <li><a [routerLink]="[url]">Meus dados</a></li>
+            <li class="separator">/</li>
+            <li><a>Detalhes</a></li>
+        </ul>
+    </div>
+</nav>
+<section class="principal">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-4 col-lg-4">
+                <app-perfil-menu [active]="url"></app-perfil-menu>
+            </div>
+            <div class="col-xs-12 col-md-8 col-lg-8">
+                <h3 class="titulo pb-3">{{title}}</h3>
+                <app-alert-message *ngIf="response" [result]='response'></app-alert-message>
+                <form [formGroup]="form" (submit)="cadastrar()">
+                    <div class="form-floating col-xs-12 col-sm-12 col-lg-4 mb-2">
+                        <input type="text" formControlName="cep" mask="00.000-000" class="form-control" placeholder="CEP" required>
+                        <label>CEP</label>
+                        <small class="form-text text-danger" *ngIf="form.controls.cep.touched && form.controls.cep.hasError('required')">Preencha o CEP</small>
+                    </div>
+                    <div class="form-floating col-xs-12 col-sm-12 col-lg-12 mb-2">
+                        <input type="text" formControlName="logradouro" class="form-control" placeholder="Endereço" required>
+                        <label>Endereço</label>
+                        <small class="form-text text-danger" *ngIf="form.controls.logradouro.touched && form.controls.logradouro.hasError('required')">Preencha o endereço</small>
+                    </div>
+                    <div class="form-floating col-xs-12 col-sm-12 col-lg-4 mb-2">
+                        <input type="text" formControlName="numero" class="form-control" placeholder="Número" required>
+                        <label>Número</label>
+                        <small class="form-text text-danger" *ngIf="form.controls.numero.touched && form.controls.numero.hasError('required')">Preencha o número</small>
+                    </div>
+                    <div class="form-floating col-xs-12 col-sm-12 col-lg-6 mb-2">
+                        <input type="text" formControlName="bairro" class="form-control" placeholder="Bairro" required>
+                        <label>Bairro</label>
+                        <small class="form-text text-danger" *ngIf="form.controls.bairro.touched && form.controls.bairro.hasError('required')">Preencha o bairro</small>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6 mb-2">
+                        <ng-select class="large" formControlName="uf" placeholder="Selecione o Estado" [loading]="loadingServiceEstado" (change)="listarCidades()" notFoundText="Nenhum item encontrado" required>
+                            <ng-option [value]="estado.id" *ngFor="let estado of estados">{{estado.nome}}</ng-option>
+                        </ng-select>
+                        <small class="form-text text-danger" *ngIf="form.controls.uf.touched && form.controls.uf.hasError('required')">Selecione o estado</small>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6 mb-2">
+                        <ng-select class="large" formControlName="cidade" placeholder="Selecione a Cidade" [loading]="loadingServiceCidade" notFoundText="Nenhum item encontrado" required>
+                            <ng-option [value]="cidade.id" *ngFor="let cidade of cidades">{{cidade.nome}}</ng-option>
+                        </ng-select>
+                        <small class="form-text text-danger" *ngIf="form.controls.cidade.touched && form.controls.cidade.hasError('required')">Selecione a cidade</small>
+                    </div>
+                    <div class="form-floating col-xs-12 col-sm-12 col-lg-12 mb-2">
+                        <input type="text" formControlName="complemento" class="form-control" placeholder="Complemento">
+                        <label>Complemento</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" formControlName="principal" class="form-check-input" value="true">
+                        <label class="form-check-label">
+                            Definir como endereço principal
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-lg btn-block mt-4" [disabled]="form.status === 'INVALID' || loadingService">
+                        <span *ngIf="!loadingService">
+                            <i class="fas fa-check pe-2"></i>
+                            CADASTRAR ENDEREÇO
+                        </span>
+                        <span *ngIf="loadingService" class="loading">
+                            <img src="/res/imagens/spinner-white.svg" />
+                            Enviando... Aguarde!
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

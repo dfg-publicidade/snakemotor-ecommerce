@@ -1,0 +1,50 @@
+<nav class="breadcrumb">
+    <div class="container">
+        <ul>
+            <li><a [routerLink]="['/']">Home</a></li>
+            <li class="separator">/</li>
+            <li><a>Alteração de senha</a></li>
+        </ul>
+    </div>
+</nav>
+<section class="principal">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-4 col-lg-4">
+                <app-perfil-menu [active]="url"></app-perfil-menu>
+            </div>
+            <div class="col-xs-12 col-md-8 col-lg-8">
+                <h3 class="titulo pb-3">{{title}}</h3>
+                <app-alert-message *ngIf="response" [result]='response'></app-alert-message>
+                <form [formGroup]="form" (submit)="alterar()">
+                    <div class="form-floating  col-xs-12 col-sm-12 col-lg-6 mb-2">
+                        <input type="password" formControlName="senhaAtual" class="form-control" placeholder="Senha atual" required>
+                        <label>Senha atual</label>
+                        <small class="form-text text-danger" *ngIf="form.controls.senha.touched && form.controls.senha.hasError('required')">Preencha a senha atual</small>
+                    </div>
+                    <div class="form-floating  col-xs-12 col-sm-12 col-lg-6 mb-2">
+                        <input type="password" formControlName="senha" class="form-control" placeholder="Nova senha" required>
+                        <label>Nova senha</label>
+                        <small class="form-text text-danger" *ngIf="form.controls.senha.touched && form.controls.senha.hasError('required')">Preencha a nova senha</small>
+                    </div>
+                    <div class="form-floating  col-xs-12 col-sm-12 col-lg-6 mb-2">
+                        <input type="password" formControlName="confirmacaoSenha" class="form-control" placeholder="Confirmação de senha" required>
+                        <label>Confirmação de senha</label>
+                        <small class="form-text text-danger" *ngIf="form.controls.confirmacaoSenha.touched && form.controls.senha.hasError('required')">Preencha a confirmação de senha</small>
+                        <small class="form-text text-danger" *ngIf="form.controls.confirmacaoSenha.hasError('mismatch')">As senhas devem ser iguais</small>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-lg btn-block mt-4" [disabled]="form.status === 'INVALID' || loadingService">
+                        <span *ngIf="!loadingService">
+                            <i class="fas fa-check pe-2"></i>
+                            ALTERAR SENHA
+                        </span>
+                        <span *ngIf="loadingService" class="loading">
+                            <img src="/res/imagens/spinner-white.svg" />
+                            Enviando... Aguarde!
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,52 @@
+<nav class="breadcrumb">
+    <div class="container">
+        <ul>
+            <li><a [routerLink]="['/']">Home</a></li>
+            <li class="separator">/</li>
+            <li><a href="#">Pedidos</a></li>
+        </ul>
+    </div>
+</nav>
+<section class="principal">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-4 col-lg-4">
+                <app-perfil-menu [active]="url"></app-perfil-menu>
+            </div>
+            <div class="enderecos col-xs-12 col-md-8 col-lg-8">
+                <h3 class="titulo pb-3">
+                    {{title}}
+                    <a [routerLink]="[url, 'novo']">
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-plus pe-1"></i>
+                            Novo
+                        </button>
+                    </a>
+                </h3>
+                <p *ngIf="entities && entities.length === 0">Nenhum endereço foi cadastrado</p>
+                <div class="border-card" *ngFor="let entity of entities">
+                    <div class="content-wrapper">
+                        <a [routerLink]="[url, entity.id]">
+                            <div class="label-group fixed">
+                                <p class="title">Endereço</p>
+                                <p class="caption">
+                                    {{entity.logradouro}}, {{entity.numero}}
+                                    <span *ngIf="entity.complemento">, {{entity.complemento}}</span> <br />
+                                    <ng-container *ngIf="entity.principal">
+                                        <i class="fas fa-star pe-1"></i>
+                                        <span class="italic">principal</span>
+                                    </ng-container>
+                                </p>
+                            </div>
+                            <div class="label-group fixed">
+                                <p class="title">Cidade</p>
+                                <p class="caption">{{entity.cidade.nome}}/{{entity.cidade.estado.sigla}}</p>
+                            </div>
+                        </a>
+                    </div>
+                    <i class="fas fa-chevron-right end-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

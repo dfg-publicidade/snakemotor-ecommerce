@@ -1,0 +1,88 @@
+<nav class="breadcrumb">
+    <div class="container">
+        <ul>
+            <li><a [routerLink]="['/']">Home</a></li>
+            <li class="separator">/</li>
+            <li><a [routerLink]="[url]">Meus dados</a></li>
+            <li class="separator">/</li>
+            <li><a>Detalhes</a></li>
+        </ul>
+    </div>
+</nav>
+<section class="principal">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-4 col-lg-4">
+                <app-perfil-menu [active]="url"></app-perfil-menu>
+            </div>
+            <div class="col-xs-12 col-md-8 col-lg-8">
+                <h3 class="titulo pb-3">{{title}}</h3>
+                <app-alert-message *ngIf="response" [result]='response'></app-alert-message>
+                <form [formGroup]="form" (submit)="alterar()" *ngIf="entity">
+                    <div class="col-xs-12 col-sm-12 col-lg-6 mb-2">
+                        <ng-select class="large" formControlName="tipo" placeholder="Tipo de cadastro" notFoundText="Nenhum item encontrado" required>
+                            <ng-option [value]="'FISICA'">Pessoa Física</ng-option>
+                            <ng-option [value]="'JURIDICA'">Pessoa Jurídica</ng-option>
+                        </ng-select>
+                        <small class="form-text text-danger" *ngIf="form.controls.tipo.touched && form.controls.tipo.hasError('required')">Preencha o tipo de cadastro</small>
+                    </div>
+                    <div class="form-floating col-xs-12 col-sm-12 col-lg-6 mb-2">
+                        <input type="text" formControlName="cpfCnpj" class="form-control" [mask]="form.value.tipo === 'JURIDICA' ? '00.000.000/0000-00' : '000.000.000-00'" [placeholder]="form.value.tipo === 'JURIDICA' ? 'CNPJ' : 'CPF'" required>
+                        <label>{{form.value.tipo === 'JURIDICA' ? 'CNPJ' : 'CPF'}}</label>
+                        <small class="form-text text-danger" *ngIf="form.controls.cpfCnpj.touched && form.controls.cpfCnpj.hasError('required')">Preencha o {{form.value.tipo === 'JURIDICA' ? 'CNPJ' : 'CPF'}}</small>
+                    </div>
+                    <div class="form-floating  col-xs-12 col-sm-12 col-lg-12 mb-2">
+                        <input type="text" formControlName="nome" class="form-control" placeholder="Nome completo" required>
+                        <label>{{form.value.tipo === 'JURIDICA' ? 'Nome da empresa' : 'Nome completo'}}</label>
+                        <small class="form-text text-danger" *ngIf="form.controls.nome.touched && form.controls.nome.hasError('required')">Preencha o nome</small>
+                    </div>
+                    <div class="form-floating  col-xs-12 col-sm-12 col-lg-4 mb-2" *ngIf="(entity && entity.tipo === 'FISICA') || form.value.tipo === 'FISICA'">
+                        <input type="text" formControlName="dataNascto" mask="00/00/0000" class="form-control" placeholder="Data de nascimento" required>
+                        <label>Data de nascimento</label>
+                        <small class="form-text text-danger" *ngIf="form.controls.dataNascto.touched && form.controls.dataNascto.hasError('required')">Preencha a data de nascimento</small>
+                    </div>
+                    <div class="form-floating  col-xs-12 col-sm-12 col-lg-6 mb-2">
+                        <input type="tel" formControlName="celular" mask="(00) 00000-0000" class="form-control" placeholder="Celular" required>
+                        <label>Celular</label>
+                        <small class="form-text text-danger" *ngIf="form.controls.celular.touched && form.controls.celular.hasError('required')">Preencha o celular</small>
+                        <small class="form-text text-danger" *ngIf="form.controls.celular.touched && form.controls.celular.hasError('minlength')">O celular digitado é inválido</small>
+                    </div>
+                    <div class="form-floating  col-xs-12 col-sm-12 col-lg-6 mb-2">
+                        <input type="tel" formControlName="telefone" mask="(00) 0000-0000" class="form-control" placeholder="Telefone">
+                        <label>Telefone</label>
+                    </div>
+                    <div class="form-floating col-xs-12 col-sm-12 col-lg-12 mb-2">
+                        <input type="email" formControlName="email" class="form-control" placeholder="E-mail">
+                        <label>E-mail</label>
+                        <small class="form-text text-danger" *ngIf="form.controls.email.touched && form.controls.email.hasError('required')">Preencha o e-mail</small>
+                        <small class="form-text text-danger" *ngIf="form.controls.email.touched && form.controls.email.hasError('email')">O e-mail digitado é inválido</small>
+                    </div>
+                    <div class="form-check pt-3">
+                        <input type="checkbox" formControlName="aceiteOferta" class="form-check-input" value="true">
+                        <label class="form-check-label">
+                            Desejo receber ofertas, promoções e informações da Snake Motor e de parceiros.
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" formControlName="aceiteContato" class="form-check-input" value="true">
+                        <label class="form-check-label">
+                            Desejo receber informações da Snake Motor por SMS/Whatsapp.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-lg btn-block mt-4" [disabled]="form.status === 'INVALID' || loadingService">
+                        <span *ngIf="!loadingService">
+                            <i class="fas fa-check pe-2"></i>
+                            ALTERAR CADASTRO
+                        </span>
+                        <span *ngIf="loadingService" class="loading">
+                            <img src="/res/imagens/spinner-white.svg" />
+                            Enviando... Aguarde!
+                        </span>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>

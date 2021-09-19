@@ -1,0 +1,34 @@
+@import "../../../../../res/variables.scss";
+@import "../../../../../res/scss/form.scss";
+@import "../../../../../res/scss/slider.scss";
+@import "../../../../../res/scss/badge.scss";
+
+section {
+    & > div.container {
+        & > div.row {
+            padding-bottom: 40px;
+            & > div {
+                & > h3 {
+                    &.titulo {
+                        text-transform: uppercase;
+                        font-weight: bold;
+                        margin: 0;
+                    }
+                }
+
+                & > form {
+                    background: #fff;
+                    padding: 20px;
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
+}
+
+@import "responsive/create-xl.scss";
+@import "responsive/create-lg.scss";
+@import "responsive/create-md.scss";
+@import "responsive/create-sm.scss";
+@import "responsive/create-xss.scss";
+@import "responsive/create-print.scss";

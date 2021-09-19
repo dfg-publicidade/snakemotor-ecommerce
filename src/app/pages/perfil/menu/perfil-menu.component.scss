@@ -1,0 +1,25 @@
+// Core variables and mixins
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+@import "../../../../res/variables.scss";
+
+div.list-group{
+    margin-bottom: 20px;
+    &>a.list-group-item{
+        &.active{
+            background-color: $secondary;
+            border-color: $secondary;
+            color: #fff;
+            font-weight: 600;
+        }
+    }
+}
+
+@import "responsive/perfil-menu-lg.scss";
+@import "responsive/perfil-menu-md.scss";
+@import "responsive/perfil-menu-sm.scss";
+@import "responsive/perfil-menu-xs.scss";
+@import "responsive/perfil-menu-xss.scss";
+@import "responsive/perfil-menu-print.scss";

@@ -34,7 +34,13 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" [routerLink]="['/pedidos']">
+                                <i class="fas fa-shopping-cart pe-2"></i>
+                                Meus pedidos
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" [routerLink]="['/perfil']">
                                 <i class="far fa-user pe-2"></i>
                                 Minha conta
                             </a>

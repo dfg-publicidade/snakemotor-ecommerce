@@ -1,0 +1,45 @@
+<nav class="breadcrumb">
+    <div class="container">
+        <ul>
+            <li><a [routerLink]="['/']">Home</a></li>
+            <li class="separator">/</li>
+            <li><a href="#">Pedidos</a></li>
+        </ul>
+    </div>
+</nav>
+<section class="principal">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-4 col-lg-4">
+                <app-perfil-menu [active]="url"></app-perfil-menu>
+            </div>
+            <div class="pedidos col-xs-12 col-md-8 col-lg-8">
+                <h3 class="titulo pb-3">{{title}}</h3>
+                <p *ngIf="entities && entities.length === 0">Nenhum pedido foi realizado</p>
+                <div class="border-card" *ngFor="let entity of entities">
+                    <div class="content-wrapper">
+                        <a [routerLink]="[url, entity.id]">
+                            <div class="label-group fixed">
+                                <p class="title">Pedido</p>
+                                <p class="caption">#{{entity.protocolo}}</p>
+                            </div>
+                            <div class="label-group fixed">
+                                <p class="title">Data</p>
+                                <p class="caption">{{entity.dataCriacao}}</p>
+                            </div>
+                            <div class="label-group fixed">
+                                <p class="title">Total</p>
+                                <p class="caption">{{entity.total | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
+                            </div>
+                            <div class="label-group fixed">
+                                <p class="title">Status</p>
+                                <p class="caption"><span class="badge {{entity.status.id}}">{{entity.status.valor}}</span></p>
+                            </div>
+                        </a>
+                    </div>
+                    <i class="fas fa-chevron-right end-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

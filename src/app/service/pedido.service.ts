@@ -14,12 +14,12 @@ export class PedidoService {
   }
 
   listar(page: number): Observable<any> {
-    let url = `${this.urlServico}/${page}`;
+    let url = `${this.urlServico}?_page=${page}`;
 
     return this.http.get(url);
   }
 
-  visualizar(id: number): Observable<any> {
+  visualizar(id: string): Observable<any> {
     let url = `${this.urlServico}/${id}`;
 
     return this.http.get(url);

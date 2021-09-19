@@ -1,0 +1,49 @@
+@import "../../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../../node_modules/bootstrap/scss/mixins";
+
+@media (max-width: 479px) {
+    main {
+    }
+
+    section {
+        & > div.container {
+            & > div.banners {
+                flex-wrap: wrap;
+                & > div.banner {
+                    width: 100%;
+                    &:first-of-type {
+                        padding: 0;
+                    }
+                    &:last-of-type {
+                        padding: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 380px) {
+    main {
+    }
+
+    section {
+        &.principal {
+        }
+        &.secundario {
+        }
+    }
+}
+
+@media (max-width: 330px) {
+    main {
+    }
+
+    section {
+        &.principal {
+        }
+        &.secundario {
+        }
+    }
+}

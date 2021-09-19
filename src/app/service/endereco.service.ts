@@ -13,7 +13,13 @@ export class EnderecoService {
   }
 
   listarTodos(): Observable<any> {
-    let url = this.urlServico;
+    let url = `${this.urlServico}?_nopaginate=true`;
+
+    return this.http.get(url);
+  }
+
+  listar(page: number): Observable<any> {
+    let url = `${this.urlServico}?_page=${page}`;
 
     return this.http.get(url);
   }
@@ -29,18 +35,19 @@ export class EnderecoService {
     body.append('complemento', entity.value.complemento ? entity.value.complemento : '');
     body.append('bairro', entity.value.bairro ? entity.value.bairro : '');
     body.append('cidade', entity.value.cidade ? entity.value.cidade : '');
+    body.append('principal', entity.value.principal ? entity.value.principal : false);
 
     return this.http.post(url, body);
   }
 
-  visualizar(enderecoId: number): Observable<any> {
-    let url = `${this.urlServico}/${enderecoId}/visualizar`;
+  visualizar(enderecoId: string): Observable<any> {
+    let url = `${this.urlServico}/${enderecoId}`;
 
     return this.http.get(url);
   }
 
-  alterar(enderecoId: number, entity: any): Observable<any> {
-    let url = `${this.urlServico}/${enderecoId}/visualizar`;
+  alterar(enderecoId: string, entity: any): Observable<any> {
+    let url = `${this.urlServico}/${enderecoId}`;
 
     let body = new FormData();
 
@@ -50,13 +57,14 @@ export class EnderecoService {
     body.append('complemento', entity.value.complemento ? entity.value.complemento : '');
     body.append('bairro', entity.value.bairro ? entity.value.bairro : '');
     body.append('cidade', entity.value.cidade ? entity.value.cidade : '');
+    body.append('principal', entity.value.principal ? entity.value.principal : false);
 
-    return this.http.post(url, body);
+    return this.http.put(url, body);
   }
 
-  excluir(enderecoId: number): Observable<any> {
-    let url = this.urlServico + enderecoId + '/excluir';
+  excluir(enderecoId: string): Observable<any> {
+    let url = `${this.urlServico}/${enderecoId}`;
 
-    return this.http.get(url);
+    return this.http.delete(url);
   }
 }
