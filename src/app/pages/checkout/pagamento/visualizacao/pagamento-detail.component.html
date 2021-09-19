@@ -38,6 +38,7 @@
                     <a [routerLink]="[url]">Alterar forma de pagamento</a>
                 </h3>
 
+                <!-- BOLETO -->
                 <div class="texto" *ngIf="carrinho.formaPagamento.name === 'BOLETO'">
                     <p>O prazo para pagamento do boleto é de 2 dias úteis. Em caso de não pagamento até o vencimento, o pedido será automaticamente cancelado. O pedido será encaminhado somente após a confirmação de pagamento.</p>
                     <p><strong>Prazo para confirmação do pagamento</strong></p>
@@ -49,6 +50,43 @@
                     <p><strong>Instruções para impressão</strong></p>
                     <p>O boleto poderá ser impresso na próxima tela. Você deve imprimi-lo em uma impressora a laser ou a jato de tinta. Configure a impressora para o modo normal de impressão. Imprima em folha A4 (210x297 mm) ou Carta (210x279mm), branca. Não fure, amasse ou rasure o código de barras.</p>
                 </div>
+
+                <!-- DÉBITO ONLINE -->
+                <div class="texto" *ngIf="carrinho.formaPagamento.name === 'ONLINE_DEBIT'">
+                    <p>
+                        Essa modalidade de pagamento consiste em fazer um pagamento instantâneo a partir de sua conta corrente.
+                        O banco é conectado por meio de uma transação segura com seus dados e a aprovação do pagamento sai na hora, deixando o débito em sua fatura ou extrato bancário.
+                    </p>
+                    <p> Assim, você evita pegar filas, imprimir boletos, trabalhar com códigos digitais ou código de barras, facilitando o processo de compra.</p>
+                    <p>No momento, as opções disponíveis para pagamento online são:</p>
+
+                    <form [formGroup]="form">
+                        <!-- SELEÇÃO DE BANCO -->
+                        <p><strong>Selecione o seu banco</strong></p>
+                        <div class="formas-pagamento">
+                            <ng-container *ngFor="let banco of bancos">
+                                <div class="pagamento theme-first-radios selected theme-second-border-color" *ngIf="banco[1].status !== 'UNAVAILABLE'">
+                                    <div class="selecao">
+                                        <div class="input-radio">
+                                            <input type="radio" name="banco" formControlName="banco" [value]="banco[0]">
+                                            <label></label>
+                                        </div>
+                                        <div class="text-content">
+                                            <div class="tipo">
+                                                <p>
+                                                    <img src="{{carrinho.pagseguro.path}}{{banco[1].images['SMALL'].path}}" title="{{banco[1].displayName}}" alt="{{banco[1].displayName}}"/>
+                                                    {{banco[1].displayName}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- CARTÃO DE CRÉDITO -->
                 <form [formGroup]="form" *ngIf="carrinho.formaPagamento.name === 'CREDIT_CARD'" (submit)="createCardToken()">
                     <div class="formulario">
                         <div class="col-xs-12 col-sm-12 col-lg-6 mb-2">
@@ -65,8 +103,8 @@
                             <small class="form-text text-danger" *ngIf="form.controls.numeroCartao.touched && form.controls.numeroCartao.hasError('required')">Preencha o número do cartão</small>
                         </div>
                         <div class="form-floating  col-xs-12 col-sm-12 col-lg-12 mb-2">
-                            <input type="text" formControlName="nome" class="form-control" placeholder="{{form.value.tipo === 'JURIDICA' ? 'Nome da empresa' : 'Nome do titular'}}" required>
-                            <label>{{form.value.tipo === 'JURIDICA' ? 'Nome da empresa' : 'Nome do titular'}}</label>
+                            <input type="text" formControlName="nome" class="form-control" placeholder="{{form.value.tipo === 'JURIDICA' ? 'Nome da empresa' : 'Nome do titular'}} (Conforme impresso no cartão)" required>
+                            <label>{{form.value.tipo === 'JURIDICA' ? 'Nome da empresa' : 'Nome do titular'}} (Conforme impresso no cartão)</label>
                             <small class="form-text text-danger" *ngIf="form.controls.nome.touched && form.controls.nome.hasError('required')">Preencha o nome</small>
                         </div>
                         <div class="form-floating col-xs-12 col-sm-12 col-md-6 col-lg-4 mb-2">
@@ -75,8 +113,8 @@
                             <small class="form-text text-danger" *ngIf="form.controls.validade.touched && form.controls.validade.hasError('required')">Preencha a validade</small>
                         </div>
                         <div class="form-floating col-xs-12 col-sm-12 col-md-6 col-lg-4 mb-2">
-                            <input type="text" formControlName="cvv" class="form-control" placeholder="Validade (MM/AA)" maxlength="{{tipoCartao && tipoCartao.brand.cvvSize ? tipoCartao.brand.cvvSize : 4}}" required>
-                            <label>CVV (código de seguraça)</label>
+                            <input type="text" formControlName="cvv" class="form-control" placeholder="CVV (código de segurança)" maxlength="{{tipoCartao && tipoCartao.brand.cvvSize ? tipoCartao.brand.cvvSize : 4}}" required>
+                            <label>CVV (código de segurança)</label>
                             <small class="form-text text-danger" *ngIf="form.controls.cvv.touched && form.controls.cvv.hasError('required')">Preencha o CVV</small>
                         </div>
                         <div class="form-floating col-xs-12 col-sm-12 col-lg-6 mb-2">
@@ -156,7 +194,7 @@
                 </p>
                 <div class="botoes">
                     <a>
-                        <button type="button" class="custom buy" [disabled]="form.status === 'INVALID' || loadingService" (click)="carrinho.formaPagamento.name === 'CREDIT_CARD' ? createCardToken() : finalizarCompra()">
+                        <button type="button" class="custom buy" [disabled]="form && form.status === 'INVALID' || loadingService" (click)="carrinho.formaPagamento.name === 'CREDIT_CARD' ? createCardToken() : finalizarCompra()">
                             <span *ngIf="!loadingService">
                                 <i class="fas fa-check pe-2"></i>
                                 Concluir a Compra

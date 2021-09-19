@@ -81,7 +81,7 @@
                         </div>
                     </div>
                 </form>
-                <button type="button" class="custom buy" (click)="adicionarCarrinho()" [disabled]="formVariacao.status === 'INVALID' || jaPossuiCarrinho(op) || (produtoOpcaoSelecionado && produtoOpcaoSelecionado.adicionadoCarrinho)">
+                <button type="button" class="custom buy" (click)="comprar()" [disabled]="formVariacao.status === 'INVALID' || jaPossuiCarrinho(op) || (produtoOpcaoSelecionado && produtoOpcaoSelecionado.adicionadoCarrinho)">
                     <i class="fas fa-shopping-cart"></i>
                     Comprar
                 </button>

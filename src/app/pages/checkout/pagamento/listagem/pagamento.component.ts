@@ -153,6 +153,10 @@ export class PagamentoComponent implements OnInit {
       amount: this.carrinho.valorTotalNum,
       success: (response: any) => {
         this.formasPagamento = Object.entries(response.paymentMethods);
+
+        this.formasPagamento.forEach((fPagamento: any, index: number) => {
+          this.formasPagamento[index].bancos = Object.entries(fPagamento[1].options);
+        });
       },
       error: (response: any) => {
         let error = '';

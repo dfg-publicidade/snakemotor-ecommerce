@@ -21,6 +21,7 @@ export class PagamentoDetailComponent implements OnInit {
   formCartaoCredito: any;
   tipoCartao: any;
   parcelamento: any;
+  bancos: any;
 
   loadingService: boolean = false;
   loadingServiceCarrinho: boolean = false;
@@ -73,7 +74,6 @@ export class PagamentoDetailComponent implements OnInit {
 
               switch (carrinho.formaPagamento.name) {
                 case 'BOLETO': {
-                  //FORM FORMAS DE PAGAMENTO
                   this.form = this.formBuilder.group({
                     formaPagamento: new FormControl('', [
                       Validators.required
@@ -90,8 +90,28 @@ export class PagamentoDetailComponent implements OnInit {
                   this.form.controls.formaPagamento.setValue('boleto');
                   break;
                 }
+                case 'ONLINE_DEBIT': {
+                  this.bancos = Object.entries(this.carrinho.formaPagamento.options);
+                  this.form = this.formBuilder.group({
+                    formaPagamento: new FormControl('', [
+                      Validators.required
+                    ]),
+                    hashPagamento: new FormControl('', [
+                      Validators.required
+                    ]),
+                    banco: new FormControl('', [
+                      Validators.required
+                    ])
+                  },
+                    {
+                      updateOn: 'change'
+                    }
+                  );
+
+                  this.form.controls.formaPagamento.setValue('eft');
+                  break;
+                }
                 case 'CREDIT_CARD': {
-                  //FORM DADOS CARTÃO DE CRÉDITO
                   this.form = this.formBuilder.group({
                     formaPagamento: new FormControl('', [
                       Validators.required
@@ -170,18 +190,27 @@ export class PagamentoDetailComponent implements OnInit {
       metodo: this.form.value.formaPagamento
     }
 
-    if (carrinho.formaPagamento && carrinho.formaPagamento.name === 'CREDIT_CARD') {
-      let parcelamento = this.parcelamento.installments[this.tipoCartao.brand.name].find((parcela: any) => parcela && parcela.quantity === this.form.value.qtdeParcelas);
+    if (carrinho.formaPagamento) {
+      switch (carrinho.formaPagamento.name) {
+        case 'CREDIT_CARD': {
+          let parcelamento = this.parcelamento.installments[this.tipoCartao.brand.name].find((parcela: any) => parcela && parcela.quantity === this.form.value.qtdeParcelas);
 
-      carrinho.pagamento.token = this.form.value.creditCardToken ? this.form.value.creditCardToken : '';
-      carrinho.pagamento.parcelas = this.form.value.qtdeParcelas ? this.form.value.qtdeParcelas : '';
-      carrinho.pagamento.valorParcelamento = parcelamento ? parcelamento.installmentAmount : '';
+          carrinho.pagamento.token = this.form.value.creditCardToken ? this.form.value.creditCardToken : '';
+          carrinho.pagamento.parcelas = this.form.value.qtdeParcelas ? this.form.value.qtdeParcelas : '';
+          carrinho.pagamento.valorParcelamento = parcelamento ? parcelamento.installmentAmount : '';
 
-      carrinho.pagamento.cartao = {
-        tipoDocumento: this.form.value.tipo ? this.form.value.tipo : '',
-        nome: this.form.value.nome ? this.form.value.nome : '',
-        cpfCnpj: this.form.value.cpfCnpj ? this.form.value.cpfCnpj : '',
-        dataNascto: this.form.value.dataNascto ? this.form.value.dataNascto : ''
+          carrinho.pagamento.cartao = {
+            tipoDocumento: this.form.value.tipo ? this.form.value.tipo : '',
+            nome: this.form.value.nome ? this.form.value.nome : '',
+            cpfCnpj: this.form.value.cpfCnpj ? this.form.value.cpfCnpj : '',
+            dataNascto: this.form.value.dataNascto ? this.form.value.dataNascto : ''
+          }
+          break;
+        }
+        case 'ONLINE_DEBIT': {
+          carrinho.pagamento.banco = this.form.value.banco ? this.form.value.banco : '';
+          break;
+        }
       }
     }
 

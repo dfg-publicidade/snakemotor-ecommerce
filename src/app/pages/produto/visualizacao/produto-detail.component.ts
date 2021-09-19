@@ -16,6 +16,7 @@ export class ProdutoDetailComponent implements OnInit {
   op: string = '';
   produtoPermalink: string = '';
   url: string = '/produtos';
+  urlCarrinho: string = '/carrinho';
 
   produtoOpcao: any;
   cores: any;
@@ -46,7 +47,7 @@ export class ProdutoDetailComponent implements OnInit {
         Validators.required
       ])
     });
-    
+
   };
 
   ngOnInit(): void {
@@ -87,7 +88,7 @@ export class ProdutoDetailComponent implements OnInit {
 
           if (this.tamanhos && this.tamanhos.length === 1) {
             this.produtoOpcaoSelecionado = this.tamanhos[0];
-            
+
             this.formVariacao.get('tamanho').clearValidators();
             this.formVariacao.get('tamanho').updateValueAndValidity();
 
@@ -167,6 +168,25 @@ export class ProdutoDetailComponent implements OnInit {
       status: 'success',
       message: 'Produto adicionado com sucesso!'
     };
+  }
+
+  comprar() {
+    let carrinho = this.carrinhoService.getCarrinho();
+
+    if (!carrinho) {
+      carrinho = this.carrinhoService.getCarrinhoVazio();
+    }
+
+    carrinho.produtos.push({
+      qtde: this.formVariacao.value.qtde,
+      produto: this.produtoOpcaoSelecionado.id
+    });
+
+    this.carrinhoService.setCarrinho(carrinho);
+
+    setTimeout(() => {
+      this.router.navigate([this.urlCarrinho]);
+    }, 100);
   }
 
   jaPossuiCarrinho(produtoOpcaoId: string): boolean {

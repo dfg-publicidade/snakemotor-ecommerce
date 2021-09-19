@@ -50,6 +50,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <ul class="opcoes-extras" *ngIf="formaPagamento[1].name === 'ONLINE_DEBIT'">
+                                    <ng-container *ngFor="let banco of formaPagamento.bancos">
+                                        <li *ngIf="banco[1].status !== 'UNAVAILABLE'">
+                                            <img src="{{carrinho.pagseguro.path}}{{banco[1].images['MEDIUM'].path}}" title="{{banco[1].displayName}}" alt="{{banco[1].displayName}}"/>
+                                        </li>
+                                    </ng-container>
+                                </ul>
                             </div>
                         </ng-container>
                     </div>
@@ -98,14 +105,14 @@
                     <span *ngIf="carrinho.cupom.tipo.id === 'PERCENTUAL'">
                         {{carrinho.cupom.valor}}% de desconto <br />
                         <button type="button" class="btn btn-secondary btn-sm">
-                            {{carrinho.cupom.codigo}} 
+                            {{carrinho.cupom.codigo}}
                             <span class="badge bg-light text-dark ms-2" (click)="removerCupom()"><i class="fas fa-times"></i></span>
                         </button>
                     </span>
                     <span *ngIf="carrinho.cupom.tipo.id !== 'PERCENTUAL'">
                         {{carrinho.cupom.valor | currency:'BRL':'symbol':'0.2-2':'pt'}} de desconto <br />
                         <button type="button" class="btn btn-secondary btn-sm">
-                            {{carrinho.cupom.codigo}} 
+                            {{carrinho.cupom.codigo}}
                             <span class="badge bg-light text-dark ms-2" (click)="removerCupom()"><i class="fas fa-times"></i></span>
                         </button>
                     </span>

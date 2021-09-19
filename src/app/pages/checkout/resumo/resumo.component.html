@@ -21,7 +21,9 @@
                     <p>Após a confirmação do pagamento, você será notificado por e-mail.</p>
                 </div>
                 <a class="btn-pagamento" href="{{carrinho.pagseguro.transaction.paymentLink}}" target="_blank" *ngIf="carrinho.pagseguro.transaction.paymentLink">
-                    <button class="btn btn-primary btn-lg">Boleto de pagamento</button>
+                    <button class="btn btn-success btn-lg">
+                        {{carrinho.formPagamento === 'boleto' ? 'Boleto de pagamento' : 'Realizar pagamento'}}
+                    </button>
                 </a>
                 <h3>{{title}}</h3>
                 <div class="table-responsive">
@@ -62,25 +64,25 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr *ngIf="formaPagamento">
+                            <tr *ngIf="carrinho.formaPagamento">
                                 <td colspan="3">
-                                    <p class="mb-0"><strong>Forma de pagamento: </strong></p>
+                                    <p class="mb-0"><strong>Forma de pagamento </strong></p>
                                     <span>
-                                        <ng-container *ngIf="carrinho.formaPagamento.permalinkFormaPagmento === 'eft'">
+                                        <ng-container *ngIf="carrinho.formaPagamento === 'eft'">
                                             <i class="fas fa-tablet-alt"></i>
-                                            Pagamento com Débito Online
+                                            Débito Online
                                         </ng-container>
-                                        <ng-container *ngIf="carrinho.formaPagamento.permalinkFormaPagmento === 'DEPOSIT'">
+                                        <ng-container *ngIf="carrinho.formaPagamento === 'deposit'">
                                             <i class="fas fa-donate"></i>
-                                            Pagamento com Depósito Bancário
+                                            Depósito Bancário
                                         </ng-container>
-                                        <ng-container *ngIf="carrinho.formaPagamento.permalinkFormaPagmento === 'creditCard'">
+                                        <ng-container *ngIf="carrinho.formaPagamento === 'creditCard'">
                                             <i class="far fa-credit-card"></i>
-                                            Pagamento com Cartão de crédito
+                                            Cartão de crédito
                                         </ng-container>
-                                        <ng-container *ngIf="carrinho.formaPagamento.permalinkFormaPagmento === 'boleto'">
+                                        <ng-container *ngIf="carrinho.formaPagamento === 'boleto'">
                                             <i class="fas fa-barcode"></i>
-                                            Pagamento com Boleto
+                                            Boleto
                                         </ng-container>
                                     </span>
                                 </td>

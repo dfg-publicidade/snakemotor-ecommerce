@@ -42,6 +42,59 @@ section {
 
                 & > div.texto {
                     font-weight: 300;
+
+                    & > form {
+                        margin-bottom: 20px;
+                        margin-top: 20px;
+                        & > div.formas-pagamento {
+                            margin-bottom: 20px;
+                            margin-top: 1px;
+                            & > div.pagamento {
+                                padding: 15px 20px;
+                                border-left: 3px solid #fff;
+                                color: #303030;
+                                background: #f5f5f5;
+                                border-left: 5px solid #303030;
+                                margin-bottom: 5px;
+
+                                transition: all 0.2s ease-in-out;
+
+                                & > div.selecao {
+                                    display: flex;
+                                    width: 100%;
+                                    align-items: center;
+
+                                    & > div.input-radio {
+                                        align-items: center;
+                                        display: flex;
+                                        & > input {
+                                            cursor: pointer;
+                                            width: 20px;
+                                            height: 20px;
+                                        }
+                                    }
+
+                                    & > div.text-content {
+                                        & > div.tipo {
+                                            width: 100%;
+                                            padding-left: 10px;
+                                            display: flex;
+
+                                            & > p {
+                                                margin: 0;
+                                                display: flex;
+                                                align-items: center;
+
+                                                & > img {
+                                                    padding: 2px 10px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
 
                 & > form {
