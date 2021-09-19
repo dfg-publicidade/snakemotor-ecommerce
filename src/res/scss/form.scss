@@ -74,25 +74,25 @@ form {
             }
         }
     }
+}
 
-    button {
-        border-radius: 0;
-        transition: all 0.25s ease;
+button {
+    border-radius: 0;
+    transition: all 0.25s ease;
 
-        & > span.loading {
-            & > img {
-                width: 30px;
-            }
+    & > span.loading {
+        & > img {
+            width: 30px;
         }
+    }
 
-        &.btn-md {
-            padding: 0.5rem 1rem;
-            font-size: 1.25rem;
-        }
+    &.btn-md {
+        padding: 0.5rem 1rem;
+        font-size: 1.25rem;
+    }
 
-        &.btn-lg {
-            padding: 20px 60px;
-        }
+    &.btn-lg {
+        padding: 20px 60px;
     }
 }
 

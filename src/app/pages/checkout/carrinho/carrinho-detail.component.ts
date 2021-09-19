@@ -16,6 +16,7 @@ export class CarrinhoDetailComponent implements OnInit {
   urlProduto: string = '/produtos'
   formFrete: any;
   formaEntrega: any;
+  formasEntrega: any;
   loadingServiceFrete: boolean = false;
   private subscription: any;
 
@@ -23,10 +24,10 @@ export class CarrinhoDetailComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     private carrinhoService: CarrinhoService,
     private metadataService: MetadataService
-    ) {
+  ) {
     this.formFrete = formBuilder.group({
       cep: new FormControl('', [
         Validators.required
@@ -34,11 +35,11 @@ export class CarrinhoDetailComponent implements OnInit {
       formaEntrega: new FormControl('')
     });
 
-    this.formFrete.controls.formaEntrega.valueChanges.subscribe(() => {
-      setTimeout(() => {
-        this.selecionarFormaEntrega();
-      }, 100);
-    });
+    // this.formFrete.controls.formaEntrega.valueChanges.subscribe(() => {
+    //   setTimeout(() => {
+    //     this.selecionarFormaEntrega();
+    //   }, 100);
+    // });
   };
 
 
@@ -57,9 +58,11 @@ export class CarrinhoDetailComponent implements OnInit {
       if (carrinho.cep) {
         this.formFrete.controls.cep.setValue(carrinho.cep);
       }
-    }
 
-    this.atualizaValorCarrinho();
+      this.atualizaValorCarrinho();
+    } else {
+      this.carrinho = {};
+    }
   }
 
   atualizaValorCarrinho() {
@@ -80,8 +83,9 @@ export class CarrinhoDetailComponent implements OnInit {
             }
           });
 
+          this.formasEntrega = this.carrinho.formasEntrega;
 
-          this.getFormaEntrega();
+          // this.getFormaEntrega();
 
           this.loadingServiceFrete = false;
         },
@@ -90,7 +94,7 @@ export class CarrinhoDetailComponent implements OnInit {
         }
       );
 
-      this.subscription.push(sub);
+    this.subscription.push(sub);
   }
 
   alterarQtde(acao: string, index: number) {
@@ -109,26 +113,27 @@ export class CarrinhoDetailComponent implements OnInit {
   }
 
   consultarFrete() {
+    delete this.formasEntrega;
     this.formFrete.controls.formaEntrega.setValue('');
     this.getCarrinho();
     this.atualizaValorCarrinho();
   }
 
-  selecionarFormaEntrega() {
-    this.getFormaEntrega();
-    this.getCarrinho();
-    this.atualizaValorCarrinho();
-  }
+  // selecionarFormaEntrega() {
+  //   this.getFormaEntrega();
+  //   this.getCarrinho();
+  //   this.atualizaValorCarrinho();
+  // }
 
-  getFormaEntrega() {
-    if (this.carrinho) {
-      if (this.carrinho.formasEntrega && this.carrinho.formasEntrega.length > 0) {
-        this.formaEntrega = this.carrinho.formasEntrega.find((formaEntrega: any) => formaEntrega && formaEntrega.permalink === this.formFrete.value.formaEntrega);
-      } else if (this.carrinho.formaEntrega) {
-        this.formaEntrega = this.carrinho.formaEntrega;
-      }
-    }
-  }
+  // getFormaEntrega() {
+  //   if (this.carrinho) {
+  //     if (this.carrinho.formasEntrega && this.carrinho.formasEntrega.length > 0) {
+  //       this.formaEntrega = this.carrinho.formasEntrega.find((formaEntrega: any) => formaEntrega && formaEntrega.permalink === this.formFrete.value.formaEntrega);
+  //     } else if (this.carrinho.formaEntrega) {
+  //       this.formaEntrega = this.carrinho.formaEntrega;
+  //     }
+  //   }
+  // }
 
   getCarrinho() {
     let carrinho = this.carrinhoService.getCarrinhoVazio();
@@ -140,7 +145,7 @@ export class CarrinhoDetailComponent implements OnInit {
           qtde: produto.qtde
         })
         carrinho.cep = this.formFrete.value.cep ? this.formFrete.value.cep : '';
-        carrinho.formaEntrega = this.formFrete.value.formaEntrega ? this.formFrete.value.formaEntrega : '';
+        // carrinho.formaEntrega = this.formFrete.value.formaEntrega ? this.formFrete.value.formaEntrega : '';
       });
 
       this.carrinhoService.setCarrinho(carrinho);
@@ -152,6 +157,10 @@ export class CarrinhoDetailComponent implements OnInit {
 
     this.carrinho = this.carrinhoService.getCarrinho();
 
-    this.atualizaValorCarrinho();
+    if (this.carrinho) {
+      this.atualizaValorCarrinho();
+    } else {
+      this.carrinho = {};
+    }
   }
 }

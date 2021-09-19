@@ -19,7 +19,7 @@ export class EnderecoService {
   }
 
   inserir(entity: any): Observable<any> {
-    let url = this.urlServico + 'inserir';
+    let url = this.urlServico;
 
     let body = new FormData();
 

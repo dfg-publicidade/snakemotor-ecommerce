@@ -1,0 +1,209 @@
+@import "../../../../../res/variables.scss";
+@import "../../../../../res/scss/form.scss";
+@import "../../../../../res/scss/buttons.scss";
+
+section {
+    &.produto-detail {
+        background: #fff;
+    }
+    & > div.container {
+        & > div.carrinho {
+            background: #fff;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 25px;
+            margin-bottom: 40px;
+
+            & > div.itens {
+                width: 60%;
+
+                & > h3 {
+                    color: #7a7a7a;
+                    font-size: 18px;
+                    font-weight: bold;
+                    padding-bottom: 20px;
+                    margin-bottom: 10px;
+                    border-bottom: 1px dashed #ccc;
+
+                    & > i {
+                        font-size: 20px;
+                        padding-right: 10px;
+                    }
+
+                    & > a {
+                        float: right;
+                        font-size: 14px;
+                        padding-left: 10px;
+                        text-decoration: underline !important;
+                        padding-top: 5px;
+                    }
+                }
+
+                & > div.texto {
+                    font-weight: 300;
+                }
+
+                & > form {
+                    margin-bottom: 20px;
+                    margin-top: 20px;
+
+                    & > div.formulario {
+                        & > div.form-floating {
+                            &.cartao {
+                                position: relative;
+
+                                & > img {
+                                    position: absolute;
+                                    top: 18px;
+                                    right: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            & > div.info {
+                background: #f6f6f6;
+                width: 35%;
+                padding: 25px;
+
+                & > p {
+                    display: flex;
+                    margin: 0;
+                    padding: 0;
+                    color: #575757;
+                    & > span {
+                        width: 50%;
+                        display: flex;
+
+                        &:first-of-type {
+                            justify-content: flex-start;
+                        }
+                        &:last-of-type {
+                            justify-content: flex-end;
+                        }
+
+                        &.gratis {
+                            color: #22ea27;
+                            font-weight: bold;
+                        }
+                    }
+
+                    &.frete {
+                        padding-bottom: 20px;
+                        margin-bottom: 20px;
+                        border-bottom: 1px solid #e3e3e3;
+                    }
+
+                    &.total {
+                        & > span {
+                            &:last-of-type {
+                                display: block;
+                                text-align: right;
+
+                                & > span {
+                                    font-size: 13px;
+                                }
+                            }
+                        }
+                    }
+
+                    &.valor-avista {
+                        font-size: 13px;
+                        display: block;
+                        text-align: right;
+                        color: #ff0000;
+                    }
+
+                    &.cupom {
+                        margin-top: 10px;
+                        & > span {
+                            &:last-of-type {
+                                display: block;
+                                text-align: right;
+
+                                & > button {
+                                    font-size: 13px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                & > div.botoes {
+                    display: block;
+                    width: 100%;
+                    text-align: center;
+                    margin-top: 20px;
+                    & > button {
+                        padding: 15px 0;
+                        width: 100%;
+                        margin: 20px 0;
+                    }
+
+                    & > p {
+                        color: #7a7a7a;
+                        margin: 0;
+                        padding: 0;
+                        margin-bottom: 20px;
+                    }
+
+                    & > a {
+                        & > button {
+                            padding: 15px 0;
+                            width: 100%;
+                        }
+
+                        &.link {
+                            margin-bottom: 5px;
+                            display: block;
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+
+            & > div.carrinho-vazio {
+                width: 100%;
+                display: block;
+                text-align: center;
+                padding: 60px 0;
+
+                & > span.icone {
+                    background: #fff;
+                    display: inline-block;
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    padding: 5px;
+
+                    & > i {
+                        border-radius: 50%;
+                        width: 100px;
+                        height: 100px;
+                        background: #efefef;
+                        color: #2d3f48;
+                        font-size: 40px;
+                        padding-top: 30px;
+                        padding-left: 0;
+                    }
+                }
+
+                & > h3,
+                & > p {
+                    margin: 0;
+                    color: #807f7f;
+                }
+            }
+        }
+    }
+}
+
+@import "responsive/pagamento-detail-xl.scss";
+@import "responsive/pagamento-detail-lg.scss";
+@import "responsive/pagamento-detail-md.scss";
+@import "responsive/pagamento-detail-sm.scss";
+@import "responsive/pagamento-detail-xss.scss";
+@import "responsive/pagamento-detail-print.scss";

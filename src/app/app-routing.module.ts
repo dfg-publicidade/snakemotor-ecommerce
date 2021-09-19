@@ -25,6 +25,16 @@ const routes: Routes = [
         path: 'endereco',
         'canActivate': [AuthGuard],
         loadChildren: () => import('./pages/checkout/endereco/endereco.module').then(m => m.EnderecoModule)
+      },
+      {
+        path: 'pagamento',
+        'canActivate': [AuthGuard],
+        loadChildren: () => import('./pages/checkout/pagamento/pagamento.module').then(m => m.PagamentoModule)
+      },
+      {
+        path: 'resumo',
+        'canActivate': [AuthGuard],
+        loadChildren: () => import('./pages/checkout/resumo/resumo.module').then(m => m.PedidoResumoModule)
       }
     ]
   },

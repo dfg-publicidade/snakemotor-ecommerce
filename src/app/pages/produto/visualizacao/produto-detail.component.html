@@ -45,7 +45,8 @@
 
                     <!-- PRECO VALOR PADRÃO -->
                     <p class="valor-vigente" *ngIf="!produtoOpcao.precoPromocional">{{produtoOpcao.precoVenda}}</p>
-                    <p class="valor-parcelado" *ngIf="!produtoOpcao.precoPromocional && produtoOpcao.precoVendaParcelado">{{produtoOpcao.precoVendaParcelado}}</p>
+                    <p class="valor-parcelado" *ngIf="!produtoOpcao.precoPromocional && produtoOpcao.precoVendaParcelado">{{produtoOpcao.precoVendaParcelado}} ou</p>
+                    <p class="valor-avista" *ngIf="produtoOpcao.precoAVista">{{produtoOpcao.precoAVista}}</p>
 
                     <!-- TAGS de destaque -->
                     <span class="tag lancamento" *ngIf="produtoOpcao.produto.lancamento">Lançamento</span>

@@ -286,7 +286,6 @@ section {
                     }
 
                     &.total {
-                        margin-bottom: 20px;
                         & > span {
                             &:last-of-type {
                                 display: block;
@@ -298,12 +297,20 @@ section {
                             }
                         }
                     }
+
+                    &.valor-avista {
+                        font-size: 13px;
+                        display: block;
+                        text-align: right;
+                        color: #ff0000;
+                    }
                 }
 
                 & > div.botoes {
                     display: block;
                     width: 100%;
                     text-align: center;
+                    margin-top: 20px;
 
                     & > p {
                         color: #7a7a7a;

@@ -15,15 +15,6 @@ section {
             padding: 25px;
             margin-bottom: 40px;
 
-            & > div {
-                & > h3 {
-                    margin: 0;
-                    padding: 0;
-                    color: #747474;
-                    font-weight: bold;
-                    margin-bottom: 20px;
-                }
-            }
             & > div.itens {
                 width: 60%;
 
@@ -31,151 +22,75 @@ section {
                     padding-top: 25px;
                 }
 
-                & > div.table-responsive {
-                    & > table {
-                        color: #747474;
-                        margin-bottom: 2px;
-                        & > thead {
-                            & > th {
-                                border-bottom: 1px solid #d2d2d2;
-                                padding-bottom: 5px;
-                                font-weight: bold;
-                                text-transform: lowercase;
-                                text-align: center;
+                & > form {
+                    & > div.enderecos {
+                        margin-bottom: 20px;
+                        margin-top: 40px;
+                        & > div.endereco {
+                            display: flex;
+                            width: 100%;
+                            align-items: center;
+                            padding: 15px 20px;
+                            border-left: 3px solid #fff;
+                            color: #303030;
+                            background: #f5f5f5;
+                            border-left: 5px solid #303030;
+                            margin-bottom: 5px;
 
-                                &:first-of-type {
-                                    text-align: left;
+                            transition: all 0.2s ease-in-out;
+
+                            & > div.input-radio {
+                                & > input {
+                                    width: 20px;
+                                    height: 20px;
                                 }
                             }
-                        }
 
-                        & > tbody {
-                            & > tr {
-                                & > td {
-                                    vertical-align: middle;
+                            & > div.text-content {
+                                & > div.tipo {
+                                    width: 100%;
+                                    padding-left: 10px;
+                                    display: flex;
 
-                                    &.produto {
-                                        width: 100%;
+                                    & > i {
+                                        font-size: 15px;
+                                        padding: 2px 5px;
+                                        color: #ffbd00;
                                     }
 
-                                    &.qtde {
-                                        min-width: 130px;
+                                    & > p {
+                                        font-weight: 600;
+                                        font-size: 14px;
+                                        margin: 0;
                                     }
+                                }
 
-                                    &.valor {
-                                        min-width: 100px;
-                                    }
-
-                                    & > div.produto {
-                                        display: flex;
-                                        justify-content: flex-start;
-                                        align-items: center;
-                                        vertical-align: middle;
-                                        padding-right: 20px;
-
-                                        & > div.imagem {
-                                            width: 64px;
-                                            height: 64px;
-                                            background-size: contain;
-                                            background-repeat: no-repeat;
-                                            background-position: center;
-                                            margin-right: 15px;
-                                        }
-
-                                        & > p {
-                                            & > a {
-                                                color: #747474;
-                                                font-weight: bold;
-                                                margin: 0;
-                                                padding: 0;
-                                            }
-                                        }
-                                    }
-
-                                    & > div.qtde {
-                                        display: flex;
-                                        align-items: center;
-                                        & > input.qtde {
-                                            border: 2px solid #e0e0e0;
-                                            border-right: 0;
-                                            border-left: 0;
-                                            text-align: center;
-                                            font-weight: bold;
-                                            padding: 5px 0;
-                                            width: 64px;
-                                            height: 45px;
-                                        }
-
-                                        & > button.btn {
-                                            display: flex;
-                                            border: 2px solid #e0e0e0;
-                                            border-radius: 5px;
-                                            color: #ff0000;
-                                            font-size: 28px;
-                                            padding-top: 0;
-                                            padding-bottom: 0;
-                                            height: 45px;
-                                            align-items: center;
-                                            &.btn-start {
-                                                border-top-right-radius: 0;
-                                                border-bottom-right-radius: 0;
-                                                border-right: 0;
-                                                font-size: 38px;
-                                                padding-bottom: 7px;
-                                            }
-
-                                            &.btn-end {
-                                                border-top-left-radius: 0;
-                                                border-bottom-left-radius: 0;
-                                                border-left: 0;
-                                            }
-
-                                            &:disabled {
-                                                cursor: not-allowed;
-                                            }
-                                        }
-                                    }
-
-                                    & > div.remover {
-                                        display: block;
-                                        text-align: center;
-                                        width: 100%;
-                                        & > button {
-                                            color: $text-primary;
-                                            font-size: 14px;
-                                            margin: 0;
-                                            padding: 0;
-                                        }
-                                    }
-
-                                    & > div.preco {
-                                        text-align: center;
-                                        min-width: 100px;
-                                        & > p {
-                                            margin-bottom: 0;
-                                            color: $text-primary;
-
-                                            &.valor-normal {
-                                                font-size: 13px;
-                                                text-decoration: line-through !important;
-                                                color: #636363;
-
-                                                &.empty {
-                                                    text-decoration: none !important;
-                                                }
-                                            }
-                                        }
-                                    }
+                                & > div.text {
+                                    width: 100%;
+                                    padding-left: 20px;
+                                    font-size: 12px;
+                                    color: #303030;
+                                    line-height: 20px;
+                                    margin-bottom: 3px;
                                 }
                             }
                         }
                     }
-                }
 
-                & > div.frete {
-                    border-top: 1px solid #dee2e6;
-                    padding-top: 20px;
-                    & > form {
+                    & > div.novo-endereco {
+                        display: flex;
+                        width: 100%;
+                        justify-content: flex-end;
+                        & > button {
+                            display: flex;
+                            text-transform: uppercase;
+                        }
+                    }
+
+                    & > div.frete {
+                        border-top: 1px solid #dee2e6;
+                        margin-top: 20px;
+                        padding-top: 20px;
                         & > div.form-group {
                             & > label {
                                 color: #575757;
@@ -215,6 +130,8 @@ section {
                                         & > input {
                                             margin-left: 0;
                                             margin-right: 10px;
+                                            width: 20px;
+                                            height: 20px;
                                         }
 
                                         & > span {
@@ -231,16 +148,24 @@ section {
                                         }
                                     }
                                 }
+
+                                & > small {
+                                    text-align: center;
+                                    & > span {
+                                        cursor: pointer;
+                                        color: #ff0000;
+                                    }
+                                }
                             }
                         }
                     }
-                }
 
-                & > div.cupom {
-                    margin-top: 40px;
-                    & > p {
-                        color: $text-primary;
-                        font-size: 14px;
+                    & > div.cupom {
+                        margin-top: 40px;
+                        & > p {
+                            color: $text-primary;
+                            font-size: 14px;
+                        }
                     }
                 }
             }
@@ -279,7 +204,6 @@ section {
                     }
 
                     &.total {
-                        margin-bottom: 20px;
                         & > span {
                             &:last-of-type {
                                 display: block;
@@ -291,12 +215,20 @@ section {
                             }
                         }
                     }
+
+                    &.valor-avista {
+                        font-size: 13px;
+                        display: block;
+                        text-align: right;
+                        color: #ff0000;
+                    }
                 }
 
                 & > div.botoes {
                     display: block;
                     width: 100%;
                     text-align: center;
+                    margin-top: 20px;
                     & > button {
                         padding: 15px 0;
                         width: 100%;
@@ -355,6 +287,27 @@ section {
                 & > p {
                     margin: 0;
                     color: #807f7f;
+                }
+            }
+        }
+    }
+}
+
+div.modal {
+    & > div.modal-dialog {
+        & > div.modal-content {
+            & > form {
+                & > div.modal-body {
+                    & > div {
+                        & > div.input-check {
+                            display: flex;
+
+                            & > input {
+                                width: 20px;
+                                height: 20px;
+                            }
+                        }
+                    }
                 }
             }
         }

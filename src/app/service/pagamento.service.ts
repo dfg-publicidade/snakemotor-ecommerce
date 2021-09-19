@@ -9,6 +9,6 @@ export class PagamentoService {
   usuario: any;
 
   constructor(private http: HttpClient, private perfilService: PerfilService) {
-    this.urlServico = environment.urlServico + 'api/cliente/';
+    this.urlServico = `${environment.urlServico}${environment.apiApp}/${environment.versao}`;
   }
 }

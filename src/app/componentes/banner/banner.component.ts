@@ -21,9 +21,10 @@ export class BannerComponent implements OnInit {
       loop: true,
       nav: true,
       autoWidth: true,
+      autoHeight: true,
       dots: true,
       autoplay: true,
-      skip_validateItems: false,
+      skip_validateItems: true,
       navText: ['<i class="fas fa-angle-left"></i>', '<i class="fas fa-angle-right"></i>'],
       responsive: {
         0: {

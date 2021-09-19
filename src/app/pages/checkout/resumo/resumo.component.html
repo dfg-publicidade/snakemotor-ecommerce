@@ -1,0 +1,135 @@
+<nav class="breadcrumb">
+    <div class="container">
+        <ul>
+            <li><a [routerLink]="['/']">Home</a></li>
+            <li class="separator">/</li>
+            <li><a>{{title}}</a></li>
+        </ul>
+    </div>
+</nav>
+<section>
+    <div class="container">
+        <div class="carrinho">
+            <div class="itens" *ngIf="response">
+                <div class="alert alert-message alert-success" *ngIf="response.status === 'success'">
+                    <h4 class="alert-heading">
+                        <i class="far fa-check-circle pe-2"></i>
+                        Seu pedido foi processado com sucesso
+                    </h4>
+                    <hr>
+                    <p>Um e-mail de confirmação foi enviado a você em {{usuario.cliente.email}} com todos os detalhes do pedido.</p>
+                    <p>Após a confirmação do pagamento, você será notificado por e-mail.</p>
+                </div>
+                <a class="btn-pagamento" href="{{carrinho.pagseguro.transaction.paymentLink}}" target="_blank" *ngIf="carrinho.pagseguro.transaction.paymentLink">
+                    <button class="btn btn-primary btn-lg">Boleto de pagamento</button>
+                </a>
+                <h3>{{title}}</h3>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <th scope="col">Produto</th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Preço</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of carrinho.produtos; let i = index">
+                                <td class="produto">
+                                    <div class="produto">
+                                        <div class="imagem" [ngStyle]="{'background-image': 'url(' + item.imagem + ')'}"></div>
+                                        <p>
+                                            <a [routerLink]="[urlProduto, item.produto.permalink]" [queryParams]="{op: item.id}" target="_blank">
+                                                {{item.produto.nome}}
+                                                <ng-container *ngIf="item.tipo_de_pintura">{{item.tipo_de_pintura.nome}}</ng-container>
+                                            </a> <br />
+                                            <ng-container *ngIf="item.cor"><strong>cor</strong>: {{item.cor.nome}} </ng-container> <br />
+                                            <ng-container *ngIf="item.tamanhoOpcao"><strong>tamanho</strong>: {{item.tamanhoOpcao.nome}} </ng-container>
+                                        </p>
+                                    </div>
+                                </td>
+                                <td class="qtde">
+                                    <div class="qtde">{{item.qtde}}</div>
+                                </td>
+                                <td class="valor">
+                                    <div class="preco">
+                                        <!-- PRECO VALOR PADRÃO RISCADO, POIS EXISTE VALOR PROMOCIONAL -->
+                                        <p class="valor-normal" *ngIf="item.precoPromocional">{{item.precoVenda}}</p>
+
+                                        <!-- PRECO VALOR PROMOCIONAL -->
+                                        <p class="valor-vigente" *ngIf="item.precoPromocional">{{item.precoPromocional}}</p>
+
+                                        <!-- PRECO VALOR PADRÃO -->
+                                        <p class="valor-vigente" *ngIf="!item.precoPromocional">{{item.precoVenda}}</p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="formaPagamento">
+                                <td colspan="3">
+                                    <p class="mb-0"><strong>Forma de pagamento: </strong></p>
+                                    <span>
+                                        <ng-container *ngIf="carrinho.formaPagamento.permalinkFormaPagmento === 'eft'">
+                                            <i class="fas fa-tablet-alt"></i>
+                                            Pagamento com Débito Online
+                                        </ng-container>
+                                        <ng-container *ngIf="carrinho.formaPagamento.permalinkFormaPagmento === 'DEPOSIT'">
+                                            <i class="fas fa-donate"></i>
+                                            Pagamento com Depósito Bancário
+                                        </ng-container>
+                                        <ng-container *ngIf="carrinho.formaPagamento.permalinkFormaPagmento === 'creditCard'">
+                                            <i class="far fa-credit-card"></i>
+                                            Pagamento com Cartão de crédito
+                                        </ng-container>
+                                        <ng-container *ngIf="carrinho.formaPagamento.permalinkFormaPagmento === 'boleto'">
+                                            <i class="fas fa-barcode"></i>
+                                            Pagamento com Boleto
+                                        </ng-container>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr *ngIf="endereco">
+                                <td colspan="3">
+                                    <p class="mb-0"><strong>Endereço de entrega</strong></p>
+                                    <span>
+                                        {{endereco.logradouro}}, {{endereco.numero ? endereco.numero : 'S/Nº'}}{{endereco.complemento ? ', ' : ''}}{{endereco.complemento}}<br />
+                                        {{endereco.bairro}} - {{endereco.cidade.nome}}/{{endereco.cidade.estado.sigla}}<br />
+                                        CEP {{endereco.cep}}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr *ngIf="formaEntrega">
+                                <td colspan="3" class="last">
+                                    <p class="mb-0"><strong>Forma de entrega</strong></p>
+                                    <span>
+                                        {{formaEntrega.nome}} <br/>
+                                        Prazo de entrega: {{formaEntrega.prazoEntrega}}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="info" *ngIf="response">
+                <h3>Resumo</h3>
+                <p class="info-produto">
+                    <span>{{carrinho.qtde}} produto{{carrinho.qtde > 1 ? 's' : ''}}</span>
+                    <span>{{carrinho.valor}}</span>
+                </p>
+                <p class="frete" *ngIf="formaEntrega">
+                    <span>
+                        <strong>Frete</strong>
+                    </span>
+                    <span class="gratis" *ngIf="formaEntrega && !formaEntrega.valor">Grátis</span>
+                    <span *ngIf="formaEntrega && formaEntrega.valor">{{formaEntrega.valor}}</span>
+                    <span *ngIf="!formaEntrega">-</span>
+                </p>
+                <p class="total">
+                    <span><strong>Total</strong></span>
+                    <span>
+                        <strong>{{carrinho.valorTotal}}</strong> <br />
+                        <span>em até {{carrinho.valorTotalParcelado}}</span>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

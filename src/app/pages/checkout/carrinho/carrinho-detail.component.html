@@ -82,9 +82,9 @@
 
                         <div class="frete-tipos">
                             <!-- LISTA DE FORMAS DE ENTREGA -->
-                            <div class="form-group form-check mb-1" *ngFor="let formaEntrega of carrinho.formasEntrega">
+                            <div class="form-group form-check mb-1" *ngFor="let formaEntrega of formasEntrega">
                                 <label>
-                                    <input type="radio" class="form-check-input" name="formaEntrega" formControlName="formaEntrega" [value]="formaEntrega.permalink">
+                                    <!-- <input type="radio" class="form-check-input" name="formaEntrega" formControlName="formaEntrega" [value]="formaEntrega.permalink"> -->
                                     <span>
                                         {{formaEntrega.nome}}:
                                         <span [ngClass]="{gratis: !formaEntrega.valor}"> {{formaEntrega.valor ? formaEntrega.valor : 'Grátis'}} </span>
@@ -94,7 +94,7 @@
                             </div>
 
                             <!-- FORMA DE ENTREGA SELECIONADA -->
-                            <div class="form-group form-check mb-1" *ngIf="carrinho.formaEntrega">
+                            <!-- <div class="form-group form-check mb-1" *ngIf="carrinho.formaEntrega">
                                 <label>
                                     <span>
                                         {{carrinho.formaEntrega.nome}}:
@@ -103,7 +103,7 @@
                                     </span>
                                 </label>
                                 <small><strong>selecionado</strong></small>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
                 </div>
@@ -130,9 +130,10 @@
                     <span><strong>Total</strong></span>
                     <span>
                         <strong>{{carrinho.valorTotal}}</strong> <br />
-                        <span>em até {{carrinho.valorTotalParcelado}}</span>
+                        <span>em até {{carrinho.valorTotalParcelado}} ou</span>
                     </span>
                 </p>
+                <p class="valor-avista" *ngIf="carrinho.valorAVista">{{carrinho.valorAVista}}</p>
                 <div class="botoes">
                     <a [routerLink]="['/endereco']">
                         <button type="button" class="custom buy">
