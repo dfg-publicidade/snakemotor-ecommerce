@@ -40,8 +40,6 @@ export class PedidoDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id'];
 
-      console.log(this.id);
-
       if (this.id) {
         this.visualizarPedido();
       }
@@ -65,7 +63,9 @@ export class PedidoDetailComponent implements OnInit {
           this.metadataService.updateMetadata(this.metatag);
           //FIM META TAG
 
-          if (this.entity.produtos && this.entity.produto.length > 0) {
+          this.entity.produtos = result.content.produtos;
+
+          if (this.entity.produtos && this.entity.produtos.length > 0) {
             this.entity.produtos.forEach((produto: any, index: number) => {
               this.entity.produtos[index].imagem = ProdutoUtil.getImagemDestaque(produto);
 

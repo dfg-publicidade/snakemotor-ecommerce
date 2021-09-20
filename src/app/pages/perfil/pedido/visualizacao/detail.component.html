@@ -16,9 +16,15 @@
                 <app-perfil-menu [active]="url"></app-perfil-menu>
             </div>
             <div class="col-xs-12 col-md-8 col-lg-8">
-                <h3 class="titulo pb-3">{{title}}</h3>
-
+                <h3 class="titulo pb-3">
+                    {{title}}
+                    <span *ngIf="entity && entity.entity" class="badge {{entity.entity.status.id}} ms-3">{{entity.entity.status.valor}}</span>
+                </h3>
                 <div class="info" *ngIf="entity">
+                    <h1 *ngIf="entity">
+                        <span>Número do pedido: </span>
+                        {{entity.entity.protocolo}}
+                    </h1>
                     <p class="info-produto">
                         <span>{{entity.qtde}} produto{{entity.qtde > 1 ? 's' : ''}}</span>
                         <span>{{entity.valor}}</span>
@@ -33,11 +39,15 @@
                     </p>
                     <p class="total">
                         <span><strong>Total</strong></span>
-                        <span>
-                            <strong>{{entity.valorTotal}}</strong> <br />
-                            <span>em até {{entity.valorTotalParcelado}}</span>
-                        </span>
+                        <span><strong>{{entity.valorTotal}}</strong></span>
                     </p>
+
+                    <a class="btn-pagamento" href="{{entity.linkpagamento}}" target="_blank" *ngIf="entity.linkpagamento">
+                        <button class="btn btn-success btn-lg">
+                            {{entity.formaPagamento === 'boleto' ? 'Boleto de pagamento' : 'Realizar pagamento'}}
+                        </button>
+                    </a>
+
                 </div>
 
                 <div class="table-responsive" *ngIf="entity">

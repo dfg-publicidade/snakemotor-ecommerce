@@ -22,7 +22,7 @@
                 </div>
                 <a class="btn-pagamento" href="{{carrinho.pagseguro.transaction.paymentLink}}" target="_blank" *ngIf="carrinho.pagseguro.transaction.paymentLink">
                     <button class="btn btn-success btn-lg">
-                        {{carrinho.formPagamento === 'boleto' ? 'Boleto de pagamento' : 'Realizar pagamento'}}
+                        {{carrinho.formaPagamento === 'boleto' ? 'Boleto de pagamento' : 'Realizar pagamento'}}
                     </button>
                 </a>
                 <h3>{{title}}</h3>

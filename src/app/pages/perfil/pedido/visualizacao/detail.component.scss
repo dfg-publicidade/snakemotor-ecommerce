@@ -7,154 +7,182 @@ section {
     & > div.container {
         & > div.row {
             padding-bottom: 40px;
-            & > div.info {
-                background: #f6f6f6;
-                width: 100%;
-                padding: 25px;
-
-                & > p {
-                    display: flex;
-                    margin: 0;
-                    padding: 0;
-                    color: #575757;
-                    & > span {
-                        width: 50%;
+            & > div {
+                & > h3 {
+                    &.titulo {
                         display: flex;
-
-                        &:first-of-type {
-                            justify-content: flex-start;
-                        }
-                        &:last-of-type {
-                            justify-content: flex-end;
-                        }
-
-                        &.gratis {
-                            color: #22ea27;
-                            font-weight: bold;
-                        }
+                        align-items: center;
+                        text-transform: uppercase;
+                        font-weight: bold;
+                        margin: 0;
                     }
 
-                    &.frete {
-                        padding-bottom: 20px;
-                        margin-bottom: 20px;
-                        border-bottom: 1px solid #e3e3e3;
+                    &>span{
+                        font-size: 20px;
+                        font-weight: bold;
                     }
+                }
+                & > div.info {
+                    background: #b6effb;
+                    border: 1px solid #b6effb;
+                    width: 100%;
+                    padding: 20px;
 
-                    &.total {
-                        margin-bottom: 20px;
+                    & > h1 {
                         & > span {
-                            &:last-of-type {
-                                display: block;
-                                text-align: right;
+                            font-size: 18px;
+                        }
+                    }
 
-                                & > span {
-                                    font-size: 13px;
+                    & > p {
+                        display: flex;
+                        margin: 0;
+                        padding: 0;
+                        color: #055160;
+                        justify-content: flex-start;
+                        & > span {
+                            width: 50%;
+                            display: flex;
+
+                            &:first-of-type {
+                                justify-content: flex-start;
+                            }
+                            &:last-of-type {
+                                justify-content: flex-end;
+                            }
+
+                            &.gratis {
+                                color: #22ea27;
+                                font-weight: bold;
+                            }
+                        }
+
+                        &.frete {
+                            padding-bottom: 20px;
+                            margin-bottom: 20px;
+                            border-bottom: 1px solid #055160;
+                        }
+
+                        &.total {
+                            margin-bottom: 20px;
+                            & > span {
+                                &:last-of-type {
+                                    display: block;
+                                    text-align: right;
+
+                                    & > span {
+                                        font-size: 13px;
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
-            & > div.table-responsive {
-                & > table {
-                    color: #747474;
-                    margin-bottom: 2px;
-                    & > thead {
-                        & > th {
-                            border-bottom: 1px solid #d2d2d2;
-                            padding-bottom: 5px;
-                            font-weight: bold;
-                            text-transform: lowercase;
-                            text-align: center;
+                & > div.table-responsive {
+                    background: #fff;
+                    padding: 20px;
+                    border-radius: 5px;
+                    margin-top: -10px;
+                    & > table {
+                        color: #747474;
+                        margin-bottom: 2px;
+                        & > thead {
+                            & > th {
+                                border-bottom: 1px solid #d2d2d2;
+                                padding-bottom: 5px;
+                                font-weight: bold;
+                                text-transform: lowercase;
+                                text-align: center;
 
-                            &:first-of-type {
-                                text-align: left;
+                                &:first-of-type {
+                                    text-align: left;
+                                }
                             }
                         }
-                    }
 
-                    & > tbody {
-                        & > tr {
-                            & > td {
-                                vertical-align: middle;
-
-                                &.produto {
-                                    width: 100%;
-                                }
-
-                                &.qtde {
-                                    min-width: 130px;
-                                }
-
-                                &.valor {
-                                    min-width: 100px;
-                                }
-
-                                & > div.produto {
-                                    display: flex;
-                                    justify-content: flex-start;
-                                    align-items: center;
+                        & > tbody {
+                            & > tr {
+                                & > td {
                                     vertical-align: middle;
-                                    padding-right: 20px;
 
-                                    & > div.imagem {
-                                        width: 64px;
-                                        height: 64px;
-                                        background-size: contain;
-                                        background-repeat: no-repeat;
-                                        background-position: center;
-                                        margin-right: 15px;
+                                    &.produto {
+                                        width: 100%;
                                     }
 
-                                    & > p {
-                                        & > a {
-                                            color: #747474;
-                                            font-weight: bold;
+                                    &.qtde {
+                                        min-width: 130px;
+                                    }
+
+                                    &.valor {
+                                        min-width: 100px;
+                                    }
+
+                                    & > div.produto {
+                                        display: flex;
+                                        justify-content: flex-start;
+                                        align-items: center;
+                                        vertical-align: middle;
+                                        padding-right: 20px;
+
+                                        & > div.imagem {
+                                            width: 64px;
+                                            height: 64px;
+                                            background-size: contain;
+                                            background-repeat: no-repeat;
+                                            background-position: center;
+                                            margin-right: 15px;
+                                        }
+
+                                        & > p {
+                                            & > a {
+                                                color: #747474;
+                                                font-weight: bold;
+                                                margin: 0;
+                                                padding: 0;
+                                            }
+                                        }
+                                    }
+
+                                    & > div.qtde {
+                                        display: block;
+                                        width: 100%;
+                                        text-align: center;
+                                    }
+
+                                    & > div.remover {
+                                        display: block;
+                                        text-align: center;
+                                        width: 100%;
+                                        & > button {
+                                            color: $text-primary;
+                                            font-size: 14px;
                                             margin: 0;
                                             padding: 0;
                                         }
                                     }
-                                }
 
-                                & > div.qtde {
-                                    display: block;
-                                    width: 100%;
-                                    text-align: center;
-                                }
+                                    & > div.preco {
+                                        text-align: center;
+                                        min-width: 100px;
+                                        & > p {
+                                            margin-bottom: 0;
+                                            color: $text-primary;
 
-                                & > div.remover {
-                                    display: block;
-                                    text-align: center;
-                                    width: 100%;
-                                    & > button {
-                                        color: $text-primary;
-                                        font-size: 14px;
-                                        margin: 0;
-                                        padding: 0;
-                                    }
-                                }
+                                            &.valor-normal {
+                                                font-size: 13px;
+                                                text-decoration: line-through !important;
+                                                color: #636363;
 
-                                & > div.preco {
-                                    text-align: center;
-                                    min-width: 100px;
-                                    & > p {
-                                        margin-bottom: 0;
-                                        color: $text-primary;
-
-                                        &.valor-normal {
-                                            font-size: 13px;
-                                            text-decoration: line-through !important;
-                                            color: #636363;
-
-                                            &.empty {
-                                                text-decoration: none !important;
+                                                &.empty {
+                                                    text-decoration: none !important;
+                                                }
                                             }
                                         }
                                     }
-                                }
 
-                                &.last {
-                                    border-bottom: none !important;
+                                    &.last {
+                                        border-bottom: none !important;
+                                    }
                                 }
                             }
                         }
