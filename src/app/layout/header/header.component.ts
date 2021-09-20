@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CarrinhoService } from "src/app/service/carrinho.service";
 import { CategoriaService } from 'src/app/service/categoria.service';
@@ -14,12 +15,10 @@ declare var $: any;
 export class HeaderComponent implements OnInit {
   configuracao: any;
   scrolled: boolean = false;
-  categoria: any;
-  categoria2: any;
-  categoria3: any;
-  categoria4: any;
 
-  constructor(private router: Router, private categoriaService: CategoriaService, private perfilService: PerfilService, private carrinhoService: CarrinhoService, private configuracaoService: ConfiguracaoService) { }
+  constructor(private router: Router, private categoriaService: CategoriaService, private perfilService: PerfilService, private carrinhoService: CarrinhoService, private configuracaoService: ConfiguracaoService) {
+
+  }
 
   ngOnInit() {
     // this.buscarConfiguracao();
@@ -70,7 +69,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  getUsuario(){
+  getUsuario() {
     return this.perfilService.getSession();
   }
 

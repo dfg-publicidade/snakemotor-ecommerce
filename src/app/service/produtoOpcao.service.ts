@@ -38,6 +38,14 @@ export class ProdutoOpcaoService {
     return this.http.get(url);
   }
 
+  buscarProduto(busca: any): Observable<any> {
+    let url = `${this.urlServico}?_nopaginate=true`;
+
+    url += `&nome=${busca}`;
+
+    return this.http.get(url);
+  }
+
   listarPorProduto(produto: any): Observable<any> {
     let url = `${this.urlServico}?_nopaginate=true`;
 

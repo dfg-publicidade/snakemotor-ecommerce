@@ -13,6 +13,7 @@ import { CategoriaService } from '../service/categoria.service';
 import { CarrinhoService } from '../service/carrinho.service';
 import { ConfiguracaoService } from '../service/configuracao.service';
 import { LoadingModule } from '../componentes/loading/loading.module';
+import { ProdutoOpcaoService } from '../service/produtoOpcao.service';
 
 @NgModule({
 	declarations: [
@@ -38,7 +39,8 @@ import { LoadingModule } from '../componentes/loading/loading.module';
 		CategoriaService,
 		CarrinhoService,
 		ConfiguracaoService,
-		ConfiguracaoService
+		ConfiguracaoService,
+		ProdutoOpcaoService
 	]
 })
 export class LayoutModule {

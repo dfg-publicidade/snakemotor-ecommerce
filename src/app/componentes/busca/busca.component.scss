@@ -19,12 +19,25 @@ div.busca {
             border-radius: 30px;
             padding: 8px;
             position: relative;
+
+            &.expanded {
+                &:hover {
+                    border-bottom-left-radius: 0;
+                    border-bottom-right-radius: 0;
+                    & > div.dropbox-produtos {
+                        &.expanded {
+                            display: block;
+                        }
+                    }
+                }
+            }
             & > i.fas {
                 position: absolute;
                 top: 50%;
                 transform: translateY(-50%);
                 right: 15px;
                 font-size: 25px;
+                cursor: pointer;
             }
             & > input {
                 display: block;
@@ -36,6 +49,70 @@ div.busca {
 
                 &::placeholder {
                     color: #000;
+                }
+            }
+
+            & > div.dropbox-produtos {
+                width: 100%;
+                position: absolute;
+                background: #fff;
+                z-index: 99999;
+                border-bottom-left-radius: 30px;
+                border-bottom-right-radius: 30px;
+                padding-bottom: 30px;
+                overflow: hidden;
+                left: 0;
+                padding-top: 10px;
+                box-shadow: 0 10px 15px -3px rgb(0 0 0 / 7%), 0 4px 6px -2px rgb(0 0 0 / 5%) !important;
+                display: none;
+
+                &.expanded {
+                    margin-bottom: 10px;
+
+                    &:hover {
+                        display: block;
+                    }
+                }
+
+                & > div {
+                    max-height: 40vh;
+                    overflow-y: auto;
+                    padding: 0 20px;
+
+                    & > nav {
+                        padding-bottom: 15px;
+
+                        &:last-of-type {
+                            padding-bottom: 0;
+                        }
+
+                        & > a {
+                            display: block;
+                            width: 100%;
+                            padding-bottom: 10px;
+                            color: #424242;
+
+                            &:hover {
+                                color: #ff0000;
+                            }
+
+                            & > div.loading {
+                                width: 100%;
+                                height: 10px;
+                            }
+
+                            & > img {
+                                width: 32px;
+                                padding-right: 5px;
+                            }
+                        }
+
+                        &.loading {
+                            & > a {
+                                padding-bottom: 0;
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -18,6 +18,8 @@ export class AppComponent {
     this.router.events.subscribe((route) => {
       if (route instanceof NavigationStart) {
         $('.modal').modal('hide');
+        $('div.campo-busca').removeClass('expanded');
+        $('div.dropbox-produtos').removeClass('expanded');
       }
       else if (route instanceof NavigationEnd) {
         Helpers.scrollPageTop();

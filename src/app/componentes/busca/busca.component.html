@@ -1,8 +1,28 @@
 <div class="busca d-sm-flex d-md-flex d-lg-flex">
     <div class="container">
-        <div class="campo-busca">
-            <i class="fas fa-search"></i>
+        <div class="campo-busca" [ngClass]="{'expanded': produtos || loadingServiceBusca}">
+            <i class="fas fa-search" (click)="buscarProdutos()"></i>
             <input type="text" name="busca" [(ngModel)]="busca" (keyup.enter)="buscarProdutos()" placeholder="O que você está procurando?" />
+            <div class="dropbox-produtos" [ngClass]="{'expanded': produtos || loadingServiceBusca}">
+                <div>
+                    <!-- LOADING -->
+                    <nav class="loading" *ngIf="loadingServiceBusca">
+                        <a *ngFor="let number of [1,2,3]"><div class="loading skeleton-box"></div></a>
+                    </nav>
+                    <nav>
+                        <a *ngFor="let produtoOpcao of produtos" [routerLink]="[urlProduto, produtoOpcao.produto.permalink]" [queryParams]="{op: produtoOpcao.id}">
+                            <img [src]="produtoOpcao.imagem">
+                            {{produtoOpcao.produto.nome}}
+                            <ng-container *ngIf="produtoOpcao.cor">{{produtoOpcao.cor.nome}} </ng-container>
+                            <ng-container *ngIf="produtoOpcao.tipo_de_pintura">{{produtoOpcao.tipo_de_pintura.nome}}</ng-container>
+                        </a>
+                    </nav>
+                </div>
+                <div *ngIf="busca && produtos && produtos.length === 0">
+                    <h4>Nenhum produto encontrado para o termo buscado</h4>
+                    <p>Que tal conhecer os produtos da Snake Motor. Navague pelo site e conheça nosso catálogo.</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

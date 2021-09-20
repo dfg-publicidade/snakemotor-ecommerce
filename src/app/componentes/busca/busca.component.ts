@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
+import { ProdutoUtil } from 'src/app/util/produtoUtil';
 declare var $: any;
 
 @Component({
@@ -9,8 +11,12 @@ declare var $: any;
 })
 export class BuscaComponent implements OnInit {
   busca: string = '';
+  produtos: any;
+  urlProduto: string = '/produtos';
 
-  constructor(private router: Router) {
+  loadingServiceBusca: boolean = false;
+  constructor(private router: Router, private produtoOpcaoService: ProdutoOpcaoService) {
+
   }
 
   ngOnInit() {
@@ -18,10 +24,18 @@ export class BuscaComponent implements OnInit {
 
 
   buscarProdutos() {
-    this.router.navigate(['/produtos'], {
-      queryParams: {
-        q: this.busca
-      }
-    });
+    delete this.produtos;
+    this.loadingServiceBusca = true;
+    this.produtoOpcaoService.buscarProduto(this.busca)
+      .subscribe(
+        result => {
+          this.produtos = result.content.items;
+          this.loadingServiceBusca = false;
+
+          this.produtos.forEach((produto: any, index: number) => {
+            this.produtos[index].imagem = ProdutoUtil.getImagemDestaque(produto);
+          });
+        }
+      );
   }
 }
