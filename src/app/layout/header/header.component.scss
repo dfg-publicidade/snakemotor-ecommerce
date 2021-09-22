@@ -244,6 +244,7 @@ header {
             & > nav.menu-principal {
                 width: 100%;
                 display: flex;
+                position: relative;
 
                 & > ul {
                     display: flex;
@@ -288,6 +289,96 @@ header {
                                 padding-left: 10px;
                                 padding-top: 3px;
                                 font-size: 16px;
+                            }
+                        }
+
+                        &.item-menu {
+                            &:hover {
+                                & > a {
+                                    color: #bcde02;
+                                }
+                            }
+
+                            // &.capacete {
+                            //     &:hover {
+                            //         div.capacete {
+                            //             display: flex;
+                            //         }
+                            //     }
+                            // }
+                            // &.vestuario {
+                            //     &:hover {
+                            //         div.vestuario {
+                            //             display: flex;
+                            //         }
+                            //     }
+                            // }
+                        }
+
+                        & > div.categoria-hover {
+                            position: absolute;
+                            left: 0;
+                            top: 50px;
+                            background-color: #fff;
+                            width: 100%;
+                            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 7%), 0 4px 6px -2px rgb(0 0 0 / 5%) !important;
+                            border-top: 5px solid #bcde02;
+                            display: none;
+
+                            & > i {
+                                top: -20px;
+                                font-size: 45px;
+                                color: #bcde02;
+                                position: absolute;
+                            }
+
+                            &.capacete {
+                                & > i {
+                                    left: 83px;
+                                }
+                            }
+                            &.vestuario {
+                                & > i {
+                                    left: 265px;
+                                }
+                            }
+
+                            & > div {
+                                &.bg {
+                                    width: 35%;
+                                    & > div.capa {
+                                        background-image: url("/res/imagens/temporarias/bg-menu.jpg");
+                                        height: 400px;
+                                        background-size: 100%;
+                                        background-position: center;
+                                    }
+                                }
+                                &.subcategorias {
+                                    width: 65%;
+                                    padding: 30px;
+
+                                    & > p {
+                                        color: #c1c1c1;
+                                        text-transform: uppercase;
+                                        font-weight: bold;
+                                    }
+
+                                    & > ul {
+                                        list-style: none;
+                                        margin: 0;
+                                        padding: 0;
+                                        -webkit-column-count: 3; /* Chrome, Safari, Opera */
+                                        -moz-column-count: 3; /* Firefox */
+                                        column-count: 3;
+                                        & > li {
+                                            & > a {
+                                                font-weight: bold;
+                                                color: #686868;
+                                                line-height: 25px;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

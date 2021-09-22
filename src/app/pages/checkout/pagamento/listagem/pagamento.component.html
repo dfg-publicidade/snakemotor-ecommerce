@@ -23,7 +23,7 @@
                     <app-alert-message *ngIf="responseFormasPagamento" [result]='responseFormasPagamento'></app-alert-message>
                     <div class="formas-pagamento">
                         <ng-container *ngFor="let formaPagamento of formasPagamento">
-                            <div class="pagamento theme-first-radios selected theme-second-border-color" *ngIf="formaPagamento[1].name !== 'BALANCE'">
+                            <div class="pagamento theme-first-radios selected theme-second-border-color" *ngIf="formaPagamento[1].name !== 'BALANCE' && formaPagamento[1].name !== 'DEPOSIT'">
                                 <div class="selecao">
                                     <div class="input-radio">
                                         <input type="radio" name="pagamento" formControlName="pagamento" [value]="formaPagamento[1].name">
@@ -57,6 +57,25 @@
                                         </li>
                                     </ng-container>
                                 </ul>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngFor="let formaPagamento of carrinho.formasPagamento">
+                            <div class="pagamento theme-first-radios selected theme-second-border-color" *ngIf="formaPagamento.permalink !== 'pagseguro'">
+                                <div class="selecao">
+                                    <div class="input-radio">
+                                        <input type="radio" name="pagamento" formControlName="pagamento" [value]="formaPagamento.permalink">
+                                        <label></label>
+                                    </div>
+                                    <div class="text-content">
+                                        <div class="tipo">
+                                            <p>
+                                                <i class="fas fa-tablet-alt" *ngIf="formaPagamento.permalink === 'deposito'"></i>
+                                                <i class="fas fa-qrcode"*ngIf="formaPagamento.permalink === 'pix'"></i>
+                                                {{formaPagamento.nome}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </ng-container>
                     </div>

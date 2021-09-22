@@ -41,13 +41,80 @@
                         <span><strong>Total</strong></span>
                         <span><strong>{{entity.valorTotal}}</strong></span>
                     </p>
-
-                    <a class="btn-pagamento" href="{{entity.linkpagamento}}" target="_blank" *ngIf="entity.linkpagamento">
+                </div>
+                <!-- PAGAMENTO PENDENTE -->
+                <div class="alert alert-warning mt-2 mb-2" *ngIf="entity.entity.status.id === 'AGUARDANDO_PAGAMENTO'">
+                    <p>
+                        <span *ngIf="entity && entity.entity" class="badge {{entity.entity.status.id}}">{{entity.entity.status.valor}}</span> <br/>
+                            <span><strong>Para efetuar o pagamento, clique no botão abaixo.</strong></span>
+                        <br />
+                        <i>
+                            Caso o pagamento já tenha sido efetuado, aguarde a compensação do mesmo. <br />
+                            O prazo de confirmação é de 2 dias úteis após o pagamento.
+                        </i>
+                    </p>
+                    <a class="btn-pagamento" href="{{entity.entity.linkPagamento}}" target="_blank" *ngIf="entity.entity.linkPagamento">
                         <button class="btn btn-success btn-lg">
-                            {{entity.formaPagamento === 'boleto' ? 'Boleto de pagamento' : 'Realizar pagamento'}}
+                            Realizar pagamento
                         </button>
                     </a>
+                </div>
 
+                <!-- PAGAMENTO REALIZADO -->
+                <div class="alert alert-success mt-2 mb-2"  *ngIf="entity.entity.status.id === 'PAGO'">
+                    <p>
+                        <span *ngIf="entity && entity.entity" class="badge {{entity.entity.status.id}}">{{entity.entity.status.valor}}</span> <br/>
+                        <strong>O pagamento foi realizado com sucesso!</strong>
+                    </p>
+                </div>
+
+                <!-- EM SEPARAÇÃO -->
+                <div class="alert alert-primary mt-2 mb-2"  *ngIf="entity.entity.status.id === 'EM_SEPARACAO'">
+                    <p>
+                        <span *ngIf="entity && entity.entity" class="badge {{entity.entity.status.id}}">{{entity.entity.status.valor}}</span> <br/>
+                        <strong>O pedido está em separação e logo sairá para entrega.</strong>
+                    </p>
+                </div>
+
+                 <!-- EM TRANSPORTE -->
+                 <div class="alert alert-primary mt-2 mb-2"  *ngIf="entity.entity.status.id === 'EM_TRANSPORTE'">
+                    <p>
+                        <span *ngIf="entity && entity.entity" class="badge {{entity.entity.status.id}}">{{entity.entity.status.valor}}</span> <br/>
+                        <strong>O pedido está em transporte e logo você receberá no endereço informado.</strong>
+                    </p>
+                    <p *ngIf="entity.entity.codigoRastreamento">Código de rastreamento: {{entity.entity.codigoRastreamento}}</p>
+                </div>
+
+                <!-- ENTREGUE -->
+                <div class="alert alert-success mt-2 mb-2"  *ngIf="entity.entity.status.id === 'ENTREGUE'">
+                    <p>
+                        <span *ngIf="entity && entity.entity" class="badge {{entity.entity.status.id}}">{{entity.entity.status.valor}}</span> <br/>
+                        <strong>O pedido foi entregue!</strong>
+                    </p>
+                </div>
+
+                <!-- CANCELADO -->
+                <div class="alert alert-dark mt-2 mb-2"  *ngIf="entity.entity.status.id === 'CANCELADO'">
+                    <p>
+                        <span *ngIf="entity && entity.entity" class="badge {{entity.entity.status.id}}">{{entity.entity.status.valor}}</span> <br/>
+                        <strong>O pedido foi cancelado.</strong>
+                    </p>
+                </div>
+
+                 <!-- EM_DISPUTA -->
+                 <div class="alert alert-warning mt-2 mb-2"  *ngIf="entity.entity.status.id === 'EM_DISPUTA'">
+                    <p>
+                        <span *ngIf="entity && entity.entity" class="badge {{entity.entity.status.id}}">{{entity.entity.status.valor}}</span> <br/>
+                        <strong>Foi aberta uma disputa no sistema de pagamento. Aguarde até que o processo seja finalizado pela empresa de pagamento.</strong>
+                    </p>
+                </div>
+
+                 <!-- DEVOLVIDO -->
+                 <div class="alert alert-dark mt-2 mb-2"  *ngIf="entity.entity.status.id === 'DEVOLVIDO'">
+                    <p>
+                        <span *ngIf="entity && entity.entity" class="badge {{entity.entity.status.id}}">{{entity.entity.status.valor}}</span> <br/>
+                        <strong>O pedido foi devolvido.</strong>
+                    </p>
                 </div>
 
                 <div class="table-responsive" *ngIf="entity">

@@ -65,7 +65,6 @@ export class ProdutoDetailComponent implements OnInit {
   }
 
   buscarProdutoOpcao() {
-    this.formVariacao.controls.qtde.disable();
     this.formVariacao.controls.tamanho.setValue(null);
     this.formVariacao.controls.qtde.setValue(1);
 
@@ -86,14 +85,17 @@ export class ProdutoDetailComponent implements OnInit {
 
           this.produtoOpcao.imagens = ProdutoUtil.getGaleriaImagens(this.produtoOpcao);
 
-          if (this.tamanhos && this.tamanhos.length === 1) {
-            this.produtoOpcaoSelecionado = this.tamanhos[0];
-
+          if (!this.tamanhos || (this.tamanhos && this.tamanhos.length <= 1)) {
+            if (this.tamanhos && this.tamanhos.length === 1) {
+              this.produtoOpcaoSelecionado = this.tamanhos[0];
+            }
             this.formVariacao.get('tamanho').clearValidators();
             this.formVariacao.get('tamanho').updateValueAndValidity();
-
-            this.getQtdes();
           }
+
+          this.produtoOpcaoSelecionado = this.produtoOpcao;
+
+          this.getQtdes();
 
           //INICIO META TAG
           this.metatag.url = this.router.url;

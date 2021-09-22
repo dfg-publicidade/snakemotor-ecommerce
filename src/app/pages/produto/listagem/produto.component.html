@@ -53,8 +53,8 @@
 
             <!-- LISTA DE PRODUTOS -->
             <div class="box-produtos">
-                <h3 *ngIf="produtoOpcoes">
-                    Capacetes
+                <h3 *ngIf="produtoOpcoes && filtrosSelecionados && filtrosSelecionados.length > 0">
+                    <!-- Capacetes -->
                     <ng-container *ngFor="let filtro of filtrosSelecionados">
                         <span *ngIf="filtro && filtro[1].nome">
                             {{filtro[1].nome}}

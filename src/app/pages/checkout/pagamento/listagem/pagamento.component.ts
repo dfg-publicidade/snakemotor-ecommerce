@@ -63,9 +63,12 @@ export class PagamentoComponent implements OnInit {
         if (pagamento) {
           this.formaPagamentoSelecionada = this.formasPagamento.find((fPagto: any) => fPagto && fPagto[0] === pagamento);
 
+          let tipoPagamento = pagamento !== 'pix' &&  pagamento !== 'deposito' ? 'pagseguro' : pagamento;
+
           let carrinho = this.carrinhoService.getCarrinho();
           carrinho.pagamento = {
-            metodo: pagamento
+            metodo: pagamento,
+            formaPagamento: tipoPagamento
           };
           carrinho.formaPagamento = this.formaPagamentoSelecionada[1];
           this.carrinhoService.setCarrinho(carrinho);

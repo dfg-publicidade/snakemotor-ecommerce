@@ -23,9 +23,15 @@
                 <div class="descricao">
                     <h3>
                         {{produtoOpcao.produto.nome}}
+                        <ng-container *ngIf="produtoOpcao.genero">{{produtoOpcao.genero.nome}} </ng-container>
                         <ng-container *ngIf="produtoOpcao.cor">{{produtoOpcao.cor.nome}} </ng-container>
                         <ng-container *ngIf="produtoOpcao.tipo_de_pintura">{{produtoOpcao.tipo_de_pintura.nome}}</ng-container>
+                        <ng-container *ngIf="produtoOpcao.viseira">{{produtoOpcao.viseira.nome === 'Sim' ? ' Com viseira ' : ' Sem viseira '}} </ng-container>
                     </h3>
+                    <span class="variacoes">
+                        <span *ngIf="produtoOpcao.material">{{produtoOpcao.material.nome}}</span>
+                        <span *ngIf="produtoOpcao.caracteristica" alt="caracteristica" title="caracteristica">{{produtoOpcao.caracteristica.nome}}</span>
+                    </span>
                     <span class="avaliacao">
                         <i class="far fa-star pe-1"></i>
                         <i class="far fa-star pe-1"></i>
@@ -54,20 +60,16 @@
                     <span class="tag frete-gratis" *ngIf="produtoOpcao.produto.freteGratis">Frete Grátis</span>
                 </div>
                 <form class="variacoes" [formGroup]="formVariacao">
-                    <div class="cor">
+                    <div class="cor" *ngIf="cores && cores.length > 0">
                         <label>Cor</label>
                         <div class="itens">
-                            <!-- loading -->
-                            <a *ngFor="let item of [1,2,3,4]" [hidden]="cores">
-                                <div class="item loading skeleton-box"></div>
-                            </a>
                             <a [routerLink]="[url, pOpcao.produto.permalink]" [queryParams]="{op: pOpcao.id}" *ngFor="let pOpcao of cores">
                                 <div class="item" [ngClass]="{active: produtoOpcao.id === pOpcao.id}" [ngStyle]="{'background-image': 'url(' + pOpcao.imagem + ')'}"></div>
                             </a>
                         </div>
                     </div>
                     <div class="variacao">
-                        <div *ngIf="tamanhos && tamanhos[0].tamanhoOpcao">
+                        <div *ngIf="tamanhos && tamanhos[0] && tamanhos[0].tamanhoOpcao">
                             <label>Tamanho</label>
                             <ng-select formControlName="tamanho" loadingText="Carregando..." [loading]="!tamanhos" placeholder="Selecione" notFoundText="Nenhum item encontrado" (change)="selecionarOpcao($event)">
                                 <ng-option [value]="pOpcao.id" *ngFor="let pOpcao of tamanhos">{{pOpcao.tamanhoOpcao.nome}}</ng-option>
@@ -81,10 +83,10 @@
                         </div>
                     </div>
                 </form>
-                <button type="button" class="custom buy" (click)="comprar()" [disabled]="formVariacao.status === 'INVALID' || jaPossuiCarrinho(op) || (produtoOpcaoSelecionado && produtoOpcaoSelecionado.adicionadoCarrinho)">
+                <!-- <button type="button" class="custom buy" (click)="comprar()" [disabled]="formVariacao.status === 'INVALID' || jaPossuiCarrinho(op) || (produtoOpcaoSelecionado && produtoOpcaoSelecionado.adicionadoCarrinho)">
                     <i class="fas fa-shopping-cart"></i>
                     Comprar
-                </button>
+                </button> -->
             </div>
         </div>
         <div class="produto-extra-info">

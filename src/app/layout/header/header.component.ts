@@ -23,6 +23,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     // this.buscarConfiguracao();
     // this.listarCategorias();
+
+    // $('li.item-menu').hover(function () {
+    //   $('body').addClass('noscroll');
+    // },
+    //   function () {
+    //     $('body').removeClass('noscroll');
+    //   });
   }
 
   buscarConfiguracao() {

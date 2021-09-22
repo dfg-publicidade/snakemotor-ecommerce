@@ -28,6 +28,13 @@
     &.CANCELADO {
         background: #393e42;
     }
+    &.EM_DISPUTA {
+        background: #ffc107;
+    }
+
+    &.DEVOLVIDO {
+        background: #393e42;
+    }
     &.ERRO {
         background: #dc3545;
     }

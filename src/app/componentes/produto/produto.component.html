@@ -7,9 +7,17 @@
     <div class="imagem" [ngStyle]="{'background-image': 'url(' + item.imagem + ')'}"></div>
     <div class="info">
         <p>
-            {{item.produto.nome}}
-            <ng-container *ngIf="item.cor">{{item.cor.nome}} </ng-container>
-            <ng-container *ngIf="item.tipo_de_pintura">{{item.tipo_de_pintura.nome}}</ng-container>
+            <span class="nome">
+                {{item.produto.nome}}
+                <ng-container *ngIf="item.genero">{{item.genero.nome}} </ng-container>
+                <ng-container *ngIf="item.cor">{{item.cor.nome}} </ng-container>
+                <ng-container *ngIf="item.tipo_de_pintura">{{item.tipo_de_pintura.nome}}</ng-container>
+                <ng-container *ngIf="item.viseira">{{item.viseira.nome === 'Sim' ? ' Com viseira ' : ' Sem viseira '}} </ng-container>
+            </span>
+            <span class="variacoes">
+                <span *ngIf="item.material">{{item.material.nome}}</span>
+                <span *ngIf="item.caracteristica" alt="caracteristica" title="caracteristica">{{item.caracteristica.nome}}</span>
+            </span>
             <span>
                 <i class="fas fa-star pe-1"></i>
                 <i class="fas fa-star pe-1"></i>

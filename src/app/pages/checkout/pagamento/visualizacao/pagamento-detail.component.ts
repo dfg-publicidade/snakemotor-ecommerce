@@ -187,7 +187,8 @@ export class PagamentoDetailComponent implements OnInit {
 
     carrinho.pagamento = {
       hash: this.form.value.hashPagamento,
-      metodo: this.form.value.formaPagamento
+      metodo: this.form.value.formaPagamento,
+      formaPagamento: carrinho.pagamento.formaPagamento
     }
 
     if (carrinho.formaPagamento) {
