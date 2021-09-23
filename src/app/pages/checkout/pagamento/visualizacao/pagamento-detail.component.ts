@@ -60,7 +60,7 @@ export class PagamentoDetailComponent implements OnInit {
           this.carrinho = result.content;
 
           if (this.carrinho) {
-            if (this.carrinho.pagseguro) {
+            if (this.carrinho.pagseguro && this.carrinho.entity.formaPagamento.id !== 'pix' && this.carrinho.entity.formaPagamento.id !== 'deposito') {
               this.loadScriptPagSeguro(this.carrinho.pagseguro.sdk);
             }
 
@@ -69,6 +69,7 @@ export class PagamentoDetailComponent implements OnInit {
             }
 
             let carrinho = this.carrinhoService.getCarrinho();
+
             if (carrinho.formaPagamento) {
               this.carrinho.formaPagamento = carrinho.formaPagamento;
 
@@ -163,8 +164,18 @@ export class PagamentoDetailComponent implements OnInit {
 
                   break;
                 }
-                case 'ONLINE_DEBIT': {
-                  this.form.controls.formaPagamento.setValue('eft');
+                default: {
+                  this.form = this.formBuilder.group({
+                    formaPagamento: new FormControl('', [
+                      Validators.required
+                    ])
+                  },
+                    {
+                      updateOn: 'change'
+                    }
+                  );
+
+                  this.form.controls.formaPagamento.setValue(carrinho.formaPagamento.name);
                   break;
                 }
               }
@@ -302,7 +313,7 @@ export class PagamentoDetailComponent implements OnInit {
   verificaQtdeParcelas() {
     PagSeguroDirectPayment.getInstallments({
       amount: this.carrinho.valorTotalNum,
-      maxInstallmentNoInterest: this.carrinho.parcelamento.maximoParcelas,
+      maxInstallmentNoInterest: this.carrinho.parcelamento.parcelasSemJuros,
       brand: this.tipoCartao.brand.name,
       success: (response: any) => {
         this.parcelamento = response;

@@ -12,11 +12,11 @@
                 <ng-container *ngIf="item.genero">{{item.genero.nome}} </ng-container>
                 <ng-container *ngIf="item.cor">{{item.cor.nome}} </ng-container>
                 <ng-container *ngIf="item.tipo_de_pintura">{{item.tipo_de_pintura.nome}}</ng-container>
-                <ng-container *ngIf="item.viseira">{{item.viseira.nome === 'Sim' ? ' Com viseira ' : ' Sem viseira '}} </ng-container>
             </span>
             <span class="variacoes">
                 <span *ngIf="item.material">{{item.material.nome}}</span>
                 <span *ngIf="item.caracteristica" alt="caracteristica" title="caracteristica">{{item.caracteristica.nome}}</span>
+                <span *ngIf="item.viseira" alt="viseira" title="viseira">{{item.viseira.nome === 'Sim' ? ' Com viseira ' : ' Sem viseira '}}</span>
             </span>
             <span>
                 <i class="fas fa-star pe-1"></i>

@@ -52,17 +52,12 @@ export class CarrinhoDetailComponent implements OnInit {
 
     this.subscription = [];
 
-    let carrinho = this.carrinhoService.getCarrinho();
+    //remove forma entrega, para selecionar novamente
+     let carrinho = this.carrinhoService.getCarrinho();
+     delete carrinho.cep;
+     this.carrinhoService.setCarrinho(carrinho);
 
-    if (carrinho) {
-      if (carrinho.cep) {
-        this.formFrete.controls.cep.setValue(carrinho.cep);
-      }
-
-      this.atualizaValorCarrinho();
-    } else {
-      this.carrinho = {};
-    }
+     this.atualizaValorCarrinho();
   }
 
   atualizaValorCarrinho() {

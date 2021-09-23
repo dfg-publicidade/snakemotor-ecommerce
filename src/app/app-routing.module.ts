@@ -58,6 +58,10 @@ const routes: Routes = [
         path: 'pedidos',
         'canActivate': [AuthGuard],
         loadChildren: () => import('./pages/perfil/pedido/pedido.module').then(m => m.PedidoModule)
+      },
+      {
+        path: ':categoriaPermalink',
+        loadChildren: () => import('./pages/produto/produto.module').then(m => m.ProdutoModule)
       }
     ]
   },

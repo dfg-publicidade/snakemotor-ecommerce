@@ -25,6 +25,23 @@ export class CategoriaService {
     return this.http.get(url);
   }
 
+  buscarPorPermalink(permalink: string): Observable<any> {
+    let url = `${this.urlServico}`;
+
+    url += `?${this.prefix}.permalink=${permalink}`;
+
+    return this.http.get(url);
+  }
+
+  listarPorSuperCategorias(categoriaPermalink: string): Observable<any> {
+    let url = `${this.urlServico}`;
+
+    url += `?_nopaginate=true`;
+    url += `&${this.prefix}.supercategoria.permalink=${categoriaPermalink}`;
+
+    return this.http.get(url);
+  }
+
   visualizar(id: number): Observable<any> {
     let url = this.urlServico + 'produto/' + id + "/visualizar";
 

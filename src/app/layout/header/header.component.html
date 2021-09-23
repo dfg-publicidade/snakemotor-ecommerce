@@ -67,75 +67,105 @@
         <div class="container segunda-linha">
             <nav class="menu-principal">
                 <ul class="d-none d-sm-flex">
-                    <li class="item-menu capacete d-xl-block d-sm-none d-md-flex d-lg-flex">
-                        <a href="#">
+
+                    <!-- CAPACETES -->
+                    <li class="item-menu capacetes d-xl-block d-sm-none d-md-flex d-lg-flex">
+                        <a (click)="openMenu('capacetes')">
                             <i class="icon icon-capacete outline"></i>
                             <span>Capacetes</span>
                         </a>
-                        <div class="categoria-hover capacete">
+                        <div class="categoria-hover menu-capacetes">
                             <i class="fas fa-sort-up"></i>
                             <div class="bg">
-                                <div class="capa"></div>
+                                <div class="capa" [ngStyle]="{'background-imagem': 'url('+ categorias.capacetes && categorias.capacetes.length > 0 && categorias.capacetes[0].supercategoria.imagem ? categorias.capacetes[0].supercategoria.imagem.original : '' +')'}"></div>
                             </div>
                             <div class="subcategorias">
                                 <p>Selecione a subcategoria abaixo</p>
-                                <ul>
-                                    <li><a [routerLink]="['/']">- Alça de baú</a></li>
-                                    <li><a [routerLink]="['/']">- Bolha</a></li>
-                                    <li><a [routerLink]="['/']">- Alça de baú</a></li>
-                                    <li><a [routerLink]="['/']">- Alça de baú</a></li>
-                                    <li><a [routerLink]="['/']">- Alça de baú</a></li>
-                                    <li><a [routerLink]="['/']">- Alça de baú</a></li>
-                                    <li><a [routerLink]="['/']">- Alça de baú</a></li>
-                                    <li><a [routerLink]="['/']">- Alça de baú</a></li>
-                                    <li><a [routerLink]="['/']">- Alça de baú</a></li>
+                                <ul [ngClass]="{'coluna-1': categorias.capacetes && categorias.capacetes.length <= 8, 'coluna-2': categorias.capacetes && categorias.capacetes.length > 8 && categorias.capacetes && categorias.capacetes.length <= 16, 'coluna-3': categorias.capacetes && categorias.capacetes.length > 16}">
+                                    <li *ngFor="let categoria of categorias.capacetes"><a [routerLink]="[categoria.permalink]">- {{categoria.nome}}</a></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
+
+                    <!-- VESTUARIO -->
                     <li class="item-menu vestuario d-xl-block d-sm-none d-md-flex d-lg-flex">
-                        <a href="#">
+                        <a (click)="openMenu('vestuario')">
                             <i class="icon icon-vestuario"></i>
                             <span>Vestuário</span>
                         </a>
-                        <div class="categoria-hover vestuario">
+                        <div class="categoria-hover menu-vestuario">
                             <i class="fas fa-sort-up"></i>
                             <div class="bg">
-                                <div class="capa"></div>
+                                <div class="capa" [ngStyle]="{'background-imagem': 'url('+ categorias.vestuario && categorias.vestuario.length > 0 && categorias.vestuario[0].supercategoria.imagem ? categorias.vestuario[0].supercategoria.imagem.original : '' +')'}"></div>
                             </div>
                             <div class="subcategorias">
                                 <p>Selecione a subcategoria abaixo</p>
-                                <ul>
-                                    <li><a [routerLink]="['/']">- Alça de baú</a></li>
-                                    <li><a [routerLink]="['/']">- Bolha</a></li>
-                                    <li><a [routerLink]="['/']">- Alça de baú</a></li>
-                                    <li><a [routerLink]="['/']">- Alça de baú</a></li>
-                                    <li><a [routerLink]="['/']">- Alça de baú</a></li>
-                                    <li><a [routerLink]="['/']">- Alça de baú</a></li>
-                                    <li><a [routerLink]="['/']">- Alça de baú</a></li>
-                                    <li><a [routerLink]="['/']">- Alça de baú</a></li>
-                                    <li><a [routerLink]="['/']">- Alça de baú</a></li>
+                                <ul [ngClass]="{'coluna-1': categorias.vestuario && categorias.vestuario.length <= 8, 'coluna-2': categorias.vestuario && categorias.vestuario.length > 8 && categorias.vestuario && categorias.vestuario.length <= 16, 'coluna-3': categorias.vestuario && categorias.vestuario.length > 16}">
+                                    <li *ngFor="let categoria of categorias.vestuario"><a [routerLink]="[categoria.permalink]">- {{categoria.nome}}</a></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
+
+                    <!-- BIGTRAIL -->
                     <li class="item-menu bigtrail d-xl-block d-sm-none d-md-flex  d-lg-flex">
-                        <a href="#">
+                        <a (click)="openMenu('bigtrail')">
                             <i class="icon icon-moto-bigtrail"></i>
                             <span>Bigtrail</span>
                         </a>
+                        <div class="categoria-hover menu-bigtrail">
+                            <i class="fas fa-sort-up"></i>
+                            <div class="bg">
+                                <div class="capa" [ngStyle]="{'background-imagem': 'url('+ categorias.bigtrail && categorias.bigtrail.length > 0 && categorias.bigtrail[0].supercategoria.imagem ? categorias.bigtrail[0].supercategoria.imagem.original : '' +')'}"></div>
+                            </div>
+                            <div class="subcategorias">
+                                <p>Selecione a subcategoria abaixo</p>
+                                <ul [ngClass]="{'coluna-1': categorias.bigtrail && categorias.bigtrail.length <= 8, 'coluna-2': categorias.bigtrail && categorias.bigtrail.length > 8 && categorias.bigtrail && categorias.bigtrail.length <= 16, 'coluna-3': categorias.bigtrail && categorias.bigtrail.length > 16}">
+                                    <li *ngFor="let categoria of categorias.bigtrail"><a [routerLink]="[categoria.permalink]">- {{categoria.nome}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </li>
+
+                    <!-- STREET -->
                     <li class="item-menu street d-xl-block d-sm-none d-md-flex  d-lg-flex">
-                        <a href="#">
+                        <a (click)="openMenu('street')">
                             <i class="icon icon-moto"></i>
                             <span>Street</span>
                         </a>
+                        <div class="categoria-hover menu-street">
+                            <i class="fas fa-sort-up"></i>
+                            <div class="bg">
+                                <div class="capa" [ngStyle]="{'background-imagem': 'url('+ categorias.street && categorias.street.length > 0 && categorias.street[0].supercategoria.imagem ? categorias.street[0].supercategoria.imagem.original : '' +')'}"></div>
+                            </div>
+                            <div class="subcategorias">
+                                <p>Selecione a subcategoria abaixo</p>
+                                <ul [ngClass]="{'coluna-1': categorias.street && categorias.street.length <= 8, 'coluna-2': categorias.street && categorias.street.length > 8 && categorias.street && categorias.street.length <= 16, 'coluna-3': categorias.street && categorias.street.length > 16}">
+                                    <li *ngFor="let categoria of categorias.street"><a [routerLink]="[categoria.permalink]">- {{categoria.nome}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </li>
+
+                    <!-- ESCAPAMENTOS -->
                     <li class="item-menu escapamentos d-xl-block d-sm-none d-md-flex d-lg-flex">
-                        <a href="#">
+                        <a (click)="openMenu('escapamentos')">
                             <i class="icon icon-escapamento"></i>
                             <span>Escapamentos</span>
                         </a>
+                        <div class="categoria-hover menu-escapamentos">
+                            <i class="fas fa-sort-up"></i>
+                            <div class="bg">
+                                <div class="capa" [ngStyle]="{'background-imagem': 'url('+ categorias.escapamentos && categorias.escapamentos.length > 0 && categorias.escapamentos[0].supercategoria.imagem ? categorias.escapamentos[0].supercategoria.imagem.original : '' +')'}"></div>
+                            </div>
+                            <div class="subcategorias">
+                                <p>Selecione a subcategoria abaixo</p>
+                                <ul [ngClass]="{'coluna-1': categorias.escapamentos && categorias.escapamentos.length <= 8, 'coluna-2': categorias.escapamentos && categorias.escapamentos.length > 8 && categorias.escapamentos && categorias.escapamentos.length <= 16, 'coluna-3': categorias.escapamentos && categorias.escapamentos.length > 16}">
+                                    <li *ngFor="let categoria of categorias.escapamentos"><a [routerLink]="[categoria.permalink]">- {{categoria.nome}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </li>
                     <li class="d-xl-block d-sm-none d-md-flex  d-lg-flex">
                         <a href="#">

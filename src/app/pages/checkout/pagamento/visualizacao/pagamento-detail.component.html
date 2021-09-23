@@ -23,10 +23,6 @@
                         <i class="fas fa-tablet-alt"></i>
                         Pagar com Débito Online
                     </ng-container>
-                    <ng-container *ngIf="carrinho.formaPagamento.name === 'DEPOSIT'">
-                        <i class="fas fa-donate"></i>
-                        Pagar com Depósito Bancário
-                    </ng-container>
                     <ng-container *ngIf="carrinho.formaPagamento.name === 'CREDIT_CARD'">
                         <i class="far fa-credit-card"></i>
                         Pagar com Cartão de crédito
@@ -35,8 +31,47 @@
                         <i class="fas fa-barcode"></i>
                         Pagar com Boleto
                     </ng-container>
+                    <ng-container *ngIf="carrinho.formaPagamento.name === 'pix'">
+                        <i class="fas fa-qrcode"></i>
+                        Pagar com PIX
+                    </ng-container>
+                    <ng-container *ngIf="carrinho.formaPagamento.name === 'deposito'">
+                        <i class="fas fa-donate"></i>
+                        Pagar com Depósito Bancario
+                    </ng-container>
                     <a [routerLink]="[url]">Alterar forma de pagamento</a>
                 </h3>
+
+                <!-- PIX -->
+                <div class="texto" *ngIf="carrinho.formaPagamento.name === 'pix'">
+                    <p><strong>Instruçoes para pagar com Pix</strong></p>
+                    <p>
+                        1. Para efetuar o pagamento, copie a chave Pix ou aponte a câmera do seu smartphone para o QR Code. <br />
+                        2. Abra o site ou aplicativo do seu banco e selecione a opção pagar com Pix. <br />
+                        3. Após a transferencia, você receberá por e-mail a confirmação da compra. <br />
+                    </p>
+
+                    <p>
+                        <strong>Atenção</strong> <br />
+                        - O prazo de entrega começa a contar após a confirmação do pagamento.
+                    </p>
+                </div>
+
+                <!-- DEPOSITO BANCÁRIO -->
+                <div class="texto" *ngIf="carrinho.formaPagamento.name === 'deposito'">
+                    <p><strong>Instruçoes para pagar com depósito bancário</strong></p>
+                    <p>
+                        <strong>1.</strong> Conclua a compra clicando no botão <strong>Concluir a compra</strong>. Você será direcionado para a Página
+                        contendo os dados para realizar o depósito bancário.<br />
+                        <strong>2.</strong> Para efetuar o depósito, dirija-se até a agência bancária com os dados fornecidos para depósito. <br />
+                        <strong>3.</strong> Após a confirmação do depósito, você receberá por e-mail a confirmação do pagamento. <br />
+                    </p>
+
+                    <p>
+                        <strong>Atenção</strong> <br />
+                        - O prazo de entrega começa a contar após a confirmação do pagamento.
+                    </p>
+                </div>
 
                 <!-- BOLETO -->
                 <div class="texto" *ngIf="carrinho.formaPagamento.name === 'BOLETO'">
@@ -74,7 +109,7 @@
                                         <div class="text-content">
                                             <div class="tipo">
                                                 <p>
-                                                    <img src="{{carrinho.pagseguro.path}}{{banco[1].images['SMALL'].path}}" title="{{banco[1].displayName}}" alt="{{banco[1].displayName}}"/>
+                                                    <img src="{{carrinho.pagseguro.path}}{{banco[1].images['SMALL'].path}}" title="{{banco[1].displayName}}" alt="{{banco[1].displayName}}" />
                                                     {{banco[1].displayName}}
                                                 </p>
                                             </div>
@@ -169,7 +204,10 @@
                     <span><strong>Total</strong></span>
                     <span>
                         <strong>{{carrinho.valorTotal}}</strong> <br />
-                        <span>em até {{carrinho.valorTotalParcelado}} ou</span>
+                        <span>
+                            <ng-container *ngIf="carrinho.formaPagamento.name === 'CREDIT_CARD'">em até {{carrinho.valorTotalParcelado}}</ng-container>
+                            <ng-container *ngIf="carrinho.valorAVista && carrinho.formaPagamento.name !== 'CREDIT_CARD'"> ou </ng-container>
+                        </span>
                     </span>
                 </p>
                 <p class="valor-avista" *ngIf="carrinho.valorAVista && carrinho.formaPagamento.name !== 'CREDIT_CARD'">{{carrinho.valorAVista}}</p>

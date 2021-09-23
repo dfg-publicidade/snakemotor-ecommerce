@@ -30,12 +30,12 @@
                                                 <ng-container *ngIf="item.genero">{{item.genero.nome}} </ng-container>
                                                 <ng-container *ngIf="item.cor">{{item.cor.nome}} </ng-container>
                                                 <ng-container *ngIf="item.tipo_de_pintura">{{item.tipo_de_pintura.nome}}</ng-container>
-                                                <ng-container *ngIf="item.viseira">{{item.viseira.nome === 'Sim' ? ' Com viseira ' : ' Sem viseira '}} </ng-container>
                                             </a> <br />
                                             <ng-container *ngIf="item.cor"><strong>cor</strong>: {{item.cor.nome}} <br /></ng-container>
                                             <ng-container *ngIf="item.tamanhoOpcao"><strong>tamanho</strong>: {{item.tamanhoOpcao.nome}} <br /></ng-container>
                                             <ng-container *ngIf="item.caracteristica"><strong>característica</strong>: {{item.caracteristica.nome}} <br /></ng-container>
                                             <ng-container *ngIf="item.material"><strong>material</strong>: {{item.material.nome}} </ng-container>
+                                            <ng-container *ngIf="item.viseira"><strong>viseira</strong>: {{item.viseira.nome === 'Sim' ? ' Com viseira ' : ' Sem viseira '}} </ng-container>
                                         </p>
                                     </div>
                                 </td>

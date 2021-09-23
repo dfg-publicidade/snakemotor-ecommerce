@@ -63,14 +63,23 @@ export class PagamentoComponent implements OnInit {
         if (pagamento) {
           this.formaPagamentoSelecionada = this.formasPagamento.find((fPagto: any) => fPagto && fPagto[0] === pagamento);
 
-          let tipoPagamento = pagamento !== 'pix' &&  pagamento !== 'deposito' ? 'pagseguro' : pagamento;
+          let tipoPagamento = pagamento !== 'pix' && pagamento !== 'deposito' ? 'pagseguro' : pagamento;
 
           let carrinho = this.carrinhoService.getCarrinho();
           carrinho.pagamento = {
             metodo: pagamento,
             formaPagamento: tipoPagamento
           };
-          carrinho.formaPagamento = this.formaPagamentoSelecionada[1];
+          if (this.formaPagamentoSelecionada) {
+            //forma de pagamento pagseguro
+            carrinho.formaPagamento = this.formaPagamentoSelecionada[1];
+          } else {
+            //forma de pagamento da empresa
+            this.formaPagamentoSelecionada = this.carrinho.formasPagamento.find((fPagto: any) => fPagto && fPagto.permalink === pagamento);
+            carrinho.formaPagamento = {
+              name: this.formaPagamentoSelecionada.permalink
+            }
+          }
           this.carrinhoService.setCarrinho(carrinho);
         }
       }, 100);

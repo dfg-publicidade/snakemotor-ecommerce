@@ -2,8 +2,9 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
 import Helpers from 'src/app/helpers';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MetadataService } from 'src/app/service/metaData.service';
+import { CategoriaService } from 'src/app/service/categoria.service';
 
 declare var $: any;
 
@@ -38,21 +39,37 @@ export class ProdutoComponent implements OnInit {
   prefix: string = 'produtoOpcao';
   metatag: any = {};
 
+  categoriaPermalink: string = '';
+
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private produtoOpcaoService: ProdutoOpcaoService,
+    private categoriaService: CategoriaService,
     private metadataService: MetadataService
-    ) {
+  ) {
 
   }
 
   ngOnInit(): void {
+    // this.route.params.subscribe(params => {
+    //   this.categoriaPermalink = params['categoriaPermalink'];
+
+    //   if (this.categoriaPermalink) {
+    //     this.buscarCategoriaPorPermalink();
+    //   }
+    // });
+
     //INICIO META TAG
     this.metatag.url = this.router.url;
     this.metatag.title = `Produtos`;
     this.metadataService.updateMetadata(this.metatag);
     //FIM META TAG
-    
+
+    // if (!this.categoriaPermalink) {
+    //   this.listarProdutos(false);
+    // }
+
     this.listarProdutos(false);
   }
 
@@ -148,6 +165,26 @@ export class ProdutoComponent implements OnInit {
     });
   }
 
+  buscarCategoriaPorPermalink() {
+    this.categoriaService.buscarPorPermalink(this.categoriaPermalink)
+      .subscribe(
+        result => {
+          if (result.content.items && result.content.items.length > 0) {
+            this.opcoesFiltro = {
+              categorias: [{
+                id: result.content.items[0].id,
+                nome: result.content.items[0].nome,
+              }]
+            }
+
+            this.opcoesFiltro = Object.entries(this.opcoesFiltro);
+
+            this.setFilterVariacao('categorias', this.categoriaPermalink);
+          }
+        }
+      );
+  }
+
   possuiFiltro(variacao: string, opcaoId: string) {
     let possuiFiltro: boolean = false;
 
@@ -169,7 +206,7 @@ export class ProdutoComponent implements OnInit {
     this.listarProdutos(false);
   }
 
-  setOrder(order: string){
+  setOrder(order: string) {
     this.order = order;
 
     this.listarProdutos(false);

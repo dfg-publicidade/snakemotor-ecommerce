@@ -178,7 +178,6 @@ section {
                     }
 
                     &.total {
-                        margin-bottom: 20px;
                         & > span {
                             &:last-of-type {
                                 display: block;
@@ -189,6 +188,13 @@ section {
                                 }
                             }
                         }
+                    }
+
+                    &.valor-avista {
+                        font-size: 13px;
+                        display: block;
+                        text-align: right;
+                        color: #ff0000;
                     }
                 }
             }

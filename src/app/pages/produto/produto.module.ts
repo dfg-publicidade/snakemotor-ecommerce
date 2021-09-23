@@ -1,5 +1,5 @@
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -33,7 +33,8 @@ import { ProdutoDetailComponent } from './visualizacao/produto-detail.component'
   providers: [
     ProdutoService,
     ProdutoOpcaoService,
-    CarrinhoService
+    CarrinhoService,
+    Location
   ]
 })
 export class ProdutoModule { }

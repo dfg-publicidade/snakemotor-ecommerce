@@ -15,6 +15,14 @@ declare var $: any;
 export class HeaderComponent implements OnInit {
   configuracao: any;
   scrolled: boolean = false;
+  categorias: any = {
+    capacetes: '',
+    vestuario: '',
+    bigtrail: '',
+    street: '',
+    escapamentos: ''
+  }
+  categoriaLista: any;
 
   constructor(private router: Router, private categoriaService: CategoriaService, private perfilService: PerfilService, private carrinhoService: CarrinhoService, private configuracaoService: ConfiguracaoService) {
 
@@ -22,14 +30,20 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     // this.buscarConfiguracao();
-    // this.listarCategorias();
 
-    // $('li.item-menu').hover(function () {
-    //   $('body').addClass('noscroll');
-    // },
-    //   function () {
-    //     $('body').removeClass('noscroll');
-    //   });
+    this.categoriaLista = Object.entries(this.categorias);
+
+    this.categoriaLista.forEach((categoria: any) => {
+      this.listarCategorias(categoria[0]);
+    });
+
+    $('li.item-menu').hover(() => {
+      //
+    },
+      () => {
+        this.closeMenus();
+        $('body').removeClass('noscroll');
+      });
   }
 
   buscarConfiguracao() {
@@ -43,11 +57,41 @@ export class HeaderComponent implements OnInit {
       );
   }
 
-  listarCategorias() {
+  listarCategorias(categoriaPermalink: string) {
+    this.categoriaService.listarPorSuperCategorias(categoriaPermalink)
+      .subscribe(
+        result => {
+          this.categorias[categoriaPermalink] = result.content.items;
+        }
+      );
   }
 
   getCarrinho() {
     return this.carrinhoService.getCarrinho();
+  }
+
+  openMenu(menu: string) {
+    this.closeMenus();
+    $('body').addClass('noscroll');
+
+    let item = document.querySelector(`li.${menu}`);
+    if (item) {
+      let x = item.getBoundingClientRect().x;
+      let width = item.getBoundingClientRect().width;
+      
+      $(`div.menu-${menu} i.fas`).css({ 'left':  x});
+    }
+
+    $(`div.menu-${menu}`).css({ 'display': 'flex' });
+  }
+
+  closeMenus() {
+    this.categoriaLista.forEach((categoria: any) => {
+      let divCategoria = $(`div.menu-${categoria[0]}`);
+      if (divCategoria) {
+        divCategoria.hide();
+      }
+    });
   }
 
   @HostListener('window:scroll', ['$event'])

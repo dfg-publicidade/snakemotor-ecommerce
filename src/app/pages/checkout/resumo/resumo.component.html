@@ -19,10 +19,25 @@
                     <hr>
                     <p>Um e-mail de confirmação foi enviado a você em {{usuario.cliente.email}} com todos os detalhes do pedido.</p>
                     <p>Após a confirmação do pagamento, você será notificado por e-mail.</p>
+                    <ng-container *ngIf="carrinho.entity.formaPagamento.id === 'pix' || carrinho.entity.formaPagamento.id === 'deposito'">
+                        <p><strong>DADOS PARA PAGAMENTO</strong></p>
+                        <ng-container *ngIf="carrinho.entity.formaPagamento.id === 'deposito'">
+                            <div [innerHtml]="carrinho[carrinho.entity.formaPagamento.id].informacoes | sanitizeHtml"></div>
+                            <p><strong>Valor do depósito: </strong>{{carrinho.valorAVista}}</p>
+                        </ng-container>
+                        <ng-container *ngIf="carrinho.entity.formaPagamento.id === 'pix'">
+                            <p>
+                                <strong>Tipo de chave: </strong>{{carrinho[carrinho.entity.formaPagamento.id].tipo}} <br/>
+                                <strong>Chave: </strong>{{carrinho[carrinho.entity.formaPagamento.id].chave}} <br/>
+                                <strong>Nome: </strong>{{carrinho[carrinho.entity.formaPagamento.id].nome}} <br/>
+                            </p>
+                            <p><strong>Valor do depósito: </strong>{{carrinho.valorAVista}}</p>
+                        </ng-container>
+                    </ng-container>
                 </div>
-                <a class="btn-pagamento" href="{{carrinho.pagseguro.transaction.paymentLink}}" target="_blank" *ngIf="carrinho.pagseguro.transaction.paymentLink">
+                <a class="btn-pagamento" href="{{carrinho.pagseguro.transaction.paymentLink}}" target="_blank" *ngIf="carrinho.pagseguro && carrinho.pagseguro.transaction && carrinho.pagseguro.transaction.paymentLink">
                     <button class="btn btn-success btn-lg">
-                        {{carrinho.formaPagamento === 'boleto' ? 'Boleto de pagamento' : 'Realizar pagamento'}}
+                        {{carrinho.entity.formaPagamento.id === 'boleto' ? 'Boleto de pagamento' : 'Realizar pagamento'}}
                     </button>
                 </a>
                 <h3>{{title}}</h3>
@@ -64,25 +79,29 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr *ngIf="carrinho.formaPagamento">
+                            <tr *ngIf="carrinho.entity.formaPagamento">
                                 <td colspan="3">
                                     <p class="mb-0"><strong>Forma de pagamento </strong></p>
                                     <span>
-                                        <ng-container *ngIf="carrinho.formaPagamento === 'eft'">
+                                        <ng-container *ngIf="carrinho.entity.formaPagamento.id === 'eft'">
                                             <i class="fas fa-tablet-alt"></i>
                                             Débito Online
                                         </ng-container>
-                                        <ng-container *ngIf="carrinho.formaPagamento === 'deposit'">
-                                            <i class="fas fa-donate"></i>
-                                            Depósito Bancário
-                                        </ng-container>
-                                        <ng-container *ngIf="carrinho.formaPagamento === 'creditCard'">
+                                        <ng-container *ngIf="carrinho.entity.formaPagamento.id === 'creditCard'">
                                             <i class="far fa-credit-card"></i>
                                             Cartão de crédito
                                         </ng-container>
-                                        <ng-container *ngIf="carrinho.formaPagamento === 'boleto'">
+                                        <ng-container *ngIf="carrinho.entity.formaPagamento.id === 'boleto'">
                                             <i class="fas fa-barcode"></i>
                                             Boleto
+                                        </ng-container>
+                                        <ng-container *ngIf="carrinho.entity.formaPagamento.id === 'deposito'">
+                                            <i class="fas fa-donate"></i>
+                                            Depósito bancário
+                                        </ng-container>
+                                        <ng-container *ngIf="carrinho.entity.formaPagamento.id === 'pix'">
+                                            <i class="fas fa-qrcode"></i>
+                                            PIX
                                         </ng-container>
                                     </span>
                                 </td>
@@ -101,7 +120,7 @@
                                 <td colspan="3" class="last">
                                     <p class="mb-0"><strong>Forma de entrega</strong></p>
                                     <span>
-                                        {{formaEntrega.nome}} <br/>
+                                        {{formaEntrega.nome}} <br />
                                         Prazo de entrega: {{formaEntrega.prazoEntrega}}
                                     </span>
                                 </td>
@@ -128,9 +147,13 @@
                     <span><strong>Total</strong></span>
                     <span>
                         <strong>{{carrinho.valorTotal}}</strong> <br />
-                        <span>em até {{carrinho.valorTotalParcelado}}</span>
+                        <span>
+                            <ng-container *ngIf="carrinho.entity.formaPagamento.id === 'creditcard'">em até {{carrinho.valorTotalParcelado}}</ng-container>
+                            <ng-container *ngIf="carrinho.valorAVista && carrinho.entity.formaPagamento.id !== 'creditCard'"> ou </ng-container>
+                        </span>
                     </span>
                 </p>
+                <p class="valor-avista" *ngIf="carrinho.valorAVista && carrinho.entity.formaPagamento.id !== 'creditCard'">{{carrinho.valorAVista}}</p>
             </div>
         </div>
     </div>

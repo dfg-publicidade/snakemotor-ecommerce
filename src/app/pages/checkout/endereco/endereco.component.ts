@@ -106,7 +106,9 @@ export class EnderecoComponent implements OnInit {
 
     //VERIFICA CAMPO ENDEREÇO, PARA BUSCAR AS FORMAS DE ENTREGA
     this.formFrete.controls.endereco.valueChanges.subscribe(() => {
-      delete this.carrinho.formasEntrega;
+      if (this.carrinho && this.carrinho.formasEntrega) {
+        delete this.carrinho.formasEntrega;
+      }
       setTimeout(() => {
         let endereco = this.enderecos.find((end: any) => end && end.id === this.formFrete.value.endereco);
 
@@ -139,6 +141,11 @@ export class EnderecoComponent implements OnInit {
     //FIM META TAG
 
     this.subscription = [];
+
+    //remove forma entrega, para selecionar novamente
+    let carrinho = this.carrinhoService.getCarrinho();
+    delete carrinho.formaEntrega;
+    this.carrinhoService.setCarrinho(carrinho);
 
     this.listarEnderecos();
     this.atualizaValorCarrinho();
@@ -230,6 +237,7 @@ export class EnderecoComponent implements OnInit {
       carrinho.formaEntrega = this.formFrete.value.formaEntrega ? this.formFrete.value.formaEntrega : '';
       let endereco = this.enderecos.find((end: any) => end && end.id === this.formFrete.value.endereco);
       carrinho.endereco = endereco.id;
+
       this.carrinhoService.setCarrinho(carrinho);
     }
   }

@@ -26,11 +26,11 @@
                         <ng-container *ngIf="produtoOpcao.genero">{{produtoOpcao.genero.nome}} </ng-container>
                         <ng-container *ngIf="produtoOpcao.cor">{{produtoOpcao.cor.nome}} </ng-container>
                         <ng-container *ngIf="produtoOpcao.tipo_de_pintura">{{produtoOpcao.tipo_de_pintura.nome}}</ng-container>
-                        <ng-container *ngIf="produtoOpcao.viseira">{{produtoOpcao.viseira.nome === 'Sim' ? ' Com viseira ' : ' Sem viseira '}} </ng-container>
                     </h3>
                     <span class="variacoes">
                         <span *ngIf="produtoOpcao.material">{{produtoOpcao.material.nome}}</span>
                         <span *ngIf="produtoOpcao.caracteristica" alt="caracteristica" title="caracteristica">{{produtoOpcao.caracteristica.nome}}</span>
+                        <span *ngIf="produtoOpcao.viseira" alt="viseira" title="viseira">{{produtoOpcao.viseira.nome === 'Sim' ? ' Com viseira ' : ' Sem viseira '}}</span>
                     </span>
                     <span class="avaliacao">
                         <i class="far fa-star pe-1"></i>
