@@ -184,11 +184,11 @@ export class EnderecoComponent implements OnInit {
         result => {
           this.enderecos = result.content.items;
 
-          if (this.enderecos && this.enderecos.length === 1) {
-            this.formFrete.controls.endereco.setValue(this.enderecos[0].id);
-            this.formFrete.controls.cep.setValue(this.enderecos[0].cep);
-            this.consultarFrete();
-          }
+          // if (this.enderecos && this.enderecos.length === 1) {
+          //   this.formFrete.controls.endereco.setValue(this.enderecos[0].id);
+          //   this.formFrete.controls.cep.setValue(this.enderecos[0].cep);
+          //   this.consultarFrete();
+          // }
 
           this.getFormaEntrega();
 

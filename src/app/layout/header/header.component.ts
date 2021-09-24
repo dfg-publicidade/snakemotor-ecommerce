@@ -15,14 +15,8 @@ declare var $: any;
 export class HeaderComponent implements OnInit {
   configuracao: any;
   scrolled: boolean = false;
-  categorias: any = {
-    capacetes: '',
-    vestuario: '',
-    bigtrail: '',
-    street: '',
-    escapamentos: ''
-  }
-  categoriaLista: any;
+  listaCategorias: any = 'capacetes,vestuario,bigtrail,street,escapamentos';
+  categorias: any;
 
   constructor(private router: Router, private categoriaService: CategoriaService, private perfilService: PerfilService, private carrinhoService: CarrinhoService, private configuracaoService: ConfiguracaoService) {
 
@@ -31,19 +25,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     // this.buscarConfiguracao();
 
-    this.categoriaLista = Object.entries(this.categorias);
-
-    this.categoriaLista.forEach((categoria: any) => {
-      this.listarCategorias(categoria[0]);
-    });
-
-    $('li.item-menu').hover(() => {
-      //
-    },
-      () => {
-        this.closeMenus();
-        $('body').removeClass('noscroll');
-      });
+    this.listarCategorias(this.listaCategorias);
   }
 
   buscarConfiguracao() {
@@ -61,7 +43,18 @@ export class HeaderComponent implements OnInit {
     this.categoriaService.listarPorSuperCategorias(categoriaPermalink)
       .subscribe(
         result => {
-          this.categorias[categoriaPermalink] = result.content.items;
+          this.categorias = Object.entries(result.content);
+
+          setTimeout(() => {
+            $('li.item-menu').hover(() => {
+              //
+            },
+              () => {
+                this.closeMenus();
+                $('body').removeClass('noscroll');
+                $('header').removeClass('open-menu');
+              });
+          }, 100);
         }
       );
   }
@@ -73,32 +66,41 @@ export class HeaderComponent implements OnInit {
   openMenu(menu: string) {
     this.closeMenus();
     $('body').addClass('noscroll');
+    $('header').addClass('open-menu');
 
     let item = document.querySelector(`li.${menu}`);
     if (item) {
       let x = item.getBoundingClientRect().x;
       let width = item.getBoundingClientRect().width;
-      
-      $(`div.menu-${menu} i.fas`).css({ 'left':  x});
+
+      $(`i.fa-sort-up`).css({ 'left': x + (width / 2) });
     }
 
     $(`div.menu-${menu}`).css({ 'display': 'flex' });
   }
 
   closeMenus() {
-    this.categoriaLista.forEach((categoria: any) => {
-      let divCategoria = $(`div.menu-${categoria[0]}`);
+    this.listaCategorias.split(',').forEach((categoria: any) => {
+      let divCategoria = $(`div.menu-${categoria}`);
       if (divCategoria) {
         divCategoria.hide();
       }
     });
   }
 
+  getCapaCategoria(categorias: any): string {
+    if (categorias && categorias[0] && categorias[0].supercategoria && categorias[0].supercategoria.imagem) {
+      return categorias[0].supercategoria.imagem ? categorias[0].supercategoria.imagem.original : '';
+    } else {
+      return ''
+    }
+  }
+
   @HostListener('window:scroll', ['$event'])
   scrollPage() {
     const win = $(window);
 
-    // this.scrolled = win.scrollTop() > 50;
+    this.scrolled = win.scrollTop() > 50;
   }
 
   overMenu() {

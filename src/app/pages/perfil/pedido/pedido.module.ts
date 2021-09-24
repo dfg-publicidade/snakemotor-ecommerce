@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { PipeModule } from 'src/app/pipe/pipeModule';
 import { PedidoService } from 'src/app/service/pedido.service';
 import { PerfilMenuModule } from '../menu/perfil-menu.module';
 import { PedidoComponent } from './listagem/listagem.component';
@@ -14,7 +15,8 @@ import { PedidoDetailComponent } from './visualizacao/detail.component';
   imports: [
     PedidoRoutingModule,
     CommonModule,
-    PerfilMenuModule
+    PerfilMenuModule,
+    PipeModule
   ],
   providers: [
     PedidoService

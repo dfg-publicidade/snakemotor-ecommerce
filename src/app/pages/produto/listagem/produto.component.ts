@@ -27,6 +27,7 @@ export class ProdutoComponent implements OnInit {
   total: number = 0;
   opcoesFiltro: any;
   categoriasFiltro: any;
+  categoria: any;
   marcasFiltro: any;
   filter: any = {};
   order: any;
@@ -52,13 +53,13 @@ export class ProdutoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.route.params.subscribe(params => {
-    //   this.categoriaPermalink = params['categoriaPermalink'];
+    this.route.params.subscribe(params => {
+      this.categoriaPermalink = params['categoriaPermalink'];
 
-    //   if (this.categoriaPermalink) {
-    //     this.buscarCategoriaPorPermalink();
-    //   }
-    // });
+      if (this.categoriaPermalink) {
+        this.buscarCategoriaPorPermalink();
+      }
+    });
 
     //INICIO META TAG
     this.metatag.url = this.router.url;
@@ -66,11 +67,9 @@ export class ProdutoComponent implements OnInit {
     this.metadataService.updateMetadata(this.metatag);
     //FIM META TAG
 
-    // if (!this.categoriaPermalink) {
-    //   this.listarProdutos(false);
-    // }
-
-    this.listarProdutos(false);
+    if (!this.categoriaPermalink) {
+      this.listarProdutos(false);
+    }
   }
 
   listarProdutos(loadMore: boolean) {
@@ -157,6 +156,17 @@ export class ProdutoComponent implements OnInit {
           };
         }
 
+        if (!variacoes && this.categoria) {
+          variacoes += `${this.categoria.id},`;
+        }
+
+        if (this.categoria && !this.filter['categoria.id'].id) {
+          this.filter['categoria.id'] = {
+            id: this.categoria.id,
+            nome: this.categoria.nome,
+          };
+        }
+
         this.filter = Object.assign({}, this.filter);
 
         this.page = 1;
@@ -169,17 +179,19 @@ export class ProdutoComponent implements OnInit {
     this.categoriaService.buscarPorPermalink(this.categoriaPermalink)
       .subscribe(
         result => {
-          if (result.content.items && result.content.items.length > 0) {
+          this.categoria = result.content && result.content.items && result.content.items.length > 0 ? result.content.items[0] : '';
+
+          if (this.categoria) {
             this.opcoesFiltro = {
               categorias: [{
-                id: result.content.items[0].id,
-                nome: result.content.items[0].nome,
+                id: this.categoria.id,
+                nome: this.categoria.nome,
               }]
             }
 
             this.opcoesFiltro = Object.entries(this.opcoesFiltro);
 
-            this.setFilterVariacao('categorias', this.categoriaPermalink);
+            this.setFilterVariacao('categorias', this.categoria.id);
           }
         }
       );
@@ -200,6 +212,13 @@ export class ProdutoComponent implements OnInit {
 
   removerFiltroSelecionado(filtro: string) {
     delete this.filter[filtro];
+
+    if (this.categoria && !this.filter['categoria.id'] || (this.filter['categoria.id'] && !this.filter['categoria.id'].id)) {
+      this.filter['categoria.id'] = {
+        id: this.categoria.id,
+        nome: this.categoria.nome,
+      };
+    }
 
     this.filter = Object.assign({}, this.filter);
 

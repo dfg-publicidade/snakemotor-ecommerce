@@ -26,7 +26,7 @@
             <div class="icones d-md-flex d-lg-flex">
                 <div class="dropdown" *ngIf="getUsuario()">
                     <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="icon icon-capacete"></i>
+                        <i class="icon icon-capacetes"></i>
                         <span class="titulo">
                             Olá, <br />
                             <strong>{{getUsuario().nome}}</strong>
@@ -66,103 +66,20 @@
         </div>
         <div class="container segunda-linha">
             <nav class="menu-principal">
-                <ul class="d-none d-sm-flex">
-
-                    <!-- CAPACETES -->
-                    <li class="item-menu capacetes d-xl-block d-sm-none d-md-flex d-lg-flex">
-                        <a (click)="openMenu('capacetes')">
-                            <i class="icon icon-capacete outline"></i>
-                            <span>Capacetes</span>
+                <ul class="d-none d-sm-flex" *ngIf="categorias">
+                    <li class="item-menu {{categoria[0]}} d-xl-block d-sm-none d-md-flex d-lg-flex" *ngFor="let categoria of categorias">
+                        <a (click)="openMenu(categoria[0])">
+                            <i class="icon icon-{{categoria[0]}} outline"></i>
+                            <span>{{categoria[1].nome}}</span>
                         </a>
-                        <div class="categoria-hover menu-capacetes">
-                            <i class="fas fa-sort-up"></i>
+                        <div class="categoria-hover menu-{{categoria[0]}}">
                             <div class="bg">
-                                <div class="capa" [ngStyle]="{'background-imagem': 'url('+ categorias.capacetes && categorias.capacetes.length > 0 && categorias.capacetes[0].supercategoria.imagem ? categorias.capacetes[0].supercategoria.imagem.original : '' +')'}"></div>
+                                <div *ngIf="categoria[1].imagem" class="capa" [ngStyle]="{'background-image': 'url(' + categoria[1].imagem.original + ')'}"></div>
                             </div>
-                            <div class="subcategorias">
+                            <div class="subcategorias" *ngIf="categoria[1] && categoria[1].categorias">
                                 <p>Selecione a subcategoria abaixo</p>
-                                <ul [ngClass]="{'coluna-1': categorias.capacetes && categorias.capacetes.length <= 8, 'coluna-2': categorias.capacetes && categorias.capacetes.length > 8 && categorias.capacetes && categorias.capacetes.length <= 16, 'coluna-3': categorias.capacetes && categorias.capacetes.length > 16}">
-                                    <li *ngFor="let categoria of categorias.capacetes"><a [routerLink]="[categoria.permalink]">- {{categoria.nome}}</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- VESTUARIO -->
-                    <li class="item-menu vestuario d-xl-block d-sm-none d-md-flex d-lg-flex">
-                        <a (click)="openMenu('vestuario')">
-                            <i class="icon icon-vestuario"></i>
-                            <span>Vestuário</span>
-                        </a>
-                        <div class="categoria-hover menu-vestuario">
-                            <i class="fas fa-sort-up"></i>
-                            <div class="bg">
-                                <div class="capa" [ngStyle]="{'background-imagem': 'url('+ categorias.vestuario && categorias.vestuario.length > 0 && categorias.vestuario[0].supercategoria.imagem ? categorias.vestuario[0].supercategoria.imagem.original : '' +')'}"></div>
-                            </div>
-                            <div class="subcategorias">
-                                <p>Selecione a subcategoria abaixo</p>
-                                <ul [ngClass]="{'coluna-1': categorias.vestuario && categorias.vestuario.length <= 8, 'coluna-2': categorias.vestuario && categorias.vestuario.length > 8 && categorias.vestuario && categorias.vestuario.length <= 16, 'coluna-3': categorias.vestuario && categorias.vestuario.length > 16}">
-                                    <li *ngFor="let categoria of categorias.vestuario"><a [routerLink]="[categoria.permalink]">- {{categoria.nome}}</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- BIGTRAIL -->
-                    <li class="item-menu bigtrail d-xl-block d-sm-none d-md-flex  d-lg-flex">
-                        <a (click)="openMenu('bigtrail')">
-                            <i class="icon icon-moto-bigtrail"></i>
-                            <span>Bigtrail</span>
-                        </a>
-                        <div class="categoria-hover menu-bigtrail">
-                            <i class="fas fa-sort-up"></i>
-                            <div class="bg">
-                                <div class="capa" [ngStyle]="{'background-imagem': 'url('+ categorias.bigtrail && categorias.bigtrail.length > 0 && categorias.bigtrail[0].supercategoria.imagem ? categorias.bigtrail[0].supercategoria.imagem.original : '' +')'}"></div>
-                            </div>
-                            <div class="subcategorias">
-                                <p>Selecione a subcategoria abaixo</p>
-                                <ul [ngClass]="{'coluna-1': categorias.bigtrail && categorias.bigtrail.length <= 8, 'coluna-2': categorias.bigtrail && categorias.bigtrail.length > 8 && categorias.bigtrail && categorias.bigtrail.length <= 16, 'coluna-3': categorias.bigtrail && categorias.bigtrail.length > 16}">
-                                    <li *ngFor="let categoria of categorias.bigtrail"><a [routerLink]="[categoria.permalink]">- {{categoria.nome}}</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- STREET -->
-                    <li class="item-menu street d-xl-block d-sm-none d-md-flex  d-lg-flex">
-                        <a (click)="openMenu('street')">
-                            <i class="icon icon-moto"></i>
-                            <span>Street</span>
-                        </a>
-                        <div class="categoria-hover menu-street">
-                            <i class="fas fa-sort-up"></i>
-                            <div class="bg">
-                                <div class="capa" [ngStyle]="{'background-imagem': 'url('+ categorias.street && categorias.street.length > 0 && categorias.street[0].supercategoria.imagem ? categorias.street[0].supercategoria.imagem.original : '' +')'}"></div>
-                            </div>
-                            <div class="subcategorias">
-                                <p>Selecione a subcategoria abaixo</p>
-                                <ul [ngClass]="{'coluna-1': categorias.street && categorias.street.length <= 8, 'coluna-2': categorias.street && categorias.street.length > 8 && categorias.street && categorias.street.length <= 16, 'coluna-3': categorias.street && categorias.street.length > 16}">
-                                    <li *ngFor="let categoria of categorias.street"><a [routerLink]="[categoria.permalink]">- {{categoria.nome}}</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- ESCAPAMENTOS -->
-                    <li class="item-menu escapamentos d-xl-block d-sm-none d-md-flex d-lg-flex">
-                        <a (click)="openMenu('escapamentos')">
-                            <i class="icon icon-escapamento"></i>
-                            <span>Escapamentos</span>
-                        </a>
-                        <div class="categoria-hover menu-escapamentos">
-                            <i class="fas fa-sort-up"></i>
-                            <div class="bg">
-                                <div class="capa" [ngStyle]="{'background-imagem': 'url('+ categorias.escapamentos && categorias.escapamentos.length > 0 && categorias.escapamentos[0].supercategoria.imagem ? categorias.escapamentos[0].supercategoria.imagem.original : '' +')'}"></div>
-                            </div>
-                            <div class="subcategorias">
-                                <p>Selecione a subcategoria abaixo</p>
-                                <ul [ngClass]="{'coluna-1': categorias.escapamentos && categorias.escapamentos.length <= 8, 'coluna-2': categorias.escapamentos && categorias.escapamentos.length > 8 && categorias.escapamentos && categorias.escapamentos.length <= 16, 'coluna-3': categorias.escapamentos && categorias.escapamentos.length > 16}">
-                                    <li *ngFor="let categoria of categorias.escapamentos"><a [routerLink]="[categoria.permalink]">- {{categoria.nome}}</a></li>
+                                <ul [ngClass]="{'coluna-1': categoria[1].categorias.length <= 8, 'coluna-2': categoria[1].categorias.length > 8 && categoria[1].categorias.length <= 16, 'coluna-3': categoria[1].categorias.length > 16}">
+                                    <li *ngFor="let subcategoria of categoria[1].categorias"><a [routerLink]="[categoria[1].permalink, subcategoria.permalink]">- {{subcategoria.nome}}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -178,5 +95,6 @@
         </div>
         <app-busca></app-busca>
     </div>
+    <i class="fas fa-sort-up"></i>
 </header>
 <header-offset [ngClass]="{scrolled: scrolled}"></header-offset>

@@ -60,7 +60,7 @@
                     <span class="tag frete-gratis" *ngIf="produtoOpcao.produto.freteGratis">Frete Grátis</span>
                 </div>
                 <form class="variacoes" [formGroup]="formVariacao">
-                    <div class="cor" *ngIf="cores && cores.length > 0">
+                    <div class="cor" *ngIf="cores && cores.length > 1">
                         <label>Cor</label>
                         <div class="itens">
                             <a [routerLink]="[url, pOpcao.produto.permalink]" [queryParams]="{op: pOpcao.id}" *ngFor="let pOpcao of cores">
@@ -68,7 +68,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="variacao">
+                    <div class="variacao" *ngIf="qtdes && qtdes.length > 0">
                         <div *ngIf="tamanhos && tamanhos[0] && tamanhos[0].tamanhoOpcao">
                             <label>Tamanho</label>
                             <ng-select formControlName="tamanho" loadingText="Carregando..." [loading]="!tamanhos" placeholder="Selecione" notFoundText="Nenhum item encontrado" (change)="selecionarOpcao($event)">
@@ -83,10 +83,11 @@
                         </div>
                     </div>
                 </form>
-                <!-- <button type="button" class="custom buy" (click)="comprar()" [disabled]="formVariacao.status === 'INVALID' || jaPossuiCarrinho(op) || (produtoOpcaoSelecionado && produtoOpcaoSelecionado.adicionadoCarrinho)">
+                <button *ngIf="qtdes && qtdes.length > 0" type="button" class="custom buy" (click)="comprar()" [disabled]="formVariacao.status === 'INVALID' || jaPossuiCarrinho(op) || (produtoOpcaoSelecionado && produtoOpcaoSelecionado.adicionadoCarrinho)">
                     <i class="fas fa-shopping-cart"></i>
                     Comprar
-                </button> -->
+                </button>
+                <h3 *ngIf="qtdes && qtdes.length === 0">Produto indisponível</h3>
             </div>
         </div>
         <div class="produto-extra-info">

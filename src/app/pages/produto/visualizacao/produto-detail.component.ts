@@ -66,8 +66,7 @@ export class ProdutoDetailComponent implements OnInit {
 
   buscarProdutoOpcao() {
     this.formVariacao.controls.tamanho.setValue(null);
-    this.formVariacao.controls.qtde.setValue(1);
-
+    
     this.produtoOpcaoService.visualizar(this.op)
       .subscribe(
         result => {
@@ -133,12 +132,13 @@ export class ProdutoDetailComponent implements OnInit {
   getQtdes() {
     this.qtdes = [];
 
-    if (this.produtoOpcaoSelecionado) {
+    if (this.produtoOpcaoSelecionado && this.produtoOpcaoSelecionado.estoqueAtual) {
       for (let qtde = 1; qtde <= this.produtoOpcaoSelecionado.estoqueAtual; qtde++) {
         this.qtdes.push(qtde);
       }
 
       if (this.qtdes.length > 0) {
+        this.formVariacao.controls.qtde.setValue(1);
         this.formVariacao.controls.qtde.enable();
       }
     } else {

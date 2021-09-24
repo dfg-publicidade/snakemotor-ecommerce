@@ -10,6 +10,7 @@ declare var $: any;
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
     usuario: any;
+    // ignoreRoutes = ['ouvidoria', 'certificados', 'documentos', 'tcc', 'calendario', 'revista', 'testecovid', 'indicamed', 'sorteio', 'graduacao', 'pos-graduacao', 'segunda-graduacao', 'colacao-fotos'];
 
     constructor(private router: Router, private perfilService: PerfilService) {
         
@@ -39,7 +40,7 @@ export class AuthInterceptor implements HttpInterceptor {
             .pipe(
                 catchError((error, caught) => {
                     if (error.status === 0) {
-                        this.router.navigate(['indisponivel'], { skipLocationChange: true });
+                        // this.router.navigate(['indisponivel'], { skipLocationChange: true });
                     } else {
 
                     }

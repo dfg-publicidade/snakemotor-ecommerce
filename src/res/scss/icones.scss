@@ -8,26 +8,26 @@ i {
         background-repeat: no-repeat;
         filter: brightness(3);
 
-        &.icon-capacete {
-            background-image: url("../imagens/icones/capacete.png");
+        &.icon-capacetes {
+            background-image: url("../imagens/icones/capacetes.png");
             &.outline {
-                background-image: url("../imagens/icones/capacete_outline.png");
+                background-image: url("../imagens/icones/capacetes_outline.png");
             }
         }
         &.icon-vestuario {
             background-image: url("../imagens/icones/vestuario.png");
         }
 
-        &.icon-moto-bigtrail {
-            background-image: url("../imagens/icones/moto_bigtrail.png");
+        &.icon-bigtrail {
+            background-image: url("../imagens/icones/bigtrail.png");
         }
 
-        &.icon-moto {
-            background-image: url("../imagens/icones/moto.png");
+        &.icon-street {
+            background-image: url("../imagens/icones/street.png");
         }
 
-        &.icon-escapamento {
-            background-image: url("../imagens/icones/escapamento.png");
+        &.icon-escapamentos {
+            background-image: url("../imagens/icones/escapamentos.png");
         }
         &.icon-moto-frente {
             background-image: url("../imagens/icones/moto_frente.png");

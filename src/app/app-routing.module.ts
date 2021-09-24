@@ -6,6 +6,18 @@ import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
   {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)
+  },
+  {
+    path: 'cadastro',
+    loadChildren: () => import('./pages/cadastro/cadastro.module').then(m => m.CadastroModule)
+  },
+  {
+    path: 'recuperacao-senha',
+    loadChildren: () => import('./pages/recuperacao-senha/recuperacao-senha.module').then(m => m.RecuperacaoSenhaModule)
+  },
+  {
     path: '',
     component: LayoutComponent,
     children: [
@@ -61,21 +73,18 @@ const routes: Routes = [
       },
       {
         path: ':categoriaPermalink',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('./pages/produto/produto.module').then(m => m.ProdutoModule)
+          }
+        ]
+      },
+      {
+        path: ':marcaPermalink',
         loadChildren: () => import('./pages/produto/produto.module').then(m => m.ProdutoModule)
       }
     ]
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)
-  },
-  {
-    path: 'cadastro',
-    loadChildren: () => import('./pages/cadastro/cadastro.module').then(m => m.CadastroModule)
-  },
-  {
-    path: 'recuperacao-senha',
-    loadChildren: () => import('./pages/recuperacao-senha/recuperacao-senha.module').then(m => m.RecuperacaoSenhaModule)
   }
 ];
 

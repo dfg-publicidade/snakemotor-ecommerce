@@ -33,11 +33,12 @@ export class CategoriaService {
     return this.http.get(url);
   }
 
-  listarPorSuperCategorias(categoriaPermalink: string): Observable<any> {
+  listarPorSuperCategorias(categoriasPermalink: string): Observable<any> {
     let url = `${this.urlServico}`;
 
     url += `?_nopaginate=true`;
-    url += `&${this.prefix}.supercategoria.permalink=${categoriaPermalink}`;
+    url += `&${this.prefix}.permalink=${categoriasPermalink}&destaque=true`;
+    url += `&_fields=content(${categoriasPermalink})`;
 
     return this.http.get(url);
   }

@@ -3,7 +3,7 @@
         <ul>
             <li><a [routerLink]="['/']">Home</a></li>
             <li class="separator">/</li>
-            <li><a href="#">Produtos</a></li>
+            <li><a *ngIf="categoria">{{categoria.nome}}</a></li>
         </ul>
     </div>
 </nav>
@@ -28,7 +28,7 @@
                         <p class="titulo">{{getNomeVariacao(i)}}</p>
                         <div *ngIf="filtro[0] !== 'cor'">
                             <div class="form-check" *ngFor="let item of filtro[1]">
-                                <input type="checkbox" class="form-check-input" id="filter_{{filtro[0]}}_{{item.id}}" [value]="item.id" (change)="setFilterVariacao(filtro[0])" [checked]="possuiFiltro(filtro[0], item.id) || filtro[1].length === 1">
+                                <input type="checkbox" class="form-check-input" id="filter_{{filtro[0]}}_{{item.id}}" [value]="item.id" (click)="setFilterVariacao(filtro[0])" [checked]="possuiFiltro(filtro[0], item.id) || filtro[1].length === 1">
                                 <label class="form-check-label">
                                     {{item.nome}}
                                 </label>
@@ -54,14 +54,16 @@
             <!-- LISTA DE PRODUTOS -->
             <div class="box-produtos">
                 <h3 *ngIf="produtoOpcoes && filtrosSelecionados && filtrosSelecionados.length > 0">
-                    <!-- Capacetes -->
+                    <ng-container *ngIf="categoria">{{categoria.nome}}</ng-container>
                     <ng-container *ngFor="let filtro of filtrosSelecionados">
-                        <span *ngIf="filtro && filtro[1].nome">
-                            {{filtro[1].nome}}
-                            <span class="badge bg-secondary" (click)="removerFiltroSelecionado(filtro[0])">
-                                <i class="fas fa-times"></i>
+                        <ng-container *ngIf="filtro[1].nome !== categoria.nome">
+                            <span *ngIf="filtro && filtro[1].nome">
+                                {{filtro[1].nome}}
+                                <span class="badge bg-secondary" (click)="removerFiltroSelecionado(filtro[0])">
+                                    <i class="fas fa-times"></i>
+                                </span>
                             </span>
-                        </span>
+                    </ng-container>
                     </ng-container>
                 </h3>
                 <div class="info" *ngIf="produtoOpcoes">
