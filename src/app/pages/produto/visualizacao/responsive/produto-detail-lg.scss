@@ -4,5 +4,40 @@
 @import "../../../../../../node_modules/bootstrap/scss/mixins";
 
 @include media-breakpoint-down(lg) {
-    
+    section {
+        & > div.container {
+            & > div.produto {
+                display: inline-block;
+                & > div.imagem {
+                    width: 100%;
+                }
+                & > div.info {
+                    margin-top: 20px;
+                    width: 100%;
+
+                    & > form.variacoes {
+                        & > div.cor {
+                            & > div.itens {
+                                grid-template-columns: repeat(6, 1fr);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &.outros-produtos {
+            & > div.container {
+                & > div.produtos {
+                    grid-template-columns: repeat(3, 1fr);
+
+                    & > app-produto-componente {
+                        &:last-of-type {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

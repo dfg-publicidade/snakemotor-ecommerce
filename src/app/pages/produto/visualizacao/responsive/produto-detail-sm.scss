@@ -4,5 +4,75 @@
 @import "../../../../../../node_modules/bootstrap/scss/mixins";
 
 @include media-breakpoint-down(sm) {
-    
+    section {
+        & > div.container {
+            & > div.produto {
+                & > div.imagem {
+                    & > doe-gallery {
+                        width: 100%;
+                        height: auto;
+
+                        ::ng-deep {
+                            & > doe-thumbs {
+                                display: none !important;
+                            }
+
+                            & > doe-viewer {
+                                & > ul {
+                                    & > li {
+                                        & > picture {
+                                            & > img {
+                                                height: 200px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                & > div.info {
+                    & > form.variacoes {
+                        & > div.cor {
+                            & > div.itens {
+                                grid-template-columns: repeat(3, 1fr);
+                                & > a {
+                                    & > div.item {
+                                        height: 80px;
+                                    }
+                                }
+                            }
+                        }
+                        & > div.variacao {
+                            width: 100%;
+                            display: inline-block;
+
+                            & > div {
+                                margin-bottom: 5px;
+                                width: 100%;
+
+                                &:first-of-type {
+                                    width: 100%;
+                                }
+                            }
+                        }
+                    }
+
+                    & > button.buy {
+                        width: 100%;
+                    }
+                }
+            }
+
+            & > div.produto-extra-info {
+                & > ul {
+                    & > li {
+                        & > button {
+                            font-size: 15px !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

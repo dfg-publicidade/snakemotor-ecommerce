@@ -4,7 +4,28 @@
 @import "../../../../../../node_modules/bootstrap/scss/mixins";
 
 @media (max-width: 479px) {
-    
+    section {
+        & > div.container {
+            & > div.produto {
+                & > div.info {
+                    & > form.variacoes {
+                        & > div.cor {
+                            & > div.itens {
+                                grid-template-columns: repeat(3, 1fr);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.outros-produtos {
+            & > div.container {
+                & > div.produtos {
+                    grid-template-columns: repeat(1, 1fr);
+                }
+            }
+        }
+    }
 }
 
 @media (max-width: 380px) {

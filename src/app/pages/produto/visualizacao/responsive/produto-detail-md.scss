@@ -4,5 +4,37 @@
 @import "../../../../../../node_modules/bootstrap/scss/mixins";
 
 @include media-breakpoint-down(md) {
-   
+    section {
+        & > div.container {
+            & > div.produto {
+                & > div.info {
+                    & > form.variacoes {
+                        & > div.cor {
+                            & > div.itens {
+                                grid-template-columns: repeat(4, 1fr);
+                                & > a {
+                                    & > div.item {
+                                        height: 100px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.outros-produtos {
+            & > div.container {
+                & > div.produtos {
+                    grid-template-columns: repeat(2, 1fr);
+
+                    & > app-produto-componente {
+                        &:last-of-type {
+                            display: inherit;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
