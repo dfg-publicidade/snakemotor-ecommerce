@@ -4,7 +4,26 @@
 @import "../../../../../../node_modules/bootstrap/scss/mixins";
 
 @media (max-width: 479px) {
-    
+    section {
+        & > div.container {
+            & > div.catalogo {
+                & > div.box-produtos {
+                    & > div.info {
+                        display: inline-block;
+                        width: 100%;
+
+                        & > span {
+                            display: inline-block;
+                            margin-bottom: 10px;
+                        }
+                    }
+                    & > div.produtos {
+                        grid-template-columns: repeat(1, 1fr);
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media (max-width: 380px) {

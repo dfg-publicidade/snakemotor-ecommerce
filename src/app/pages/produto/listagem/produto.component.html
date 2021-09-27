@@ -2,7 +2,7 @@
     <div class="container">
         <ul>
             <li><a [routerLink]="['/']">Home</a></li>
-            <li class="separator">/</li>
+            <li class="separator" *ngIf="categoria || marca">/</li>
             <li><a *ngIf="categoria">{{categoria?.supercategoria?.nome}} {{categoria.nome}}</a></li>
             <li><a *ngIf="marca">{{marca.nome}}</a></li>
         </ul>

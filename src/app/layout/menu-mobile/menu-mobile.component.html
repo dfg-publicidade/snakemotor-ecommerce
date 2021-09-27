@@ -19,7 +19,7 @@
         <ul class="principal">
             <li (click)="toggleMenu()"><a href="#">Fechar</a></li>
             <li *ngFor="let categoria of categorias">
-                <a [routerLink]="['/', categoria[1].permalink]">
+                <a [routerLink]="['/c', categoria[1].permalink]">
                     <i class="icon icon-{{categoria[0]}} outline"></i>
                     <span>{{categoria[1].nome}}</span>
                 </a>

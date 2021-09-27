@@ -11,8 +11,8 @@
     <div class="container">
         <h3>{{entity?.titulo}}</h3>
         <div class="texto">
-            <div *ngIf="entity.texto" class="texto" [innerHtml]="entity.texto | sanitizeHtml"></div>
-            <div class="imagem" *ngIf="entity.imagem">
+            <div *ngIf="entity && entity.texto" class="texto" [innerHtml]="entity.texto | sanitizeHtml"></div>
+            <div class="imagem" *ngIf="entity && entity.imagem">
                 <img [src]="entity.imagem.original" />
             </div>
         </div>

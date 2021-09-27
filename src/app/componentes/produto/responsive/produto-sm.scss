@@ -4,5 +4,12 @@
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 
 @include media-breakpoint-down(sm) {
-   
+    a.produto {
+        & > div.imagem {
+            height: 150px;
+        }
+        & > div.preco {
+            padding-top: 10px;
+        }
+    }
 }

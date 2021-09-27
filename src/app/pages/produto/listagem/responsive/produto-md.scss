@@ -4,5 +4,20 @@
 @import "../../../../../../node_modules/bootstrap/scss/mixins";
 
 @include media-breakpoint-down(md) {
-   
+    section {
+        & > div.container {
+            & > div.catalogo {
+                & > div.box-filtro {
+                    width: 35%;
+                }
+                & > div.box-produtos {
+                    width: 55%;
+
+                    & > div.produtos {
+                        grid-template-columns: repeat(1, 1fr);
+                    }
+                }
+            }
+        }
+    }
 }

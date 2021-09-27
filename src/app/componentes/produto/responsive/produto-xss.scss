@@ -4,5 +4,17 @@
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 
 @media (max-width: 479px) {
-    
+    a.produto {
+        & > div.imagem {
+            height: 120px;
+        }
+        &>div.info{
+            &>p{
+                min-height: 100px;
+            }
+        }
+        & > div.preco {
+            padding-top: 0;
+        }
+    }
 }

@@ -22,6 +22,9 @@ export class AppComponent {
         $('div.campo-busca').removeClass('expanded');
         $('div.dropbox-produtos').removeClass('expanded');
 
+        $('aside').removeClass('open');
+        $('body, html').removeClass('aside-menu-open');
+
         this.closeMenus();
       }
       else if (route instanceof NavigationEnd) {
