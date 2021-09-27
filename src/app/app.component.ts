@@ -9,6 +9,7 @@ declare var $: any;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  listaCategorias: any = 'capacetes,vestuario,bigtrail,street,escapamentos';
 
   constructor(private router: Router) {
   }
@@ -20,9 +21,20 @@ export class AppComponent {
         $('.modal').modal('hide');
         $('div.campo-busca').removeClass('expanded');
         $('div.dropbox-produtos').removeClass('expanded');
+
+        this.closeMenus();
       }
       else if (route instanceof NavigationEnd) {
         Helpers.scrollPageTop();
+      }
+    });
+  }
+
+  closeMenus() {
+    this.listaCategorias.split(',').forEach((categoria: any) => {
+      let divCategoria = $(`div.menu-${categoria}`);
+      if (divCategoria) {
+        divCategoria.hide();
       }
     });
   }

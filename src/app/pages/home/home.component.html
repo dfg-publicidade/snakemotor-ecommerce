@@ -49,7 +49,7 @@
 <section *ngIf="banners[tipoBannerIdTerceiraRolagem] && banners[tipoBannerIdTerceiraRolagem]">
     <div class="container" *ngFor="let banner of banners[tipoBannerIdTerceiraRolagem]; let i = index">
         <div class="banners" [ngClass]="{'mt-0': i === 0, 'mt-5': i > 0}">
-            <a class="banner" href="{{banner.url ? banner.url : '#'}}" [ngStyle]="{'background-image': 'url(' + (!isMobile ? banner.imagem.original + '?timestamp=' + timestamp  : banner.imagemMobile.original + '?timestamp=' + timestamp) + ')'}"></a>
+            <a class="banner" href="{{banner.url ? banner.url : '#'}}" [ngStyle]="{'background-image': 'url(' + (!isMobile ? !isMobile ? banner.imagem.original :  banner.imagemMobile.original + '?timestamp=' + timestamp  : banner.imagemMobile.original + '?timestamp=' + timestamp) + ')'}"></a>
         </div>
         <div class="produtos" *ngIf="banner.produtos">
             <owl-carousel-o *ngIf="optionsRotativoProdutos" [options]="optionsRotativoProdutos">
@@ -66,7 +66,7 @@
     <div class="marcas">
         <owl-carousel-o *ngIf="optionsRotativoMarcas && marcas" [options]="optionsRotativoMarcas">
             <ng-template carouselSlide *ngFor="let marca of marcas">
-                <a class="marca" href="#" [ngStyle]="{'background-image': marca.logo ? 'url(' + marca.logo.original + ')' : 'url(res/images/sem-capa-thumb.png)'}"></a>
+                <a class="marca" [routerLink]="['/m', marca.permalink]" [ngStyle]="{'background-image': marca.logo ? 'url(' + marca.logo.original + ')' : 'url(res/images/sem-capa-thumb.png)'}"></a>
             </ng-template>
         </owl-carousel-o>
     </div>

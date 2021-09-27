@@ -5,68 +5,35 @@
 
 @include media-breakpoint-down(lg) {    
     footer {
-        padding: 40px 0 20px 0;
+        &.central {
+            & > div.container {
+                & > div.colunas {
+                    display: inline-block;
+                    width: 100%;
+                    & > div.coluna {
+                        &.coluna-1 {
+                            width: 50%;
+                            display: inline-block;
 
-        &>div.container {
-            &>nav.menu-rodape {
-                &>ul {
-                    &>li {
-                        &>ul {
-                            &>li {
-                                &.titulo {
-                                    &:not(:first-of-type) {
-                                    }
-                                }
-    
-                                &>a {
-                                    &:hover {
-                                    }
-                                }
+                            &>p.copyright{
+                                bottom: -10px;
                             }
                         }
-                    }
-                }
-            }
-    
-            &>div.inferior {
-                &>div {
-                    &>div.logo {
-                        width: 100px;
-                    }
-                    &>div.selo {
-                        width: 138px;
-                        height: 78px;
-                    }
-                }
-                &>nav.social {
-                    &>ul {
-                        &>li {
-                            &>a {
-                                &:hover {
-                                    &>span {
-                                        &>i.fab {
-                                        }
-                                    }
-                                }
-    
-                                &>span {
-                                    width: 40px;
-                                    height: 40px;
-                                    border-radius: 40px;
-                                    font-size: 26px;
-                                    
-                                    &>i.fab {
-                                    }
-                                }
+                        &.coluna-2 {
+                            width: 50%;
+                            display: inline-block;
+                        }
+                        &.coluna-3 {
+                            width: 100%;
+
+                            &>iframe{
+                                height: 250px;
                             }
                         }
-                    }
-                    &>span.atualizacao {
-                        margin-top: 23px;
-                        font-size: 13px;
                     }
                 }
             }
         }
+
     }
 }

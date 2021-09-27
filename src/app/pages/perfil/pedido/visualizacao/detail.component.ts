@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MetadataService } from 'src/app/service/metaData.service';
 import { PedidoService } from 'src/app/service/pedido.service';
+import { ProdutoOpcaoAvaliacaoService } from 'src/app/service/produtoOpcaoAvaliacao.service';
 import { ProdutoUtil } from 'src/app/util/produtoUtil';
 
 declare var $: any;
@@ -18,8 +20,10 @@ export class PedidoDetailComponent implements OnInit {
 
   id: string = '';
   entity: any
+  produtoSelecionado: any;
 
   loadingService: boolean = false;
+  loadingAvaliacaoService: boolean = false;
 
   metatag: any = {};
 
@@ -27,13 +31,24 @@ export class PedidoDetailComponent implements OnInit {
   formaPagamento: any;
   endereco: any;
 
+  responseAvaliacao: any;
+
+  formAvaliacao: any;
   constructor(
+    private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private pedidoService: PedidoService,
-    private metadataService: MetadataService
+    private metadataService: MetadataService,
+    private produtoOpcaoAvaliacaoService: ProdutoOpcaoAvaliacaoService
   ) {
 
+    this.formAvaliacao = formBuilder.group({
+      avaliacao: new FormControl('',
+        Validators.required
+      ),
+      observacao: new FormControl('')
+    });
   }
 
   ngOnInit(): void {
@@ -79,6 +94,42 @@ export class PedidoDetailComponent implements OnInit {
           this.formaPagamento = result.content.formPagamento;
           this.endereco = result.content.entity.recebimento;
 
+        });
+  }
+
+  abrirModalAvaliacao(produtoId: string) {
+    delete this.responseAvaliacao;
+    this.produtoSelecionado = this.entity.produtos.find((produtoOpcao: any) => produtoOpcao.id === produtoId);
+
+    $('#modalAvaliacao').modal('show');
+  }
+
+  setAvaliacao(avaliacao: number) {
+    if (avaliacao) {
+      this.formAvaliacao.controls['avaliacao'].setValue(avaliacao);
+    }
+  }
+
+  avaliarProduto() {
+    delete this.responseAvaliacao;
+    this.loadingAvaliacaoService = true;
+    this.produtoOpcaoAvaliacaoService.avaliar(this.produtoSelecionado.id, this.formAvaliacao)
+      .subscribe(
+        result => {
+          this.loadingAvaliacaoService = false;
+          this.formAvaliacao.reset();
+
+          this.responseAvaliacao = result;
+
+          if (this.responseAvaliacao.status === 'success') {
+            setTimeout(() => {
+              $('#modalAvaliacao').modal('hide');
+            }, 3000);
+          }
+        },
+        (error) => {
+          this.responseAvaliacao = error.error;
+          this.loadingAvaliacaoService = false;
         });
   }
 }

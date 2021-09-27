@@ -7,9 +7,80 @@
     main {
         padding-top: 15px;
 
-        &>div.container {
+        & > div.container {
             & > div.loading-banner {
                 height: 185px;
+            }
+        }
+    }
+
+    section {
+        & > div.container {
+            & > div.produtos {
+                ::ng-deep {
+                    div.owl-theme {
+                        div.owl-nav {
+                            & > div.owl-prev {
+                                margin-left: -15px;
+                            }
+
+                            & > div.owl-next {
+                                margin-right: -15px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            & > div.banners {
+                &.banner {
+                    height: 238px;
+                }
+                &.half {
+                    grid-template-columns: repeat(1, 1fr);
+
+                    & > a {
+                        &.banner {
+                            height: 238px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    footer {
+        padding: 30px 0;
+        &.newsletter {
+            & > div.container {
+                & > div.cadastro {
+                    display: block;
+                    text-align: center;
+                    width: 100%;
+                    & > span.titulo {
+                        width: 100%;
+                        font-size: 20px;
+                        line-height: 25px;
+                        & > strong {
+                            font-size: 30px;
+                        }
+                    }
+                    & > div.campo {
+                        margin-top: 10px;
+                        width: 100%;
+                        text-align: left;
+
+                        & > form {
+                            & > input {
+                            }
+                            & > button {
+                            }
+                        }
+
+                        & > span {
+                        }
+                    }
+                }
             }
         }
     }

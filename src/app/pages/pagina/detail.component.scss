@@ -1,0 +1,30 @@
+@import "../../../res/variables.scss";
+
+section {
+    & > div.container {
+        & > div.texto {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 300px;
+
+            & > div.imagem {
+                display: block;
+                width: 100%;
+                text-align: center;
+
+                & > img {
+                    margin-top: 20px;
+                    width: 70%;
+                }
+            }
+        }
+    }
+}
+
+@import "responsive/detail-xl.scss";
+@import "responsive/detail-lg.scss";
+@import "responsive/detail-md.scss";
+@import "responsive/detail-sm.scss";
+@import "responsive/detail-xss.scss";
+@import "responsive/detail-print.scss";

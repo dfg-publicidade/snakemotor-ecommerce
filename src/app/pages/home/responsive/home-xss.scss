@@ -4,10 +4,39 @@
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 
 @media (max-width: 479px) {
-    main {
+    section {
         & > div.container {
-            & > div.loading-banner {
-                height: 230px;
+            & > div.banners {
+                & > a {
+                    &.banner {
+                        height: 180px;
+                    }
+                }
+
+                &.half{
+                    & > a {
+                        &.banner {
+                            height: 180px;
+                        }
+                    }
+                }
+            }
+
+            & > div.produtos {
+                margin-top: 10px;
+                ::ng-deep {
+                    div.owl-theme {
+                        div.owl-nav {
+                            display: none;
+                        }
+    
+                        div.owl-dots {
+                            position: inherit;
+                            bottom: -5px;
+                            width: 100%;
+                        }
+                    }
+                }
             }
         }
     }

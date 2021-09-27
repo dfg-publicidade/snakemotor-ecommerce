@@ -11,6 +11,32 @@ const routes: Routes = [
   {
     path: ':produtoPermalink',
     component: ProdutoDetailComponent
+  },
+  {
+    path: 'c',
+    children: [
+      {
+        path: ':categoriaPermalink',
+        component: ProdutoComponent
+      },
+      {
+        path: ':produtoPermalink',
+        component: ProdutoDetailComponent
+      }
+    ]
+  },
+  {
+    path: 'm',
+    children: [
+      {
+        path: ':marcaPermalink',
+        component: ProdutoComponent
+      },
+      {
+        path: ':produtoPermalink',
+        component: ProdutoDetailComponent
+      }
+    ]
   }
 ];
 

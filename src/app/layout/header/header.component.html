@@ -4,7 +4,7 @@
             <nav class="itens">
                 <ul>
                     <li class="item">
-                        <a [routerLink]="['/quemsomos']">Quem somos</a>
+                        <a [routerLink]="['/sobre-nos']">Quem somos</a>
                     </li>
                     <li class="item">
                         <a href="https://web.whatsapp.com/send?phone=5519996257084&text&app_absent=0" target="_blank">
@@ -66,7 +66,7 @@
         </div>
         <div class="container segunda-linha">
             <nav class="menu-principal">
-                <ul class="d-none d-sm-flex" *ngIf="categorias">
+                <ul class="d-none d-sm-flex">
                     <li class="item-menu {{categoria[0]}} d-xl-block d-sm-none d-md-flex d-lg-flex" *ngFor="let categoria of categorias">
                         <a (click)="openMenu(categoria[0])">
                             <i class="icon icon-{{categoria[0]}} outline"></i>
@@ -79,13 +79,17 @@
                             <div class="subcategorias" *ngIf="categoria[1] && categoria[1].categorias">
                                 <p>Selecione a subcategoria abaixo</p>
                                 <ul [ngClass]="{'coluna-1': categoria[1].categorias.length <= 8, 'coluna-2': categoria[1].categorias.length > 8 && categoria[1].categorias.length <= 16, 'coluna-3': categoria[1].categorias.length > 16}">
-                                    <li *ngFor="let subcategoria of categoria[1].categorias"><a [routerLink]="[categoria[1].permalink, subcategoria.permalink]">- {{subcategoria.nome}}</a></li>
+                                    <li *ngFor="let subcategoria of categoria[1].categorias">
+                                        <a [routerLink]="['c', categoria[1].permalink, subcategoria.permalink]">
+                                            - {{subcategoria.nome}}
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                     </li>
-                    <li class="d-xl-block d-sm-none d-md-flex  d-lg-flex">
-                        <a href="#">
+                    <li class="d-xl-block d-sm-none d-md-flex  d-lg-flex" *ngIf="categorias">
+                        <a href="https://snake-motor.lojaintegrada.com.br/" target="_blank">
                             <i class="icon icon-moto-frente"></i>
                             <span>Motos 0Km e Usadas</span>
                         </a>

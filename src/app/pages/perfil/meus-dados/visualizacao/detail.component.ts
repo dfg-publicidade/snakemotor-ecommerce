@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Helpers from 'src/app/helpers';
 import { MetadataService } from 'src/app/service/metaData.service';
-import { PedidoService } from 'src/app/service/pedido.service';
 import { PerfilService } from 'src/app/service/perfil.service';
 
 declare var $: any;
@@ -82,7 +81,6 @@ export class MeusDadosComponent implements OnInit {
     this.metatag.title = this.title;
     this.metadataService.updateMetadata(this.metatag);
     //FIM META TAG
-
   }
 
   visualizar() {
@@ -108,6 +106,10 @@ export class MeusDadosComponent implements OnInit {
         result => {
           this.response = result;
           this.loadingService = false;
+
+          if (this.response && this.response.status === 'success' && this.response.content) {
+            this.perfilService.setSession(this.response.content);
+          }
 
           Helpers.scrollPageTop();
         },

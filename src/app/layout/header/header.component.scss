@@ -146,7 +146,7 @@ header {
             & > div.logo {
                 width: 275px;
                 height: 115px;
-                background: url("../../../res/imagens/logo.png") no-repeat center center;
+                background: url("../../../res/imagens/logo.png") no-repeat bottom center;
                 background-size: 100% auto;
                 cursor: pointer;
                 align-self: center;
@@ -255,6 +255,7 @@ header {
                     padding: 0;
                     margin: 0;
                     position: relative;
+                    min-height: 50px;
 
                     & > li {
                         display: flex;

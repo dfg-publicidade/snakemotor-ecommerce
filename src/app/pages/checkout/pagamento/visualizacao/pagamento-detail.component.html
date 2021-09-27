@@ -206,11 +206,11 @@
                         <strong>{{carrinho.valorTotal}}</strong> <br />
                         <span>
                             <ng-container *ngIf="carrinho.formaPagamento.name === 'CREDIT_CARD'">em até {{carrinho.valorTotalParcelado}}</ng-container>
-                            <ng-container *ngIf="carrinho.valorAVista && carrinho.formaPagamento.name !== 'CREDIT_CARD'"> ou </ng-container>
+                            <!-- <ng-container *ngIf="carrinho.valorAVista && carrinho.formaPagamento.name !== 'CREDIT_CARD'"> ou </ng-container> -->
                         </span>
                     </span>
                 </p>
-                <p class="valor-avista" *ngIf="carrinho.valorAVista && carrinho.formaPagamento.name !== 'CREDIT_CARD'">{{carrinho.valorAVista}}</p>
+                <p class="valor-avista" *ngIf="carrinho.descricaoDesconto && carrinho.formaPagamento.name !== 'CREDIT_CARD'">({{carrinho.descricaoDesconto}})</p>
                 <p class="cupom" *ngIf="carrinho.cupom && carrinho.cupom.valor">
                     <span>
                         <strong>Cupom</strong>

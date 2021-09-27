@@ -58,8 +58,19 @@ export class HomeComponent implements OnInit {
       dots: true,
       autoplay: true,
       navText: ['<i class="fas fa-angle-left"></i>', '<i class="fas fa-angle-right"></i>'],
+      responsiveRefreshRate: 1,
+
       responsive: {
         0: {
+          items: 1
+        },
+        439: {
+          items: 2
+        },
+        639: {
+          items: 3
+        },
+        1000: {
           items: 4
         }
       }
@@ -75,6 +86,15 @@ export class HomeComponent implements OnInit {
       autoplay: true,
       responsive: {
         0: {
+          items: 3
+        },
+        439: {
+          items: 3
+        },
+        639: {
+          items: 4
+        },
+        1000: {
           items: 6
         }
       }
@@ -84,8 +104,8 @@ export class HomeComponent implements OnInit {
   loadingServiceMarca: boolean = false;
 
   ngOnInit(): void {
-     //INICIALIZA META - default
-     this.metadataService.updateMetadata({
+    //INICIALIZA META - default
+    this.metadataService.updateMetadata({
       url: this.router.url
     });
 
@@ -105,6 +125,8 @@ export class HomeComponent implements OnInit {
     this.listarbanners(this.tipoBannerIdTerceiraRolagem);
 
     this.buscarCategoriaDestaque(1);
+
+    this.mobile();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -162,7 +184,7 @@ export class HomeComponent implements OnInit {
 
   listarMarcas() {
     this.loadingServiceMarca = true;
-    this.marcaService.listarTodas(true, true, true, 12)
+    this.marcaService.listarTodas(true, true, true)
       .subscribe(
         result => {
           this.marcas = result.content.items;
@@ -179,7 +201,7 @@ export class HomeComponent implements OnInit {
       .subscribe(
         result => {
           this.loadingServiceLead = false;
-          
+
           this.resultLead = result;
 
           if (this.resultLead.status === 'success') {
@@ -190,7 +212,7 @@ export class HomeComponent implements OnInit {
         },
         (error) => {
           this.loadingServiceLead = false;
-          
+
           if (error.error) {
             this.resultLead = error.error;
           }

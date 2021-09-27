@@ -29,6 +29,15 @@ export class MarcaService {
     return this.http.get(url);
   }
 
+  buscarPorPermalink(permalink: string): Observable<any> {
+    let url = `${this.urlServico}`;
+
+    url += `?${this.prefix}.permalink=${permalink}`;
+
+    return this.http.get(url);
+  }
+
+
   visualizar(id: string): Observable<any> {
     let url = `${this.urlServico}/${id}`;
 

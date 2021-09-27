@@ -5,61 +5,27 @@
 
 @include media-breakpoint-down(md) {
     footer {
-        &>div.container {
-            &>nav.menu-rodape {
-                &>ul {
-                    &>li {
-                        &>ul {
-                            &>li {
-                                &.titulo {
-                                    font-size: 15px;
+        &.central {
+            & > div.container {
+                & > div.colunas {
+                    & > div.coluna {
+                        &.coluna-1 {
+                            width: 100%;
+                            & > p.copyright {
+                                bottom: -10px;
+                            }
+                        }
+                        &.coluna-2 {
+                            width: 100%;
 
-                                    &:not(:first-of-type) {
-                                    }
-                                }
-    
-                                &>a {
-                                    &:hover {
-                                    }
-                                }
+                            &>ul{
+                                padding: 0;
+                                border-left: 0;
                             }
                         }
-                    }
-                }
-            }
-    
-            &>div.inferior {
-                &>div {
-                    &>div.logo {
-                        width: 90px;
-                        height: 65px;
-                    }
-                    &>div.selo {
-                        width: 118px;
-                        height: 58px;
-                    }
-                }
-                &>nav.social {
-                    &>ul {
-                        &>li {
-                            &>a {
-                                &:hover {
-                                    &>span {
-                                        &>i.fab {
-                                        }
-                                    }
-                                }
-    
-                                &>span {
-                                    &>i.fab {
-                                    }
-                                }
-                            }
+                        &.coluna-3 {
+                            width: 100%;
                         }
-                    }
-                    &>span.atualizacao {
-                        margin-top: 8px;
-                        font-size: 10px;
                     }
                 }
             }

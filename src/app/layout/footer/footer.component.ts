@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoriaService } from 'src/app/service/categoria.service';
 import { ConfiguracaoService } from 'src/app/service/configuracao.service';
 declare var $: any;
 
@@ -8,13 +9,28 @@ declare var $: any;
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
+  listaCategorias: any = 'capacetes,vestuario,bigtrail,street,escapamentos';
+  categorias: any;
   configuracao: any;
   time: any = new Date().getTime();
-  constructor(private configuracaoService: ConfiguracaoService) {
+  constructor(
+    private configuracaoService: ConfiguracaoService,
+    private categoriaService: CategoriaService
+    ) {
   }
 
   ngOnInit() {
+    this.listarCategorias(this.listaCategorias);
     // this.buscarConfiguracao();
+  }
+
+  listarCategorias(categoriaPermalink: string) {
+    this.categoriaService.listarPorSuperCategorias(categoriaPermalink)
+      .subscribe(
+        result => {
+          this.categorias = Object.entries(result.content);
+        }
+      );
   }
 
   buscarConfiguracao() {

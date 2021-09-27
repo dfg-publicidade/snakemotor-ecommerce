@@ -30,6 +30,14 @@ const routes: Routes = [
         loadChildren: () => import('./pages/produto/produto.module').then(m => m.ProdutoModule)
       },
       {
+        path: 'c', //categorias
+        loadChildren: () => import('./pages/categoria/categoria.module').then(m => m.CategoriaModule)
+      },
+      {
+        path: 'm', //marcas
+        loadChildren: () => import('./pages/marca/marca.module').then(m => m.MarcaModule)
+      },
+      {
         path: 'carrinho',
         loadChildren: () => import('./pages/checkout/carrinho/carrinho.module').then(m => m.CarrinhoModule)
       },
@@ -72,17 +80,8 @@ const routes: Routes = [
         loadChildren: () => import('./pages/perfil/pedido/pedido.module').then(m => m.PedidoModule)
       },
       {
-        path: ':categoriaPermalink',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('./pages/produto/produto.module').then(m => m.ProdutoModule)
-          }
-        ]
-      },
-      {
-        path: ':marcaPermalink',
-        loadChildren: () => import('./pages/produto/produto.module').then(m => m.ProdutoModule)
+        path: ':permalink',
+        loadChildren: () => import('./pages/pagina/pagina.module').then(m => m.PaginaModule)
       }
     ]
   }

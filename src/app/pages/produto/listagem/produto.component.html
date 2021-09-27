@@ -3,7 +3,8 @@
         <ul>
             <li><a [routerLink]="['/']">Home</a></li>
             <li class="separator">/</li>
-            <li><a *ngIf="categoria">{{categoria.nome}}</a></li>
+            <li><a *ngIf="categoria">{{categoria?.supercategoria?.nome}} {{categoria.nome}}</a></li>
+            <li><a *ngIf="marca">{{marca.nome}}</a></li>
         </ul>
     </div>
 </nav>
@@ -39,7 +40,7 @@
                         <div *ngIf="filtro[0] === 'cor'">
                             <div class="cores">
                                 <div class="box-cor" *ngFor="let item of filtro[1]">
-                                    <div class="cor" [ngClass]="{active: possuiFiltro(filtro[0], item.id) || filtro[1].length === 2}" id="filter_{{filtro[0]}}_{{item.id}}" (click)="setFilterVariacao(filtro[0], item.id)">
+                                    <div class="cor" [ngClass]="{active: possuiFiltro(filtro[0], item.id) || filtro[1].length === 1}" id="filter_{{filtro[0]}}_{{item.id}}" (click)="setFilterVariacao(filtro[0], item.id)">
                                         <span class="cor" [ngClass]="{full: !item.valor2}" [ngStyle]="{'background-color': item.valor}"></span>
                                         <span *ngIf="item.valor2" class="cor" [ngStyle]="{'background-color': item.valor2}"></span>
                                     </div>
@@ -54,9 +55,13 @@
             <!-- LISTA DE PRODUTOS -->
             <div class="box-produtos">
                 <h3 *ngIf="produtoOpcoes && filtrosSelecionados && filtrosSelecionados.length > 0">
-                    <ng-container *ngIf="categoria">{{categoria.nome}}</ng-container>
+                    <ng-container *ngIf="categoria">
+                    <ng-container *ngIf="subcategoriaPermalink && categoria.supercategoria">{{categoria.supercategoria.nome}} &bull; </ng-container>
+                        {{categoria.nome}}
+                    </ng-container>
+                    <ng-container *ngIf="marca">{{marca.nome}}</ng-container>
                     <ng-container *ngFor="let filtro of filtrosSelecionados">
-                        <ng-container *ngIf="filtro[1].nome !== categoria.nome">
+                        <ng-container *ngIf="filtro[1].nome !== categoria?.nome && filtro[1].nome !== marca?.nome">
                             <span *ngIf="filtro && filtro[1].nome">
                                 {{filtro[1].nome}}
                                 <span class="badge bg-secondary" (click)="removerFiltroSelecionado(filtro[0])">

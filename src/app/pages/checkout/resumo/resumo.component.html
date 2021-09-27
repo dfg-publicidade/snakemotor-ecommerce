@@ -31,7 +31,7 @@
                                 <strong>Nome: </strong>{{carrinho[carrinho.formaPagamento].nome}} <br/>
                             </p>
                         </ng-container>
-                        <h3><strong>Valor para depósito: </strong>{{carrinho.valorAVistaNum | currency:'BRL':'symbol':'0.2-2':'pt'}}</h3>
+                        <h3><strong>Valor para {{carrinho.formaPagamento === 'pix' ? 'transferência': 'depósito'}}: </strong>{{carrinho.valorAVistaNum | currency:'BRL':'symbol':'0.2-2':'pt'}}</h3>
                     </ng-container>
                 </div>
                 <a class="btn-pagamento" href="{{carrinho.pagseguro.transaction.paymentLink}}" target="_blank" *ngIf="carrinho.pagseguro && carrinho.pagseguro.transaction && carrinho.pagseguro.transaction.paymentLink">
@@ -149,9 +149,10 @@
                         {{carrinho.entity.qtdeParcela}} x {{carrinho.entity.valorParcela | currency:'BRL':'symbol':'0.2-2':'pt'}}
                     </span>
                     <span *ngIf="carrinho.formaPagamento !== 'creditCard'">
-                        <strong>{{carrinho.valorAVistaNum | currency:'BRL':'symbol':'0.2-2':'pt'}} <ng-container *ngIf="carrinho.descricaoDesconto">({{carrinho.descricaoDesconto}})</ng-container></strong><br/>
+                        <strong>{{carrinho.valorAVistaNum | currency:'BRL':'symbol':'0.2-2':'pt'}} </strong>
                     </span>
                 </p>
+                <p class="valor-avista" *ngIf="carrinho.descricaoDesconto && carrinho.formaPagamento !== 'creditCard'">({{carrinho.descricaoDesconto}})</p>
             </div>
         </div>
     </div>

@@ -8,6 +8,8 @@ import { ProdutoComponentModule } from 'src/app/componentes/produto/produto.modu
 import { ToastMessageModule } from 'src/app/componentes/toastMessage/toast-alert.module';
 import { PipeModule } from 'src/app/pipe/pipeModule';
 import { CarrinhoService } from 'src/app/service/carrinho.service';
+import { CategoriaService } from 'src/app/service/categoria.service';
+import { MarcaService } from 'src/app/service/marca.service';
 import { ProdutoService } from 'src/app/service/produto.service';
 import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
 import { ProdutoComponent } from './listagem/produto.component';
@@ -34,6 +36,8 @@ import { ProdutoDetailComponent } from './visualizacao/produto-detail.component'
     ProdutoService,
     ProdutoOpcaoService,
     CarrinhoService,
+    MarcaService,
+    CategoriaService,
     Location
   ]
 })

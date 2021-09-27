@@ -1,10 +1,11 @@
-import { Component, HostListener, OnInit } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
-import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
-import Helpers from 'src/app/helpers';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MetadataService } from 'src/app/service/metaData.service';
+import Helpers from 'src/app/helpers';
 import { CategoriaService } from 'src/app/service/categoria.service';
+import { MarcaService } from 'src/app/service/marca.service';
+import { MetadataService } from 'src/app/service/metaData.service';
+import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
 
 declare var $: any;
 
@@ -15,10 +16,10 @@ declare var $: any;
 })
 export class ProdutoComponent implements OnInit {
   minValue: number = 0;
-  maxValue: number = 2000;
+  maxValue: number = 50000;
   options: Options = {
     floor: 0,
-    ceil: 2000,
+    ceil: 50000,
     hideLimitLabels: true
   };
 
@@ -29,6 +30,7 @@ export class ProdutoComponent implements OnInit {
   categoriasFiltro: any;
   categoria: any;
   marcasFiltro: any;
+  marca: any;
   filter: any = {};
   order: any;
   filtrosSelecionados: any;
@@ -41,12 +43,15 @@ export class ProdutoComponent implements OnInit {
   metatag: any = {};
 
   categoriaPermalink: string = '';
+  subcategoriaPermalink: string = '';
+  marcaPermalink: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private produtoOpcaoService: ProdutoOpcaoService,
     private categoriaService: CategoriaService,
+    private marcaService: MarcaService,
     private metadataService: MetadataService
   ) {
 
@@ -55,9 +60,20 @@ export class ProdutoComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.categoriaPermalink = params['categoriaPermalink'];
+      this.subcategoriaPermalink = params['subcategoriaPermalink'];
+      this.marcaPermalink = params['marcaPermalink'];
 
-      if (this.categoriaPermalink) {
+      if (this.categoriaPermalink && !this.subcategoriaPermalink) {
         this.buscarCategoriaPorPermalink();
+      }
+
+      if (this.subcategoriaPermalink) {
+        this.categoriaPermalink = this.subcategoriaPermalink;
+        this.buscarCategoriaPorPermalink();
+      }
+
+      if (this.marcaPermalink) {
+        this.buscarMarcaPorPermalink();
       }
     });
 
@@ -192,6 +208,28 @@ export class ProdutoComponent implements OnInit {
             this.opcoesFiltro = Object.entries(this.opcoesFiltro);
 
             this.setFilterVariacao('categorias', this.categoria.id);
+          }
+        }
+      );
+  }
+
+  buscarMarcaPorPermalink() {
+    this.marcaService.buscarPorPermalink(this.marcaPermalink)
+      .subscribe(
+        result => {
+          this.marca = result.content && result.content.items && result.content.items.length > 0 ? result.content.items[0] : '';
+
+          if (this.marca) {
+            this.opcoesFiltro = {
+              marcas: [{
+                id: this.marca.id,
+                nome: this.marca.nome,
+              }]
+            }
+
+            this.opcoesFiltro = Object.entries(this.opcoesFiltro);
+
+            this.setFilterVariacao('marcas', this.marca.id);
           }
         }
       );

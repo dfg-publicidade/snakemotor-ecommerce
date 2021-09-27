@@ -10,10 +10,10 @@
                 <div class="redes-sociais">
                     <p><strong>siga nossas redes sociais</strong></p>
                     <ul>
-                        <li><a href="" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
-                        <li><a href="" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="" target="_blank"><i class="fab fa-youtube"></i></a></li>
-                        <li><a href="" target="_blank"><i class="fab fa-tiktok"></i></a></li>
+                        <li><a href="https://www.facebook.com/SnakeMotor" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
+                        <li><a href="https://www.instagram.com/snakemotor" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="https://www.youtube.com/channel/UCUjy4V1s09yPtt11PSs9Zlw" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                        <li><a href="https://www.tiktok.com/@snakemotor" target="_blank"><i class="fab fa-tiktok"></i></a></li>
                     </ul>
                 </div>
                 <p class="copyright">Copyright © 2021. Todos os direitos reservados</p>
@@ -21,17 +21,18 @@
             <div class="coluna coluna-2">
                 <ul>
                     <li class="titulo"><strong>SNAKE MOTOR</strong></li>
-                    <li><a href="">Capacetes</a></li>
-                    <li><a href="">Vestuário</a></li>
-                    <li><a href="">Big Trail</a></li>
-                    <li><a href="">Street</a></li>
-                    <li><a href="">Motos 0km e Usadas</a></li>
-                    <li><a href="">Marcas</a></li>
-
-                    <li class="pt-5"><a href="">Institucional</a></li>
-                    <li><a href="">Trocas e Devoluções</a></li>
-                    <li><a href="">Minha Conta</a></li>
-                    <li><a href="">Política de Privacidade</a></li>
+                    <li *ngFor="let categoria of categorias">
+                        <a [routerLink]="['/', categoria[1].permalink]">
+                            {{categoria[1].nome}}
+                        </a>
+                    </li>
+                    <li><a href="https://snake-motor.lojaintegrada.com.br/" target="_blank">Motos 0km e Usadas</a></li>
+                    <li class="pt-5">
+                        <a [routerLink]="['/', 'sobre-nos']">Sobre a Snake Motor</a>
+                    </li>
+                    <li><a [routerLink]="['/','troca-devolucao']">Trocas e Devoluções</a></li>
+                    <li><a [routerLink]="['/','perfil']">Minha Conta</a></li>
+                    <li><a [routerLink]="['/','politica-privacidade']">Política de Privacidade</a></li>
                 </ul>
             </div>
             <div class="coluna coluna-3">
@@ -46,23 +47,23 @@
                 <p>
                     <i class="fas fa-clock pe-2 pt-1"></i>
                     Horário de Atendimento: <br />
-                    segunda a sexta das 08hrs30 às 18hrs <br />
-                    sábados 08hrs às 12hrs.
+                    segunda a sexta das 08h30 às 18h00<br />
+                    sábados 08h00 às 12h00.
                 </p>
                 <p class="pt-4">
                     <i class="far fa-envelope pe-2 pt-1"></i>
                     contato@snakemotor.com.br
                 </p>
                 <p>
-                    <a href="#">
+                    <a href="tel:1935569262">
                         <i class="fas fa-phone pe-2 pt-1"></i>
                         (19) 3556-9262
                     </a>
                 </p>
                 <p>
-                    <a href="#">
+                    <a href="https://web.whatsapp.com/send?phone=5519996257084&text&app_absent=0" target="_blank">
                         <i class="fab fa-whatsapp pe-2 pt-1"></i>
-                        (19) 3556-9262
+                        (19) 99625-7084
                     </a>
                 </p>
             </div>
@@ -73,7 +74,8 @@
     <div class="container">
         <div>
             <div class="info">
-                <img src="./res/imagens/formas-pagamento.jpg" />
+                <img src="./res/imagens/formas-pagto.jpg" class="pe-3" />
+                <img src="./res/imagens/frete.jpg" />
             </div>
             <div class="dfgpublicidade">
                 <a href="http://dfgpublicidade.com" target="_blank">
@@ -87,7 +89,7 @@
 
 <!-- BOTAO FLUTUANTE WHATSAPP -->
 <div id="botao-whatsapp">
-    <a href="https://wa.me/5519996257084" target="_blank" class="icon-whats">
+    <a href="https://web.whatsapp.com/send?phone=5519996257084&text&app_absent=0" target="_blank" class="icon-whats">
         <i class="fab fa-whatsapp"></i>
     </a>
 </div>

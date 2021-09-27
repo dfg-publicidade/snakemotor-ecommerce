@@ -39,7 +39,6 @@ import { ProdutoOpcaoService } from '../service/produtoOpcao.service';
 		CategoriaService,
 		CarrinhoService,
 		ConfiguracaoService,
-		ConfiguracaoService,
 		ProdutoOpcaoService
 	]
 })

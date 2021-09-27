@@ -1,0 +1,20 @@
+<nav class="breadcrumb">
+    <div class="container">
+        <ul>
+            <li><a [routerLink]="['/']">Home</a></li>
+            <li class="separator">/</li>
+            <li><a class="active">{{entity?.titulo}}</a></li>
+        </ul>
+    </div>
+</nav>
+<section>
+    <div class="container">
+        <h3>{{entity?.titulo}}</h3>
+        <div class="texto">
+            <div *ngIf="entity.texto" class="texto" [innerHtml]="entity.texto | sanitizeHtml"></div>
+            <div class="imagem" *ngIf="entity.imagem">
+                <img [src]="entity.imagem.original" />
+            </div>
+        </div>
+    </div>
+</section>

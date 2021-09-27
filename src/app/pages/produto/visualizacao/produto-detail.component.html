@@ -68,14 +68,14 @@
                             </a>
                         </div>
                     </div>
-                    <div class="variacao" *ngIf="qtdes && qtdes.length > 0">
+                    <div class="variacao">
                         <div *ngIf="tamanhos && tamanhos[0] && tamanhos[0].tamanhoOpcao">
                             <label>Tamanho</label>
                             <ng-select formControlName="tamanho" loadingText="Carregando..." [loading]="!tamanhos" placeholder="Selecione" notFoundText="Nenhum item encontrado" (change)="selecionarOpcao($event)">
                                 <ng-option [value]="pOpcao.id" *ngFor="let pOpcao of tamanhos">{{pOpcao.tamanhoOpcao.nome}}</ng-option>
                             </ng-select>
                         </div>
-                        <div>
+                        <div *ngIf="qtdes && qtdes.length > 0">
                             <label>Quantidade</label>
                             <ng-select formControlName="qtde" placeholder="Selecione" notFoundText="Nenhum item encontrado">
                                 <ng-option [value]="qtde" *ngFor="let qtde of qtdes">{{qtde}}</ng-option>

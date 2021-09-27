@@ -8,6 +8,7 @@ section {
             display: flex;
             justify-content: space-between;
             flex-direction: row;
+            min-height: 300px;
             & > div.box-filtro {
                 width: 25%;
                 height: 100%;

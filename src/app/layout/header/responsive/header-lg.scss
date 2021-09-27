@@ -48,7 +48,7 @@
                             }
                         }
 
-                        &:last-of-type{
+                        &:last-of-type {
                             margin-right: 0;
                         }
                     }
@@ -72,10 +72,44 @@
                                     font-size: 13px;
                                 }
                             }
+
+                            & > div.categoria-hover {
+                                & > div {
+                                    &.bg {
+                                        width: 35%;
+                                        & > div.capa {
+                                            height: 250px;
+                                        }
+                                    }
+                                    &.subcategorias {
+                                        width: 65%;
+                                        padding: 10px;
+
+                                        & > ul {
+                                            & > li {
+                                                & > a {
+                                                    font-size: 14px;
+                                                    line-height: 20px;
+                                                }
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
+                                                display: -webkit-box;
+                                                -webkit-line-clamp: 1;
+                                                -webkit-box-orient: vertical;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
+        }
+
+        & > i.fa-sort-up {
+            bottom: -15px;
+            font-size: 35px;
         }
     }
 }

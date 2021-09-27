@@ -4,5 +4,13 @@
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 
 @include media-breakpoint-down(sm) {
-    
+    main {
+        & > div.container {
+            & > form {
+                & > div.accordion {
+                    margin: 0 10px;
+                }
+            }
+        }
+    }
 }

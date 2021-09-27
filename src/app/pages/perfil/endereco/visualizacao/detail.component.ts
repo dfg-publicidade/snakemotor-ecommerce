@@ -49,7 +49,6 @@ export class EnderecoDetailComponent implements OnInit {
     private metadataService: MetadataService,
     private formBuilder: FormBuilder
   ) {
-
     this.form = formBuilder.group({
       logradouro: new FormControl('', [
         Validators.required,

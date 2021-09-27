@@ -12,4 +12,35 @@
             }
         }
     }
+
+    section {
+        padding: 10px;
+        &:first-of-type {
+            padding-top: 20px;
+        }
+        & > div.container {
+            & > h1 {
+                font-size: 20px;
+                margin-top: 10px;
+                padding-bottom: 20px;
+                justify-content: center;
+            }
+            
+            & > div.banners {
+                margin-top: 20px;
+                & > a {
+                    &.banner {
+                        height: 265px;
+                    }
+                }
+                &.half {
+                    & > a {
+                        &.banner {
+                            height: 205px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

@@ -17,7 +17,7 @@ section {
                         margin: 0;
                     }
 
-                    &>span{
+                    & > span {
                         font-size: 20px;
                         font-weight: bold;
                     }
@@ -182,6 +182,39 @@ section {
                                     &.last {
                                         border-bottom: none !important;
                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+div.modal {
+    & > div.modal-dialog {
+        & > div.modal-content {
+            & > form {
+                & > div.modal-body {
+                    & > p {
+                        &.imagem {
+                            & > img {
+                                width: 48px;
+                            }
+                        }
+                    }
+                    & > span {
+                        &.star {
+                            display: block;
+                            text-align: center;
+                            padding: 10px 0;
+                            & > i {
+                                cursor: pointer;
+                                font-size: 35px;
+
+                                &.fas{
+                                    color: #ffc107;
                                 }
                             }
                         }

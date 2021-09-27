@@ -22,6 +22,27 @@
                     & > ul {
                         & > li {
                             padding: 0;
+
+                            & > a {
+                                & > span {
+                                    font-size: 15px;
+                                }
+                            }
+
+                            & > div.categoria-hover {
+                                & > div {
+                                    &.bg {
+                                        width: 35%;
+                                        & > div.capa {
+                                            height: 300px;
+                                            background-position: left;
+                                        }
+                                    }
+                                    &.subcategorias {
+                                        padding: 20px;
+                                    }
+                                }
+                            }
                         }
                     }
                 }

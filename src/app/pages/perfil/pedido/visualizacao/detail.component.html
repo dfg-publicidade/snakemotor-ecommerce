@@ -40,11 +40,11 @@
                     <p class="total">
                         <span><strong>Total</strong></span>
                         <span *ngIf="entity.formaPagamento === 'creditCard'">
-                            <strong>{{entity.entity.totalParcelado | currency:'BRL':'symbol':'0.2-2':'pt'}}</strong><br/>
+                            <strong>{{entity.entity.totalParcelado | currency:'BRL':'symbol':'0.2-2':'pt'}}</strong><br />
                             {{entity.entity.qtdeParcela}} x {{entity.entity.valorParcela | currency:'BRL':'symbol':'0.2-2':'pt'}}
                         </span>
                         <span *ngIf="entity.formaPagamento !== 'creditCard'">
-                            <strong>{{entity.valorAVistaNum | currency:'BRL':'symbol':'0.2-2':'pt'}} <ng-container *ngIf="entity.descricaoDesconto">({{entity.descricaoDesconto}})</ng-container></strong><br/>
+                            <strong>{{entity.valorAVistaNum | currency:'BRL':'symbol':'0.2-2':'pt'}} <ng-container *ngIf="entity.descricaoDesconto">({{entity.descricaoDesconto}})</ng-container></strong><br />
                         </span>
                     </p>
                 </div>
@@ -76,7 +76,7 @@
                                 <strong>Nome: </strong>{{entity[entity.formaPagamento].nome}} <br />
                             </p>
                         </ng-container>
-                        <h3><strong>Valor para depósito: </strong>{{entity.valorAVistaNum | currency:'BRL':'symbol':'0.2-2':'pt'}}</h3>
+                        <h3><strong>Valor para {{entity.formaPagamento === 'pix' ? 'transferência': 'depósito'}}: </strong>{{entity.valorAVistaNum | currency:'BRL':'symbol':'0.2-2':'pt'}}</h3>
                     </ng-container>
                 </div>
 
@@ -143,6 +143,7 @@
                             <th scope="col">Produto</th>
                             <th scope="col">Quantidade</th>
                             <th scope="col">Preço</th>
+                            <th scope="col" *ngIf="entity.entity.status.id === 'ENTREGUE'">Avaliação</th>
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of entity.produtos; let i = index">
@@ -173,6 +174,9 @@
                                         <!-- PRECO VALOR PADRÃO -->
                                         <p class="valor-vigente" *ngIf="!item.precoPromocional">{{item.precoVenda}}</p>
                                     </div>
+                                </td>
+                                <td *ngIf="entity.entity.status.id === 'ENTREGUE'">
+                                    <button type="button" class="btn btn-secondary" (click)="abrirModalAvaliacao(item.id)">Avaliar</button>
                                 </td>
                             </tr>
                             <tr *ngIf="entity.formaPagamento">
@@ -228,3 +232,48 @@
         </div>
     </div>
 </section>
+
+<!-- MODAL AVALIACAO -->
+<div class="modal fade" id="modalAvaliacao" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Avaliação de produto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="formAvaliacao" (submit)="avaliarProduto()">
+                <div class="modal-body" *ngIf="responseAvaliacao && responseAvaliacao.status === 'success'">
+                    <app-alert-message *ngIf="responseAvaliacao" [result]='responseAvaliacao'></app-alert-message>
+                </div>
+                <div class="modal-body"  *ngIf="!responseAvaliacao || (responseAvaliacao.status !== 'success')">
+                    <app-alert-message *ngIf="responseAvaliacao" [result]='responseAvaliacao'></app-alert-message>
+                    <p class="imagem">
+                        <img class="pe-2" [src]="produtoSelecionado?.imagem" />
+                        <strong>{{produtoSelecionado?.produto.nome}}</strong>
+                    </p>
+                    <p *ngIf="!responseAvaliacao">O que achou do produto?</p>
+                    
+                    <span class="star">
+                        <i class="fa-star pe-1 n1" [ngClass]="{'far': !formAvaliacao.value.avaliacao, 'fas': formAvaliacao.value.avaliacao && formAvaliacao.value.avaliacao >= 1}" (click)="setAvaliacao(1)"></i>
+                        <i class="fa-star pe-1 n2" [ngClass]="{'far': !formAvaliacao.value.avaliacao || (formAvaliacao.value.avaliacao && formAvaliacao.value.avaliacao < 2), 'fas': formAvaliacao.value.avaliacao && formAvaliacao.value.avaliacao >= 2}" (click)="setAvaliacao(2)"></i>
+                        <i class="fa-star pe-1 n3" [ngClass]="{'far': !formAvaliacao.value.avaliacao || (formAvaliacao.value.avaliacao && formAvaliacao.value.avaliacao < 3), 'fas': formAvaliacao.value.avaliacao && formAvaliacao.value.avaliacao >= 3}" (click)="setAvaliacao(3)"></i>
+                        <i class="fa-star pe-1 n4" [ngClass]="{'far': !formAvaliacao.value.avaliacao || (formAvaliacao.value.avaliacao && formAvaliacao.value.avaliacao < 4), 'fas': formAvaliacao.value.avaliacao && formAvaliacao.value.avaliacao >= 4}" (click)="setAvaliacao(4)"></i>
+                        <i class="fa-star pe-1 n5" [ngClass]="{'far': !formAvaliacao.value.avaliacao || (formAvaliacao.value.avaliacao && formAvaliacao.value.avaliacao < 5), 'fas': formAvaliacao.value.avaliacao && formAvaliacao.value.avaliacao === 5}"  (click)="setAvaliacao(5)"></i>
+                    </span>
+                    <div class="form-group col-xs-12 col-sm-12 col-lg-12 mb-3" *ngIf="formAvaliacao.value.avaliacao">
+                        <textarea rows="5" formControlName="observacao" class="form-control" placeholder="Comentário"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success btn-block" [disabled]="formAvaliacao.status === 'INVALID' || loadingAvaliacaoService">
+                        <span *ngIf="!loadingAvaliacaoService">Enviar</span>
+                        <span *ngIf="loadingAvaliacaoService" class="loading">
+                            <img src="/res/imagens/spinner-white.svg" />
+                        </span>
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

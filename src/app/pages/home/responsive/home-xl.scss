@@ -5,9 +5,30 @@
 
 @include media-breakpoint-down(xl) {
     main {
-        &>div.container {
+        & > div.container {
             & > div.loading-banner {
-                height: 335px;
+                height: 225px;
+            }
+        }
+    }
+
+    section {
+        & > div.container {
+            & > div.banners {
+                & > a {
+                    &.banner {
+                        background-position: top;
+                        height: 215px;
+                    }
+                }
+                &.half {
+                    & > a {
+                        &.banner {
+                            background-position: top;
+                            height: 215px;
+                        }
+                    }
+                }
             }
         }
     }

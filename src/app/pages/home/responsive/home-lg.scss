@@ -5,9 +5,60 @@
 
 @include media-breakpoint-down(lg) {
     main {
-        &>div.container {
+        & > div.container {
             & > div.loading-banner {
-                height: 250px;
+                height: 400px;
+            }
+        }
+    }
+
+    section {
+        & > div.container {
+            & > div.banners {
+                & > a {
+                    &.banner {
+                        height: 160px;
+                    }
+                }
+                &.half {
+                    & > a {
+                        &.banner {
+                            height: 160px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    footer {
+        padding: 30px 0;
+        &.newsletter {
+            & > div.container {
+                & > div.cadastro {
+                    & > span.titulo {
+                        width: 30%;
+                        font-size: 18px;
+                        line-height: 24px;
+                        & > strong {
+                            font-size: 30px;
+                        }
+                    }
+                    & > div.campo {
+                        width: 65%;
+
+                        & > form {
+                            & > input {
+                            }
+                            & > button {
+                            }
+                        }
+
+                        & > span {
+                          
+                        }
+                    }
+                }
             }
         }
     }

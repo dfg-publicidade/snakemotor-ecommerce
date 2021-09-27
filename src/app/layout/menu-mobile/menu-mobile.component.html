@@ -1,4 +1,4 @@
-<aside (scroll)="scrollPage($event)">
+<aside>
     <nav class="menu-mobile">
         <ul class="perfil">
             <li class="principal" *ngIf="!getUsuario()">
@@ -17,35 +17,11 @@
             </li>
         </ul>
         <ul class="principal">
-            <!-- <li (click)="toggleMenu()"><a href="#">Fechar</a></li> -->
-            <li>
-                <a href="#">
-                    <i class="icon icon-capacete outline"></i>
-                    <span>Capacetes</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="icon icon-vestuario"></i>
-                    <span>Vestuário</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="icon icon-moto-bigtrail"></i>
-                    <span>Bigtrail</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="icon icon-moto"></i>
-                    <span>Street</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="icon icon-pneu"></i>
-                    <span>Pneus</span>
+            <li (click)="toggleMenu()"><a href="#">Fechar</a></li>
+            <li *ngFor="let categoria of categorias">
+                <a [routerLink]="['/', categoria[1].permalink]">
+                    <i class="icon icon-{{categoria[0]}} outline"></i>
+                    <span>{{categoria[1].nome}}</span>
                 </a>
             </li>
             <li>
