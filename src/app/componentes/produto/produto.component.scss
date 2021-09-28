@@ -51,7 +51,7 @@ a.produto {
 
         & > p {
             color: $text-primary;
-            min-height: 126px;
+            min-height: 110px;
             margin-bottom: 0;
             width: 100%;
             & > span {
@@ -116,6 +116,9 @@ a.produto {
             &.valor-parcelado {
                 font-size: 13px;
                 color: #a5a5a5;
+            }
+            &.valor-avista {
+                font-size: 13px
             }
         }
     }

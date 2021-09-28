@@ -7,6 +7,8 @@ import { environment } from '../../environments/environment';
 export class CategoriaService {
   urlServico: string;
   prefix: string = 'categoria';
+  KEY_SESSION: string = 'categorias_principais';
+  categoriasPrincipais: string = 'capacetes,vestuario,acessorios-para-moto,escapamentos';
 
   constructor(private http: HttpClient) {
     this.urlServico = `${environment.urlServico}${environment.apiApp}/${environment.versao}/categorias`;
@@ -47,5 +49,18 @@ export class CategoriaService {
     let url = this.urlServico + 'produto/' + id + "/visualizar";
 
     return this.http.get(url);
+  }
+
+  setCategoriasPrincipais(categorias: any) {
+    sessionStorage.setItem(this.KEY_SESSION, JSON.stringify(categorias));
+  }
+
+  getCategoriasPrincipais(): any {
+    let item: any = localStorage.getItem(this.KEY_SESSION);
+    return JSON.parse(item);
+  }
+
+  removerCategoriasPrincipais() {
+    sessionStorage.removeItem(this.KEY_SESSION);
   }
 }

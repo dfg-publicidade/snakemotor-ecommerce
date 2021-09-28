@@ -10,6 +10,23 @@
 <section>
     <div class="container">
         <div class="carrinho">
+             <!-- loading -->
+             <div class="loading-produto-view" *ngIf="!carrinho">
+                <div class="imagem">
+                    <div class="skeleton-box small line"></div>
+                    <div class="skeleton-box quadrado full line"></div>
+                </div>
+                <div class="info">
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box small line"></div>
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box small line mt-4 me-2"></div>
+                    <div class="skeleton-box small line"></div>
+                    <div class="skeleton-box large line"></div>
+                </div>
+            </div>
             <div class="itens" *ngIf="carrinho && carrinho.produtos">
                 <h3>{{title}}</h3>
                 <div class="table-responsive">

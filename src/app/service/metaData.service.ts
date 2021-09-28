@@ -3,6 +3,8 @@ import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
+declare var ga: any;
+
 export interface PageMetadata {
     title: string;
     description: string;
@@ -72,5 +74,8 @@ export class MetadataService {
         this.metaTagService.updateTag({ property: 'fb:robots', content: pageMetadata.robots }, "property='fb:robots'");
         this.metaTagService.updateTag({ name: 'robots', content: pageMetadata.robots }, "name='robots'");
         this.metaTagService.updateTag({ name: 'viewport', content: 'width=device-width, initial-scale=1' }, "name='viewport'");
+
+        //PAGEVIEW GOOGLE ANALYTICS
+        ga('send', 'pageview');
     }
 }

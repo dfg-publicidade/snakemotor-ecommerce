@@ -1,0 +1,34 @@
+@include media-breakpoint-down(lg) {
+    div.loading-produtos {
+        grid-template-columns: repeat(3, 1fr);
+
+        & > div.produto {
+            height: 350px;
+
+            &:nth-child(3) {
+                display: none;
+            }
+        }
+    }
+
+    div.loading-produto-view {
+        display: block;
+        & > div.imagem {
+            width: 100%;
+            height: 250px;
+            display: inline-block;
+
+            & > div.retangulo {
+                display: none;
+            }
+            & > div.quadrado {
+                width: 100%;
+                height: 150px;
+            }
+        }
+        & > div.info {
+            width: 100%;
+            height: inherit;
+        }
+    }
+}

@@ -96,10 +96,7 @@ export class PerfilService {
     body.append('telefone', entity.value.telefone ? entity.value.telefone : '');
     body.append('aceiteOferta', entity.value.aceiteOferta ? entity.value.aceiteOferta : false);
     body.append('aceiteContato', entity.value.aceiteContato ? entity.value.aceiteContato : false);
-
-    if (entity.value.tipo === 'FISICA') {
-      body.append('dataNascto', entity.value.dataNascto ? entity.value.dataNascto : '');
-    }
+    body.append('dataNascto', entity.value.dataNascto ? entity.value.dataNascto : '');
 
     return this.http.put(url, body);
   }

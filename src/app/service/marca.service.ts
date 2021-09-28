@@ -13,7 +13,7 @@ export class MarcaService {
   }
 
   listarTodas(ativa: boolean, aleatorio: boolean, destaque: boolean, qtde?: number): Observable<any> {
-    let url = `${this.urlServico}?${this.prefix}.destaque=${destaque}`;
+    let url = `${this.urlServico}?_nopaginate=true&${this.prefix}.destaque=${destaque}`;
 
     if (aleatorio) {
       url += `&${this.prefix}.aleatorio=${aleatorio}`;

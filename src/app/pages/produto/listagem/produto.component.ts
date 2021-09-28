@@ -35,7 +35,6 @@ export class ProdutoComponent implements OnInit {
   order: any;
   filtrosSelecionados: any;
 
-  loadingService: boolean = false;
   infiniteScroll: boolean = false;
   load: boolean = true;
 
@@ -44,7 +43,10 @@ export class ProdutoComponent implements OnInit {
 
   categoriaPermalink: string = '';
   subcategoriaPermalink: string = '';
+  subsubcategoriaPermalink: string = '';
   marcaPermalink: string = '';
+
+  loadingServiceProdutos: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -61,14 +63,20 @@ export class ProdutoComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.categoriaPermalink = params['categoriaPermalink'];
       this.subcategoriaPermalink = params['subcategoriaPermalink'];
+      this.subsubcategoriaPermalink = params['subsubcategoriaPermalink'];
       this.marcaPermalink = params['marcaPermalink'];
 
       if (this.categoriaPermalink && !this.subcategoriaPermalink) {
         this.buscarCategoriaPorPermalink();
       }
 
-      if (this.subcategoriaPermalink) {
+      if (this.subcategoriaPermalink && !this.subsubcategoriaPermalink) {
         this.categoriaPermalink = this.subcategoriaPermalink;
+        this.buscarCategoriaPorPermalink();
+      }
+
+      if (this.subsubcategoriaPermalink) {
+        this.categoriaPermalink = this.subsubcategoriaPermalink;
         this.buscarCategoriaPorPermalink();
       }
 
@@ -77,12 +85,6 @@ export class ProdutoComponent implements OnInit {
       }
     });
 
-    //INICIO META TAG
-    this.metatag.url = this.router.url;
-    this.metatag.title = `Produtos`;
-    this.metadataService.updateMetadata(this.metatag);
-    //FIM META TAG
-
     if (!this.categoriaPermalink) {
       this.listarProdutos(false);
     }
@@ -90,8 +92,9 @@ export class ProdutoComponent implements OnInit {
 
   listarProdutos(loadMore: boolean) {
     if (!loadMore) {
+      delete this.produtoOpcoes;
       Helpers.scrollPageTop();
-      this.loadingService = true;
+      this.loadingServiceProdutos = true;
     } else {
       this.load = true;
     }
@@ -101,7 +104,7 @@ export class ProdutoComponent implements OnInit {
     this.produtoOpcaoService.listar(this.page, this.filter, this.order)
       .subscribe(
         result => {
-          this.loadingService = false;
+          this.loadingServiceProdutos = false;
           this.load = false;
           if (!loadMore) {
             this.produtoOpcoes = result.content.items;
@@ -113,7 +116,10 @@ export class ProdutoComponent implements OnInit {
             });
           }
 
-          this.infiniteScroll = this.produtoOpcoes.length < this.total;
+          this.infiniteScroll = this.produtoOpcoes && this.produtoOpcoes.length < this.total;
+        },
+        () => {
+          this.loadingServiceProdutos = false;
         }
       );
   }
@@ -198,6 +204,13 @@ export class ProdutoComponent implements OnInit {
           this.categoria = result.content && result.content.items && result.content.items.length > 0 ? result.content.items[0] : '';
 
           if (this.categoria) {
+
+            //INICIO META TAG
+            this.metatag.url = this.router.url;
+            this.metatag.title = this.categoria.nome;
+            this.metadataService.updateMetadata(this.metatag);
+            //FIM META TAG
+
             this.opcoesFiltro = {
               categorias: [{
                 id: this.categoria.id,
@@ -270,7 +283,8 @@ export class ProdutoComponent implements OnInit {
   }
 
   getNomeVariacao(index: number) {
-    return this.opcoesFiltro[index][0].replaceAll('_', ' ');
+    let nome = this.opcoesFiltro[index][0].replaceAll('_', ' ');
+    return nome !== 'viseira' ? nome : `${nome} solar`;
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -279,7 +293,7 @@ export class ProdutoComponent implements OnInit {
       let pos = (document.documentElement.scrollTop || document.body.scrollTop) + $('header')[0].scrollHeight;
       let max = $('div.produtos')[0].scrollHeight;
 
-      if (pos >= max) {
+      if (pos >= (max - 300)) {
         this.page++;
         this.listarProdutos(true);
       }

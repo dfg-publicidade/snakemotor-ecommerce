@@ -7,6 +7,8 @@ import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
 import { ProdutoUtil } from 'src/app/util/produtoUtil';
 import { environment } from 'src/environments/environment';
 
+declare var $: any;
+
 @Component({
   selector: 'app-produto-detail',
   templateUrl: './produto-detail.component.html',
@@ -30,6 +32,10 @@ export class ProdutoDetailComponent implements OnInit {
   metatag: any = {};
 
   formVariacao: any;
+
+  imagemSelecionada: any;
+
+  categoria: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -65,8 +71,9 @@ export class ProdutoDetailComponent implements OnInit {
   }
 
   buscarProdutoOpcao() {
+    delete this.produtoOpcao;
     this.formVariacao.controls.tamanho.setValue(null);
-    
+
     this.produtoOpcaoService.visualizar(this.op)
       .subscribe(
         result => {
@@ -201,5 +208,27 @@ export class ProdutoDetailComponent implements OnInit {
     }
 
     return possuiCarrinho;
+  }
+
+  previewConteudo(imagem: any) {
+    this.imagemSelecionada = imagem.item.src;
+
+    console.log(this.imagemSelecionada);
+
+    $("body").addClass("lightbox-body");
+    $(".lightbox").show();
+  }
+
+  hidePreview(event?: any) {
+    if (
+      !event ||
+      (event && !event.path) ||
+      (event.path && event.path.length > 0 && event.path[0])
+    ) {
+      $("body").removeClass("lightbox-body");
+      $(".lightbox").hide();
+
+      delete this.imagemSelecionada;
+    }
   }
 }

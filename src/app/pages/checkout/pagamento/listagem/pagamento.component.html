@@ -14,6 +14,24 @@
 <section>
     <div class="container">
         <div class="carrinho">
+            <!-- loading -->
+            <div class="loading-produto-view" *ngIf="!formasPagamento && !carrinho">
+                <div class="imagem">
+                    <div class="skeleton-box small line"></div>
+                    <div class="skeleton-box quadrado full line"></div>
+                </div>
+                <div class="info">
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box small line"></div>
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box small line mt-4 me-2"></div>
+                    <div class="skeleton-box small line"></div>
+                    <div class="skeleton-box large line"></div>
+                </div>
+            </div>
+
             <div class="itens" *ngIf="carrinho && carrinho.produtos">
                 <h3>{{title}}</h3>
 
@@ -23,7 +41,7 @@
                     <app-alert-message *ngIf="responseFormasPagamento" [result]='responseFormasPagamento'></app-alert-message>
                     <div class="formas-pagamento">
                         <ng-container *ngFor="let formaPagamento of formasPagamento">
-                            <div class="pagamento theme-first-radios selected theme-second-border-color" *ngIf="formaPagamento[1].name !== 'BALANCE' && formaPagamento[1].name !== 'DEPOSIT'">
+                            <div class="pagamento theme-first-radios selected theme-second-border-color" *ngIf="formaPagamento[1].name !== 'BALANCE' && formaPagamento[1].name !== 'DEBIT_CARD' && formaPagamento[1].name !== 'DEPOSIT'">
                                 <div class="selecao">
                                     <div class="input-radio">
                                         <input type="radio" name="pagamento" formControlName="pagamento" [value]="formaPagamento[1].name">
@@ -53,30 +71,39 @@
                                 <ul class="opcoes-extras" *ngIf="formaPagamento[1].name === 'ONLINE_DEBIT'">
                                     <ng-container *ngFor="let banco of formaPagamento.bancos">
                                         <li *ngIf="banco[1].status !== 'UNAVAILABLE'">
-                                            <img src="{{carrinho.pagseguro.path}}{{banco[1].images['MEDIUM'].path}}" title="{{banco[1].displayName}}" alt="{{banco[1].displayName}}"/>
+                                            <img src="{{carrinho.pagseguro.path}}{{banco[1].images['MEDIUM'].path}}" title="{{banco[1].displayName}}" alt="{{banco[1].displayName}}" />
                                         </li>
                                     </ng-container>
                                 </ul>
                             </div>
                         </ng-container>
-                        <ng-container *ngFor="let formaPagamento of carrinho.formasPagamento">
-                            <div class="pagamento theme-first-radios selected theme-second-border-color" *ngIf="formaPagamento.permalink !== 'pagseguro'">
-                                <div class="selecao">
-                                    <div class="input-radio">
-                                        <input type="radio" name="pagamento" formControlName="pagamento" [value]="formaPagamento.permalink">
-                                        <label></label>
-                                    </div>
-                                    <div class="text-content">
-                                        <div class="tipo">
-                                            <p>
-                                                <i class="fas fa-tablet-alt" *ngIf="formaPagamento.permalink === 'deposito'"></i>
-                                                <i class="fas fa-qrcode" *ngIf="formaPagamento.permalink === 'pix'"></i>
-                                                {{formaPagamento.nome}}
-                                            </p>
+                        <ng-container *ngIf="formasPagamento">
+                            <ng-container *ngFor="let formaPagamento of carrinho.formasPagamento">
+                                <div class="pagamento theme-first-radios selected theme-second-border-color" *ngIf="formaPagamento.permalink !== 'pagseguro'">
+                                    <div class="selecao">
+                                        <div class="input-radio">
+                                            <input type="radio" name="pagamento" formControlName="pagamento" [value]="formaPagamento.permalink">
+                                            <label></label>
+                                        </div>
+                                        <div class="text-content">
+                                            <div class="tipo">
+                                                <p>
+                                                    <i class="fas fa-tablet-alt" *ngIf="formaPagamento.permalink === 'deposito'"></i>
+                                                    <i class="fas fa-qrcode" *ngIf="formaPagamento.permalink === 'pix'"></i>
+                                                    {{formaPagamento.nome}}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </ng-container>
+                        </ng-container>
+                        <!-- loading -->
+                        <ng-container *ngIf="!formasPagamento || !carrinho.formaPagamento">
+                            <div class="skeleton-box large line"></div>
+                            <div class="skeleton-box medium line"></div>
+                            <div class="skeleton-box large line"></div>
+                            <div class="skeleton-box small line"></div>
                         </ng-container>
                     </div>
                 </form>
@@ -100,7 +127,7 @@
                         <span>em até {{carrinho.valorTotalParcelado}} ou</span>
                     </span>
                 </p>
-                <p class="valor-avista" *ngIf="carrinho.valorAVista">{{carrinho.valorAVista}}</p>
+                <p class="valor-avista text-success" *ngIf="carrinho.valorAVista"><strong>{{carrinho.valorAVista}}</strong></p>
                 <form [formGroup]="formCupom" (submit)="consultarCupom()" *ngIf="!carrinho.cupom || (carrinho.cupom && !carrinho.cupom.valor)">
                     <app-alert-message *ngIf="responseCupom" [result]='responseCupom'></app-alert-message>
                     <div class="form-group row">

@@ -2,7 +2,9 @@
     <div class="container">
         <ul>
             <li><a [routerLink]="['/']">Home</a></li>
-            <li class="separator" *ngIf="categoria || marca">/</li>
+            <ng-container *ngIf="categoria || marca">
+                <li class="separator">/</li>
+            </ng-container>
             <li><a *ngIf="categoria">{{categoria?.supercategoria?.nome}} {{categoria.nome}}</a></li>
             <li><a *ngIf="marca">{{marca.nome}}</a></li>
         </ul>
@@ -12,8 +14,22 @@
     <div class="container">
         <div class="catalogo">
             <!-- FILTROS -->
-            <div class="box-filtro" *ngIf="opcoesFiltro">
-                <form>
+            <div class="box-filtro">
+                <!-- loading -->
+                <ng-container *ngIf="!opcoesFiltro">
+                    <ng-container *ngFor="let item of [1,2,3]">
+                        <div class="loading-filtro">
+                            <div class="loading">
+                                <div class="skeleton-box line"></div>
+                            </div>
+                            <div class="loading" *ngFor="let item of [1,2,3]">
+                                <div class="skeleton-box small me-2"></div>
+                                <div class="skeleton-box large"></div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+                <form *ngIf="opcoesFiltro">
                     <!-- FILTRO POR PREÇO -->
                     <div class="filtro">
                         <p class="titulo">Preço</p>
@@ -54,11 +70,16 @@
 
             <!-- LISTA DE PRODUTOS -->
             <div class="box-produtos">
-                <h3 *ngIf="produtoOpcoes && filtrosSelecionados && filtrosSelecionados.length > 0">
+                <h3>
+                    <!--loading -->
+                    <div class="skeleton-box line small" *ngIf="!categoria"></div>
+
                     <ng-container *ngIf="categoria">
-                    <ng-container *ngIf="subcategoriaPermalink && categoria.supercategoria">{{categoria.supercategoria.nome}} &bull; </ng-container>
+                        <ng-container *ngIf="subcategoriaPermalink && categoria.supercategoria">{{categoria.supercategoria.nome}} &bull; </ng-container>
+                        <ng-container *ngIf="subsubcategoriaPermalink && categoria.supercategoria && categoria.supercategoria.supercategoria">{{categoria.supercategoria.supercategoria.nome}} &bull; </ng-container>
                         {{categoria.nome}}
                     </ng-container>
+
                     <ng-container *ngIf="marca">{{marca.nome}}</ng-container>
                     <ng-container *ngFor="let filtro of filtrosSelecionados">
                         <ng-container *ngIf="filtro[1].nome !== categoria?.nome && filtro[1].nome !== marca?.nome">
@@ -68,20 +89,37 @@
                                     <i class="fas fa-times"></i>
                                 </span>
                             </span>
-                    </ng-container>
+                        </ng-container>
                     </ng-container>
                 </h3>
-                <div class="info" *ngIf="produtoOpcoes">
-                    <span *ngIf="total && total > 0">{{total}} produto{{total > 1 ? 's' : ''}}</span>
-                    <div class="ordenacao">
-                        <ng-select [multiple]="false" placeholder="Ordenar" (change)="setOrder($event)">
-                            <ng-option [value]="'preco:asc'">Menor preço</ng-option>
-                            <ng-option [value]="'preco:desc'">Maior preço</ng-option>
-                        </ng-select>
+                <div class="info">
+                    <!--loading -->
+                    <div class="loading-filtro" *ngIf="!produtoOpcoes">
+                        <div class="loading space-between">
+                            <div class="skeleton-box small line"></div>
+                            <div class="skeleton-box small line"></div>
+                        </div>
                     </div>
+                    <ng-container *ngIf="produtoOpcoes">
+                        <span *ngIf="total && total > 0">{{total}} produto{{total > 1 ? 's' : ''}}</span>
+                        <div class="ordenacao">
+                            <ng-select [multiple]="false" placeholder="Ordenar" (change)="setOrder($event)">
+                                <ng-option [value]="'preco:asc'">Menor preço</ng-option>
+                                <ng-option [value]="'preco:desc'">Maior preço</ng-option>
+                            </ng-select>
+                        </div>
+                    </ng-container>
                 </div>
                 <div class="produtos">
+                    <!-- loading-->
+                    <ng-container *ngIf="loadingServiceProdutos">
+                        <div class="skeleton-box produto-no-grid" *ngFor="let item of [1,2,3]"></div>
+                    </ng-container>
+
                     <app-produto-componente [item]="produto" *ngFor="let produto of produtoOpcoes"></app-produto-componente>
+                </div>
+                <div class="empty" *ngIf="total && total === 0">
+                    Nenhum produto foi encontrado.
                 </div>
             </div>
         </div>

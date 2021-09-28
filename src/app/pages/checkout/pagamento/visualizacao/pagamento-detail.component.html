@@ -16,6 +16,23 @@
 <section>
     <div class="container">
         <div class="carrinho">
+            <!-- loading -->
+            <div class="loading-produto-view" *ngIf="!carrinho">
+                <div class="imagem">
+                    <div class="skeleton-box small line"></div>
+                    <div class="skeleton-box quadrado full line"></div>
+                </div>
+                <div class="info">
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box small line"></div>
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box small line mt-4 me-2"></div>
+                    <div class="skeleton-box small line"></div>
+                    <div class="skeleton-box large line"></div>
+                </div>
+            </div>
             <div class="itens" *ngIf="carrinho && carrinho.produtos && carrinho.formaPagamento">
                 <app-alert-message *ngIf="response" [result]='response'></app-alert-message>
                 <h3>
@@ -37,14 +54,14 @@
                     </ng-container>
                     <ng-container *ngIf="carrinho.formaPagamento.name === 'deposito'">
                         <i class="fas fa-donate"></i>
-                        Pagar com Depósito Bancario
+                        Pagar com Depósito Bancário
                     </ng-container>
                     <a [routerLink]="[url]">Alterar forma de pagamento</a>
                 </h3>
 
                 <!-- PIX -->
                 <div class="texto" *ngIf="carrinho.formaPagamento.name === 'pix'">
-                    <p><strong>Instruçoes para pagar com Pix</strong></p>
+                    <p><strong>Instruções para pagar com Pix</strong></p>
                     <p>
                         1. Para efetuar o pagamento, copie a chave Pix ou aponte a câmera do seu smartphone para o QR Code. <br />
                         2. Abra o site ou aplicativo do seu banco e selecione a opção pagar com Pix. <br />
@@ -59,7 +76,7 @@
 
                 <!-- DEPOSITO BANCÁRIO -->
                 <div class="texto" *ngIf="carrinho.formaPagamento.name === 'deposito'">
-                    <p><strong>Instruçoes para pagar com depósito bancário</strong></p>
+                    <p><strong>Instruções para pagar com depósito bancário</strong></p>
                     <p>
                         <strong>1.</strong> Conclua a compra clicando no botão <strong>Concluir a compra</strong>. Você será direcionado para a Página
                         contendo os dados para realizar o depósito bancário.<br />
@@ -203,14 +220,19 @@
                 <p class="total">
                     <span><strong>Total</strong></span>
                     <span>
-                        <strong>{{carrinho.valorTotal}}</strong> <br />
+                        <ng-container *ngIf="carrinho.formaPagamento.name !== 'CREDIT_CARD'">
+                            <strong>{{carrinho.valorAVistaNum | currency:'BRL':'symbol':'0.2-2':'pt'}}</strong> <br />
+                        </ng-container>
+                        <ng-container *ngIf="carrinho.formaPagamento.name === 'CREDIT_CARD'">
+                            <strong>{{carrinho.valorTotal}}</strong> <br />
+                        </ng-container>
                         <span>
                             <ng-container *ngIf="carrinho.formaPagamento.name === 'CREDIT_CARD'">em até {{carrinho.valorTotalParcelado}}</ng-container>
                             <!-- <ng-container *ngIf="carrinho.valorAVista && carrinho.formaPagamento.name !== 'CREDIT_CARD'"> ou </ng-container> -->
                         </span>
                     </span>
                 </p>
-                <p class="valor-avista" *ngIf="carrinho.descricaoDesconto && carrinho.formaPagamento.name !== 'CREDIT_CARD'">({{carrinho.descricaoDesconto}})</p>
+                <p class="valor-avista text-success" *ngIf="carrinho.descricaoDesconto && carrinho.formaPagamento.name !== 'CREDIT_CARD'"><strong>{{carrinho.descricaoDesconto}}</strong></p>
                 <p class="cupom" *ngIf="carrinho.cupom && carrinho.cupom.valor">
                     <span>
                         <strong>Cupom</strong>
@@ -219,14 +241,12 @@
                         {{carrinho.cupom.valor}}% de desconto <br />
                         <button type="button" class="btn btn-secondary btn-sm">
                             {{carrinho.cupom.codigo}}
-                            <span class="badge bg-light text-dark ms-2"><i class="fas fa-times"></i></span>
                         </button>
                     </span>
                     <span *ngIf="carrinho.cupom.tipo.id !== 'PERCENTUAL'">
                         {{carrinho.cupom.valor | currency:'BRL':'symbol':'0.2-2':'pt'}} de desconto <br />
                         <button type="button" class="btn btn-secondary btn-sm">
                             {{carrinho.cupom.codigo}}
-                            <span class="badge bg-light text-dark ms-2"><i class="fas fa-times"></i></span>
                         </button>
                     </span>
                 </p>

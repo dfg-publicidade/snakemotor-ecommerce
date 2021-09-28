@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import Helpers from './helpers';
+import { CategoriaService } from './service/categoria.service';
 declare var $: any;
 
 @Component({
@@ -9,15 +10,17 @@ declare var $: any;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  listaCategorias: any = 'capacetes,vestuario,bigtrail,street,escapamentos';
+  listaCategorias: string = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private categoriaService: CategoriaService) {
   }
 
 
   ngOnInit() {
     this.router.events.subscribe((route) => {
       if (route instanceof NavigationStart) {
+        this.listaCategorias = this.categoriaService.categoriasPrincipais;
+        
         $('.modal').modal('hide');
         $('div.campo-busca').removeClass('expanded');
         $('div.dropbox-produtos').removeClass('expanded');

@@ -15,6 +15,12 @@
             </div>
             <div class="pedidos col-xs-12 col-md-8 col-lg-8">
                 <h3 class="titulo pb-3">{{title}}</h3>
+                <!-- loading -->
+                <ng-container *ngIf="!entities">
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box medium line"></div>
+                    <div class="skeleton-box large line"></div>
+                </ng-container>
                 <p *ngIf="entities && entities.length === 0">Nenhum pedido foi realizado</p>
                 <div class="border-card" *ngFor="let entity of entities">
                     <div class="content-wrapper">

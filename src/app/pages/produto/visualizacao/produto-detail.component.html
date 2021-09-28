@@ -1,94 +1,120 @@
 <nav class="breadcrumb">
     <div class="container">
-        <ul *ngIf="produtoOpcao">
-            <li><a [routerLink]="['/']">Home</a></li>
-            <li class="separator">/</li>
-            <li><a [routerLink]="[url]">Produtos</a></li>
-            <!-- 
-            <li class="separator">/</li>
-            <li><a href="#">Capacetes</a></li>
-             -->
-            <li class="separator">/</li>
-            <li><a class="active">{{produtoOpcao.produto.nome}}</a></li>
+        <ul>
+            <li *ngIf="!produtoOpcao">
+                <div class="skeleton-box medium medium-vw line"></div>
+            </li>
+            <ng-container *ngIf="produtoOpcao">
+                <li><a [routerLink]="['/']">Home</a></li>
+                <ng-container *ngIf="categoria && categoria.supercategoria">
+                    <li class="separator">/</li>
+                    <li><a [routerLink]="[url]">{{categoria.supercategoria.nome}}</a></li>
+                </ng-container>
+                <ng-container *ngIf="categoria">
+                    <li class="separator">/</li>
+                    <li><a [routerLink]="[url]">{{categoria.nome}}</a></li>
+                </ng-container>
+                <li class="separator">/</li>
+                <li><a class="active">{{produtoOpcao.produto.nome}}</a></li>
+            </ng-container>
         </ul>
     </div>
 </nav>
 <section>
-    <div class="container" *ngIf="produtoOpcao">
+    <div class="container">
         <div class="produto">
-            <div class="imagem">
-                <doe-gallery [items]="produtoOpcao.imagens" thumbsOrientation="left" [thumbsAutoScroll]="true"></doe-gallery>
+            <!-- loading -->
+            <div class="loading-produto-view" *ngIf="!produtoOpcao">
+                <div class="imagem">
+                    <div class="skeleton-box retangulo line me-2"></div>
+                    <div class="skeleton-box quadrado line"></div>
+                </div>
+                <div class="info">
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box small line"></div>
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box small line mt-4 me-2"></div>
+                    <div class="skeleton-box small line"></div>
+                    <div class="skeleton-box large line"></div>
+                </div>
             </div>
-            <div class="info">
-                <div class="descricao">
-                    <h3>
-                        {{produtoOpcao.produto.nome}}
-                        <ng-container *ngIf="produtoOpcao.genero">{{produtoOpcao.genero.nome}} </ng-container>
-                        <ng-container *ngIf="produtoOpcao.cor">{{produtoOpcao.cor.nome}} </ng-container>
-                        <ng-container *ngIf="produtoOpcao.tipo_de_pintura">{{produtoOpcao.tipo_de_pintura.nome}}</ng-container>
-                    </h3>
-                    <span class="variacoes">
-                        <span *ngIf="produtoOpcao.material">{{produtoOpcao.material.nome}}</span>
-                        <span *ngIf="produtoOpcao.caracteristica" alt="caracteristica" title="caracteristica">{{produtoOpcao.caracteristica.nome}}</span>
-                        <span *ngIf="produtoOpcao.viseira" alt="viseira" title="viseira">{{produtoOpcao.viseira.nome === 'Sim' ? ' Com viseira ' : ' Sem viseira '}}</span>
-                    </span>
-                    <span class="avaliacao">
+            <ng-container *ngIf="produtoOpcao">
+                <div class="imagem">
+                    <doe-gallery [items]="produtoOpcao.imagens" thumbsOrientation="left" [thumbsAutoScroll]="true" (imageClick)="previewConteudo($event)"></doe-gallery>
+                </div>
+                <div class="info">
+                    <div class="descricao">
+                        <h3>
+                            {{produtoOpcao.produto.nome}}
+                            <ng-container *ngIf="produtoOpcao.genero">{{produtoOpcao.genero.nome}} </ng-container>
+                            <ng-container *ngIf="produtoOpcao.cor"> - {{produtoOpcao.cor.nome}} </ng-container>
+                            <!-- <ng-container *ngIf="produtoOpcao.tipo_de_pintura">{{produtoOpcao.tipo_de_pintura.nome}}</ng-container> -->
+                        </h3>
+                        <span class="variacoes">
+                            <span *ngIf="produtoOpcao.material">{{produtoOpcao.material.nome}}</span>
+                            <span *ngIf="produtoOpcao.caracteristica" alt="caracteristica" title="caracteristica">{{produtoOpcao.caracteristica.nome}}</span>
+                            <span *ngIf="produtoOpcao.viseira" alt="viseira" title="viseira">{{produtoOpcao.viseira.nome === 'Sim' ? ' Com viseira ' : ' Sem viseira '}}</span>
+                        </span>
+                        <!-- <span class="avaliacao">
                         <i class="far fa-star pe-1"></i>
                         <i class="far fa-star pe-1"></i>
                         <i class="far fa-star pe-1"></i>
                         <i class="far fa-star pe-1"></i>
                         <i class="far fa-star"></i>
-                    </span>
-                    <p>{{produtoOpcao.produto.descricaoCurta}}</p>
-                </div>
-                <div class="preco">
-                    <!-- PRECO VALOR PADRÃO RISCADO, POIS EXISTE VALOR PROMOCIONAL -->
-                    <p class="valor-normal" [ngClass]="{empty: !produtoOpcao.precoPromocional}">{{produtoOpcao.precoPromocional ? produtoOpcao.precoVenda : '&nbsp;'}}</p>
-
-                    <!-- PRECO VALOR PROMOCIONAL -->
-                    <p class="valor-vigente" *ngIf="produtoOpcao.precoPromocional">{{produtoOpcao.precoPromocional}}</p>
-                    <p class="valor-parcelado" *ngIf="produtoOpcao.precoPromocional && produtoOpcao.precoPromocionalParcelado">{{produtoOpcao.precoPromocionalParcelado}}</p>
-
-                    <!-- PRECO VALOR PADRÃO -->
-                    <p class="valor-vigente" *ngIf="!produtoOpcao.precoPromocional">{{produtoOpcao.precoVenda}}</p>
-                    <p class="valor-parcelado" *ngIf="!produtoOpcao.precoPromocional && produtoOpcao.precoVendaParcelado">{{produtoOpcao.precoVendaParcelado}} ou</p>
-                    <p class="valor-avista" *ngIf="produtoOpcao.precoAVista">{{produtoOpcao.precoAVista}}</p>
-
-                    <!-- TAGS de destaque -->
-                    <span class="tag lancamento" *ngIf="produtoOpcao.produto.lancamento">Lançamento</span>
-                    <span class="tag exclusivo" *ngIf="produtoOpcao.produto.exclusivoSite">Exclusivo no site</span>
-                    <span class="tag frete-gratis" *ngIf="produtoOpcao.produto.freteGratis">Frete Grátis</span>
-                </div>
-                <form class="variacoes" [formGroup]="formVariacao">
-                    <div class="cor" *ngIf="cores && cores.length > 1">
-                        <label>Cor</label>
-                        <div class="itens">
-                            <a [routerLink]="[url, pOpcao.produto.permalink]" [queryParams]="{op: pOpcao.id}" *ngFor="let pOpcao of cores">
-                                <div class="item" [ngClass]="{active: produtoOpcao.id === pOpcao.id}" [ngStyle]="{'background-image': 'url(' + pOpcao.imagem + ')'}"></div>
-                            </a>
-                        </div>
+                    </span> -->
+                        <p>{{produtoOpcao?.produto?.descricaoCurta}}</p>
                     </div>
-                    <div class="variacao">
-                        <div *ngIf="tamanhos && tamanhos[0] && tamanhos[0].tamanhoOpcao">
-                            <label>Tamanho</label>
-                            <ng-select formControlName="tamanho" loadingText="Carregando..." [loading]="!tamanhos" placeholder="Selecione" notFoundText="Nenhum item encontrado" (change)="selecionarOpcao($event)">
-                                <ng-option [value]="pOpcao.id" *ngFor="let pOpcao of tamanhos">{{pOpcao.tamanhoOpcao.nome}}</ng-option>
-                            </ng-select>
-                        </div>
-                        <div *ngIf="qtdes && qtdes.length > 0">
-                            <label>Quantidade</label>
-                            <ng-select formControlName="qtde" placeholder="Selecione" notFoundText="Nenhum item encontrado">
-                                <ng-option [value]="qtde" *ngFor="let qtde of qtdes">{{qtde}}</ng-option>
-                            </ng-select>
-                        </div>
+                    <div class="preco">
+                        <!-- PRECO VALOR PADRÃO RISCADO, POIS EXISTE VALOR PROMOCIONAL -->
+                        <p class="valor-normal" [ngClass]="{empty: !produtoOpcao.precoPromocional}">{{produtoOpcao.precoPromocional ? produtoOpcao.precoVenda : '&nbsp;'}}</p>
+
+                        <!-- PRECO VALOR PROMOCIONAL -->
+                        <p class="valor-vigente" *ngIf="produtoOpcao.precoPromocional">{{produtoOpcao.precoPromocional}}</p>
+                        <p class="valor-parcelado" *ngIf="produtoOpcao.precoPromocional && produtoOpcao.precoPromocionalParcelado">{{produtoOpcao.precoPromocionalParcelado}}</p>
+
+                        <!-- PRECO VALOR PADRÃO -->
+                        <p class="valor-vigente" *ngIf="!produtoOpcao.precoPromocional">{{produtoOpcao.precoVenda}}</p>
+                        <p class="valor-parcelado" *ngIf="!produtoOpcao.precoPromocional && produtoOpcao.precoVendaParcelado">{{produtoOpcao.precoVendaParcelado}} ou</p>
+                        <p class="valor-avista text-success" *ngIf="produtoOpcao.precoAVista"><strong>{{produtoOpcao.precoAVista}}</strong></p>
+
+                        <!-- TAGS de destaque -->
+                        <span class="tag lancamento" *ngIf="produtoOpcao.produto.lancamento">Lançamento</span>
+                        <span class="tag exclusivo" *ngIf="produtoOpcao.produto.exclusivoSite">Exclusivo no site</span>
+                        <span class="tag frete-gratis" *ngIf="produtoOpcao.produto.freteGratis">Frete Grátis</span>
                     </div>
-                </form>
-                <button *ngIf="qtdes && qtdes.length > 0" type="button" class="custom buy" (click)="comprar()" [disabled]="formVariacao.status === 'INVALID' || jaPossuiCarrinho(op) || (produtoOpcaoSelecionado && produtoOpcaoSelecionado.adicionadoCarrinho)">
-                    <i class="fas fa-shopping-cart"></i>
-                    Comprar
-                </button>
-                <h3 *ngIf="qtdes && qtdes.length === 0">Produto indisponível</h3>
-            </div>
+                    <form class="variacoes" [formGroup]="formVariacao">
+                        <div class="cor" *ngIf="cores && cores.length > 1">
+                            <label>Cor</label>
+                            <div class="itens">
+                                <a [routerLink]="[url, pOpcao.produto.permalink]" [queryParams]="{op: pOpcao.id}" *ngFor="let pOpcao of cores">
+                                    <div class="item" [ngClass]="{active: produtoOpcao.id === pOpcao.id}" [ngStyle]="{'background-image': 'url(' + pOpcao.imagem + ')'}"></div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="variacao">
+                            <div *ngIf="tamanhos && tamanhos[0] && tamanhos[0].tamanhoOpcao">
+                                <label>Tamanho</label>
+                                <ng-select formControlName="tamanho" loadingText="Carregando..." [loading]="!tamanhos" placeholder="Selecione" notFoundText="Nenhum item encontrado" (change)="selecionarOpcao($event)">
+                                    <ng-option [value]="pOpcao.id" *ngFor="let pOpcao of tamanhos">{{pOpcao.tamanhoOpcao.nome}}</ng-option>
+                                </ng-select>
+                            </div>
+                            <div *ngIf="qtdes && qtdes.length > 0">
+                                <label>Quantidade</label>
+                                <ng-select formControlName="qtde" placeholder="Selecione" notFoundText="Nenhum item encontrado">
+                                    <ng-option [value]="qtde" *ngFor="let qtde of qtdes">{{qtde}}</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </form>
+                    <button *ngIf="qtdes && qtdes.length > 0" type="button" class="custom buy" (click)="comprar()" [disabled]="formVariacao.status === 'INVALID' || jaPossuiCarrinho(op) || (produtoOpcaoSelecionado && produtoOpcaoSelecionado.adicionadoCarrinho)">
+                        <i class="fas fa-shopping-cart"></i>
+                        {{jaPossuiCarrinho(op) ? 'Adicionado no carrinho' : 'Comprar'}}
+                    </button>
+                    <h3 *ngIf="qtdes && qtdes.length === 0">Produto indisponível</h3>
+                </div>
+            </ng-container>
         </div>
         <div class="produto-extra-info">
             <!-- Nav tabs -->
@@ -102,7 +128,7 @@
             </ul>
 
             <!-- Tab panes -->
-            <div class="tab-content">
+            <div class="tab-content" *ngIf="produtoOpcao">
                 <div class="tab-pane active" id="descricao" role="tabpanel" aria-labelledby="home-tab">
                     <div *ngIf="produtoOpcao.produto.descricao" [innerHtml]="produtoOpcao.produto.descricao | sanitizeHtml"></div>
                     <p *ngIf="!produtoOpcao.produto.descricao">Nenhuma descrição disponível</p>
@@ -119,6 +145,10 @@
     <div class="container">
         <h1>Você também pode se <strong>interessar</strong> por</h1>
         <div class="produtos">
+             <!-- loading-->
+             <ng-container *ngIf="!produtosPorCategoria">
+                <div class="skeleton-box produto-no-grid" *ngFor="let item of [1,2,3,4]"></div>
+            </ng-container>
             <app-produto-componente [item]="produto" *ngFor="let produto of produtosPorCategoria"></app-produto-componente>
         </div>
     </div>
@@ -126,3 +156,15 @@
 
 <!-- TOAST MESSAGE -->
 <app-toast-message *ngIf="toastMessage" [message]='toastMessage'></app-toast-message>
+
+<!-- PREVIEW IMAGEM -->
+<div class="lightbox" (click)="hidePreview($event)" *ngIf="produtoOpcao">
+    <div class="lightbox-container" *ngIf="imagemSelecionada">
+        <div class="lightbox-content">
+            <div class="box-container">
+                <img [src]="imagemSelecionada" />
+            </div>
+            <button (click)="hidePreview()" class="btn btn-dark lightbox-close">Fechar | ✕</button>
+        </div>
+    </div>
+</div>

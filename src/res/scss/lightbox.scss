@@ -1,0 +1,71 @@
+body {
+    &.lightbox-body {
+        overflow: hidden;
+    }
+}
+.lightbox {
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: scroll;
+    position: fixed;
+    display: none;
+    z-index: 99999;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+
+    @include transition(all, linear, 0.3s);
+
+    &-container {
+        position: relative;
+        max-width: 100%;
+        margin: 5% auto;
+        display: block;
+        padding: 0 3%;
+        height: 80vh;
+        z-index: 10;
+        
+        // Increasing top margin for mobile
+        @media screen and (max-width: 768px) {
+            margin-top: 10%;
+        }
+        @media screen and (max-width: 414px) {
+            margin-top: 13%;
+        }
+    }
+
+    &-content {
+        box-shadow: 0 1px 6px fade(black, 70%);
+        display: block;
+        width: 100%;
+        text-align: center;
+
+        & > button.lightbox-close {
+            border: none;
+            color: #fff;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        & > p {
+            &.legenda {
+                font-size: 15px;
+                // color: #fff;
+                margin-bottom: 5px;
+                background: #fff;
+                display: inline-block;
+                padding: 5px 30px;
+            }
+        }
+
+        & > div.box-container {
+            width: 100%;
+            display: inline-block;
+            &>img{
+                height: 80vh;
+                border-radius: 5px;
+            }
+        }
+    }
+}

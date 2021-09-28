@@ -144,12 +144,13 @@ header {
             }
 
             & > div.logo {
-                width: 275px;
-                height: 115px;
+                width: 250px;
+                height: 110px;
                 background: url("../../../res/imagens/logo.png") no-repeat bottom center;
                 background-size: 100% auto;
                 cursor: pointer;
                 align-self: center;
+                margin-top: 5px;
 
                 @include transition(all, linear, 0.5s);
             }
@@ -263,6 +264,10 @@ header {
                         justify-content: flex-start;
                         padding: 0 15px;
 
+                        &.acessorios-para-moto {
+                            width: 100%;
+                        }
+
                         &:first-of-type {
                             padding-left: 0;
                         }
@@ -285,6 +290,9 @@ header {
                             color: #e8e8e8;
                             font-weight: 600;
                             font-size: 15px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                             white-space: nowrap;
 
                             & > span {
                                 padding-left: 10px;
@@ -364,6 +372,10 @@ header {
                                                 font-weight: bold;
                                                 color: #686868;
                                                 line-height: 25px;
+
+                                                &.destaque{
+                                                    text-decoration: underline !important;
+                                                }
                                             }
                                         }
                                     }

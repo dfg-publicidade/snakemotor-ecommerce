@@ -3,7 +3,7 @@
         <ul>
             <li><a [routerLink]="['/']">Home</a></li>
             <li class="separator">/</li>
-            <li><a [routerLink]="[url]">Meus dados</a></li>
+            <li><a [routerLink]="[url]">Endereços</a></li>
             <li class="separator">/</li>
             <li><a>Detalhes</a></li>
         </ul>
@@ -18,6 +18,12 @@
             <div class="col-xs-12 col-md-8 col-lg-8">
                 <h3 class="titulo pb-3">{{title}}</h3>
                 <app-alert-message *ngIf="response" [result]='response'></app-alert-message>
+                <!-- loading -->
+                <ng-container *ngIf="!entity">
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box medium line"></div>
+                    <div class="skeleton-box large line"></div>
+                </ng-container>
                 <form [formGroup]="form" (submit)="alterar()" *ngIf="entity">
                     <div class="form-floating col-xs-12 col-sm-12 col-lg-4 mb-2">
                         <input type="text" formControlName="cep" mask="00.000-000" class="form-control" placeholder="CEP" required>

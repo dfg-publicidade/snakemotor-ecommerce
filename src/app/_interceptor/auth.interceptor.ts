@@ -13,7 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
     // ignoreRoutes = ['ouvidoria', 'certificados', 'documentos', 'tcc', 'calendario', 'revista', 'testecovid', 'indicamed', 'sorteio', 'graduacao', 'pos-graduacao', 'segunda-graduacao', 'colacao-fotos'];
 
     constructor(private router: Router, private perfilService: PerfilService) {
-        
+
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -41,6 +41,9 @@ export class AuthInterceptor implements HttpInterceptor {
                 catchError((error, caught) => {
                     if (error.status === 0) {
                         // this.router.navigate(['indisponivel'], { skipLocationChange: true });
+                    } else if (error.status === 401) {
+                        this.perfilService.removerSessao();
+                        location.href = "/";
                     } else {
 
                     }

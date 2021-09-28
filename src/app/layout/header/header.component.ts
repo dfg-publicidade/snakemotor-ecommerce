@@ -15,7 +15,6 @@ declare var $: any;
 export class HeaderComponent implements OnInit {
   configuracao: any;
   scrolled: boolean = false;
-  listaCategorias: any = 'capacetes,vestuario,bigtrail,street,escapamentos';
   categorias: any;
 
   constructor(private router: Router, private categoriaService: CategoriaService, private perfilService: PerfilService, private carrinhoService: CarrinhoService, private configuracaoService: ConfiguracaoService) {
@@ -25,7 +24,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     // this.buscarConfiguracao();
 
-    this.listarCategorias(this.listaCategorias);
+    this.listarCategorias();
   }
 
   buscarConfiguracao() {
@@ -39,11 +38,15 @@ export class HeaderComponent implements OnInit {
       );
   }
 
-  listarCategorias(categoriaPermalink: string) {
-    this.categoriaService.listarPorSuperCategorias(categoriaPermalink)
+  listarCategorias() {
+    let categoriasPrincipais = this.categoriaService.categoriasPrincipais;
+
+    this.categoriaService.listarPorSuperCategorias(categoriasPrincipais)
       .subscribe(
         result => {
           this.categorias = Object.entries(result.content);
+
+          this.categoriaService.setCategoriasPrincipais(this.categorias);
 
           setTimeout(() => {
             $('li.item-menu').hover(() => {
@@ -80,7 +83,7 @@ export class HeaderComponent implements OnInit {
   }
 
   closeMenus() {
-    this.listaCategorias.split(',').forEach((categoria: any) => {
+    this.categoriaService.categoriasPrincipais.split(',').forEach((categoria: any) => {
       let divCategoria = $(`div.menu-${categoria}`);
       if (divCategoria) {
         divCategoria.hide();

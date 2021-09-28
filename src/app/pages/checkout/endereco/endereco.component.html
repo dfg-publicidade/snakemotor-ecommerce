@@ -12,9 +12,26 @@
 <section>
     <div class="container">
         <div class="carrinho">
+            <!-- loading -->
+            <div class="loading-produto-view" *ngIf="!carrinho">
+                <div class="imagem">
+                    <div class="skeleton-box small line"></div>
+                    <div class="skeleton-box quadrado full line"></div>
+                </div>
+                <div class="info">
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box small line"></div>
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box large line"></div>
+                    <div class="skeleton-box small line mt-4 me-2"></div>
+                    <div class="skeleton-box small line"></div>
+                    <div class="skeleton-box large line"></div>
+                </div>
+            </div>
             <div class="itens" *ngIf="carrinho && carrinho.produtos">
                 <h3>{{title}}</h3>
-
+                <p>Selecione o local para entrega</p>
                 <form [formGroup]="formFrete">
                     <!-- SELEÇÃO DE ENDEREÇO -->
                     <div class="enderecos">
@@ -42,36 +59,48 @@
                     </div>
 
                     <!-- SELEÇÃO DE FRETE -->
-                    <div class="frete" *ngIf="carrinho.formasEntrega && formFrete.value.endereco">
-                        <h3>Formas de entrega</h3>
-                        <div class="frete-tipos">
-                            <!-- LISTA DE FORMAS DE ENTREGA -->
-                            <div class="form-group form-check mb-1" *ngFor="let formaEntrega of carrinho.formasEntrega">
-                                <label>
-                                    <input type="radio" class="form-check-input" name="formaEntrega" formControlName="formaEntrega" [value]="formaEntrega.permalink">
-                                    <span>
-                                        {{formaEntrega.nome}}:
-                                        <span [ngClass]="{gratis: !formaEntrega.valor}"> {{formaEntrega.valor ? formaEntrega.valor : 'Grátis'}} </span>
-                                        <ng-container *ngIf="formaEntrega.prazoEntrega">( {{formaEntrega.prazoEntrega}} )</ng-container>
-                                    </span>
-                                </label>
+                    <div class="frete">
+                        <!-- loading-->
+                        <div class="loading-filtro" *ngIf="!carrinho.formasEntrega && formFrete.value.endereco">
+                            <div class="loading">
+                                <div class="skeleton-box line"></div>
                             </div>
-
-                            <!-- FORMA DE ENTREGA SELECIONADA -->
-                            <div class="form-group form-check mb-1" *ngIf="carrinho.formaEntrega">
-                                <label>
-                                    <span>
-                                        {{carrinho.formaEntrega.nome}}:
-                                        <span [ngClass]="{gratis: !carrinho.formaEntrega.valor}"> {{carrinho.formaEntrega.valor ? carrinho.formaEntrega.valor : 'Grátis'}} </span>
-                                        <ng-container *ngIf="carrinho.formaEntrega.prazoEntrega">({{carrinho.formaEntrega.prazoEntrega}})</ng-container>
-                                    </span>
-                                </label>
-                                <small>
-                                    <strong>selecionado</strong><br/>
-                                    <span (click)="alterarFrete()">alterar</span>
-                                </small>
+                            <div class="loading" *ngFor="let item of [1,2,3]">
+                                <div class="skeleton-box small me-2"></div>
+                                <div class="skeleton-box large"></div>
                             </div>
                         </div>
+                        <ng-container *ngIf="carrinho.formasEntrega && formFrete.value.endereco">
+                            <h3>Formas de entrega</h3>
+                            <div class="frete-tipos">
+                                <!-- LISTA DE FORMAS DE ENTREGA -->
+                                <div class="form-group form-check mb-1" *ngFor="let formaEntrega of carrinho.formasEntrega">
+                                    <label>
+                                        <input type="radio" class="form-check-input" name="formaEntrega" formControlName="formaEntrega" [value]="formaEntrega.permalink">
+                                        <span>
+                                            {{formaEntrega.nome}}:
+                                            <span [ngClass]="{gratis: !formaEntrega.valor}"> {{formaEntrega.valor ? formaEntrega.valor : 'Grátis'}} </span>
+                                            <ng-container *ngIf="formaEntrega.prazoEntrega">( {{formaEntrega.prazoEntrega}} )</ng-container>
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <!-- FORMA DE ENTREGA SELECIONADA -->
+                                <div class="form-group form-check mb-1" *ngIf="carrinho.formaEntrega">
+                                    <label>
+                                        <span>
+                                            {{carrinho.formaEntrega.nome}}:
+                                            <span [ngClass]="{gratis: !carrinho.formaEntrega.valor}"> {{carrinho.formaEntrega.valor ? carrinho.formaEntrega.valor : 'Grátis'}} </span>
+                                            <ng-container *ngIf="carrinho.formaEntrega.prazoEntrega">({{carrinho.formaEntrega.prazoEntrega}})</ng-container>
+                                        </span>
+                                    </label>
+                                    <small>
+                                        <strong>selecionado</strong><br />
+                                        <span (click)="alterarFrete()">alterar</span>
+                                    </small>
+                                </div>
+                            </div>
+                        </ng-container>
                     </div>
                 </form>
             </div>

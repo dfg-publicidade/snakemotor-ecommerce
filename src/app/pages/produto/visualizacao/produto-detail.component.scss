@@ -1,6 +1,7 @@
 @import "../../../../res/variables.scss";
 @import "../../../../res/scss/form.scss";
 @import "../../../../res/scss/buttons.scss";
+@import "../../../../res/scss/lightbox.scss";
 
 section {
     &.produto-detail {
@@ -29,6 +30,7 @@ section {
                                         padding: 20px;
                                         & > img {
                                             object-fit: contain !important;
+                                            cursor: zoom-in;
                                         }
                                     }
                                 }
@@ -222,27 +224,6 @@ section {
                             font-size: 22px;
                             font-weight: bold;
                             align-items: center;
-
-                            & > span.tag {
-                                font-size: 14px;
-                                font-weight: bold;
-                                line-height: 15px;
-                                color: #fff;
-                                padding: 4px 10px;
-                                margin-left: 3px;
-                                &.lancamento {
-                                    background: #d602de;
-                                }
-                                &.desconto {
-                                    background: #de0205;
-                                }
-                                &.exclusivo {
-                                    background: #b6df0e;
-                                }
-                                &.frete-gratis {
-                                    background: #de0205;
-                                }
-                            }
                         }
 
                         &.valor-parcelado {
@@ -251,7 +232,30 @@ section {
                         }
                         &.valor-avista {
                             font-size: 13px;
-                            color: #ff0000;
+                            // color: #ff0000;
+                        }
+                    }
+
+                    & > span.tag {
+                        font-size: 14px;
+                        font-weight: bold;
+                        line-height: 15px;
+                        color: #fff;
+                        padding: 4px 10px;
+                        margin-left: 3px;
+                        margin-top: 5px;
+                        display: inline-block;
+                        &.lancamento {
+                            background: #d602de;
+                        }
+                        &.desconto {
+                            background: #de0205;
+                        }
+                        &.exclusivo {
+                            background: #b6df0e;
+                        }
+                        &.frete-gratis {
+                            background: #de0205;
                         }
                     }
                 }
@@ -372,7 +376,7 @@ section {
     }
 }
 
-div.toast-container{
+div.toast-container {
     z-index: 9999;
 }
 

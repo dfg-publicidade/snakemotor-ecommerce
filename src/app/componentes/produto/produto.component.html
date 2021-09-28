@@ -10,8 +10,8 @@
             <span class="nome">
                 {{item.produto.nome}}
                 <ng-container *ngIf="item.genero">{{item.genero.nome}} </ng-container>
-                <ng-container *ngIf="item.cor">{{item.cor.nome}} </ng-container>
-                <ng-container *ngIf="item.tipo_de_pintura">{{item.tipo_de_pintura.nome}}</ng-container>
+                <ng-container *ngIf="item.cor"> - {{item.cor.nome}} </ng-container>
+                <!-- <ng-container *ngIf="item.tipo_de_pintura">{{item.tipo_de_pintura.nome}}</ng-container> -->
             </span>
             <span class="variacoes">
                 <span *ngIf="item.material">{{item.material.nome}}</span>
@@ -31,6 +31,7 @@
     <div class="preco">
         <!-- PRECO VALOR PADRÃO RISCADO, POIS EXISTE VALOR PROMOCIONAL -->
         <p class="valor-normal" [ngClass]="{empty: !item.precoPromocional}">{{item.precoPromocional ? item.precoVenda : '&nbsp;'}}</p>
+       
         <!-- PRECO VALOR PROMOCIONAL -->
         <p class="valor-vigente" *ngIf="item.precoPromocional">{{item.precoPromocional}}</p>
         <p class="valor-parcelado" *ngIf="item.precoPromocional && item.precoPromocionalParcelado">{{item.precoPromocionalParcelado}}</p>
@@ -38,5 +39,8 @@
         <!-- PRECO VALOR PADRÃO -->
         <p class="valor-vigente" *ngIf="!item.precoPromocional">{{item.precoVenda}}</p>
         <p class="valor-parcelado" *ngIf="!item.precoPromocional && item.precoVendaParcelado">{{item.precoVendaParcelado}}</p>
+
+        <!-- PRECO A VISTA-->
+        <p class="valor-avista text-success" *ngIf="item.precoAVista"><strong>{{item.precoAVista}}</strong></p>
     </div>
 </a>

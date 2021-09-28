@@ -9,28 +9,32 @@ declare var $: any;
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-  listaCategorias: any = 'capacetes,vestuario,bigtrail,street,escapamentos';
   categorias: any;
   configuracao: any;
   time: any = new Date().getTime();
   constructor(
     private configuracaoService: ConfiguracaoService,
     private categoriaService: CategoriaService
-    ) {
+  ) {
   }
 
   ngOnInit() {
-    this.listarCategorias(this.listaCategorias);
+    this.listarCategorias();
     // this.buscarConfiguracao();
   }
 
-  listarCategorias(categoriaPermalink: string) {
-    this.categoriaService.listarPorSuperCategorias(categoriaPermalink)
-      .subscribe(
-        result => {
-          this.categorias = Object.entries(result.content);
-        }
-      );
+  listarCategorias() {
+    this.categorias = this.categoriaService.getCategoriasPrincipais();
+    
+    if (!this.categorias) {
+      let categoriasPrincipais = this.categoriaService.categoriasPrincipais;
+      this.categoriaService.listarPorSuperCategorias(categoriasPrincipais)
+        .subscribe(
+          result => {
+            this.categorias = Object.entries(result.content);
+          }
+        );
+    }
   }
 
   buscarConfiguracao() {
@@ -51,7 +55,7 @@ export class FooterComponent implements OnInit {
       );
   }
 
-  getOnlyNumber(telefone: string){
-   return telefone.replace(/^\+|-|\(|\)/g, '').replace(' ', '');
+  getOnlyNumber(telefone: string) {
+    return telefone.replace(/^\+|-|\(|\)/g, '').replace(' ', '');
   }
 }

@@ -13,12 +13,18 @@
             <strong>Destaques</strong>
             de nossa loja virtual
         </h1>
-        <div class="produtos" *ngIf="produtosDestaque && produtosDestaque.length > 0">
-            <owl-carousel-o *ngIf="optionsRotativoProdutos && produtosDestaque" [options]="optionsRotativoProdutos">
-                <ng-template carouselSlide *ngFor="let produto of produtosDestaque">
-                    <app-produto-componente [item]="produto"></app-produto-componente>
-                </ng-template>
-            </owl-carousel-o>
+        <!-- loading -->
+        <div class="produtos">
+            <div class="loading-produtos" *ngIf="loadingServiceProdutosDestaque">
+                <div class="skeleton-box produto" *ngFor="let item of [1,2,3,4]"></div>
+            </div>
+            <ng-container *ngIf="optionsRotativoProdutos && produtosDestaque">
+                <owl-carousel-o [options]="optionsRotativoProdutos">
+                    <ng-template carouselSlide *ngFor="let produto of produtosDestaque">
+                        <app-produto-componente [item]="produto"></app-produto-componente>
+                    </ng-template>
+                </owl-carousel-o>
+            </ng-container>
         </div>
 
         <!-- BANNER DE SEGUNDA ROLAGEM -->
@@ -36,11 +42,16 @@
             <a [routerLink]="[categoriaDestaque.permalink]" routerLinkActive="router-link-active" class="right">veja mais +</a>
         </h1>
         <div class="produtos">
-            <owl-carousel-o *ngIf="optionsRotativoProdutos && produtosPorCategoriaDestaque" [options]="optionsRotativoProdutos">
-                <ng-template carouselSlide *ngFor="let produto of produtosPorCategoriaDestaque">
-                    <app-produto-componente [item]="produto"></app-produto-componente>
-                </ng-template>
-            </owl-carousel-o>
+            <div class="loading-produtos" *ngIf="loadingServiceProdutosPorCategoria">
+                <div class="skeleton-box produto" *ngFor="let item of [1,2,3,4]"></div>
+            </div>
+            <ng-container *ngIf="optionsRotativoProdutos && produtosPorCategoriaDestaque">
+                <owl-carousel-o [options]="optionsRotativoProdutos">
+                    <ng-template carouselSlide *ngFor="let produto of produtosPorCategoriaDestaque">
+                        <app-produto-componente [item]="produto"></app-produto-componente>
+                    </ng-template>
+                </owl-carousel-o>
+            </ng-container>
         </div>
     </div>
 </section>
@@ -49,14 +60,19 @@
 <section *ngIf="banners[tipoBannerIdTerceiraRolagem] && banners[tipoBannerIdTerceiraRolagem]">
     <div class="container" *ngFor="let banner of banners[tipoBannerIdTerceiraRolagem]; let i = index">
         <div class="banners" [ngClass]="{'mt-0': i === 0, 'mt-5': i > 0}">
-            <a class="banner" href="{{banner.url ? banner.url : '#'}}" [ngStyle]="{'background-image': 'url(' + (!isMobile ? !isMobile ? banner.imagem.original :  banner.imagemMobile.original + '?timestamp=' + timestamp  : banner.imagemMobile.original + '?timestamp=' + timestamp) + ')'}"></a>
+            <a class="banner" href="{{banner.url ? banner.url : '#'}}" [ngStyle]="{'background-image': 'url(' + (isMobile ? banner.imagemMobile.original : banner.imagem.original) + '?timestamp=' + timestamp +')'}"></a>
         </div>
-        <div class="produtos" *ngIf="banner.produtos">
-            <owl-carousel-o *ngIf="optionsRotativoProdutos" [options]="optionsRotativoProdutos">
-                <ng-template carouselSlide *ngFor="let produto of banner.produtos">
-                    <app-produto-componente [item]="produto"></app-produto-componente>
-                </ng-template>
-            </owl-carousel-o>
+        <div class="produtos">
+            <div class="loading-produtos" *ngIf="loadingServiceProdutosPorCategoria">
+                <div class="skeleton-box produto" *ngFor="let item of [1,2,3,4]"></div>
+            </div>
+            <ng-container *ngIf="banner.produtos">
+                <owl-carousel-o *ngIf="optionsRotativoProdutos" [options]="optionsRotativoProdutos">
+                    <ng-template carouselSlide *ngFor="let produto of banner.produtos">
+                        <app-produto-componente [item]="produto"></app-produto-componente>
+                    </ng-template>
+                </owl-carousel-o>
+            </ng-container>
         </div>
     </div>
 </section>
@@ -64,11 +80,13 @@
 <section>
     <h3 class="center pt-3"><strong>Compre por marca</strong></h3>
     <div class="marcas">
-        <owl-carousel-o *ngIf="optionsRotativoMarcas && marcas" [options]="optionsRotativoMarcas">
-            <ng-template carouselSlide *ngFor="let marca of marcas">
-                <a class="marca" [routerLink]="['/m', marca.permalink]" [ngStyle]="{'background-image': marca.logo ? 'url(' + marca.logo.original + ')' : 'url(res/images/sem-capa-thumb.png)'}"></a>
-            </ng-template>
-        </owl-carousel-o>
+        <ng-container *ngIf="optionsRotativoMarcas && marcas">
+            <owl-carousel-o [options]="optionsRotativoMarcas">
+                <ng-template carouselSlide *ngFor="let marca of marcas">
+                    <a class="marca" [routerLink]="['/m', marca.permalink]" [ngStyle]="{'background-image': marca.logo ? 'url(' + marca.logo.original + ')' : 'url(res/images/sem-capa-thumb.png)'}"></a>
+                </ng-template>
+            </owl-carousel-o>
+        </ng-container>
     </div>
 </section>
 <footer class="newsletter">

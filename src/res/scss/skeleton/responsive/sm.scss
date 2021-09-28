@@ -1,0 +1,20 @@
+@include media-breakpoint-down(sm) {
+    div.loading-produtos {
+        grid-template-columns: repeat(2, 1fr);
+
+        & > div.produto {
+            height: 280px;
+
+            &:nth-child(2), &:nth-child(3) {
+                display: none;
+            }
+        }
+    }
+
+    div.loading-produto-view {
+        display: block;
+        & > div.imagem {
+            height: 150px;
+        }
+    }
+}

@@ -16,7 +16,16 @@ const routes: Routes = [
           },
           {
             path: ':subcategoriaPermalink',
-            component: ProdutoComponent
+            children: [
+              {
+                path: '',
+                component: ProdutoComponent
+              },
+              {
+                path: ':subsubcategoriaPermalink',
+                component: ProdutoComponent
+              }
+            ]
           }
         ]
       },

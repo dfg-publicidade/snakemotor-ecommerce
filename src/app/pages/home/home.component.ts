@@ -39,6 +39,10 @@ export class HomeComponent implements OnInit {
 
   timestamp: any = new Date().getTime();
 
+  loadingServiceMarca: boolean = false;
+  loadingServiceProdutosDestaque: boolean = false;
+  loadingServiceProdutosPorCategoria: boolean = false;
+
   constructor(
     private router: Router,
     private marcaService: MarcaService,
@@ -82,6 +86,7 @@ export class HomeComponent implements OnInit {
       margin: 20,
       nav: false,
       autoWidth: true,
+      freeDrag: true,
       dots: false,
       autoplay: true,
       responsive: {
@@ -101,9 +106,9 @@ export class HomeComponent implements OnInit {
     };
   }
 
-  loadingServiceMarca: boolean = false;
-
   ngOnInit(): void {
+    this.innerWidth = window.innerWidth;
+
     //INICIALIZA META - default
     this.metadataService.updateMetadata({
       url: this.router.url
@@ -141,6 +146,7 @@ export class HomeComponent implements OnInit {
   }
 
   listarbanners(tipoId: string) {
+    this
     this.bannerService.listarPorPosicao(tipoId)
       .subscribe(
         result => {
@@ -150,10 +156,15 @@ export class HomeComponent implements OnInit {
   }
 
   listarProdutosDestaque(limite: number) {
+    this.loadingServiceProdutosDestaque = true;
     this.produtoOpcaoService.listarDestaques(limite, true)
       .subscribe(
         result => {
+          this.loadingServiceProdutosDestaque = false;
           this.produtosDestaque = result.content.items;
+        },
+        () => {
+          this.loadingServiceProdutosDestaque = false;
         }
       );
   }
@@ -174,10 +185,15 @@ export class HomeComponent implements OnInit {
   }
 
   listarProdutosPorCategoria(categoriaId: string, limite: number, aleatorio: boolean) {
+    this.loadingServiceProdutosPorCategoria = true;
     this.produtoOpcaoService.listarPorCategoria(categoriaId, limite, aleatorio)
       .subscribe(
         result => {
           this.produtosPorCategoriaDestaque = result.content.items;
+          this.loadingServiceProdutosPorCategoria = false;
+        },
+        () => {
+          this.loadingServiceProdutosPorCategoria = false;
         }
       );
   }

@@ -9,7 +9,6 @@ declare var $: any;
   styleUrls: ['./menu-mobile.component.scss']
 })
 export class MenuMobileComponent implements OnInit {
-  listaCategorias: any = 'capacetes,vestuario,bigtrail,street,escapamentos';
   categorias: any;
 
   configAlert: any = {};
@@ -18,19 +17,24 @@ export class MenuMobileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.listarCategorias(this.listaCategorias);
+    this.listarCategorias();
   }
 
-  listarCategorias(categoriaPermalink: string) {
-    this.categoriaService.listarPorSuperCategorias(categoriaPermalink)
-      .subscribe(
-        result => {
-          this.categorias = Object.entries(result.content);
-        }
-      );
+  listarCategorias() {
+    this.categorias = this.categoriaService.getCategoriasPrincipais();
+    
+    if (!this.categorias) {
+      let categoriasPrincipais = this.categoriaService.categoriasPrincipais;
+      this.categoriaService.listarPorSuperCategorias(categoriasPrincipais)
+        .subscribe(
+          result => {
+            this.categorias = Object.entries(result.content);
+          }
+        );
+    }
   }
 
-  getUsuario(){
+  getUsuario() {
     return this.perfilService.getSession();
   }
 
