@@ -17,7 +17,7 @@
             <span class="variacoes">
                 <span *ngIf="item.material">{{item.material.nome}}</span>
                 <span *ngIf="item.caracteristica" alt="caracteristica" title="caracteristica">{{item.caracteristica.nome}}</span>
-                <span *ngIf="item.viseira" alt="viseira" title="viseira">{{item.viseira.nome === 'Sim' ? ' Com viseira ' : ' Sem viseira '}}</span>
+                <span *ngIf="item.viseira && item.viseira.nome === 'Sim'" alt="viseira" title="viseira">Com viseira solar</span>
             </span>
             <!-- <span>
                 <i class="fas fa-star pe-1"></i>
@@ -32,7 +32,7 @@
     <div class="preco">
         <!-- PRECO VALOR PADRÃO RISCADO, POIS EXISTE VALOR PROMOCIONAL -->
         <p class="valor-normal" [ngClass]="{empty: !item.precoPromocional}">{{item.precoPromocional ? item.precoVenda : '&nbsp;'}}</p>
-       
+
         <!-- PRECO VALOR PROMOCIONAL -->
         <p class="valor-vigente" *ngIf="item.precoPromocional">{{item.precoPromocional}}</p>
         <p class="valor-parcelado" *ngIf="item.precoPromocional && item.precoPromocionalParcelado">{{item.precoPromocionalParcelado}}</p>

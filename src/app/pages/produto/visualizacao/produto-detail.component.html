@@ -55,7 +55,7 @@
                         <span class="variacoes">
                             <span *ngIf="produtoOpcao.material">{{produtoOpcao.material.nome}}</span>
                             <span *ngIf="produtoOpcao.caracteristica" alt="caracteristica" title="caracteristica">{{produtoOpcao.caracteristica.nome}}</span>
-                            <span *ngIf="produtoOpcao.viseira" alt="viseira" title="viseira">{{produtoOpcao.viseira.nome === 'Sim' ? ' Com viseira ' : ' Sem viseira '}}</span>
+                            <span *ngIf="produtoOpcao.viseira && produtoOpcao.viseira.nome === 'Sim'" alt="viseira" title="viseira">Com viseira solar</span>
                         </span>
                         <!-- <span class="avaliacao">
                         <i class="far fa-star pe-1"></i>
@@ -146,8 +146,8 @@
     <div class="container">
         <h1>Você também pode se <strong>interessar</strong> por</h1>
         <div class="produtos">
-             <!-- loading-->
-             <ng-container *ngIf="!produtosPorCategoria">
+            <!-- loading-->
+            <ng-container *ngIf="!produtosPorCategoria">
                 <div class="skeleton-box produto-no-grid" *ngFor="let item of [1,2,3,4]"></div>
             </ng-container>
             <app-produto-componente [item]="produto" *ngFor="let produto of produtosPorCategoria"></app-produto-componente>
