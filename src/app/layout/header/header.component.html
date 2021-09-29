@@ -96,6 +96,12 @@
                             </div>
                         </div>
                     </li>
+                    <li class="d-xl-block d-sm-none d-md-flex  d-lg-flex servicos" *ngIf="categorias">
+                        <a [routerLink]="['/oficina-e-servicos']">
+                            <i class="icon icon-servicos"></i>
+                            <span>Oficina/Serviços</span>
+                        </a>
+                    </li>
                     <li class="d-xl-block d-sm-none d-md-flex  d-lg-flex" *ngIf="categorias">
                         <a href="https://snake-motor.lojaintegrada.com.br/" target="_blank">
                             <i class="icon icon-moto-frente"></i>

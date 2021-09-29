@@ -58,6 +58,10 @@
                     & > ul {
                         & > li {
                             padding: 0;
+
+                            &.servicos {
+                                display: none !important;
+                            }
                             & > a {
                                 padding: 8px;
 

@@ -16,7 +16,7 @@ export class ProdutoOpcaoService {
   }
 
   listar(page: number, filter: any, order: any): Observable<any> {
-    let url = `${this.urlServico}?filtros=true&_limit=21`;
+    let url = `${this.urlServico}?agrupar=true&filtros=true&_limit=21`;
 
     let params = '';
 
@@ -39,7 +39,7 @@ export class ProdutoOpcaoService {
   }
 
   buscarProduto(busca: any): Observable<any> {
-    let url = `${this.urlServico}?_nopaginate=true`;
+    let url = `${this.urlServico}?agrupar=true&_nopaginate=true`;
 
     url += `&nome=${busca}`;
 
@@ -47,7 +47,7 @@ export class ProdutoOpcaoService {
   }
 
   listarPorProduto(produto: any): Observable<any> {
-    let url = `${this.urlServico}?_nopaginate=true`;
+    let url = `${this.urlServico}?agrupar=true&_nopaginate=true`;
 
     url += `&${this.prefix}.produto.id=${produto.id}`;
 
@@ -70,9 +70,9 @@ export class ProdutoOpcaoService {
   }
 
   listarPorCategoria(categoriaId: string, limite: number, aleatorio: boolean, ignore?: string): Observable<any> {
-    let url = `${this.urlServico}`;
+    let url = `${this.urlServico}?agrupar=true`;
 
-    url += `?_limit=${limite}`;
+    url += `&_limit=${limite}`;
     url += `&${this.prefix}.produto.categoria.id=${categoriaId}`;
 
     if (aleatorio) {
@@ -89,9 +89,9 @@ export class ProdutoOpcaoService {
   }
 
   listarPorIdsProdutoPrincipal(ids: any, aleatorio: boolean): Observable<any> {
-    let url = `${this.urlServico}`;
+    let url = `${this.urlServico}?agrupar=true`;
 
-    url += `?produtos=${ids.join()}`;
+    url += `&produtos=${ids.join()}`;
 
     if (aleatorio) {
       url += `&aleatorio=${aleatorio}`;
@@ -103,7 +103,7 @@ export class ProdutoOpcaoService {
   }
 
   buscarPorPermalink(permalink: string): Observable<any> {
-    let url = `${this.urlServico}`
+    let url = `${this.urlServico}?agrupar=true`
 
     url += `&${this.prefix}.produto.permalink=${permalink}`;
 
@@ -111,10 +111,9 @@ export class ProdutoOpcaoService {
   }
 
   listarPorProdutoComAgrupamento(produtoId: string, agrupamento: string, filtros: any, ignore?: string): Observable<any> {
-    let url = `${this.urlServico}`
+    let url = `${this.urlServico}?agrupar=${agrupamento}`
 
-    url += `?${this.prefix}.produto.id=${produtoId}`;
-    url += `&agrupar=${agrupamento}`;
+    url += `&${this.prefix}.produto.id=${produtoId}`;
 
     if (ignore) {
       url += `&ignore=${ignore}`;

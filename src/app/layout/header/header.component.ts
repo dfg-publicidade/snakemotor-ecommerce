@@ -103,7 +103,7 @@ export class HeaderComponent implements OnInit {
   scrollPage() {
     const win = $(window);
 
-    this.scrolled = win.scrollTop() > 50;
+    // this.scrolled = win.scrollTop() > 50;
   }
 
   overMenu() {

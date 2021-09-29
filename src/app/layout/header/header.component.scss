@@ -246,7 +246,6 @@ header {
                 width: 100%;
                 display: flex;
                 position: relative;
-
                 & > ul {
                     display: flex;
                     justify-content: flex-start;
@@ -263,10 +262,6 @@ header {
                         align-self: center;
                         justify-content: flex-start;
                         padding: 0 15px;
-
-                        &.acessorios-para-moto {
-                            width: auto;
-                        }
 
                         &:first-of-type {
                             padding-left: 0;
@@ -292,7 +287,7 @@ header {
                             font-size: 15px;
                             overflow: hidden;
                             text-overflow: ellipsis;
-                             white-space: nowrap;
+                            white-space: nowrap;
 
                             & > span {
                                 padding-left: 10px;
@@ -328,7 +323,7 @@ header {
                                     & > div.capa {
                                         height: 390px;
                                         background-size: contain;
-                                        background-position: center;
+                                        background-position: left;
                                         background-repeat: no-repeat;
                                     }
                                 }
@@ -373,15 +368,14 @@ header {
                                                 color: #686868;
                                                 line-height: 25px;
 
-                                                &.destaque{
+                                                &.destaque {
                                                     text-decoration: underline !important;
                                                 }
                                             }
                                         }
                                     }
 
-                                    &>div.marcas{
-                                        
+                                    & > div.marcas {
                                     }
                                 }
                             }

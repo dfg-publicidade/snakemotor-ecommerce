@@ -43,6 +43,11 @@ export class AuthInterceptor implements HttpInterceptor {
                         case 0:
                             // this.router.navigate(['/500'], { skipLocationChange: true });
                             break;
+                        case 401:
+                            this.perfilService.removerSessao();
+                            location.href = '/';
+
+                            break;
                         case 404:
                             this.router.navigate(['/404'], { skipLocationChange: true });
 
