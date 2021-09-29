@@ -82,7 +82,7 @@ export class ProdutoComponent implements OnInit {
       }
     });
 
-    if (!this.categoriaPermalink) {
+    if (!this.categoriaPermalink && !this.marcaPermalink) {
       this.listarProdutos(false);
     }
   }

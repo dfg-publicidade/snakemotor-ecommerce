@@ -118,7 +118,7 @@
 
                     <app-produto-componente [item]="produto" *ngFor="let produto of produtoOpcoes"></app-produto-componente>
                 </div>
-                <div class="empty" *ngIf="total && total === 0">
+                <div class="empty" *ngIf="produtoOpcoes && produtoOpcoes.length === 0">
                     Nenhum produto foi encontrado.
                 </div>
             </div>

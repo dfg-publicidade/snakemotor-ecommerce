@@ -10,8 +10,8 @@
 <section>
     <div class="container">
         <div class="carrinho">
-             <!-- loading -->
-             <div class="loading-produto-view" *ngIf="!carrinho">
+            <!-- loading -->
+            <div class="loading-produto-view" *ngIf="!carrinho">
                 <div class="imagem">
                     <div class="skeleton-box small line"></div>
                     <div class="skeleton-box quadrado full line"></div>
@@ -38,47 +38,49 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of carrinho.produtos; let i = index">
-                                <td class="produto">
-                                    <div class="produto">
-                                        <div class="imagem" [ngStyle]="{'background-image': 'url(' + item.imagem + ')'}"></div>
-                                        <p>
-                                            <a [routerLink]="[urlProduto, item.produto.permalink]" [queryParams]="{op: item.id}" target="_blank">
-                                                {{item.produto.nome}}
-                                                <ng-container *ngIf="item.genero">{{item.genero.nome}} </ng-container>
-                                                <ng-container *ngIf="item.cor">{{item.cor.nome}} </ng-container>
-                                                <ng-container *ngIf="item.tipo_de_pintura">{{item.tipo_de_pintura.nome}}</ng-container>
-                                            </a> <br />
-                                            <ng-container *ngIf="item.cor"><strong>cor</strong>: {{item.cor.nome}} <br /></ng-container>
-                                            <ng-container *ngIf="item.tamanhoOpcao"><strong>tamanho</strong>: {{item.tamanhoOpcao.nome}} <br /></ng-container>
-                                            <ng-container *ngIf="item.caracteristica"><strong>característica</strong>: {{item.caracteristica.nome}} <br /></ng-container>
-                                            <ng-container *ngIf="item.material"><strong>material</strong>: {{item.material.nome}} </ng-container>
-                                            <ng-container *ngIf="item.viseira"><strong>viseira</strong>: {{item.viseira.nome === 'Sim' ? ' Com viseira ' : ' Sem viseira '}} </ng-container>
-                                        </p>
-                                    </div>
-                                </td>
-                                <td class="qtde" *ngIf="item.disponivel">
-                                    <div class="qtde">
-                                        <button type="button" class="btn btn-start" (click)="alterarQtde('diminuir', i)" [disabled]="item.qtde === 1">-</button>
-                                        <input class="qtde" type="text" [value]="item.qtde" readonly />
-                                        <button type="button" class="btn btn-end" (click)="alterarQtde('aumentar', i)" [disabled]="item.qtde === item.estoqueAtual">+</button>
-                                    </div>
-                                    <div class="remover">
-                                        <button type="button" class="btn" (click)="removerCarrinho(item)">remover</button>
-                                    </div>
-                                </td>
-                                <td class="qtde text-danger text-center" *ngIf="!item.disponivel">INDISPONÍVEL</td>
-                                <td class="valor">
-                                    <div class="preco">
-                                        <!-- PRECO VALOR PADRÃO RISCADO, POIS EXISTE VALOR PROMOCIONAL -->
-                                        <p class="valor-normal" *ngIf="item.precoPromocional">{{item.precoVenda}}</p>
+                                <ng-container *ngIf="item">
+                                    <td class="produto">
+                                        <div class="produto">
+                                            <div class="imagem" [ngStyle]="{'background-image': 'url(' + item.imagem + ')'}"></div>
+                                            <p>
+                                                <a [routerLink]="[urlProduto, item.produto.permalink]" [queryParams]="{op: item.id}" target="_blank">
+                                                    {{item.produto.nome}}
+                                                    <ng-container *ngIf="item.genero">{{item.genero.nome}} </ng-container>
+                                                    <ng-container *ngIf="item.cor">{{item.cor.nome}} </ng-container>
+                                                    <ng-container *ngIf="item.tipo_de_pintura">{{item.tipo_de_pintura.nome}}</ng-container>
+                                                </a> <br />
+                                                <ng-container *ngIf="item.cor"><strong>cor</strong>: {{item.cor.nome}} <br /></ng-container>
+                                                <ng-container *ngIf="item.tamanhoOpcao"><strong>tamanho</strong>: {{item.tamanhoOpcao.nome}} <br /></ng-container>
+                                                <ng-container *ngIf="item.caracteristica"><strong>característica</strong>: {{item.caracteristica.nome}} <br /></ng-container>
+                                                <ng-container *ngIf="item.material"><strong>material</strong>: {{item.material.nome}} </ng-container>
+                                                <ng-container *ngIf="item.viseira"><strong>viseira</strong>: {{item.viseira.nome === 'Sim' ? ' Com viseira ' : ' Sem viseira '}} </ng-container>
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td class="qtde" *ngIf="item.disponivel">
+                                        <div class="qtde">
+                                            <button type="button" class="btn btn-start" (click)="alterarQtde('diminuir', i)" [disabled]="item.qtde === 1">-</button>
+                                            <input class="qtde" type="text" [value]="item.qtde" readonly />
+                                            <button type="button" class="btn btn-end" (click)="alterarQtde('aumentar', i)" [disabled]="item.qtde === item.estoqueAtual">+</button>
+                                        </div>
+                                        <div class="remover">
+                                            <button type="button" class="btn" (click)="removerCarrinho(item)">remover</button>
+                                        </div>
+                                    </td>
+                                    <td class="qtde text-danger text-center" *ngIf="!item.disponivel">INDISPONÍVEL</td>
+                                    <td class="valor">
+                                        <div class="preco">
+                                            <!-- PRECO VALOR PADRÃO RISCADO, POIS EXISTE VALOR PROMOCIONAL -->
+                                            <p class="valor-normal" *ngIf="item.precoPromocional">{{item.precoVenda}}</p>
 
-                                        <!-- PRECO VALOR PROMOCIONAL -->
-                                        <p class="valor-vigente" *ngIf="item.precoPromocional">{{item.precoPromocional}}</p>
+                                            <!-- PRECO VALOR PROMOCIONAL -->
+                                            <p class="valor-vigente" *ngIf="item.precoPromocional">{{item.precoPromocional}}</p>
 
-                                        <!-- PRECO VALOR PADRÃO -->
-                                        <p class="valor-vigente" *ngIf="!item.precoPromocional">{{item.precoVenda}}</p>
-                                    </div>
-                                </td>
+                                            <!-- PRECO VALOR PADRÃO -->
+                                            <p class="valor-vigente" *ngIf="!item.precoPromocional">{{item.precoVenda}}</p>
+                                        </div>
+                                    </td>
+                                </ng-container>
                             </tr>
                         </tbody>
                     </table>
@@ -156,7 +158,7 @@
                         <span>em até {{carrinho.valorTotalParcelado}} ou</span>
                     </span>
                 </p>
-                <p class="valor-avista" *ngIf="carrinho.valorAVista">{{carrinho.valorAVista}}</p>
+                <p class="valor-avista text-success" *ngIf="carrinho.valorAVista"><strong>{{carrinho.valorAVista}}</strong></p>
                 <div class="botoes">
                     <a [routerLink]="['/endereco']">
                         <button type="button" class="custom buy">

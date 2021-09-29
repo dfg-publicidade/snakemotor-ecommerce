@@ -5,7 +5,7 @@ a.produto {
     background: #fff;
     padding: 20px;
     position: relative;
-    width: 100%;
+    // width: 100%;
 
     & > div.tags {
         display: grid;
@@ -27,7 +27,7 @@ a.produto {
                 background: #d602de;
             }
             &.desconto {
-                background: #de0205;
+                background: #198754;
             }
             &.exclusivo {
                 background: #b6df0e;
@@ -51,7 +51,7 @@ a.produto {
 
         & > p {
             color: $text-primary;
-            min-height: 110px;
+            min-height: 80px;
             margin-bottom: 0;
             width: 100%;
             & > span {

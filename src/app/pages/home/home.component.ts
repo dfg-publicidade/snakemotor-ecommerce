@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
       items: 4,
       margin: 15,
       nav: true,
-      autoWidth: true,
+      autoWidth: false,
       dots: true,
       autoplay: true,
       navText: ['<i class="fas fa-angle-left"></i>', '<i class="fas fa-angle-right"></i>'],

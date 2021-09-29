@@ -123,7 +123,7 @@
                         <span>em até {{carrinho.valorTotalParcelado}} ou</span>
                     </span>
                 </p>
-                <p class="valor-avista" *ngIf="carrinho.valorAVista">{{carrinho.valorAVista}}</p>
+                <p class="valor-avista text-success" *ngIf="carrinho.valorAVista"><strong>{{carrinho.valorAVista}}</strong></p>
                 <div class="botoes">
                     <a [routerLink]="['/pagamento']">
                         <button type="button" class="custom buy" [disabled]="formFrete.status === 'INVALID' || loadingServiceCarrinho">
