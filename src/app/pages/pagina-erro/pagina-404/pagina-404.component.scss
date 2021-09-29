@@ -1,0 +1,57 @@
+// Core variables and mixins
+
+
+@import "../../../../res/variables.scss";
+
+
+
+section {
+    &.principal {
+        & > div.container {
+            padding-bottom: 95px;
+            background: #fff;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            & > div.ops {
+                display: inline-block;
+                width: 100%;
+                height: 260px;
+                margin-top: 20px;
+                & > h1 {
+                    font-size: 13em;
+                    color: $primary;
+                    text-align: center;
+                    margin: 0;
+                    display: inline-block;
+                    width: 100%;
+                    display: none;
+                    &.animate__bounceInDown {
+                        display: block;
+                    }
+                }
+            }
+
+            & > div.info {
+                & > h3 {
+                    color: #787777;
+                    text-align: center;
+                    margin: 0;
+                    font-size: 30px;
+                    margin-bottom: 10px;
+                }
+
+                & > p {
+                    font-size: 18px;
+                    text-align: center;
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+
+@import "responsive/pagina-404-lg.scss";
+@import "responsive/pagina-404-md.scss";
+@import "responsive/pagina-404-sm.scss";
+@import "responsive/pagina-404-xss.scss";
+@import "responsive/pagina-404-print.scss";

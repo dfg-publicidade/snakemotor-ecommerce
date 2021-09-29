@@ -34,7 +34,7 @@
                     <div class="filtro">
                         <p class="titulo">Preço</p>
                         <div>
-                            <div class="precos">
+                            <div class="precos" *ngIf="options">
                                 <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChangeEnd)="setFilterPreco()"></ngx-slider>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
             <div class="box-produtos">
                 <h3>
                     <!--loading -->
-                    <div class="skeleton-box line small" *ngIf="!categoria"></div>
+                    <div class="skeleton-box line small" *ngIf="!categoria && !marca"></div>
 
                     <ng-container *ngIf="categoria">
                         <ng-container *ngIf="subcategoriaPermalink && categoria.supercategoria">{{categoria.supercategoria.nome}} &bull; </ng-container>

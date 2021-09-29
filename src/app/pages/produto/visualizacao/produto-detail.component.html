@@ -80,9 +80,10 @@
                         <p class="valor-avista text-success" *ngIf="produtoOpcao.precoAVista"><strong>{{produtoOpcao.precoAVista}}</strong></p>
 
                         <!-- TAGS de destaque -->
-                        <span class="tag lancamento" *ngIf="produtoOpcao.produto.lancamento">Lançamento</span>
-                        <span class="tag exclusivo" *ngIf="produtoOpcao.produto.exclusivoSite">Exclusivo no site</span>
-                        <span class="tag frete-gratis" *ngIf="produtoOpcao.produto.freteGratis">Frete Grátis</span>
+                        <span class="tag lancamento" *ngIf="produtoOpcao.lancamento">Lançamento</span>
+                        <span class="tag exclusivo" *ngIf="produtoOpcao.exclusivoSite">Exclusivo no site</span>
+                        <span class="tag frete-gratis" *ngIf="produtoOpcao.freteGratis">Frete Grátis</span>
+                        <span class="tag desconto" *ngIf="produtoOpcao.emOferta">Promoção</span>
                     </div>
                     <form class="variacoes" [formGroup]="formVariacao">
                         <div class="cor" *ngIf="cores && cores.length > 1">

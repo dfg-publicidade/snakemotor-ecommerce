@@ -1,1 +1,8 @@
 <router-outlet></router-outlet>
+<div class="lgpd close animate__animated animate__bounceInUp">
+    <p>
+        Ao prosseguir navegando nesse site, você aceita a utilização de cookies e outras tecnologias semelhantes. Para saber mais,
+        <a [routerLink]="['/politica-de-privacidade']" target="_blank">clique aqui</a>.
+    </p>
+    <button type="button" class="btn btn-primary" (click)="aceitarLgpd()">Entendi</button>
+</div>

@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { AppCustomPreloader } from './service/AppCustomPreloader';
+import { LgpdService } from './service/lgpd.service';
 import { MetadataService } from './service/metaData.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthInterceptor } from './_interceptor/auth.interceptor';
@@ -28,6 +29,7 @@ registerLocaleData(localePt);
   providers: [
     AuthGuard,
     MetadataService,
+    LgpdService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

@@ -1,8 +1,9 @@
 <a [routerLink]="[url, item.produto.permalink]" [queryParams]="{op: item.id}" class="produto tag" *ngIf="item && item.produto">
     <div class="tags">
-        <span class="tag lancamento" *ngIf="item.produto.lancamento">Lançamento</span>
-        <span class="tag exclusivo" *ngIf="item.produto.exclusivoSite">Exclusivo no site</span>
-        <span class="tag frete-gratis" *ngIf="item.produto.freteGratis">Frete Grátis</span>
+        <span class="tag lancamento" *ngIf="item.lancamento">Lançamento</span>
+        <span class="tag exclusivo" *ngIf="item.exclusivoSite">Exclusivo no site</span>
+        <span class="tag frete-gratis" *ngIf="item.freteGratis">Frete Grátis</span>
+        <span class="tag desconto" *ngIf="item.emOferta">Promoção</span>
     </div>
     <div class="imagem" [ngStyle]="{'background-image': 'url(' + item.imagem + ')'}"></div>
     <div class="info">

@@ -80,8 +80,16 @@ const routes: Routes = [
         loadChildren: () => import('./pages/perfil/pedido/pedido.module').then(m => m.PedidoModule)
       },
       {
+        path: '404',
+        loadChildren: () => import('./pages/pagina-erro/pagina-404/pagina-404.module').then(m => m.Pagina404Module)
+      },
+      {
         path: ':permalink',
         loadChildren: () => import('./pages/pagina/pagina.module').then(m => m.PaginaModule)
+      },
+      {
+        path: '**',
+        redirectTo: '/404'
       }
     ]
   }

@@ -90,6 +90,9 @@
                                         </a>
                                     </li>
                                 </ul>
+                                <div class="marcas" *ngIf="categoria[1].marcas">
+                                    <a class="marca" [routerLink]="['/m', marca.permalink]" [ngStyle]="{'background-image': marca.logo ? 'url(' + marca.logo.original + ')' : 'url(res/images/sem-capa-thumb.png)'}" *ngFor="let marca of categoria[1].marcas"></a>
+                                </div>
                             </div>
                         </div>
                     </li>

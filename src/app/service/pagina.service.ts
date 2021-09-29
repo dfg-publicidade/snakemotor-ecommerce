@@ -13,7 +13,7 @@ export class PaginaService {
   }
 
   buscarPorPermalink(permalink: string): Observable<any> {
-    let url = `${this.urlServico}?${this.prefix}.permalink=${permalink}`;
+    let url = `${this.urlServico}/${permalink}`;
 
     return this.http.get(url);
   }

@@ -58,7 +58,7 @@ export class ProdutoOpcaoService {
     let url = `${this.urlServico}?agrupar=true`;
 
     url += `&_limit=${limite}`;
-    url += `&${this.prefix}.produto.destaque=true`;
+    url += `&${this.prefix}.destaque=true`;
 
     if (aleatorio) {
       url += `&aleatorio=${aleatorio}`;

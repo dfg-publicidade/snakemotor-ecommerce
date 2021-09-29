@@ -39,13 +39,14 @@ export class AuthInterceptor implements HttpInterceptor {
         return next.handle(request)
             .pipe(
                 catchError((error, caught) => {
-                    if (error.status === 0) {
-                        // this.router.navigate(['indisponivel'], { skipLocationChange: true });
-                    } else if (error.status === 401) {
-                        this.perfilService.removerSessao();
-                        location.href = "/";
-                    } else {
+                    switch (error.status) {
+                        case 0:
+                            // this.router.navigate(['/500'], { skipLocationChange: true });
+                            break;
+                        case 404:
+                            this.router.navigate(['/404'], { skipLocationChange: true });
 
+                            break;
                     }
 
                     return Promise.reject(error);

@@ -265,7 +265,7 @@ header {
                         padding: 0 15px;
 
                         &.acessorios-para-moto {
-                            width: 100%;
+                            width: auto;
                         }
 
                         &:first-of-type {
@@ -378,6 +378,10 @@ header {
                                                 }
                                             }
                                         }
+                                    }
+
+                                    &>div.marcas{
+                                        
                                     }
                                 }
                             }

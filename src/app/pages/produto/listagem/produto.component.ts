@@ -1,4 +1,5 @@
 import { Options } from '@angular-slider/ngx-slider';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Helpers from 'src/app/helpers';
@@ -16,12 +17,8 @@ declare var $: any;
 })
 export class ProdutoComponent implements OnInit {
   minValue: number = 0;
-  maxValue: number = 50000;
-  options: Options = {
-    floor: 0,
-    ceil: 50000,
-    hideLimitLabels: true
-  };
+  maxValue: number = 0;
+  options: any;
 
   page: number = 1;
   produtoOpcoes: any;
@@ -110,6 +107,16 @@ export class ProdutoComponent implements OnInit {
             this.produtoOpcoes = result.content.items;
             this.total = result.content.total;
             this.opcoesFiltro = Object.entries(result.content.filtros);
+
+            if (this.maxValue === 0) {
+              this.maxValue = result.content.valorMaximo ? result.content.valorMaximo : 50000;
+              this.options = {
+                floor: 0,
+                ceil: this.maxValue,
+                hideLimitLabels: true
+              };
+            }
+
           } else {
             result.content.items.forEach((entity: any) => {
               this.produtoOpcoes.push(entity);
@@ -198,6 +205,7 @@ export class ProdutoComponent implements OnInit {
   }
 
   buscarCategoriaPorPermalink() {
+    this.maxValue = 0;
     this.categoriaService.buscarPorPermalink(this.categoriaPermalink)
       .subscribe(
         result => {
