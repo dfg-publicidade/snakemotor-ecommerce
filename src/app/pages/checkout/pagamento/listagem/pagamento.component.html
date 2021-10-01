@@ -41,7 +41,7 @@
                     <app-alert-message *ngIf="responseFormasPagamento" [result]='responseFormasPagamento'></app-alert-message>
                     <div class="formas-pagamento">
                         <ng-container *ngFor="let formaPagamento of formasPagamento">
-                            <div class="pagamento theme-first-radios selected theme-second-border-color" *ngIf="formaPagamento[1].name !== 'BALANCE' && formaPagamento[1].name !== 'DEBIT_CARD' && formaPagamento[1].name !== 'DEPOSIT'">
+                            <div class="pagamento theme-first-radios selected theme-second-border-color" *ngIf="formaPagamento[1].name !== 'BALANCE' && formaPagamento[1].name !== 'DEBIT_CARD' && formaPagamento[1].name !== 'DEPOSIT' && formaPagamento[1].name !== 'PIX'">
                                 <div class="selecao">
                                     <div class="input-radio">
                                         <input type="radio" name="pagamento" formControlName="pagamento" [value]="formaPagamento[1].name">
