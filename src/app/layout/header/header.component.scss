@@ -261,7 +261,7 @@ header {
                         display: flex;
                         align-self: center;
                         justify-content: flex-start;
-                        padding: 0 15px;
+                        padding: 0 5px;
 
                         &:first-of-type {
                             padding-left: 0;
@@ -330,6 +330,7 @@ header {
                                 &.subcategorias {
                                     width: 65%;
                                     padding: 30px;
+                                    position: relative;
 
                                     & > p {
                                         color: #c1c1c1;
@@ -376,6 +377,26 @@ header {
                                     }
 
                                     & > div.marcas {
+                                        display: inline-block;
+                                        width: 100%;
+                                        overflow-x: auto;
+                                        white-space: nowrap;
+                                        margin-top: 20px;
+                                        &::-webkit-scrollbar {
+                                            display: none;
+                                        }
+
+                                        -ms-overflow-style: none; /* IE and Edge */
+                                        scrollbar-width: none; /* Firefox */
+
+                                        & > a {
+                                            display: inline-block;
+                                            width: 120px;
+                                            height: 80px;
+                                            background-position: center;
+                                            background-repeat: no-repeat;
+                                            background-size: contain;
+                                        }
                                     }
                                 }
                             }

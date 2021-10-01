@@ -36,11 +36,15 @@ export class CategoriaService {
   }
 
   listarPorSuperCategorias(categoriasPermalink: string): Observable<any> {
+    let timestamp = new Date().getTime();
+
     let url = `${this.urlServico}`;
 
     url += `?_nopaginate=true`;
     url += `&${this.prefix}.permalink=${categoriasPermalink}&destaque=true`;
     url += `&_fields=content(${categoriasPermalink})`;
+    
+    url += `&timestamp=${timestamp}`;
 
     return this.http.get(url);
   }

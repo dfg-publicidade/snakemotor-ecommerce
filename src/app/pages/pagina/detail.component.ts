@@ -45,14 +45,12 @@ export class PaginaDetailComponent implements OnInit {
     this.paginaService.buscarPorPermalink(this.permalink)
       .subscribe(
         result => {
-          if (result.content.items && result.content.items.length > 0) {
-            this.entity = result.content.items[0];
-            //INICIO META TAG
-            this.metatag.url = this.router.url;
-            this.metatag.title = `${this.entity.titulo} - ${environment.title}`;
-            this.metadataService.updateMetadata(this.metatag);
-            //FIM META TAG
-          }
+          this.entity = result.content;
+          //INICIO META TAG
+          this.metatag.url = this.router.url;
+          this.metatag.title = `${this.entity.titulo} - ${environment.title}`;
+          this.metadataService.updateMetadata(this.metatag);
+          //FIM META TAG
         }
       );
   }

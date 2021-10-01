@@ -16,10 +16,10 @@
                             <img [src]="produtoOpcao.imagem">
                             {{produtoOpcao.produto.nome}}
                             <ng-container *ngIf="produtoOpcao.genero">{{produtoOpcao.genero.nome}} </ng-container>
-                            <ng-container *ngIf="produtoOpcao.cor">{{produtoOpcao.cor.nome}} </ng-container>
-                            <ng-container *ngIf="produtoOpcao.tipo_de_pintura">{{produtoOpcao.tipo_de_pintura.nome}}</ng-container>
-                            <ng-container *ngIf="produtoOpcao.caracteristica">{{produtoOpcao.caracteristica.nome}} </ng-container>
-                            <ng-container *ngIf="produtoOpcao.material">{{produtoOpcao.material.nome}} </ng-container>
+                            <ng-container *ngIf="produtoOpcao.cor"> - {{produtoOpcao.cor.nome}} </ng-container>
+                            <!-- <ng-container *ngIf="produtoOpcao.tipo_de_pintura">{{produtoOpcao.tipo_de_pintura.nome}}</ng-container> -->
+                            <!-- <ng-container *ngIf="produtoOpcao.caracteristica">{{produtoOpcao.caracteristica.nome}} </ng-container> -->
+                            <!-- <ng-container *ngIf="produtoOpcao.material">{{produtoOpcao.material.nome}} </ng-container> -->
                         </a>
                     </nav>
                 </div>
