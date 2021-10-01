@@ -74,8 +74,5 @@ export class MetadataService {
         this.metaTagService.updateTag({ property: 'fb:robots', content: pageMetadata.robots }, "property='fb:robots'");
         this.metaTagService.updateTag({ name: 'robots', content: pageMetadata.robots }, "name='robots'");
         this.metaTagService.updateTag({ name: 'viewport', content: 'width=device-width, initial-scale=1' }, "name='viewport'");
-
-        //PAGEVIEW GOOGLE ANALYTICS
-        ga('send', 'pageview');
     }
 }
