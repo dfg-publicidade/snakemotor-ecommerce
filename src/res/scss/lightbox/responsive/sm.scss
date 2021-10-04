@@ -1,0 +1,18 @@
+@include media-breakpoint-down(sm) {
+    .lightbox {
+        &-container {
+            margin: 10px auto;
+            display: block;
+            padding: 0 10px;
+        }
+
+        &-content {
+            & > div.box-container {
+                & > img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+        }
+    }
+}
