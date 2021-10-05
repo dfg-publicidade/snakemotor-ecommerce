@@ -54,12 +54,18 @@ export class CarrinhoDetailComponent implements OnInit {
 
     //remove forma entrega, para selecionar novamente
     let carrinho = this.carrinhoService.getCarrinho();
-    if (carrinho && carrinho.cep) {
-      delete carrinho.cep;
-    }
-    this.carrinhoService.setCarrinho(carrinho);
 
-    this.atualizaValorCarrinho();
+    if (carrinho) {
+      this.carrinhoService.setCarrinho(carrinho);
+
+      if (carrinho.cep) {
+        delete carrinho.cep;
+      }
+
+      this.atualizaValorCarrinho();
+    }else{
+      this.carrinho = {};
+    }
   }
 
   atualizaValorCarrinho() {

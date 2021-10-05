@@ -50,9 +50,9 @@
                             {{produtoOpcao.produto.nome}}
                             <ng-container *ngIf="produtoOpcao.genero">{{produtoOpcao.genero.nome}} </ng-container>
                             <ng-container *ngIf="produtoOpcao.cor"> - {{produtoOpcao.cor.nome}} </ng-container>
-                            <!-- <ng-container *ngIf="produtoOpcao.tipo_de_pintura">{{produtoOpcao.tipo_de_pintura.nome}}</ng-container> -->
                         </h3>
                         <span class="variacoes">
+                            <span *ngIf="produtoOpcao.tipo_de_pintura">{{produtoOpcao.tipo_de_pintura.nome}}</span>
                             <span *ngIf="produtoOpcao.material">{{produtoOpcao.material.nome}}</span>
                             <span *ngIf="produtoOpcao.caracteristica" alt="caracteristica" title="caracteristica">{{produtoOpcao.caracteristica.nome}}</span>
                             <span *ngIf="produtoOpcao.viseira && produtoOpcao.viseira.nome === 'Sim'" alt="viseira" title="viseira">Com viseira solar</span>
