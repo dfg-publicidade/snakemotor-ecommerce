@@ -24,22 +24,22 @@
                 <p *ngIf="entities && entities.length === 0">Nenhum pedido foi realizado</p>
                 <div class="border-card" *ngFor="let entity of entities">
                     <div class="content-wrapper">
-                        <a [routerLink]="[url, entity.id]">
+                        <a [routerLink]="[url, entity.entity.id]">
                             <div class="label-group fixed">
                                 <p class="title">Pedido</p>
-                                <p class="caption">{{entity.protocolo}}</p>
+                                <p class="caption">{{entity.entity.protocolo}}</p>
                             </div>
                             <div class="label-group fixed">
                                 <p class="title">Data</p>
-                                <p class="caption">{{entity.dataCriacao}}</p>
+                                <p class="caption">{{entity.entity.dataCriacao}}</p>
                             </div>
                             <div class="label-group fixed">
                                 <p class="title">Total</p>
-                                <p class="caption">{{entity.total | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
+                                <p class="caption">{{entity.entity.total | currency:'BRL':'symbol':'0.2-2':'pt'}}</p>
                             </div>
                             <div class="label-group fixed">
                                 <p class="title">Status</p>
-                                <p class="caption"><span class="badge {{entity.status.id}}">{{entity.status.valor}}</span></p>
+                                <p class="caption"><span class="badge {{entity.entity.status.id}}">{{entity.entity.status.valor}}</span></p>
                             </div>
                         </a>
                     </div>
