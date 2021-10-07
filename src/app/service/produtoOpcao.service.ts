@@ -31,10 +31,8 @@ export class ProdutoOpcaoService {
 
     if (order) {
       url += `&_sort=${order}`;
-    } else {
-      url += `&_sort=${this.prefix}.produto.dataCriacao:desc`
     }
-
+    
     return this.http.get(url);
   }
 
