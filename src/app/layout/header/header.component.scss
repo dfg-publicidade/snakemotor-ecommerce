@@ -7,10 +7,10 @@
 
 header {
     display: block;
-    position: fixed;
+    // position: fixed;
     width: 100vw;
-    top: 0;
-    left: 0;
+    // top: 0;
+    // left: 0;
     z-index: 1059;
 
     @include transition(all, linear, 0.3s);
@@ -315,6 +315,7 @@ header {
                             width: 100%;
                             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 7%), 0 4px 6px -2px rgb(0 0 0 / 5%) !important;
                             border-top: 5px solid #bcde02;
+                            z-index: 1100;
                             display: none;
 
                             & > div {
