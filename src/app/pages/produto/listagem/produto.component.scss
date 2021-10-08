@@ -171,15 +171,15 @@ section {
                         font-size: 15px;
                         position: relative;
 
-                        &:first-of-type{
+                        &:first-of-type {
                             margin-left: 10px;
                         }
 
-                        &:last-of-type{
+                        &:last-of-type {
                             margin-right: 0;
                         }
 
-                        &>span{
+                        & > span {
                             cursor: pointer;
                         }
                     }
@@ -195,6 +195,12 @@ section {
                     & > span {
                         justify-content: left;
                         width: 100%;
+
+                        & > span {
+                            &.badge{
+                                cursor: pointer;
+                            }
+                        }
                     }
 
                     & > div.ordenacao {

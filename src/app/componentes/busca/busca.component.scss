@@ -35,9 +35,17 @@ div.busca {
                 position: absolute;
                 top: 50%;
                 transform: translateY(-50%);
-                right: 15px;
                 font-size: 25px;
                 cursor: pointer;
+
+                &.fa-search {
+                    right: 15px;
+                }
+
+                &.fa-times {
+                    right: 60px;
+                    color: #ccc;
+                }
             }
             & > input {
                 display: block;

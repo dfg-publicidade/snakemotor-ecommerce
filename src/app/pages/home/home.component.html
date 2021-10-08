@@ -45,12 +45,16 @@
             <div class="loading-produtos" *ngIf="loadingServiceProdutosPorCategoria">
                 <div class="skeleton-box produto" *ngFor="let item of [1,2,3,4]"></div>
             </div>
-            <ng-container *ngIf="optionsRotativoProdutos && produtosPorCategoriaDestaque">
+            <ng-container *ngIf="optionsRotativoProdutos && produtosPorCategoriaDestaque && !isMobile">
                 <owl-carousel-o [options]="optionsRotativoProdutos">
                     <ng-template carouselSlide *ngFor="let produto of produtosPorCategoriaDestaque">
                         <app-produto-componente [item]="produto"></app-produto-componente>
                     </ng-template>
                 </owl-carousel-o>
+            </ng-container>
+
+            <ng-container *ngIf="isMobile">
+                <app-produto-componente [item]="produto" *ngFor="let produto of produtosPorCategoriaDestaque"></app-produto-componente>
             </ng-container>
         </div>
     </div>
@@ -66,12 +70,16 @@
             <div class="loading-produtos" *ngIf="loadingServiceProdutosPorCategoria">
                 <div class="skeleton-box produto" *ngFor="let item of [1,2,3,4]"></div>
             </div>
-            <ng-container *ngIf="banner.produtos">
+            <ng-container *ngIf="banner.produtos && !isMobile">
                 <owl-carousel-o *ngIf="optionsRotativoProdutos" [options]="optionsRotativoProdutos">
                     <ng-template carouselSlide *ngFor="let produto of banner.produtos">
                         <app-produto-componente [item]="produto"></app-produto-componente>
                     </ng-template>
                 </owl-carousel-o>
+            </ng-container>
+
+            <ng-container *ngIf="isMobile">
+                <app-produto-componente [item]="produto" *ngFor="let produto of banner.produtos"></app-produto-componente>
             </ng-container>
         </div>
     </div>

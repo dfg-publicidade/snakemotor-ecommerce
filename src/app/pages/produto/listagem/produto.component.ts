@@ -45,6 +45,8 @@ export class ProdutoComponent implements OnInit {
 
   loadingServiceProdutos: boolean = false;
 
+  q: string = '';
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -57,6 +59,15 @@ export class ProdutoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.q = params['q'];
+
+      if (this.q) {
+        this.page = 1;
+        this.listarProdutos(false);
+      }
+    });
+
     this.route.params.subscribe(params => {
       this.categoriaPermalink = params['categoriaPermalink'];
       this.subcategoriaPermalink = params['subcategoriaPermalink'];
@@ -82,7 +93,7 @@ export class ProdutoComponent implements OnInit {
       }
     });
 
-    if (!this.categoriaPermalink && !this.marcaPermalink) {
+    if (!this.categoriaPermalink && !this.marcaPermalink && !this.q) {
       this.listarProdutos(false);
     }
   }
@@ -98,7 +109,7 @@ export class ProdutoComponent implements OnInit {
 
     this.filtrosSelecionados = Object.entries(this.filter);
 
-    this.produtoOpcaoService.listar(this.page, this.filter, this.order)
+    this.produtoOpcaoService.listar(this.page, this.filter, this.order, this.q)
       .subscribe(
         result => {
           this.loadingServiceProdutos = false;
@@ -295,9 +306,14 @@ export class ProdutoComponent implements OnInit {
     return nome !== 'viseira' ? nome : `${nome} solar`;
   }
 
+  limparBusca() {
+    this.q = '';
+    this.listarProdutos(false);
+  }
+
   @HostListener('window:scroll', ['$event'])
   scrollPage() {
-    if (this.infiniteScroll && !this.load) {
+    if (this.infiniteScroll && !this.load && this.produtoOpcoes) {
       let pos = (document.documentElement.scrollTop || document.body.scrollTop) + $('header')[0].scrollHeight;
       let max = $('div.produtos')[0].scrollHeight;
 

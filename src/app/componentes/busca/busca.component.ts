@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
-import { ProdutoUtil } from 'src/app/util/produtoUtil';
 declare var $: any;
 
 @Component({
@@ -22,20 +21,32 @@ export class BuscaComponent implements OnInit {
   ngOnInit() {
   }
 
-
   buscarProdutos() {
-    delete this.produtos;
-    this.loadingServiceBusca = true;
-    this.produtoOpcaoService.buscarProduto(this.busca)
-      .subscribe(
-        result => {
-          this.produtos = result.content.items;
-          this.loadingServiceBusca = false;
-
-          this.produtos.forEach((produto: any, index: number) => {
-            this.produtos[index].imagem = ProdutoUtil.getImagemDestaque(produto);
-          });
-        }
-      );
+    setTimeout(() => {
+      this.busca = '';
+    }, 500);
+    this.router.navigate(['/produtos'], { queryParams: { q: this.busca } });
   }
+
+
+  limparBusca() {
+    this.busca = '';
+
+    location.href = '/produtos';
+  }
+  // buscarProdutos() {
+  //   delete this.produtos;
+  //   this.loadingServiceBusca = true;
+  //   this.produtoOpcaoService.buscarProduto(this.busca)
+  //     .subscribe(
+  //       result => {
+  //         this.produtos = result.content.items;
+  //         this.loadingServiceBusca = false;
+
+  //         this.produtos.forEach((produto: any, index: number) => {
+  //           this.produtos[index].imagem = ProdutoUtil.getImagemDestaque(produto);
+  //         });
+  //       }
+  //     );
+  // }
 }

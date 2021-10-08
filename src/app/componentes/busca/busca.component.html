@@ -2,10 +2,10 @@
     <div class="container">
         <div class="campo-busca" [ngClass]="{'expanded':(produtos || loadingServiceBusca) && busca}">
             <i class="fas fa-search" (click)="buscarProdutos()"></i>
+            <i class="fas fa-times" (click)="limparBusca()" *ngIf="busca"></i>
             <input type="text" name="busca" [(ngModel)]="busca" (keyup.enter)="buscarProdutos()" placeholder="O que você está procurando?" />
-            <div class="dropbox-produtos" [ngClass]="{'expanded': (produtos || loadingServiceBusca) && busca}">
+            <!-- <div class="dropbox-produtos" [ngClass]="{'expanded': (produtos || loadingServiceBusca) && busca}">
                 <div>
-                    <!-- LOADING -->
                     <nav class="loading" *ngIf="loadingServiceBusca">
                         <a *ngFor="let number of [1,2,3]">
                             <div class="loading skeleton-box"></div>
@@ -17,9 +17,6 @@
                             {{produtoOpcao.produto.nome}}
                             <ng-container *ngIf="produtoOpcao.genero">{{produtoOpcao.genero.nome}} </ng-container>
                             <ng-container *ngIf="produtoOpcao.cor"> - {{produtoOpcao.cor.nome}} </ng-container>
-                            <!-- <ng-container *ngIf="produtoOpcao.tipo_de_pintura">{{produtoOpcao.tipo_de_pintura.nome}}</ng-container> -->
-                            <!-- <ng-container *ngIf="produtoOpcao.caracteristica">{{produtoOpcao.caracteristica.nome}} </ng-container> -->
-                            <!-- <ng-container *ngIf="produtoOpcao.material">{{produtoOpcao.material.nome}} </ng-container> -->
                         </a>
                     </nav>
                 </div>
@@ -27,7 +24,7 @@
                     <h4>Nenhum produto encontrado para o termo buscado</h4>
                     <p>Que tal conhecer os produtos da Snake Motor. Navague pelo site e conheça nosso catálogo.</p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

@@ -15,7 +15,7 @@ export class ProdutoOpcaoService {
     this.urlServico = `${environment.urlServico}${environment.apiApp}/${environment.versao}/produto-opcoes`;
   }
 
-  listar(page: number, filter: any, order: any): Observable<any> {
+  listar(page: number, filter: any, order: any, search?: string): Observable<any> {
     let url = `${this.urlServico}?agrupar=true&filtros=true&_limit=21`;
 
     let params = '';
@@ -27,12 +27,17 @@ export class ProdutoOpcaoService {
     });
 
     url += `${params}`;
+
+    if (search) {
+      url += `&nome=${search}`;
+    }
+
     url += `&_page=${page}`;
 
     if (order) {
       url += `&_sort=${order}`;
     }
-    
+
     return this.http.get(url);
   }
 
