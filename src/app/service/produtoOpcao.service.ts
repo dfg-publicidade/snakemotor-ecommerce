@@ -67,8 +67,6 @@ export class ProdutoOpcaoService {
       url += `&aleatorio=${aleatorio}`;
     }
 
-    url += `&_sort:${this.prefix}.produto.nome:asc`;
-
     return this.http.get(url);
   }
 
