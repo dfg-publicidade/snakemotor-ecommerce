@@ -1,5 +1,3 @@
-import { Options } from '@angular-slider/ngx-slider';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Helpers from 'src/app/helpers';
@@ -158,20 +156,20 @@ export class ProdutoComponent implements OnInit {
       if (opcaoFiltro[0] === variacao) {
         let variacoes = '';
         let nomeOpcao = '';
-        opcaoFiltro[1].forEach((opcao: any, index: number) => {
-          let value = !val ? $(`#filter_${variacao}_${opcao.id}:checked`).val() : val;
+        opcaoFiltro[1].forEach((opcao: any, idx: number) => {
+          let value = !val ? $(`#filter_${variacao}_${opcao.id ? opcao.id : idx}:checked`).val() : val;
           if (!val && value) {
             variacoes += `${value},`;
-            nomeOpcao = opcao.nome;
+            nomeOpcao = opcao.nome ? opcao.nome : opcao;
           } else {
-            if (opcao.id === val) {
+            if ((opcao.id ? opcao.id : opcao) === val) {
               variacoes += `${val},`;
-              nomeOpcao = opcao.nome;
+              nomeOpcao = opcao.nome ? opcao.nome : opcao;
             }
           }
         });
 
-        if (variacao === 'categorias' || variacao === 'marcas') {
+        if (variacao === 'categorias' || variacao === 'marcas' || variacao === 'modelos') {
           let prefix = this.prefix;
           switch (variacao) {
             case 'categorias': {
@@ -182,13 +180,23 @@ export class ProdutoComponent implements OnInit {
               prefix += `.produto.marca`;
               break
             }
+            case 'modelos': {
+              prefix += `.produto.modelo`;
+              break
+            }
           }
-          this.filter[`${prefix}.id`] = {
-            nome: nomeOpcao,
-            id: variacoes.slice(0, -1)
-          };
 
-
+          if (variacao !== 'modelos') {
+            this.filter[`${prefix}.id`] = {
+              nome: nomeOpcao,
+              id: variacoes.slice(0, -1)
+            };
+          } else {
+            this.filter[`${prefix}`] = {
+              nome: nomeOpcao,
+              id: variacoes.slice(0, -1)
+            };
+          }
         } else {
           this.filter[`${this.prefix}.${variacao}.id`] = {
             nome: nomeOpcao,

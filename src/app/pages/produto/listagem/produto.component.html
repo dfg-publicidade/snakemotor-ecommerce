@@ -44,10 +44,10 @@
                     <div class="filtro" [hidden]="filtro[1].length === 0" *ngFor="let filtro of opcoesFiltro; let i = index">
                         <p class="titulo">{{getNomeVariacao(i)}}</p>
                         <div *ngIf="filtro[0] !== 'cor'">
-                            <div class="form-check" *ngFor="let item of filtro[1]">
-                                <input type="checkbox" class="form-check-input" id="filter_{{filtro[0]}}_{{item.id}}" [value]="item.id" (click)="setFilterVariacao(filtro[0])" [checked]="possuiFiltro(filtro[0], item.id) || filtro[1].length === 1">
+                            <div class="form-check" *ngFor="let item of filtro[1]; let idx = index">
+                                <input type="checkbox" class="form-check-input" id="filter_{{filtro[0]}}_{{item.id ? item.id : idx}}" [value]="item.id ? item.id : item" (click)="setFilterVariacao(filtro[0])" [checked]="possuiFiltro(filtro[0], item.id ? item.id : item) || filtro[1].length === 1">
                                 <label class="form-check-label">
-                                    {{item.nome}}
+                                    {{item.nome ? item.nome : item}}
                                 </label>
                             </div>
                         </div>
