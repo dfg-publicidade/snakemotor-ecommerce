@@ -29,7 +29,9 @@
         </p>
 
     </div>
-    <div class="preco">
+    
+    <!-- PRODUTO DISPONÍVEL -->
+    <div class="preco" *ngIf="item.estoqueAtual && item.estoqueAtual > 0">
         <!-- PRECO VALOR PADRÃO RISCADO, POIS EXISTE VALOR PROMOCIONAL -->
         <p class="valor-normal" [ngClass]="{empty: !item.precoPromocional}">{{item.precoPromocional ? item.precoVenda : '&nbsp;'}}</p>
 
@@ -43,5 +45,10 @@
 
         <!-- PRECO A VISTA-->
         <p class="valor-avista text-success" *ngIf="item.precoAVista"><strong>{{item.precoAVista}}</strong></p>
+    </div>
+
+    <!-- PRODUTO INDISPONÍVEL -->
+    <div class="preco indisponivel" *ngIf="!item.estoqueAtual || (item.estoqueAtual && item.estoqueAtual === 0)">
+        <p class="valor-vigente">Produto indisponível</p>
     </div>
 </a>

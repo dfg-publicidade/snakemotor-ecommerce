@@ -90,6 +90,14 @@ a.produto {
     & > div.preco {
         padding-top: 30px;
 
+        &.indisponivel {
+            & > p {
+                &.valor-vigente {
+                    font-size: 15px;
+                }
+            }
+        }
+
         & > p {
             margin-bottom: 0;
             color: $text-primary;
@@ -118,7 +126,7 @@ a.produto {
                 color: #a5a5a5;
             }
             &.valor-avista {
-                font-size: 13px
+                font-size: 13px;
             }
         }
     }

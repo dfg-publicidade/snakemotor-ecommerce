@@ -197,7 +197,7 @@ section {
                         width: 100%;
 
                         & > span {
-                            &.badge{
+                            &.badge {
                                 cursor: pointer;
                             }
                         }
@@ -215,6 +215,22 @@ section {
                     grid-column-gap: 20px;
                     grid-row-gap: 20px;
                     justify-content: flex-start;
+                }
+
+                & > div.carregar-mais {
+                    display: block;
+                    width: 100%;
+                    text-align: center;
+                    margin-top: 40px;
+
+                    & > button {
+                        border: 0;
+                        font-weight: 700;
+                        font-size: 18px;
+                        background: red;
+                        color: #fff;
+                        padding: 20px 60px;
+                    }
                 }
             }
         }

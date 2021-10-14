@@ -319,16 +319,21 @@ export class ProdutoComponent implements OnInit {
     this.listarProdutos(false);
   }
 
-  @HostListener('window:scroll', ['$event'])
-  scrollPage() {
-    if (this.infiniteScroll && !this.load && this.produtoOpcoes) {
-      let pos = (document.documentElement.scrollTop || document.body.scrollTop) + $('header')[0].scrollHeight;
-      let max = $('div.produtos')[0].scrollHeight;
-
-      if (pos >= (max - 300)) {
-        this.page++;
-        this.listarProdutos(true);
-      }
-    }
+  carregarMaisProdutos() {
+    this.page++;
+    this.listarProdutos(true);
   }
+
+  // @HostListener('window:scroll', ['$event'])
+  // scrollPage() {
+  //   if (this.infiniteScroll && !this.load && this.produtoOpcoes) {
+  //     let pos = (document.documentElement.scrollTop || document.body.scrollTop) + $('header')[0].scrollHeight;
+  //     let max = $('div.produtos')[0].scrollHeight;
+
+  //     if (pos >= (max - 300)) {
+  //       this.page++;
+  //       this.listarProdutos(true);
+  //     }
+  //   }
+  // }
 }

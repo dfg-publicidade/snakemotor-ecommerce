@@ -103,7 +103,7 @@
                     <ng-container *ngIf="produtoOpcoes">
                         <span *ngIf="total && total > 0">
                             {{total}} produto{{total > 1 ? 's' : ''}}
-                            <ng-container *ngIf="q"> 
+                            <ng-container *ngIf="q">
                                 encontrado{{total > 1 ? 's' : ''}} pelo termo <strong>{{q}}</strong>
                                 <span class="badge bg-secondary ms-1"><i class="fa fa-times" (click)="limparBusca()"></i></span>
                             </ng-container>
@@ -123,6 +123,14 @@
                     </ng-container>
 
                     <app-produto-componente [item]="produto" *ngFor="let produto of produtoOpcoes"></app-produto-componente>
+
+                     <!-- loading-->
+                     <ng-container *ngIf="load">
+                        <div class="skeleton-box produto-no-grid" *ngFor="let item of [1,2,3]"></div>
+                    </ng-container>
+                </div>
+                <div class="carregar-mais" *ngIf="infiniteScroll">
+                    <button *ngIf="!load" type="button" class="btn btn-primary" (click)="carregarMaisProdutos()">Carregar mais produtos</button>
                 </div>
                 <div class="empty" *ngIf="produtoOpcoes && produtoOpcoes.length === 0">
                     Nenhum produto foi encontrado.

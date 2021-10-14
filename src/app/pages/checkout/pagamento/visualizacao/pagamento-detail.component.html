@@ -181,7 +181,9 @@
                         <!-- CAMPO DE PARCELAMENTO com VALORES PREENCHIDOS -->
                         <div class="col-xs-12 col-sm-12 col-lg-12 mb-2" *ngIf="parcelamento && parcelamento.installments">
                             <ng-select class="large" formControlName="qtdeParcelas" placeholder="Como deseja pagar?" notFoundText="Nenhum item encontrado" required>
-                                <ng-option [value]="parcela.quantity" *ngFor="let parcela of parcelamento.installments[tipoCartao.brand.name]"><strong>{{parcela.quantity}}x</strong> de <strong>{{parcela.installmentAmount | currency:'BRL':'symbol':'0.2-2':'pt'}}</strong> (total {{parcela.totalAmount | currency:'BRL':'symbol':'0.2-2':'pt'}} {{parcela.interestFree ? 'sem juros' : 'com juros'}})</ng-option>
+                                <ng-container *ngFor="let parcela of parcelamento.installments[tipoCartao.brand.name]">
+                                    <ng-option *ngIf="carrinho.parcelamento.valorMinParcela <= parcela.installmentAmount" [value]="parcela.quantity"><strong>{{parcela.quantity}}x</strong> de <strong>{{parcela.installmentAmount | currency:'BRL':'symbol':'0.2-2':'pt'}}</strong> (total {{parcela.totalAmount | currency:'BRL':'symbol':'0.2-2':'pt'}} {{parcela.interestFree ? 'sem juros' : 'com juros'}})</ng-option>
+                                </ng-container>
                             </ng-select>
                             <small class="form-text text-danger" *ngIf="form.controls.qtdeParcelas.touched && form.controls.qtdeParcelas.hasError('required')">Selecione como deseja pagar</small>
                         </div>
