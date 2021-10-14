@@ -196,6 +196,13 @@ ng-select.ng-select {
                     background-color: $secondary;
                     color: #fff;
                 }
+
+                &.ng-option-disabled {
+                    color: #ccc;
+                    & > span {
+                        text-decoration: line-through !important;
+                    }
+                }
             }
         }
     }

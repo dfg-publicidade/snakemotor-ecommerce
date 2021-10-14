@@ -2,7 +2,6 @@
 
 form {
     & > div.row {
-        
     }
 }
 
@@ -65,7 +64,7 @@ ng-select.ng-select {
         border: 1px solid #ced4da;
         border-top: 0;
 
-        div.ng-option {
+        &>div.ng-option {
             color: #444;
             border-radius: 0;
             padding: 10px;
@@ -73,6 +72,14 @@ ng-select.ng-select {
             &.ng-option-marked {
                 background-color: $secondary;
                 color: #fff;
+            }
+
+            &.ng-option-disabled {
+                background-color: #efefef;
+                color: #ccc;
+                & > span {
+                    text-decoration: line-through;
+                }
             }
         }
     }

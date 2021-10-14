@@ -66,7 +66,7 @@
                     </span> -->
                         <p>{{produtoOpcao?.produto?.descricaoCurta}}</p>
                     </div>
-                    <div class="preco">
+                    <div class="preco" *ngIf="qtdes && qtdes.length > 0">
                         <!-- PRECO VALOR PADRÃO RISCADO, POIS EXISTE VALOR PROMOCIONAL -->
                         <p class="valor-normal" [ngClass]="{empty: !produtoOpcao.precoPromocional}">{{produtoOpcao.precoPromocional ? produtoOpcao.precoVenda : '&nbsp;'}}</p>
 
@@ -98,7 +98,7 @@
                             <div *ngIf="tamanhos && tamanhos[0] && tamanhos[0].tamanhoOpcao">
                                 <label>Tamanho</label>
                                 <ng-select formControlName="tamanho" loadingText="Carregando..." [loading]="!tamanhos" placeholder="Selecione" notFoundText="Nenhum item encontrado" (change)="selecionarOpcao($event)">
-                                    <ng-option [value]="pOpcao.id" *ngFor="let pOpcao of tamanhos">{{pOpcao.tamanhoOpcao.nome}}</ng-option>
+                                    <ng-option [value]="pOpcao.id" *ngFor="let pOpcao of tamanhos" [disabled]="!pOpcao.estoqueAtual || (pOpcao.estoqueAtual && pOpcao.estoqueAtual === 0) ">{{pOpcao.tamanhoOpcao.nome}}</ng-option>
                                 </ng-select>
                             </div>
                             <div *ngIf="qtdes && qtdes.length > 0">
