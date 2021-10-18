@@ -115,6 +115,9 @@ export class HomeComponent implements OnInit {
     });
 
     this.formLead = this.formBuilder.group({
+      nome: new FormControl('', [
+        Validators.required
+      ]),
       celular: new FormControl('', [
         Validators.required
       ])

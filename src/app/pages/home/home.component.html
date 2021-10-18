@@ -106,7 +106,8 @@
             </span>
             <div class="campo">
                 <form [formGroup]="formLead" (submit)="cadastrarLead()" *ngIf="!resultLead || (resultLead && resultLead.status !== 'success')">
-                    <input type="text" placeholder="Whatsapp com DDD" formControlName="celular" mask="(00) 00000-0000" />
+                    <input type="text" placeholder="Seu nome" formControlName="nome"/>
+                    <input type="text" placeholder="WhatsApp com DDD" formControlName="celular" mask="(00) 00000-0000" />
                     <button type="submit" [disabled]="formLead.status === 'INVALID' || loadingServiceLead">
                         <span class="loading" [hidden]="!loadingServiceLead"><img src="/res/imagens/spinner-white.svg" /></span>
                         <span *ngIf="!loadingServiceLead">Enviar</span>

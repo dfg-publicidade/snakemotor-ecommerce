@@ -13,6 +13,7 @@ export class LeadServiceService {
   inserir(entity: any): Observable<any> {
     let body = new FormData();
 
+    body.append('nome', entity.value.nome ?  entity.value.nome : '');
     body.append('celular', entity.value.celular ?  entity.value.celular : '');
 
     return this.http.post(this.urlServico, body);

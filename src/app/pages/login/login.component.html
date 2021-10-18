@@ -25,7 +25,7 @@
                         <label>Senha</label>
                         <small class="form-text text-danger" *ngIf="form.controls.senha.touched && form.controls.senha.hasError('required')">Preencha a senha</small>
                     </div>
-                    <button type="submit" class="btn btn-success btn-md btn-block" [disabled]="form.status === 'INVALID' || loadingService">
+                    <button type="submit" class="btn btn-danger btn-md btn-block" [disabled]="form.status === 'INVALID' || loadingService">
                         <span *ngIf="!loadingService">ENTRAR</span>
                         <span *ngIf="loadingService" class="loading">
                             <img src="/res/imagens/spinner-white.svg" />
@@ -46,7 +46,7 @@
                         <p>Ainda não tem conta na Snake Motor?</p>
                     </div>
                     <a [routerLink]="['/cadastro']">
-                        <button type="button" class="btn btn-outline-success btn-block">CADASTRE-SE</button>
+                        <button type="button" class="btn btn-outline-danger btn-block">CADASTRE-SE</button>
                     </a>
                 </div>
             </div>

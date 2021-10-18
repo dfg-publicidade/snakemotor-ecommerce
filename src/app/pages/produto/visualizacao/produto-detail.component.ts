@@ -213,8 +213,6 @@ export class ProdutoDetailComponent implements OnInit {
   previewConteudo(imagem: any) {
     this.imagemSelecionada = imagem.item.src;
 
-    console.log(this.imagemSelecionada);
-
     $("body").addClass("lightbox-body");
     $(".lightbox").show();
   }

@@ -80,7 +80,7 @@
                                     Desejo receber informações da Snake Motor por SMS/Whatsapp.
                                 </label>
                             </div>
-                            <button type="button" class="btn btn-success btn-lg btn-block mt-4" (click)="trocarEtapa('endereco')">
+                            <button type="button" class="btn btn-danger btn-lg btn-block mt-4" (click)="trocarEtapa('endereco')">
                                 CONTINUAR
                                 <i class="fas fa-long-arrow-alt-down ps-2"></i>
                             </button>
@@ -131,7 +131,7 @@
                                 <input type="text" formControlName="complemento" class="form-control" placeholder="Complemento">
                                 <label>Complemento</label>
                             </div>
-                            <button type="submit" class="btn btn-success btn-lg btn-block mt-4" [disabled]="form.status === 'INVALID' || loadingServiceCadastro">
+                            <button type="submit" class="btn btn-danger btn-lg btn-block mt-4" [disabled]="form.status === 'INVALID' || loadingServiceCadastro">
                                 <span *ngIf="!loadingServiceCadastro">
                                     <i class="fas fa-check pe-2"></i>
                                     FINALIZAR CADASTRO

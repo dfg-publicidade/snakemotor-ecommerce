@@ -304,6 +304,10 @@ footer {
                             border: 0;
                             width: 100%;
                             padding-right: 160px;
+
+                            &:first-of-type{
+                                margin-bottom: 1px;
+                            }
                         }
                         & > button {
                             position: absolute;
