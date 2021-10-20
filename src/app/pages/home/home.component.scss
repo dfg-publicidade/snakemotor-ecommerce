@@ -313,7 +313,7 @@ footer {
                             position: absolute;
                             right: 0;
                             top: 0;
-                            background: #48ba80;
+                            background: #ff0000;
                             color: #fff;
                             padding: 10px;
                             border: 0;
@@ -324,11 +324,11 @@ footer {
                             margin: 0;
 
                             &:active {
-                                background: #328057;
+                                background: #bf1515;
                             }
 
                             &:disabled {
-                                background: #9ab5a7 !important;
+                                background: #e68181 !important;
                             }
                         }
                     }

@@ -74,7 +74,7 @@ export class ProdutoOpcaoService {
     let url = `${this.urlServico}?agrupar=true`;
 
     url += `&_limit=${limite}`;
-    url += `&${this.prefix}.produto.categoria.id=${categoriaId}`;
+    url += `&categoria.id=${categoriaId}`;
 
     if (aleatorio) {
       url += `&aleatorio=${aleatorio}`;
@@ -83,8 +83,6 @@ export class ProdutoOpcaoService {
     if (ignore) {
       url += `&ignore=${ignore}`;
     }
-
-    url += `&_sort:${this.prefix}.produto.nome:asc`;
 
     return this.http.get(url);
   }

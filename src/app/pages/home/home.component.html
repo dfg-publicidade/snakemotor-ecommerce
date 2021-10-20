@@ -39,7 +39,7 @@
     <div class="container">
         <h1>
             <strong class="left">{{categoriaDestaque.nome}}</strong>
-            <a [routerLink]="[categoriaDestaque.permalink]" routerLinkActive="router-link-active" class="right">veja mais +</a>
+            <a [routerLink]="['/c', categoriaDestaque.permalink]" routerLinkActive="router-link-active" class="right">veja mais +</a>
         </h1>
         <div class="produtos">
             <div class="loading-produtos" *ngIf="loadingServiceProdutosPorCategoria">
