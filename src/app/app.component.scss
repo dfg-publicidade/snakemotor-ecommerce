@@ -56,9 +56,12 @@ div.lgpd {
 
 @media (max-width: 479px) {
     div.lgpd {
-        display: block !important;
         width: 100%;
         text-align: center;
+
+        &.open {
+            display: block;
+        }
 
         & > p {
             display: inline-block;

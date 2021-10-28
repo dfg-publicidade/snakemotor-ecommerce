@@ -8,7 +8,6 @@ import { ProdutoComponentModule } from 'src/app/componentes/produto/produto.modu
 import { BannerService } from 'src/app/service/banner.service';
 import { LeadServiceService } from 'src/app/service/lead.service';
 import { MarcaService } from 'src/app/service/marca.service';
-import { MetadataService } from 'src/app/service/metaData.service';
 import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';

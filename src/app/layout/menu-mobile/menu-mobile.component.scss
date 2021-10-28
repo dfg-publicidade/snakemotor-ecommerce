@@ -55,7 +55,6 @@ aside {
                 padding: 10px 0;
                 border-bottom: 1px solid $primary;
                 margin-bottom: 5px;
-                display: flex;
 
                 &.principal {
                     background: #262e3b;
@@ -84,6 +83,33 @@ aside {
                     }
 
                     @include transition(all, linear, 0.3s);
+                }
+
+                & > ul {
+                    padding: 0 10px 0 40px;
+                    list-style: none;
+
+                    & > li {
+                        font-size: 18px;
+                        padding: 10px 0;
+                        border-bottom: 1px solid $primary;
+                        margin-bottom: 5px;
+
+                        &:nth-last-child(1){
+                            border-bottom: 0;
+                        }
+
+                        & > a {
+                            color: #fff;
+                            display: flex;
+
+                            & > span {
+                                padding-right: 10px;
+                            }
+
+                            @include transition(all, linear, 0.3s);
+                        }
+                    }
                 }
             }
         }

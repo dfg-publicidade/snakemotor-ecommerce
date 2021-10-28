@@ -45,7 +45,7 @@
             <div class="loading-produtos" *ngIf="loadingServiceProdutosPorCategoria">
                 <div class="skeleton-box produto" *ngFor="let item of [1,2,3,4]"></div>
             </div>
-            <ng-container *ngIf="optionsRotativoProdutos && produtosPorCategoriaDestaque && !isMobile">
+            <ng-container *ngIf="optionsRotativoProdutos && produtosPorCategoriaDestaque">
                 <owl-carousel-o [options]="optionsRotativoProdutos">
                     <ng-template carouselSlide *ngFor="let produto of produtosPorCategoriaDestaque">
                         <app-produto-componente [item]="produto"></app-produto-componente>
@@ -53,9 +53,9 @@
                 </owl-carousel-o>
             </ng-container>
 
-            <ng-container *ngIf="isMobile">
+            <!-- <ng-container *ngIf="isMobile">
                 <app-produto-componente [item]="produto" *ngFor="let produto of produtosPorCategoriaDestaque"></app-produto-componente>
-            </ng-container>
+            </ng-container> -->
         </div>
     </div>
 </section>
@@ -70,7 +70,7 @@
             <div class="loading-produtos" *ngIf="loadingServiceProdutosPorCategoria">
                 <div class="skeleton-box produto" *ngFor="let item of [1,2,3,4]"></div>
             </div>
-            <ng-container *ngIf="banner.produtos && !isMobile">
+            <ng-container *ngIf="banner.produtos">
                 <owl-carousel-o *ngIf="optionsRotativoProdutos" [options]="optionsRotativoProdutos">
                     <ng-template carouselSlide *ngFor="let produto of banner.produtos">
                         <app-produto-componente [item]="produto"></app-produto-componente>
@@ -78,9 +78,9 @@
                 </owl-carousel-o>
             </ng-container>
 
-            <ng-container *ngIf="isMobile">
+            <!-- <ng-container *ngIf="isMobile">
                 <app-produto-componente [item]="produto" *ngFor="let produto of banner.produtos"></app-produto-componente>
-            </ng-container>
+            </ng-container> -->
         </div>
     </div>
 </section>

@@ -19,10 +19,24 @@
         <ul class="principal">
             <li (click)="toggleMenu()"><a href="#">Fechar</a></li>
             <li *ngFor="let categoria of categorias">
-                <a [routerLink]="['/c', categoria[1].permalink]">
+                <a>
                     <i class="icon icon-{{categoria[0]}} outline"></i>
                     <span>{{categoria[1].nome}}</span>
                 </a>
+                <ul *ngIf="categoria[1] && categoria[1].categorias">
+                    <li>
+                        <a class="destaque" [routerLink]="['c', categoria[1].permalink]">
+                            <span>&bull;</span>
+                            <strong>Ver todos</strong>
+                        </a>
+                    </li>
+                    <li *ngFor="let subcategoria of categoria[1].categorias">
+                        <a [routerLink]="['c', categoria[1].permalink, subcategoria.permalink]">
+                            <span>&bull;</span>
+                            {{subcategoria.nome}}
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a [routerLink]="['/oficina-e-servicos']">

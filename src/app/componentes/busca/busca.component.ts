@@ -28,7 +28,6 @@ export class BuscaComponent implements OnInit {
     this.router.navigate(['/produtos'], { queryParams: { q: this.busca } });
   }
 
-
   limparBusca() {
     this.busca = '';
 
