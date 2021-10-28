@@ -57,8 +57,9 @@
                                             </p>
                                         </div>
                                     </td>
-                                    <td class="qtde" *ngIf="item.disponivel">
-                                        <div class="qtde">
+                                    <td class="qtde">
+                                        <span class="text-danger text-center" *ngIf="!item.disponivel">INDISPONÍVEL</span>
+                                        <div class="qtde" *ngIf="item.disponivel">
                                             <button type="button" class="btn btn-start" (click)="alterarQtde('diminuir', i)" [disabled]="item.qtde === 1">-</button>
                                             <input class="qtde" type="text" [value]="item.qtde" readonly />
                                             <button type="button" class="btn btn-end" (click)="alterarQtde('aumentar', i)" [disabled]="item.qtde === item.estoqueAtual">+</button>
@@ -67,7 +68,6 @@
                                             <button type="button" class="btn" (click)="removerCarrinho(item)">remover</button>
                                         </div>
                                     </td>
-                                    <td class="qtde text-danger text-center" *ngIf="!item.disponivel">INDISPONÍVEL</td>
                                     <td class="valor">
                                         <div class="preco">
                                             <!-- PRECO VALOR PADRÃO RISCADO, POIS EXISTE VALOR PROMOCIONAL -->
