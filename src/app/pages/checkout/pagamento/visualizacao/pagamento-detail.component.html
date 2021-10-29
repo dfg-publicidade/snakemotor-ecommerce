@@ -182,7 +182,7 @@
                         <div class="col-xs-12 col-sm-12 col-lg-12 mb-2" *ngIf="parcelamento && parcelamento.installments">
                             <ng-select class="large" formControlName="qtdeParcelas" placeholder="Como deseja pagar?" notFoundText="Nenhum item encontrado" required>
                                 <ng-container *ngFor="let parcela of parcelamento.installments[tipoCartao.brand.name]">
-                                    <ng-option *ngIf="carrinho.parcelamento.valorMinParcela <= parcela.installmentAmount" [value]="parcela.quantity"><strong>{{parcela.quantity}}x</strong> de <strong>{{parcela.installmentAmount | currency:'BRL':'symbol':'0.2-2':'pt'}}</strong> (total {{parcela.totalAmount | currency:'BRL':'symbol':'0.2-2':'pt'}} {{parcela.interestFree ? 'sem juros' : 'com juros'}})</ng-option>
+                                    <ng-option *ngIf="parcela.quantity === 1 || (carrinho.parcelamento.valorMinParcela <= parcela.installmentAmount)" [value]="parcela.quantity"><strong>{{parcela.quantity}}x</strong> de <strong>{{parcela.installmentAmount | currency:'BRL':'symbol':'0.2-2':'pt'}}</strong> (total {{parcela.totalAmount | currency:'BRL':'symbol':'0.2-2':'pt'}} {{parcela.interestFree ? 'sem juros' : 'com juros'}})</ng-option>
                                 </ng-container>
                             </ng-select>
                             <small class="form-text text-danger" *ngIf="form.controls.qtdeParcelas.touched && form.controls.qtdeParcelas.hasError('required')">Selecione como deseja pagar</small>
@@ -229,7 +229,7 @@
                             <strong>{{carrinho.valorTotal}}</strong> <br />
                         </ng-container>
                         <span>
-                            <ng-container *ngIf="carrinho.formaPagamento.name === 'CREDIT_CARD'">em até {{carrinho.valorTotalParcelado}}</ng-container>
+                            <ng-container *ngIf="carrinho.valorTotalParcelado && carrinho.formaPagamento.name === 'CREDIT_CARD'">em até {{carrinho.valorTotalParcelado}}</ng-container>
                             <!-- <ng-container *ngIf="carrinho.valorAVista && carrinho.formaPagamento.name !== 'CREDIT_CARD'"> ou </ng-container> -->
                         </span>
                     </span>

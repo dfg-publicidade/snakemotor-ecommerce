@@ -120,7 +120,7 @@
                     <span><strong>Total</strong></span>
                     <span>
                         <strong>{{carrinho.valorTotal}}</strong> <br />
-                        <span>em até {{carrinho.valorTotalParcelado}} ou</span>
+                        <span *ngIf="carrinho.valorTotalParcelado">em até {{carrinho.valorTotalParcelado}} ou</span>
                     </span>
                 </p>
                 <p class="valor-avista text-success" *ngIf="carrinho.valorAVista"><strong>{{carrinho.valorAVista}}</strong></p>

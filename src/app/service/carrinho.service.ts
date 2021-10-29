@@ -59,7 +59,7 @@ export class CarrinhoService {
   removerItemCarrinho(produto: any) {
     let carrinho = this.getCarrinho();
 
-    let itemSelecionado = carrinho.produtos.find((p: any) => p.id === produto.id);
+    let itemSelecionado = carrinho.produtos.find((p: any) => p.produto === produto.id);
     let indexItem = carrinho.produtos.indexOf(itemSelecionado);
 
     carrinho.produtos.splice(indexItem, 1);
