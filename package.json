@@ -4,9 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open --port 4000",
-    "build-prod": "ng build --configuration production && npm run gcloud-deploy",
-    "build-dev": "ng build --configuration development  && npm run gcloud-deploy-hml",
-    "watch": "ng build --watch --configuration development",
+    "build-prod": "ng build --configuration=production && npm run gcloud-deploy",
+    "build-dev": "ng build --configuration=development && npm run gcloud-deploy-hml",
+    "watch": "ng build --watch --configuration=development",
     "test": "ng test",
     "gcloud-deploy": "gcloud app deploy app.yaml",
     "gcloud-deploy-hml": "gcloud app deploy app-hml.yaml",
