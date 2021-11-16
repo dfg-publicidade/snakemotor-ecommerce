@@ -114,6 +114,12 @@ footer {
                             & > a {
                                 color: #dadada;
                             }
+
+                            &.tour-virtual {
+                                & > img {
+                                    width: 40px;
+                                }
+                            }
                         }
 
                         & > iframe {
@@ -143,6 +149,16 @@ footer {
                     text-align: center;
                     & > img {
                         width: 200px;
+
+                        &.site-seguro {
+                            width: 115px;
+                        }
+                    }
+
+                    & > a {
+                        & > img {
+                            width: 115px;
+                        }
                     }
                     & > span {
                         width: 100%;

@@ -81,7 +81,7 @@ export class ProdutoOpcaoService {
     }
 
     if (ignore) {
-      url += `&ignore=${ignore}`;
+      url += `&ignorar=${ignore}`;
     }
 
     return this.http.get(url);

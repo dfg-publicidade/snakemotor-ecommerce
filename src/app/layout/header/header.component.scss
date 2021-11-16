@@ -59,6 +59,23 @@ header {
                                     color: $primary;
                                 }
                             }
+
+                            &.tour-virtual {
+                                border: 1px solid #ccc;
+                                border-radius: 10px;
+                                padding: 3px 15px;
+
+                                & > a {
+                                    font-weight: bold;
+                                    align-items: center;
+                                    display: flex;
+                                    padding-right: 0;
+                                    & > img {
+                                        width: 40px;
+                                        margin-right: 5px;
+                                    }
+                                }
+                            }
                         }
 
                         &.whatsapp {

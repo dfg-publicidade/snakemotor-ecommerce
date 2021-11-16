@@ -13,6 +13,12 @@
                             (19) 99625-7084
                         </a>
                     </li>
+                    <li class="item tour-virtual">
+                        <a [routerLink]="['/tour-virtual-360']" routerLinkActive="router-link-active" >
+                            <img src="/res/imagens/tour-360-logo.png">
+                            Tour Virtual
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <a *ngIf="!getUsuario()" class="portal" [routerLink]="['/login']">Olá, <strong>cadastre-se</strong> ou faça <strong>login</strong></a>
