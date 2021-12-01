@@ -66,11 +66,15 @@
                     }
                 }
                 & > div.logo {
-                    // background: url("/res/imagens/logo-conecta.svg") no-repeat center center;
                     height: 70px;
                     max-width: inherit;
                     margin: 10px 0 !important;
                     margin-bottom: 10px !important;
+
+                    &.natal {
+                        height: 130px;
+                    }
+
                 }
 
                 & > div.icones {
