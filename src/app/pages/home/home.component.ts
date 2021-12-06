@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   categoriaDestaque: any;
   marcas: any;
 
+  optionsRotativoBanners: OwlOptions;
   optionsRotativoProdutos: OwlOptions;
   optionsRotativoMarcas: OwlOptions;
 
@@ -53,6 +54,22 @@ export class HomeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private metadataService: MetadataService
   ) {
+    this.optionsRotativoBanners = {
+      loop: true,
+      nav: true,
+      autoWidth: true,
+      autoHeight: true,
+      dots: true,
+      autoplay: true,
+      skip_validateItems: true,
+      navText: ['<i class="fas fa-angle-left"></i>', '<i class="fas fa-angle-right"></i>'],
+      responsive: {
+        0: {
+          items: 1
+        }
+      }
+    };
+
     this.optionsRotativoProdutos = {
       loop: true,
       items: 4,

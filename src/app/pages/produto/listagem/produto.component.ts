@@ -260,6 +260,12 @@ export class ProdutoComponent implements OnInit {
           this.marca = result.content && result.content.items && result.content.items.length > 0 ? result.content.items[0] : '';
 
           if (this.marca) {
+            //INICIO META TAG
+            this.metatag.url = this.router.url;
+            this.metatag.title = this.marca.nome;
+            this.metadataService.updateMetadata(this.metatag);
+            //FIM META TAG
+
             this.opcoesFiltro = {
               marcas: [{
                 id: this.marca.id,

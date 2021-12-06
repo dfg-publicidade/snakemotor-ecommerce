@@ -2,7 +2,16 @@
     <div class="container">
         <!-- BANNER PRINCIPAL -->
         <div class="loading-banner skeleton-box" *ngIf="!banners[tipoBannerIdPrincipal] || (banners[tipoBannerIdPrincipal] && banners[tipoBannerIdPrincipal].length === 0)"></div>
-        <app-banner [items]="banners[tipoBannerIdPrincipal]" class="d-xs-block d-sm-block d-md-block d-lg-block"></app-banner>
+        <div class="banner">
+            <owl-carousel-o [options]="optionsRotativoBanners">
+                <ng-template carouselSlide *ngFor="let banner of banners[tipoBannerIdPrincipal]">
+                    <a class="banner-item" href="{{banner.url ? banner.url : '#'}}">
+                        <img *ngIf="!isMobile" src="{{banner.imagem.original}}?timestamp={{timestamp}}" [alt]="banner.titulo">
+                        <img *ngIf="isMobile && banner.imagemMobile" src="{{banner.imagemMobile.original}}?timestamp={{timestamp}}" [alt]="'Título do banner'">
+                    </a>
+                </ng-template>
+            </owl-carousel-o>
+        </div>
     </div>
 </main>
 
@@ -106,7 +115,7 @@
             </span>
             <div class="campo">
                 <form [formGroup]="formLead" (submit)="cadastrarLead()" *ngIf="!resultLead || (resultLead && resultLead.status !== 'success')">
-                    <input type="text" placeholder="Seu nome" formControlName="nome"/>
+                    <input type="text" placeholder="Seu nome" formControlName="nome" />
                     <input type="text" placeholder="WhatsApp com DDD" formControlName="celular" mask="(00) 00000-0000" />
                     <button type="submit" [disabled]="formLead.status === 'INVALID' || loadingServiceLead">
                         <span class="loading" [hidden]="!loadingServiceLead"><img src="/res/imagens/spinner-white.svg" /></span>
