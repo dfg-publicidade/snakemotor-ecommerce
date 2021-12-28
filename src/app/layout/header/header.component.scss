@@ -171,11 +171,11 @@ header {
 
                 @include transition(all, linear, 0.5s);
 
-                &.natal {
-                    width: 264px;
-                    background: url("../../../res/imagens/logo_natal.png") no-repeat bottom center;
-                    background-size: 100% auto;
-                }
+                // &.natal {
+                //     width: 264px;
+                //     background: url("../../../res/imagens/logo_natal.png") no-repeat bottom center;
+                //     background-size: 100% auto;
+                // }
             }
 
             app-busca {
