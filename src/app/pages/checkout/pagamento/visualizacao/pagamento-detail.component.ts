@@ -302,7 +302,9 @@ export class PagamentoDetailComponent implements OnInit {
         this.verificaQtdeParcelas();
       },
       error: (response: any) => {
-        console.log('erro', response);
+        // this.form.controls['numeroCartao'].setErrors({ invalid: true });
+        // this.form.controls['numeroCartao'].updateValueAndValidity();
+        console.log('erro tipo cartao', response);
       },
       complete: (response: any) => {
         //
@@ -323,7 +325,7 @@ export class PagamentoDetailComponent implements OnInit {
         this.scrollTop();
       },
       error: (response: any) => {
-        console.log('erro', response);
+        console.log('erro parcelas', response);
       },
       complete: (response: any) => {
         //

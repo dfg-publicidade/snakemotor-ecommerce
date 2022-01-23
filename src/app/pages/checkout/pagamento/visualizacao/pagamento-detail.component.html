@@ -153,6 +153,7 @@
                             <img *ngIf="tipoCartao && tipoCartao.brand.name" src="{{carrinho.pagseguro.path}}{{carrinho.formaPagamento.options[tipoCartao.brand.name.toUpperCase()].images['SMALL'].path}}">
                             <label>Número do cartão</label>
                             <small class="form-text text-danger" *ngIf="form.controls.numeroCartao.touched && form.controls.numeroCartao.hasError('required')">Preencha o número do cartão</small>
+                            <small class="form-text text-danger" *ngIf="form.controls.numeroCartao.hasError('invalid')">Número inválido</small>
                         </div>
                         <div class="form-floating  col-xs-12 col-sm-12 col-lg-12 mb-2">
                             <input type="text" formControlName="nome" class="form-control" placeholder="{{form.value.tipo === 'JURIDICA' ? 'Nome da empresa' : 'Nome do titular'}} (Conforme impresso no cartão)" required>
