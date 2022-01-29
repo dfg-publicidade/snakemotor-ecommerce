@@ -63,9 +63,10 @@
                 <div class="texto" *ngIf="carrinho.formaPagamento.name === 'pix'">
                     <p><strong>Instruções para pagar com Pix</strong></p>
                     <p>
-                        1. Para efetuar o pagamento, copie a chave Pix ou aponte a câmera do seu smartphone para o QR Code. <br />
-                        2. Abra o site ou aplicativo do seu banco e selecione a opção pagar com Pix. <br />
-                        3. Após a transferencia, você receberá por e-mail a confirmação da compra. <br />
+                        1. Conclua a compra clicando no botão Concluir a compra. Você será direcionado para a página contendo os dados para realizar o Pix.<br/>
+                        2. Para efetuar o pagamento, copie a chave Pix. <!--ou aponte a câmera do seu smartphone para o QR Code --> <br />
+                        3. Abra o site ou aplicativo do seu banco e selecione a opção pagar com Pix. <br />
+                        4. Após a transferencia, você receberá por e-mail a confirmação da compra. <br />
                     </p>
 
                     <p>
@@ -78,7 +79,7 @@
                 <div class="texto" *ngIf="carrinho.formaPagamento.name === 'deposito'">
                     <p><strong>Instruções para pagar com depósito bancário</strong></p>
                     <p>
-                        <strong>1.</strong> Conclua a compra clicando no botão <strong>Concluir a compra</strong>. Você será direcionado para a Página
+                        <strong>1.</strong> Conclua a compra clicando no botão <strong>Concluir a compra</strong>. Você será direcionado para a página
                         contendo os dados para realizar o depósito bancário.<br />
                         <strong>2.</strong> Para efetuar o depósito, dirija-se até a agência bancária com os dados fornecidos para depósito. <br />
                         <strong>3.</strong> Após a confirmação do depósito, você receberá por e-mail a confirmação do pagamento. <br />
@@ -276,7 +277,7 @@
                 <p>Continue buscando os produtos desejados</p>
                 <a [routerLink]="['/']">
                     <button class="info btn btn-primary btn-lg mt-4 ps-5 pe-5">
-                        <span>Página inicial</span>
+                        <span>página inicial</span>
                     </button>
                 </a>
             </div>
