@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarrinhoService } from 'src/app/service/carrinho.service';
 import { MetadataService } from 'src/app/service/metaData.service';
 import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
 import { ProdutoUtil } from 'src/app/util/produtoUtil';
+import { Util } from 'src/app/util/util';
 import { environment } from 'src/environments/environment';
 
 declare var $: any;
@@ -37,13 +39,16 @@ export class ProdutoDetailComponent implements OnInit {
 
   categoria: any;
 
+  urlVideo: any;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
     private produtoOpcaoService: ProdutoOpcaoService,
     private carrinhoService: CarrinhoService,
-    private metadataService: MetadataService
+    private metadataService: MetadataService,
+    private sanitizer: DomSanitizer
   ) {
     this.formVariacao = this.formBuilder.group({
       tamanho: new FormControl(null, [
@@ -80,6 +85,10 @@ export class ProdutoDetailComponent implements OnInit {
           this.produtoOpcao = result.content.entity;
           this.cores = result.content.cores;
           this.tamanhos = result.content.tamanhos;
+
+          if (this.produtoOpcao.produto.video) {
+            this.urlVideo = this.sanitizer.bypassSecurityTrustResourceUrl(`${Util.linkYoutubeEmbed()}/${this.produtoOpcao.produto.video}`);
+          }
 
           this.cores.forEach((pOpcao: any, index: number) => {
             this.cores[index].imagem = ProdutoUtil.getImagemDestaque(pOpcao);

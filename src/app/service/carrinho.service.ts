@@ -25,13 +25,13 @@ export class CarrinhoService {
   }
 
   setCarrinho(carrinho: any) {
-    localStorage.setItem(this.KEY_SESSION, JSON.stringify(carrinho));
+    sessionStorage.setItem(this.KEY_SESSION, JSON.stringify(carrinho));
 
     this.watchCarrinhoService.complete();
   }
 
   getCarrinho(): any {
-    let item: any = localStorage.getItem(this.KEY_SESSION);
+    let item: any = sessionStorage.getItem(this.KEY_SESSION);
     return JSON.parse(item);
   }
 
@@ -74,7 +74,7 @@ export class CarrinhoService {
   }
 
   removerCarrinho() {
-    localStorage.removeItem(this.KEY_SESSION);
+    sessionStorage.removeItem(this.KEY_SESSION);
 
     this.watchCarrinhoService.next();
   }

@@ -32,4 +32,8 @@ export class Util {
 			document.getElementsByTagName('head')[0].appendChild(node);
 		}
 	}
+
+	static linkYoutubeEmbed(): string {
+		return 'https://www.youtube.com/embed';
+	}
 }
