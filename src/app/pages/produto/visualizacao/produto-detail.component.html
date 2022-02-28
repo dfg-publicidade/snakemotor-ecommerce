@@ -109,11 +109,13 @@
                             </div>
                         </div>
                     </form>
-                    <button *ngIf="qtdes && qtdes.length > 0" type="button" class="custom buy" (click)="comprar()" [disabled]="formVariacao.status === 'INVALID' || jaPossuiCarrinho(op) || (produtoOpcaoSelecionado && produtoOpcaoSelecionado.adicionadoCarrinho)">
-                        <i class="fas fa-shopping-cart"></i>
-                        {{jaPossuiCarrinho(op) ? 'Adicionado no carrinho' : 'Comprar'}}
-                    </button>
-                    <h3 *ngIf="qtdes && qtdes.length === 0">Produto indisponível</h3>
+                    <ng-container *ngIf="produtoOpcao.precoVenda !== 'Preços sob consulta'">
+                        <button *ngIf="qtdes && qtdes.length > 0" type="button" class="custom buy" (click)="comprar()" [disabled]="formVariacao.status === 'INVALID' || jaPossuiCarrinho(op) || (produtoOpcaoSelecionado && produtoOpcaoSelecionado.adicionadoCarrinho)">
+                            <i class="fas fa-shopping-cart"></i>
+                            {{jaPossuiCarrinho(op) ? 'Adicionado no carrinho' : 'Comprar'}}
+                        </button>
+                        <h3 *ngIf="qtdes && qtdes.length === 0">Produto indisponível</h3>
+                    </ng-container>
                 </div>
             </ng-container>
         </div>
