@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   configuracao: any;
   scrolled: boolean = false;
   categorias: any;
-
+  timestamp: any;
   constructor(private router: Router, private categoriaService: CategoriaService, private perfilService: PerfilService, private carrinhoService: CarrinhoService, private configuracaoService: ConfiguracaoService) {
 
   }
@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     // this.buscarConfiguracao();
 
+    this.timestamp = new Date().getTime();
     this.listarCategorias();
   }
 

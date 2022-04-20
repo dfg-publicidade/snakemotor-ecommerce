@@ -80,7 +80,7 @@
                         </a>
                         <div class="categoria-hover menu-{{categoria[0]}}">
                             <div class="bg">
-                                <div *ngIf="categoria[1].imagem" class="capa" [ngStyle]="{'background-image': 'url(' + categoria[1].imagem.original + ')'}"></div>
+                                <div *ngIf="categoria[1].imagem" class="capa" [ngStyle]="{'background-image': 'url(' + categoria[1].imagem.original + '?timestamp=' + timestamp + ')'}"></div>
                             </div>
                             <div class="subcategorias" *ngIf="categoria[1] && categoria[1].categorias">
                                 <p>Selecione a subcategoria abaixo</p>
