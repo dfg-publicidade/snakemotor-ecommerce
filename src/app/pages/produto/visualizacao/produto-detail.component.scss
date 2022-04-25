@@ -350,6 +350,11 @@ section {
                     & > p {
                         color: #575757;
                     }
+
+                    &>iframe{
+                        width: 60%;
+                        height: 350px;
+                    }
                 }
             }
         }
