@@ -63,10 +63,10 @@
                 <div class="texto" *ngIf="carrinho.formaPagamento.name === 'pix'">
                     <p><strong>Instruções para pagar com Pix</strong></p>
                     <p>
-                        1. Conclua a compra clicando no botão Concluir a compra. Você será direcionado para a página contendo os dados para realizar o Pix.<br/>
-                        2. Para efetuar o pagamento, copie a chave Pix. <!--ou aponte a câmera do seu smartphone para o QR Code --> <br />
-                        3. Abra o site ou aplicativo do seu banco e selecione a opção pagar com Pix. <br />
-                        4. Após a transferencia, você receberá por e-mail a confirmação da compra. <br />
+                        1. Conclua a compra clicando no <span style="font-weight: bold; background: yellow; padding: 3px 5px;">botão Pagar com Pix</span>. Você será direcionado para a página contendo os dados para realizar o Pix.<br/>
+                        <!-- 2. Para efetuar o pagamento, copie a chave Pix. ou aponte a câmera do seu smartphone para o QR Code <br />  --> 
+                        2. Abra o site ou aplicativo do seu banco e selecione a opção pagar com Pix. <br />
+                        3. Após a transferencia, você receberá por e-mail a confirmação da compra. <br />
                     </p>
 
                     <p>
@@ -259,7 +259,8 @@
                         <button type="button" class="custom buy" [disabled]="form && form.status === 'INVALID' || loadingService" (click)="carrinho.formaPagamento.name === 'CREDIT_CARD' ? createCardToken() : finalizarCompra()">
                             <span *ngIf="!loadingService">
                                 <i class="fas fa-check pe-2"></i>
-                                Concluir a Compra
+                                <ng-container *ngIf="carrinho.formaPagamento.name !== 'pix'"> Concluir a Compra </ng-container>
+                                <ng-container *ngIf="carrinho.formaPagamento.name === 'pix'"> Pagar com PIX </ng-container>
                             </span>
                             <span *ngIf="loadingService" class="loading">
                                 <img src="/res/imagens/spinner-white.svg" />
