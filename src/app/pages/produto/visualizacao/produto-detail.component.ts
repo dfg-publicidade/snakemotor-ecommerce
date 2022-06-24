@@ -14,7 +14,7 @@ declare var $: any;
 @Component({
   selector: 'app-produto-detail',
   templateUrl: './produto-detail.component.html',
-  styleUrls: ['./produto-detail.component.scss']
+  styleUrls: ['./produto-detail.component.scss'],
 })
 export class ProdutoDetailComponent implements OnInit {
   op: string = '';
@@ -51,22 +51,17 @@ export class ProdutoDetailComponent implements OnInit {
     private sanitizer: DomSanitizer
   ) {
     this.formVariacao = this.formBuilder.group({
-      tamanho: new FormControl(null, [
-        Validators.required
-      ]),
-      qtde: new FormControl(1, [
-        Validators.required
-      ])
+      tamanho: new FormControl(null, [Validators.required]),
+      qtde: new FormControl(1, [Validators.required]),
     });
-
-  };
+  }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.produtoPermalink = params['produtoPermalink'];
     });
 
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.op = params['op'];
 
       if (this.op) {
@@ -79,68 +74,86 @@ export class ProdutoDetailComponent implements OnInit {
     delete this.produtoOpcao;
     this.formVariacao.controls.tamanho.setValue(null);
 
-    this.produtoOpcaoService.visualizar(this.op)
-      .subscribe(
-        result => {
-          this.produtoOpcao = result.content.entity;
-          this.cores = result.content.cores;
-          this.tamanhos = result.content.tamanhos;
+    this.produtoOpcaoService.visualizar(this.op).subscribe((result) => {
+      this.produtoOpcao = result.content.entity;
+      this.cores = result.content.cores;
+      this.tamanhos = result.content.tamanhos;
 
-          if (this.produtoOpcao.produto.video) {
-            this.urlVideo = this.sanitizer.bypassSecurityTrustResourceUrl(`${Util.linkYoutubeEmbed()}/${this.produtoOpcao.produto.video}`);
-          }
-
-          this.cores.forEach((pOpcao: any, index: number) => {
-            this.cores[index].imagem = ProdutoUtil.getImagemDestaque(pOpcao);
-
-            if (!this.cores[index].imagem) {
-              this.cores[index].imagem = '/res/imagens/sem-imagem.png';
-            }
-          });
-
-          this.produtoOpcao.imagens = ProdutoUtil.getGaleriaImagens(this.produtoOpcao);
-
-          if (!this.tamanhos || (this.tamanhos && this.tamanhos.length <= 1)) {
-            if (this.tamanhos && this.tamanhos.length === 1) {
-              this.produtoOpcaoSelecionado = this.tamanhos[0];
-            }
-            this.formVariacao.get('tamanho').clearValidators();
-            this.formVariacao.get('tamanho').updateValueAndValidity();
-          }
-
-          this.produtoOpcaoSelecionado = this.produtoOpcao;
-
-          this.getQtdes();
-
-          //INICIO META TAG
-          this.metatag.url = this.router.url;
-          this.metatag.title = `${this.produtoOpcao.produto.nome} | ${environment.title}`;
-          this.metatag.description = `${this.produtoOpcao.produto.descricaoCurta}`;
-          this.metatag.image = `${this.produtoOpcao.produto.imagem}`;
-          this.metadataService.updateMetadata(this.metatag);
-          //FIM META TAG
-
-          //PRODUTO RELACIONADOS
-          this.listarProdutosPorCategoria(this.produtoOpcao.produto.categoria.id, 4, true);
+      if (this.produtoOpcao.video) {
+        this.urlVideo = this.sanitizer.bypassSecurityTrustResourceUrl(
+          `${Util.linkYoutubeEmbed()}/${this.produtoOpcao.video}`
+        );
+      } else {
+        if (this.produtoOpcao.produto.video) {
+          this.urlVideo = this.sanitizer.bypassSecurityTrustResourceUrl(
+            `${Util.linkYoutubeEmbed()}/${this.produtoOpcao.produto.video}`
+          );
         }
+      }
+
+      this.cores.forEach((pOpcao: any, index: number) => {
+        this.cores[index].imagem = ProdutoUtil.getImagemDestaque(pOpcao);
+
+        if (!this.cores[index].imagem) {
+          this.cores[index].imagem = '/res/imagens/sem-imagem.png';
+        }
+      });
+
+      this.produtoOpcao.imagens = ProdutoUtil.getGaleriaImagens(
+        this.produtoOpcao
       );
+
+      if (!this.tamanhos || (this.tamanhos && this.tamanhos.length <= 1)) {
+        if (this.tamanhos && this.tamanhos.length === 1) {
+          this.produtoOpcaoSelecionado = this.tamanhos[0];
+        }
+        this.formVariacao.get('tamanho').clearValidators();
+        this.formVariacao.get('tamanho').updateValueAndValidity();
+      }
+
+      this.produtoOpcaoSelecionado = this.produtoOpcao;
+
+      this.getQtdes();
+
+      //INICIO META TAG
+      this.metatag.url = this.router.url;
+      this.metatag.title = `${this.produtoOpcao.produto.nome} | ${environment.title}`;
+      this.metatag.description = `${this.produtoOpcao.produto.descricaoCurta}`;
+      this.metatag.image = `${this.produtoOpcao.produto.imagem}`;
+      this.metadataService.updateMetadata(this.metatag);
+      //FIM META TAG
+
+      //PRODUTO RELACIONADOS
+      this.listarProdutosPorCategoria(
+        this.produtoOpcao.produto.categoria.id,
+        4,
+        true
+      );
+    });
   }
 
-  listarProdutosPorCategoria(categoriaId: string, limite: number, aleatorio: boolean) {
-    this.produtoOpcaoService.listarPorCategoria(categoriaId, limite, aleatorio, this.op)
-      .subscribe(
-        result => {
-          this.produtosPorCategoria = result.content.items;
-        }
-      );
+  listarProdutosPorCategoria(
+    categoriaId: string,
+    limite: number,
+    aleatorio: boolean
+  ) {
+    this.produtoOpcaoService
+      .listarPorCategoria(categoriaId, limite, aleatorio, this.op)
+      .subscribe((result) => {
+        this.produtosPorCategoria = result.content.items;
+      });
   }
 
   selecionarOpcao(event: any) {
     this.formVariacao.controls.qtde.setValue(null);
     this.op = event;
-    this.produtoOpcaoSelecionado = this.tamanhos.find((pOpcao: any) => pOpcao && pOpcao.id === this.op);
+    this.produtoOpcaoSelecionado = this.tamanhos.find(
+      (pOpcao: any) => pOpcao && pOpcao.id === this.op
+    );
 
-    this.produtoOpcaoSelecionado.adicionadoCarrinho = this.jaPossuiCarrinho(this.produtoOpcaoSelecionado.id);
+    this.produtoOpcaoSelecionado.adicionadoCarrinho = this.jaPossuiCarrinho(
+      this.produtoOpcaoSelecionado.id
+    );
 
     this.getQtdes();
   }
@@ -148,8 +161,15 @@ export class ProdutoDetailComponent implements OnInit {
   getQtdes() {
     this.qtdes = [];
 
-    if (this.produtoOpcaoSelecionado && this.produtoOpcaoSelecionado.estoqueAtual) {
-      for (let qtde = 1; qtde <= this.produtoOpcaoSelecionado.estoqueAtual; qtde++) {
+    if (
+      this.produtoOpcaoSelecionado &&
+      this.produtoOpcaoSelecionado.estoqueAtual
+    ) {
+      for (
+        let qtde = 1;
+        qtde <= this.produtoOpcaoSelecionado.estoqueAtual;
+        qtde++
+      ) {
         this.qtdes.push(qtde);
       }
 
@@ -173,18 +193,20 @@ export class ProdutoDetailComponent implements OnInit {
 
     carrinho.produtos.push({
       qtde: this.formVariacao.value.qtde,
-      produto: this.produtoOpcaoSelecionado.id
+      produto: this.produtoOpcaoSelecionado.id,
     });
 
     this.carrinhoService.setCarrinho(carrinho);
 
     this.produtoOpcaoSelecionado.adicionadoCarrinho = true;
 
-    this.produtoOpcaoSelecionado.adicionadoCarrinho = this.jaPossuiCarrinho(this.produtoOpcaoSelecionado.id);
+    this.produtoOpcaoSelecionado.adicionadoCarrinho = this.jaPossuiCarrinho(
+      this.produtoOpcaoSelecionado.id
+    );
 
     this.toastMessage = {
       status: 'success',
-      message: 'Produto adicionado com sucesso!'
+      message: 'Produto adicionado com sucesso!',
     };
   }
 
@@ -197,7 +219,7 @@ export class ProdutoDetailComponent implements OnInit {
 
     carrinho.produtos.push({
       qtde: this.formVariacao.value.qtde,
-      produto: this.produtoOpcaoSelecionado.id
+      produto: this.produtoOpcaoSelecionado.id,
     });
 
     this.carrinhoService.setCarrinho(carrinho);
@@ -213,7 +235,9 @@ export class ProdutoDetailComponent implements OnInit {
     let possuiCarrinho = false;
 
     if (this.carrinho) {
-      possuiCarrinho = this.carrinho.produtos.find((pOpcao: any) => pOpcao && pOpcao.produto === produtoOpcaoId);
+      possuiCarrinho = this.carrinho.produtos.find(
+        (pOpcao: any) => pOpcao && pOpcao.produto === produtoOpcaoId
+      );
     }
 
     return possuiCarrinho;
@@ -222,8 +246,8 @@ export class ProdutoDetailComponent implements OnInit {
   previewConteudo(imagem: any) {
     this.imagemSelecionada = imagem.item.src;
 
-    $("body").addClass("lightbox-body");
-    $(".lightbox").show();
+    $('body').addClass('lightbox-body');
+    $('.lightbox').show();
   }
 
   hidePreview(event?: any) {
@@ -232,8 +256,8 @@ export class ProdutoDetailComponent implements OnInit {
       (event && !event.path) ||
       (event.path && event.path.length > 0 && event.path[0])
     ) {
-      $("body").removeClass("lightbox-body");
-      $(".lightbox").hide();
+      $('body').removeClass('lightbox-body');
+      $('.lightbox').hide();
 
       delete this.imagemSelecionada;
     }
