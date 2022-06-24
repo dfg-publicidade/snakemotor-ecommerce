@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GalleryVideo } from 'ngx-doe-gallery';
 import { CarrinhoService } from 'src/app/service/carrinho.service';
 import { MetadataService } from 'src/app/service/metaData.service';
 import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
@@ -40,6 +41,8 @@ export class ProdutoDetailComponent implements OnInit {
   categoria: any;
 
   urlVideo: any;
+  urlVideoSeguro: any;
+  thumbVideo: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -80,13 +83,25 @@ export class ProdutoDetailComponent implements OnInit {
       this.tamanhos = result.content.tamanhos;
 
       if (this.produtoOpcao.video) {
-        this.urlVideo = this.sanitizer.bypassSecurityTrustResourceUrl(
+        this.urlVideo = `${Util.linkYoutubeEmbed()}/${this.produtoOpcao.video}`;
+
+         this.urlVideoSeguro = this.sanitizer.bypassSecurityTrustResourceUrl(
           `${Util.linkYoutubeEmbed()}/${this.produtoOpcao.video}`
+        );
+
+        this.thumbVideo = this.sanitizer.bypassSecurityTrustResourceUrl(
+          `https://img.youtube.com/vi/${this.produtoOpcao.video}/0.jpg`
         );
       } else {
         if (this.produtoOpcao.produto.video) {
-          this.urlVideo = this.sanitizer.bypassSecurityTrustResourceUrl(
-            `${Util.linkYoutubeEmbed()}/${this.produtoOpcao.produto.video}`
+          this.urlVideo = `${Util.linkYoutubeEmbed()}/${this.produtoOpcao.produto.video}`;
+
+          this.urlVideoSeguro = this.sanitizer.bypassSecurityTrustResourceUrl(
+           `${Util.linkYoutubeEmbed()}/${this.produtoOpcao.produto.video}`
+         );
+
+          this.thumbVideo = this.sanitizer.bypassSecurityTrustResourceUrl(
+            `https://img.youtube.com/vi/${this.produtoOpcao.produto.video}/0.jpg`
           );
         }
       }
@@ -102,6 +117,12 @@ export class ProdutoDetailComponent implements OnInit {
       this.produtoOpcao.imagens = ProdutoUtil.getGaleriaImagens(
         this.produtoOpcao
       );
+
+      if(this.urlVideo) { 
+      this.produtoOpcao.imagens.push(new GalleryVideo(this.urlVideo, this.thumbVideo));
+      }
+
+      console.log(this.produtoOpcao.imagens);
 
       if (!this.tamanhos || (this.tamanhos && this.tamanhos.length <= 1)) {
         if (this.tamanhos && this.tamanhos.length === 1) {

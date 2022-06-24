@@ -128,7 +128,7 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#caracteristicas" type="button" role="tab" aria-controls="caracteristicas" aria-selected="false">Características</button>
                 </li>
-                <li class="nav-item" role="presentation" *ngIf="urlVideo">
+                <li class="nav-item" role="presentation" *ngIf="urlVideoSeguro">
                     <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#video" type="button" role="tab" aria-controls="video" aria-selected="false">Vídeo</button>
                 </li>
             </ul>
@@ -143,8 +143,8 @@
                     <div *ngIf="produtoOpcao.produto.caracteristicas" [innerHtml]="produtoOpcao.produto.caracteristicas | sanitizeHtml"></div>
                     <p *ngIf="!produtoOpcao.produto.caracteristicas">Nenhuma característica disponível</p>
                 </div>
-                <div class="tab-pane" id="video" role="tabpanel" aria-labelledby="profile-tab" *ngIf="urlVideo">
-                    <iframe [src]="urlVideo"></iframe>
+                <div class="tab-pane" id="video" role="tabpanel" aria-labelledby="profile-tab" *ngIf="urlVideoSeguro">
+                    <iframe [src]="urlVideoSeguro"></iframe>
                 </div>
             </div>
         </div>
