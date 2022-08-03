@@ -4,26 +4,32 @@
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 
 @include media-breakpoint-down(sm) {
-    footer {
-        &.central {
-            & > div.container {
-                & > div.colunas {
-                    & > div.coluna {
-                        &.coluna-1 {
-                            width: 100%;
-                            & > p.copyright {
-                                bottom: -10px;
-                            }
-                        }
-                        &.coluna-2 {
-                            width: 100%;
-                        }
-                        &.coluna-3 {
-                            width: 100%;
-                        }
-                    }
+  footer {
+    &.central {
+      & > div.container {
+        & > div.colunas {
+          & > div.coluna {
+            &.coluna-1 {
+              width: 100%;
+
+              & > div.app {
+                & > ul {
+                  display: block;
                 }
+              }
+              & > p.copyright {
+                bottom: -10px;
+              }
             }
+            &.coluna-2 {
+              width: 100%;
+            }
+            &.coluna-3 {
+              width: 100%;
+            }
+          }
         }
+      }
     }
+  }
 }

@@ -4,171 +4,155 @@
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 
 @media (max-width: 479px) {
-    footer {
-        &>div.container {
-            &>nav.menu-rodape {
-                text-align: center;
+  footer {
+    & > div.container {
+      & > nav.menu-rodape {
+        text-align: center;
 
-                &>ul {
-                    &>li {
-                        &>ul {
-                            &>li {
-                                &.titulo {
-                                    &:not(:first-of-type) {
-                                    }
-                                }
-    
-                                &>a {
-                                    &:hover {
-                                    }
-                                }
-                            }
-                        }
-                    }
+        & > ul {
+          & > li {
+            & > ul {
+              & > li {
+                &.titulo {
+                  &:not(:first-of-type) {
+                  }
                 }
+
+                & > a {
+                  &:hover {
+                  }
+                }
+              }
             }
-    
-            &>div.inferior {
-                &>div {
-                    &>div.logo {
-                    }
-                    &>div.selo {
-                    }
-                }
-                &>nav.social {
-                    &>ul {
-                        &>li {
-                            &>a {
-                                &:hover {
-                                    &>span {
-                                        &>i.fab {
-                                        }
-                                    }
-                                }
-    
-                                &>span {
-                                    &>i.fab {
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    &>span.atualizacao {
-                    }
-                }
-            }
+          }
         }
+      }
+
+      & > div.inferior {
+        & > div {
+          & > div.logo {
+          }
+          & > div.selo {
+          }
+        }
+        & > nav.social {
+          & > ul {
+            & > li {
+              & > a {
+                &:hover {
+                  & > span {
+                    & > i.fab {
+                    }
+                  }
+                }
+
+                & > span {
+                  & > i.fab {
+                  }
+                }
+              }
+            }
+          }
+          & > span.atualizacao {
+          }
+        }
+      }
     }
+  }
 }
 
 @media (max-width: 380px) {
-    footer {
-        &>div.container {
-            &>nav.menu-rodape {
-                &>ul {
-                    &>li {
-                        &>ul {
-                            &>li {
-                                &.titulo {
-                                    &:not(:first-of-type) {
-                                    }
-                                }
-    
-                                &>a {
-                                    &:hover {
-                                    }
-                                }
-                            }
-                        }
+  footer {
+    &.central {
+      & > div.container {
+        & > div.colunas {
+          & > div.coluna {
+            &.coluna-1 {
+              width: 100%;
+
+              & > div.app {
+                & > ul {
+                  display: block;
+                  & > li {
+                    &:last-of-type {
+                      margin-bottom: 40px;
                     }
+                    & > a {
+                      height: 100%;
+                      display: inline-block;
+                    }
+                  }
                 }
+              }
+              & > p.copyright {
+                bottom: -10px;
+              }
             }
-    
-            &>div.inferior {
-                &>div {
-                    &>div.logo {
-                    }
-                    &>div.selo {
-                    }
-                }
-                &>nav.social {
-                    &>ul {
-                        &>li {
-                            &>a {
-                                &:hover {
-                                    &>span {
-                                        &>i.fab {
-                                        }
-                                    }
-                                }
-    
-                                &>span {
-                                    &>i.fab {
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    &>span.atualizacao {
-                    }
-                }
+            &.coluna-2 {
+              width: 100%;
             }
+            &.coluna-3 {
+              width: 100%;
+            }
+          }
         }
+      }
     }
+  }
 }
 
 @media (max-width: 330px) {
-    footer {
-        &>div.container {
-            &>nav.menu-rodape {
-                &>ul {
-                    &>li {
-                        &>ul {
-                            &>li {
-                                &.titulo {
-                                    &:not(:first-of-type) {
-                                    }
-                                }
-    
-                                &>a {
-                                    &:hover {
-                                    }
-                                }
-                            }
-                        }
-                    }
+  footer {
+    & > div.container {
+      & > nav.menu-rodape {
+        & > ul {
+          & > li {
+            & > ul {
+              & > li {
+                &.titulo {
+                  &:not(:first-of-type) {
+                  }
                 }
+
+                & > a {
+                  &:hover {
+                  }
+                }
+              }
             }
-    
-            &>div.inferior {
-                &>div {
-                    &>div.logo {
-                    }
-                    &>div.selo {
-                    }
-                }
-                &>nav.social {
-                    &>ul {
-                        &>li {
-                            &>a {
-                                &:hover {
-                                    &>span {
-                                        &>i.fab {
-                                        }
-                                    }
-                                }
-    
-                                &>span {
-                                    &>i.fab {
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    &>span.atualizacao {
-                    }
-                }
-            }
+          }
         }
+      }
+
+      & > div.inferior {
+        & > div {
+          & > div.logo {
+          }
+          & > div.selo {
+          }
+        }
+        & > nav.social {
+          & > ul {
+            & > li {
+              & > a {
+                &:hover {
+                  & > span {
+                    & > i.fab {
+                    }
+                  }
+                }
+
+                & > span {
+                  & > i.fab {
+                  }
+                }
+              }
+            }
+          }
+          & > span.atualizacao {
+          }
+        }
+      }
     }
+  }
 }
