@@ -74,7 +74,7 @@ export class PedidoResumoWhatsappComponent implements OnInit {
 
   getUrlWhatapp() {
     return this.santize.bypassSecurityTrustUrl(
-      `https://api.whatsapp.com/send?phone=5519981394700&text=${this.carrinho.mensagemWpp}&app_absent=0`
+      `https://api.whatsapp.com/send?phone=5519996257084&text=${this.carrinho.mensagemWpp}&app_absent=0`
     );
   }
 }
