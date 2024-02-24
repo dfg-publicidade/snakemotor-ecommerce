@@ -1,0 +1,323 @@
+@import "../../../../res/variables.scss";
+@import "../../../../res/scss/form.scss";
+@import "../../../../res/scss/buttons.scss";
+
+section {
+    &.produto-detail {
+        background: #fff;
+    }
+    & > div.container {
+        & > div.carrinho {
+            background: #fff;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 25px;
+            margin-bottom: 40px;
+            min-height: 300px;
+
+            & > div.itens {
+                width: 60%;
+
+                & > h3 {
+                    padding-top: 25px;
+                }
+
+                & > form {
+                    & > div.enderecos {
+                        margin-bottom: 20px;
+                        margin-top: 40px;
+                        & > div.endereco {
+                            display: flex;
+                            width: 100%;
+                            align-items: center;
+                            padding: 15px 20px;
+                            border-left: 3px solid #fff;
+                            color: #303030;
+                            background: #f5f5f5;
+                            border-left: 5px solid #303030;
+                            margin-bottom: 5px;
+
+                            transition: all 0.2s ease-in-out;
+
+                            & > div.input-radio {
+                                & > input {
+                                    width: 20px;
+                                    height: 20px;
+                                }
+                            }
+
+                            & > div.text-content {
+                                & > div.tipo {
+                                    width: 100%;
+                                    padding-left: 10px;
+                                    display: flex;
+
+                                    & > i {
+                                        font-size: 15px;
+                                        padding: 2px 5px;
+                                        color: #ffbd00;
+                                    }
+
+                                    & > p {
+                                        font-weight: 600;
+                                        font-size: 14px;
+                                        margin: 0;
+                                    }
+                                }
+
+                                & > div.text {
+                                    width: 100%;
+                                    padding-left: 20px;
+                                    font-size: 12px;
+                                    color: #303030;
+                                    line-height: 20px;
+                                    margin-bottom: 3px;
+                                }
+                            }
+                        }
+                    }
+
+                    & > div.novo-endereco {
+                        display: flex;
+                        width: 100%;
+                        justify-content: flex-end;
+                        & > button {
+                            display: flex;
+                            text-transform: uppercase;
+                        }
+                    }
+
+                    & > div.frete {
+                        border-top: 1px solid #dee2e6;
+                        margin-top: 20px;
+                        padding-top: 20px;
+                        & > div.form-group {
+                            & > label {
+                                color: #575757;
+                                &.titulo {
+                                    padding-bottom: 5px;
+                                    font-weight: bold;
+                                }
+                            }
+
+                            & > div {
+                                &.center {
+                                    align-items: center;
+                                    display: flex;
+                                }
+                                & > input {
+                                    width: 100%;
+                                }
+
+                                & > button {
+                                    background: #747474;
+                                    color: #fff;
+                                }
+                            }
+                        }
+
+                        & > div.frete-tipos {
+                            margin-top: 20px;
+                            & > div.form-group {
+                                background: #f2f2f2;
+                                padding: 15px;
+
+                                &.form-check {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    & > label {
+                                        display: flex;
+                                        & > input {
+                                            margin-left: 0;
+                                            margin-right: 10px;
+                                            width: 20px;
+                                            height: 20px;
+                                        }
+
+                                        & > span {
+                                            & > span {
+                                                font-weight: bold;
+                                                &.gratis {
+                                                    color: #22ea27;
+                                                }
+                                            }
+                                        }
+
+                                        & > small {
+                                            display: flex;
+                                        }
+                                    }
+                                }
+
+                                & > small {
+                                    text-align: center;
+                                    & > span {
+                                        cursor: pointer;
+                                        color: #ff0000;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    & > div.cupom {
+                        margin-top: 40px;
+                        & > p {
+                            color: $text-primary;
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+
+            & > div.info {
+                background: #f6f6f6;
+                width: 35%;
+                padding: 25px;
+
+                & > p {
+                    display: flex;
+                    margin: 0;
+                    padding: 0;
+                    color: #575757;
+                    & > span {
+                        width: 50%;
+                        display: flex;
+
+                        &:first-of-type {
+                            justify-content: flex-start;
+                        }
+                        &:last-of-type {
+                            justify-content: flex-end;
+                        }
+
+                        &.gratis {
+                            color: #22ea27;
+                            font-weight: bold;
+                        }
+                    }
+
+                    &.frete {
+                        padding-bottom: 20px;
+                        margin-bottom: 20px;
+                        border-bottom: 1px solid #e3e3e3;
+                    }
+
+                    &.total {
+                        & > span {
+                            &:last-of-type {
+                                display: block;
+                                text-align: right;
+
+                                & > span {
+                                    font-size: 13px;
+                                }
+                            }
+                        }
+                    }
+
+                    &.valor-avista {
+                        font-size: 13px;
+                        display: block;
+                        text-align: right;
+                        // color: #ff0000;
+                    }
+                }
+
+                & > div.botoes {
+                    display: block;
+                    width: 100%;
+                    text-align: center;
+                    margin-top: 20px;
+                    & > button {
+                        padding: 15px 0;
+                        width: 100%;
+                        margin: 20px 0;
+                    }
+
+                    & > p {
+                        color: #7a7a7a;
+                        margin: 0;
+                        padding: 0;
+                        margin-bottom: 20px;
+                    }
+
+                    & > a {
+                        & > button {
+                            padding: 15px 0;
+                            width: 100%;
+                        }
+
+                        &.link {
+                            margin-bottom: 5px;
+                            display: block;
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+
+            & > div.carrinho-vazio {
+                width: 100%;
+                display: block;
+                text-align: center;
+                padding: 60px 0;
+
+                & > span.icone {
+                    background: #fff;
+                    display: inline-block;
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    padding: 5px;
+
+                    & > i {
+                        border-radius: 50%;
+                        width: 100px;
+                        height: 100px;
+                        background: #efefef;
+                        color: #2d3f48;
+                        font-size: 40px;
+                        padding-top: 30px;
+                        padding-left: 0;
+                    }
+                }
+
+                & > h3,
+                & > p {
+                    margin: 0;
+                    color: #807f7f;
+                }
+            }
+        }
+    }
+}
+
+div.modal {
+    & > div.modal-dialog {
+        & > div.modal-content {
+            & > form {
+                & > div.modal-body {
+                    & > div {
+                        & > div.input-check {
+                            display: flex;
+
+                            & > input {
+                                width: 20px;
+                                height: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@import "responsive/endereco-xl.scss";
+@import "responsive/endereco-lg.scss";
+@import "responsive/endereco-md.scss";
+@import "responsive/endereco-sm.scss";
+@import "responsive/endereco-xss.scss";
+@import "responsive/endereco-print.scss";

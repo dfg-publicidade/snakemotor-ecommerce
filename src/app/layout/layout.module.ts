@@ -14,6 +14,7 @@ import { CarrinhoService } from '../service/carrinho.service';
 import { ConfiguracaoService } from '../service/configuracao.service';
 import { LoadingModule } from '../componentes/loading/loading.module';
 import { ProdutoOpcaoService } from '../service/produtoOpcao.service';
+import { CarrinhoWhatsappService } from '../service/carrinhoWhatsapp.service';
 
 @NgModule({
 	declarations: [
@@ -38,6 +39,7 @@ import { ProdutoOpcaoService } from '../service/produtoOpcao.service';
 		PerfilService,
 		CategoriaService,
 		CarrinhoService,
+		CarrinhoWhatsappService,
 		ConfiguracaoService,
 		ProdutoOpcaoService
 	]

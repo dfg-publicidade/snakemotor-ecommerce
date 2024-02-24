@@ -1,0 +1,27 @@
+// Core variables and mixins
+@import "../../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../../node_modules/bootstrap/scss/mixins";
+
+@include media-breakpoint-down(sm) {
+    section {
+        & > div.container {
+            & > div.carrinho {
+                & > div.itens {
+                    & > div.frete {
+                        & > form {
+                            & > div.form-group {
+                                &>div{
+                                    &>button{
+                                        margin-top: 5px;
+                                        margin-right: 10px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

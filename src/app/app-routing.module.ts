@@ -42,9 +42,18 @@ const routes: Routes = [
         loadChildren: () => import('./pages/checkout/carrinho/carrinho.module').then(m => m.CarrinhoModule)
       },
       {
+        path: 'carrinho-wp',
+        loadChildren: () => import('./pages/checkout/carrinho-wp/carrinho.module').then(m => m.CarrinhoWhatsappModule)
+      },
+      {
         path: 'endereco',
         'canActivate': [AuthGuard],
         loadChildren: () => import('./pages/checkout/endereco/endereco.module').then(m => m.EnderecoModule)
+      },
+      {
+        path: 'endereco-wp',
+        'canActivate': [AuthGuard],
+        loadChildren: () => import('./pages/checkout/endereco-wp/endereco.module').then(m => m.EnderecoWhatsappModule)
       },
       {
         path: 'pagamento',
@@ -55,6 +64,11 @@ const routes: Routes = [
         path: 'resumo',
         'canActivate': [AuthGuard],
         loadChildren: () => import('./pages/checkout/resumo/resumo.module').then(m => m.PedidoResumoModule)
+      },
+      {
+        path: 'resumo-wp',
+        'canActivate': [AuthGuard],
+        loadChildren: () => import('./pages/checkout/resumo-wp/resumo.module').then(m => m.PedidoResumoWhatsappModule)
       },
       {
         path: 'perfil',

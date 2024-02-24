@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CarrinhoService } from 'src/app/service/carrinho.service';
+import { CarrinhoWhatsappService } from 'src/app/service/carrinhoWhatsapp.service';
 import { MetadataService } from 'src/app/service/metaData.service';
 import { ProdutoUtil } from 'src/app/util/produtoUtil';
 
 @Component({
-  selector: 'app-carrinho-detail',
+  selector: 'app-carrinho-detail-whatsapp',
   templateUrl: './carrinho-detail.component.html',
   styleUrls: ['./carrinho-detail.component.scss']
 })
-export class CarrinhoDetailComponent implements OnInit {
+export class CarrinhoDetailWhatsappComponent implements OnInit {
   carrinho: any
-  title: string = 'Meu carrinho (Site)';
+  title: string = 'Meu carrinho (Whatsapp)';
   urlProduto: string = '/produtos'
   formFrete: any;
   formaEntrega: any;
@@ -25,7 +26,7 @@ export class CarrinhoDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private carrinhoService: CarrinhoService,
+    private carrinhoService: CarrinhoWhatsappService,
     private metadataService: MetadataService
   ) {
     this.formFrete = formBuilder.group({

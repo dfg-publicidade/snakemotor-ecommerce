@@ -1,124 +1,223 @@
-<header [ngClass]="{scrolled: scrolled}">
-    <div class="superior d-none d-md-flex">
-        <div class="container">
-            <nav class="itens">
-                <ul>
-                    <li class="item">
-                        <a [routerLink]="['/sobre-nos']">Quem somos</a>
-                    </li>
-                    <li class="item">
-                        <a href="https://api.whatsapp.com/send?phone=5519996257084&text=Snake Motor. Seja bem vindo!&app_absent=0" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                            <strong class="pe-2">atendimento</strong>
-                            (19) 99625-7084
-                        </a>
-                    </li>
-                    <li class="item tour-virtual">
-                        <a [routerLink]="['/tour-virtual-360']" routerLinkActive="router-link-active" >
-                            <img src="/res/imagens/tour-360-logo.png">
-                            Tour Virtual
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <a *ngIf="!getUsuario()" class="portal" [routerLink]="['/login']">Olá, <strong>cadastre-se</strong> ou faça <strong>login</strong></a>
-        </div>
+<header [ngClass]="{ scrolled: scrolled }">
+  <div class="superior d-none d-md-flex">
+    <div class="container">
+      <nav class="itens">
+        <ul>
+          <li class="item">
+            <a [routerLink]="['/sobre-nos']">Quem somos</a>
+          </li>
+          <li class="item">
+            <a
+              href="https://api.whatsapp.com/send?phone=5519996257084&text=Snake Motor. Seja bem vindo!&app_absent=0"
+              target="_blank"
+            >
+              <i class="fab fa-whatsapp"></i>
+              <strong class="pe-2">atendimento</strong>
+              (19) 99625-7084
+            </a>
+          </li>
+          <li class="item tour-virtual">
+            <a
+              [routerLink]="['/tour-virtual-360']"
+              routerLinkActive="router-link-active"
+            >
+              <img src="/res/imagens/tour-360-logo.png" />
+              Tour Virtual
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <a *ngIf="!getUsuario()" class="portal" [routerLink]="['/login']"
+        >Olá, <strong>cadastre-se</strong> ou faça <strong>login</strong></a
+      >
     </div>
-    <div class="principal">
-        <div class="container">
-            <button class="button-menu d-md-none" (click)="toggleMenu()"><i class="fas fa-bars"></i></button>
-            <div class="logo d-md-flex d-lg-flex" [routerLink]="['/']"></div>
-            <app-busca class="d-none d-md-flex d-lg-flex"></app-busca>
-            <div class="icones d-md-flex d-lg-flex">
-                <div class="dropdown" *ngIf="getUsuario()">
-                    <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="icon icon-capacetes"></i>
-                        <span class="titulo">
-                            Olá, <br />
-                            <strong>{{getUsuario().nome}}</strong>
-                        </span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li>
-                            <a class="dropdown-item" [routerLink]="['/pedidos']">
-                                <i class="fas fa-shopping-cart pe-2"></i>
-                                Meus pedidos
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" [routerLink]="['/perfil']">
-                                <i class="far fa-user pe-2"></i>
-                                Minha conta
-                            </a>
-                        </li>
-                        <li class="divider">
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="javascript:void(0)" (click)="logout()">
-                                <i class="fas fa-power-off pe-2"></i>
-                                Sair
-                            </a>
-                        </li>
-                    </ul>
+  </div>
+  <div class="principal">
+    <div class="container">
+      <button class="button-menu d-md-none" (click)="toggleMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="logo d-md-flex d-lg-flex" [routerLink]="['/']"></div>
+      <app-busca class="d-none d-md-flex d-lg-flex"></app-busca>
+      <div class="icones d-md-flex d-lg-flex">
+        <div class="dropdown" *ngIf="getUsuario()">
+          <button
+            class="btn btn-link dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="icon icon-capacetes"></i>
+            <span class="titulo">
+              Olá, <br />
+              <strong>{{ getUsuario().nome }}</strong>
+            </span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/pedidos']">
+                <i class="fas fa-shopping-cart pe-2"></i>
+                Meus pedidos
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/perfil']">
+                <i class="far fa-user pe-2"></i>
+                Minha conta
+              </a>
+            </li>
+            <li class="divider">
+              <hr class="dropdown-divider" />
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                href="javascript:void(0)"
+                (click)="logout()"
+              >
+                <i class="fas fa-power-off pe-2"></i>
+                Sair
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="dropdown" *ngIf="getUsuario()">
+          <button
+            class="btn btn-link dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span
+              class="badge position-absolute top-0 start-100 translate-middle bg-danger border border-light rounded-circle"
+              *ngIf="(getCarrinho()?.produtos?.length > 0) || (getCarrinhoWp()?.produtos?.length > 0)"
+            >
+              <span>{{ getCarrinho()?.produtos?.length + getCarrinhoWp()?.produtos?.length }}</span>
+            </span>
+            <i class="fas fa-shopping-cart"></i>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/carrinho']">
+                <i class="fas fa-shopping-cart pe-2"></i>
+                Meu carrinho (site)
+              </a>
+            </li>
+            <li *ngIf="getCarrinhoWp()?.produtos?.length > 0">
+              <a class="dropdown-item" [routerLink]="['/carrinho-wp']">
+                <i class="fab fa-whatsapp pe-2"></i>
+                Meu carrinho (whatsapp)
+              </a>
+            </li>
+            <li class="divider">
+              <hr class="dropdown-divider" />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container segunda-linha">
+      <nav class="menu-principal">
+        <ul class="d-none d-sm-flex">
+          <li
+            class="item-menu {{
+              categoria[0]
+            }} d-xl-block d-sm-none d-md-flex d-lg-flex"
+            *ngFor="let categoria of categorias"
+          >
+            <a (click)="openMenu(categoria[0])">
+              <i class="icon icon-{{ categoria[0] }} outline"></i>
+              <span>{{ categoria[1].nome }}</span>
+            </a>
+            <div class="categoria-hover menu-{{ categoria[0] }}">
+              <div class="bg">
+                <div
+                  *ngIf="categoria[1].imagem"
+                  class="capa"
+                  [ngStyle]="{
+                    'background-image':
+                      'url(' +
+                      categoria[1].imagem.original +
+                      '?timestamp=' +
+                      timestamp +
+                      ')'
+                  }"
+                ></div>
+              </div>
+              <div
+                class="subcategorias"
+                *ngIf="categoria[1] && categoria[1].categorias"
+              >
+                <p>Selecione a subcategoria abaixo</p>
+                <ul
+                  [ngClass]="{
+                    'coluna-1': categoria[1].categorias.length <= 8,
+                    'coluna-2':
+                      categoria[1].categorias.length > 8 &&
+                      categoria[1].categorias.length <= 16,
+                    'coluna-3': categoria[1].categorias.length > 16
+                  }"
+                >
+                  <li>
+                    <a
+                      class="destaque"
+                      [routerLink]="['c', categoria[1].permalink]"
+                    >
+                      <strong>Ver todos</strong>
+                    </a>
+                  </li>
+                  <li *ngFor="let subcategoria of categoria[1].categorias">
+                    <a
+                      [routerLink]="[
+                        'c',
+                        categoria[1].permalink,
+                        subcategoria.permalink
+                      ]"
+                    >
+                      - {{ subcategoria.nome }}
+                    </a>
+                  </li>
+                </ul>
+                <div class="marcas" *ngIf="categoria[1].marcas">
+                  <a
+                    class="marca"
+                    [routerLink]="['/m', marca.permalink]"
+                    [ngStyle]="{
+                      'background-image': marca.logo
+                        ? 'url(' + marca.logo.original + ')'
+                        : 'url(res/images/sem-capa-thumb.png)'
+                    }"
+                    *ngFor="let marca of categoria[1].marcas"
+                  ></a>
                 </div>
-                <a class="carrinho" [routerLink]="['/carrinho']">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="badge position-absolute top-0 start-100 translate-middle bg-danger border border-light rounded-circle" *ngIf="getCarrinho() && getCarrinho().produtos.length > 0">
-                        <span>{{getCarrinho().produtos.length}}</span>
-                    </span>
-                </a>
+              </div>
             </div>
-        </div>
-        <div class="container segunda-linha">
-            <nav class="menu-principal">
-                <ul class="d-none d-sm-flex">
-                    <li class="item-menu {{categoria[0]}} d-xl-block d-sm-none d-md-flex d-lg-flex" *ngFor="let categoria of categorias">
-                        <a (click)="openMenu(categoria[0])">
-                            <i class="icon icon-{{categoria[0]}} outline"></i>
-                            <span>{{categoria[1].nome}}</span>
-                        </a>
-                        <div class="categoria-hover menu-{{categoria[0]}}">
-                            <div class="bg">
-                                <div *ngIf="categoria[1].imagem" class="capa" [ngStyle]="{'background-image': 'url(' + categoria[1].imagem.original + '?timestamp=' + timestamp + ')'}"></div>
-                            </div>
-                            <div class="subcategorias" *ngIf="categoria[1] && categoria[1].categorias">
-                                <p>Selecione a subcategoria abaixo</p>
-                                <ul [ngClass]="{'coluna-1': categoria[1].categorias.length <= 8, 'coluna-2': categoria[1].categorias.length > 8 && categoria[1].categorias.length <= 16, 'coluna-3': categoria[1].categorias.length > 16}">
-                                    <li>
-                                        <a class="destaque" [routerLink]="['c', categoria[1].permalink]">
-                                            <strong>Ver todos</strong>
-                                        </a>
-                                    </li>
-                                    <li *ngFor="let subcategoria of categoria[1].categorias">
-                                        <a [routerLink]="['c', categoria[1].permalink, subcategoria.permalink]">
-                                            - {{subcategoria.nome}}
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="marcas" *ngIf="categoria[1].marcas">
-                                    <a class="marca" [routerLink]="['/m', marca.permalink]" [ngStyle]="{'background-image': marca.logo ? 'url(' + marca.logo.original + ')' : 'url(res/images/sem-capa-thumb.png)'}" *ngFor="let marca of categoria[1].marcas"></a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="d-xl-block d-sm-none d-md-flex  d-lg-flex servicos" *ngIf="categorias">
-                        <a [routerLink]="['/oficina-e-servicos']">
-                            <i class="icon icon-servicos"></i>
-                            <span>Oficina/Serviços</span>
-                        </a>
-                    </li>
-                    <li class="d-xl-block d-sm-none d-md-flex  d-lg-flex" *ngIf="categorias">
-                        <a href="https://motos.snakemotor.com.br" target="_blank">
-                            <i class="icon icon-moto-frente"></i>
-                            <span>Motos 0Km e Usadas</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <app-busca></app-busca>
+          </li>
+          <li
+            class="d-xl-block d-sm-none d-md-flex d-lg-flex servicos"
+            *ngIf="categorias"
+          >
+            <a [routerLink]="['/oficina-e-servicos']">
+              <i class="icon icon-servicos"></i>
+              <span>Oficina/Serviços</span>
+            </a>
+          </li>
+          <li
+            class="d-xl-block d-sm-none d-md-flex d-lg-flex"
+            *ngIf="categorias"
+          >
+            <a href="https://motos.snakemotor.com.br" target="_blank">
+              <i class="icon icon-moto-frente"></i>
+              <span>Motos 0Km e Usadas</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
-    <i class="fas fa-sort-up"></i>
+    <app-busca></app-busca>
+  </div>
+  <i class="fas fa-sort-up"></i>
 </header>
 <!-- <header-offset [ngClass]="{scrolled: scrolled}"></header-offset> -->

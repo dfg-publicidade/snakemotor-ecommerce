@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GalleryVideo } from 'ngx-doe-gallery';
 import { CarrinhoService } from 'src/app/service/carrinho.service';
+import { CarrinhoWhatsappService } from 'src/app/service/carrinhoWhatsapp.service';
 import { MetadataService } from 'src/app/service/metaData.service';
 import { ProdutoOpcaoService } from 'src/app/service/produtoOpcao.service';
 import { ProdutoUtil } from 'src/app/util/produtoUtil';
@@ -22,6 +23,7 @@ export class ProdutoDetailComponent implements OnInit {
   produtoPermalink: string = '';
   url: string = '/produtos';
   urlCarrinho: string = '/carrinho';
+  urlCarrinhoWp: string = '/carrinho-wp';
 
   produtoOpcao: any;
   cores: any;
@@ -29,6 +31,7 @@ export class ProdutoDetailComponent implements OnInit {
   produtosPorCategoria: any;
   produtoOpcaoSelecionado: any;
   carrinho: any;
+  carrinhoWp: any;
   qtdes: any = [];
   toastMessage: any;
 
@@ -50,6 +53,7 @@ export class ProdutoDetailComponent implements OnInit {
     private formBuilder: FormBuilder,
     private produtoOpcaoService: ProdutoOpcaoService,
     private carrinhoService: CarrinhoService,
+    private carrinhoWpService: CarrinhoWhatsappService,
     private metadataService: MetadataService,
     private sanitizer: DomSanitizer
   ) {
@@ -122,8 +126,6 @@ export class ProdutoDetailComponent implements OnInit {
       this.produtoOpcao.imagens.push(new GalleryVideo(this.urlVideo, this.thumbVideo));
       }
 
-      console.log(this.produtoOpcao.imagens);
-
       if (!this.tamanhos || (this.tamanhos && this.tamanhos.length <= 1)) {
         if (this.tamanhos && this.tamanhos.length === 1) {
           this.produtoOpcaoSelecionado = this.tamanhos[0];
@@ -172,9 +174,7 @@ export class ProdutoDetailComponent implements OnInit {
       (pOpcao: any) => pOpcao && pOpcao.id === this.op
     );
 
-    this.produtoOpcaoSelecionado.adicionadoCarrinho = this.jaPossuiCarrinho(
-      this.produtoOpcaoSelecionado.id
-    );
+    this.produtoOpcaoSelecionado.adicionadoCarrinho = this.jaPossuiCarrinho(this.produtoOpcaoSelecionado.id);
 
     this.getQtdes();
   }
@@ -203,34 +203,6 @@ export class ProdutoDetailComponent implements OnInit {
     }
   }
 
-  adicionarCarrinho() {
-    delete this.toastMessage;
-
-    let carrinho = this.carrinhoService.getCarrinho();
-
-    if (!carrinho) {
-      carrinho = this.carrinhoService.getCarrinhoVazio();
-    }
-
-    carrinho.produtos.push({
-      qtde: this.formVariacao.value.qtde,
-      produto: this.produtoOpcaoSelecionado.id,
-    });
-
-    this.carrinhoService.setCarrinho(carrinho);
-
-    this.produtoOpcaoSelecionado.adicionadoCarrinho = true;
-
-    this.produtoOpcaoSelecionado.adicionadoCarrinho = this.jaPossuiCarrinho(
-      this.produtoOpcaoSelecionado.id
-    );
-
-    this.toastMessage = {
-      status: 'success',
-      message: 'Produto adicionado com sucesso!',
-    };
-  }
-
   comprar() {
     let carrinho = this.carrinhoService.getCarrinho();
 
@@ -250,13 +222,39 @@ export class ProdutoDetailComponent implements OnInit {
     }, 100);
   }
 
+  comprarWp() {
+    let carrinho = this.carrinhoWpService.getCarrinho();
+
+    if (!carrinho) {
+      carrinho = this.carrinhoWpService.getCarrinhoVazio();
+    }
+
+    carrinho.produtos.push({
+      qtde: this.formVariacao.value.qtde,
+      produto: this.produtoOpcaoSelecionado.id,
+    });
+
+    this.carrinhoWpService.setCarrinho(carrinho);
+
+    setTimeout(() => {
+      this.router.navigate([this.urlCarrinhoWp]);
+    }, 100);
+  }
+
   jaPossuiCarrinho(produtoOpcaoId: string): boolean {
     this.carrinho = this.carrinhoService.getCarrinho();
+    this.carrinhoWp = this.carrinhoWpService.getCarrinho();
 
     let possuiCarrinho = false;
 
     if (this.carrinho) {
       possuiCarrinho = this.carrinho.produtos.find(
+        (pOpcao: any) => pOpcao && pOpcao.produto === produtoOpcaoId
+      );
+    }
+
+    if (this.carrinhoWp) {
+      possuiCarrinho = this.carrinhoWp.produtos.find(
         (pOpcao: any) => pOpcao && pOpcao.produto === produtoOpcaoId
       );
     }
