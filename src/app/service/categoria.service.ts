@@ -43,14 +43,14 @@ export class CategoriaService {
     url += `?_nopaginate=true`;
     url += `&${this.prefix}.permalink=${categoriasPermalink}&destaque=true`;
     url += `&_fields=content(${categoriasPermalink})`;
-    
+
     url += `&timestamp=${timestamp}`;
 
     return this.http.get(url);
   }
 
   visualizar(id: number): Observable<any> {
-    let url = this.urlServico + 'produto/' + id + "/visualizar";
+    let url = this.urlServico + 'produto/' + id + '/visualizar';
 
     return this.http.get(url);
   }

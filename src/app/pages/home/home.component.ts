@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   produtosDestaque: any;
   produtosPorCategoriaDestaque: any;
   produtosPorIdsProdutoPrincipal: any;
+  produtosPorCategoriaWhatsapp: any;
   categoriaDestaque: any;
   marcas: any;
 
@@ -43,6 +44,7 @@ export class HomeComponent implements OnInit {
   loadingServiceMarca: boolean = false;
   loadingServiceProdutosDestaque: boolean = false;
   loadingServiceProdutosPorCategoria: boolean = false;
+  loadingServiceProdutosPorCategoriaWhatsapp: boolean = false;
 
   constructor(
     private router: Router,
@@ -145,6 +147,7 @@ export class HomeComponent implements OnInit {
     this.banners = [];
     this.listarbanners(this.tipoBannerIdPrincipal);
     this.listarProdutosDestaque(8);
+    this.listarProdutosPorCategoriaWhatsapp(8, true)
 
     this.listarbanners(this.tipoBannerIdSegundaRolagem);
     this.listarbanners(this.tipoBannerIdTerceiraRolagem);
@@ -214,6 +217,20 @@ export class HomeComponent implements OnInit {
         },
         () => {
           this.loadingServiceProdutosPorCategoria = false;
+        }
+      );
+  }
+
+  listarProdutosPorCategoriaWhatsapp(limite: number, aleatorio: boolean) {
+    this.loadingServiceProdutosPorCategoriaWhatsapp = true;
+    this.produtoOpcaoService.listarPorCategoriaWhatsapp(limite, aleatorio)
+      .subscribe(
+        result => {
+          this.produtosPorCategoriaWhatsapp = result.content.items;
+          this.loadingServiceProdutosPorCategoriaWhatsapp = false;
+        },
+        () => {
+          this.loadingServiceProdutosPorCategoriaWhatsapp = false;
         }
       );
   }

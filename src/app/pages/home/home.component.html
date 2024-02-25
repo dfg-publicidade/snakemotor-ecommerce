@@ -35,8 +35,34 @@
                 </owl-carousel-o>
             </ng-container>
         </div>
+    </div>
+</section>
 
-        <!-- BANNER DE SEGUNDA ROLAGEM -->
+<!-- PRODUTOS COMPRAS POR WHATSAPP -->
+<section *ngIf="produtosPorCategoriaWhatsapp.length > 0">
+    <div class="container">
+        <h1>
+            <strong class="left">Compra pelo whatsapp</strong>
+            <a [routerLink]="['/produtos']" [queryParams]="{q: 'whatsapp'}" routerLinkActive="router-link-active" class="right">veja mais +</a>
+        </h1>
+        <div class="produtos">
+            <div class="loading-produtos" *ngIf="loadingServiceProdutosPorCategoriaWhatsapp">
+                <div class="skeleton-box produto" *ngFor="let item of [1,2,3,4]"></div>
+            </div>
+            <ng-container *ngIf="optionsRotativoProdutos && produtosPorCategoriaWhatsapp">
+                <owl-carousel-o [options]="optionsRotativoProdutos">
+                    <ng-template carouselSlide *ngFor="let produto of produtosPorCategoriaWhatsapp">
+                        <app-produto-componente [item]="produto"></app-produto-componente>
+                    </ng-template>
+                </owl-carousel-o>
+            </ng-container>
+        </div>
+    </div>
+</section>
+
+<!-- BANNER DE SEGUNDA ROLAGEM -->
+<section>
+    <div class="container">
         <div class="banners half" *ngIf="banners[tipoBannerIdSegundaRolagem]">
             <a *ngFor="let banner of banners[tipoBannerIdSegundaRolagem].slice(0,4)" class="banner" href="{{banner.url ? banner.url : '#'}}" [ngStyle]="{'background-image': 'url(' + banner.imagem.original + '?timestamp='+ timestamp +')'}"></a>
         </div>
@@ -61,10 +87,6 @@
                     </ng-template>
                 </owl-carousel-o>
             </ng-container>
-
-            <!-- <ng-container *ngIf="isMobile">
-                <app-produto-componente [item]="produto" *ngFor="let produto of produtosPorCategoriaDestaque"></app-produto-componente>
-            </ng-container> -->
         </div>
     </div>
 </section>

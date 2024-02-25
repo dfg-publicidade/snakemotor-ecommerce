@@ -10,12 +10,16 @@ export class ProdutoOpcaoService {
   urlServico: string;
   prefix: any = 'produtoOpcao';
 
-
   constructor(private http: HttpClient) {
     this.urlServico = `${environment.urlServico}${environment.apiApp}/${environment.versao}/produto-opcoes`;
   }
 
-  listar(page: number, filter: any, order: any, search?: string): Observable<any> {
+  listar(
+    page: number,
+    filter: any,
+    order: any,
+    search?: string
+  ): Observable<any> {
     let url = `${this.urlServico}?agrupar=true&filtros=true&_limit=21`;
 
     let params = '';
@@ -28,8 +32,10 @@ export class ProdutoOpcaoService {
 
     url += `${params}`;
 
-    if (search) {
+    if (search !== 'whatsapp') {
       url += `&nome=${search}`;
+    } else {
+      url += `&produtoOpcao.produto.categoria.whatsapp=true`;
     }
 
     url += `&_page=${page}`;
@@ -70,11 +76,37 @@ export class ProdutoOpcaoService {
     return this.http.get(url);
   }
 
-  listarPorCategoria(categoriaId: string, limite: number, aleatorio: boolean, ignore?: string): Observable<any> {
+  listarPorCategoria(
+    categoriaId: string,
+    limite: number,
+    aleatorio: boolean,
+    ignore?: string
+  ): Observable<any> {
     let url = `${this.urlServico}?agrupar=true`;
 
     url += `&_limit=${limite}`;
     url += `&categoria.id=${categoriaId}`;
+
+    if (aleatorio) {
+      url += `&aleatorio=${aleatorio}`;
+    }
+
+    if (ignore) {
+      url += `&ignorar=${ignore}`;
+    }
+
+    return this.http.get(url);
+  }
+
+  listarPorCategoriaWhatsapp(
+    limite: number,
+    aleatorio: boolean,
+    ignore?: string
+  ): Observable<any> {
+    let url = `${this.urlServico}?agrupar=true`;
+
+    url += `&produtoOpcao.produto.categoria.whatsapp=true`;
+    url += `&_limit=${limite}`;
 
     if (aleatorio) {
       url += `&aleatorio=${aleatorio}`;
@@ -102,15 +134,20 @@ export class ProdutoOpcaoService {
   }
 
   buscarPorPermalink(permalink: string): Observable<any> {
-    let url = `${this.urlServico}?agrupar=true`
+    let url = `${this.urlServico}?agrupar=true`;
 
     url += `&${this.prefix}.produto.permalink=${permalink}`;
 
     return this.http.get(url);
   }
 
-  listarPorProdutoComAgrupamento(produtoId: string, agrupamento: string, filtros: any, ignore?: string): Observable<any> {
-    let url = `${this.urlServico}?agrupar=${agrupamento}`
+  listarPorProdutoComAgrupamento(
+    produtoId: string,
+    agrupamento: string,
+    filtros: any,
+    ignore?: string
+  ): Observable<any> {
+    let url = `${this.urlServico}?agrupar=${agrupamento}`;
 
     url += `&${this.prefix}.produto.id=${produtoId}`;
 
@@ -123,7 +160,6 @@ export class ProdutoOpcaoService {
         let f = `&${this.prefix}.${filtro.permalink}.id=${filtro.id}`;
         url += `${f}`;
       });
-
     }
 
     let sort = `${this.prefix}.${agrupamento}.nome:asc`;
@@ -134,7 +170,7 @@ export class ProdutoOpcaoService {
   }
 
   visualizar(id: string): Observable<any> {
-    let url = `${this.urlServico}/${id}`
+    let url = `${this.urlServico}/${id}`;
 
     return this.http.get(url);
   }
