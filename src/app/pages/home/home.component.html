@@ -122,7 +122,7 @@
         <ng-container *ngIf="optionsRotativoMarcas && marcas">
             <owl-carousel-o [options]="optionsRotativoMarcas">
                 <ng-template carouselSlide *ngFor="let marca of marcas">
-                    <a class="marca" [routerLink]="['/m', marca.permalink]" [ngStyle]="{'background-image': marca.logo ? 'url(' + marca.logo.original + ')' : 'url(res/images/sem-capa-thumb.png)'}"></a>
+                    <a class="marca" [routerLink]="['/m', marca.permalink]" [ngStyle]="{'background-image': marca.logo ? 'url(' + marca.logo.original + ')' : 'url(/res/imagens/sem-imagem.png)'}"></a>
                 </ng-template>
             </owl-carousel-o>
         </ng-container>
