@@ -32,10 +32,12 @@ export class ProdutoOpcaoService {
 
     url += `${params}`;
 
-    if (search !== 'whatsapp') {
-      url += `&nome=${search}`;
-    } else {
-      url += `&produtoOpcao.produto.categoria.whatsapp=true`;
+    if (search) {
+      if (search !== 'whatsapp') {
+        url += `&nome=${search}`;
+      } else {
+        url += `&produtoOpcao.produto.categoria.whatsapp=true`;
+      }
     }
 
     url += `&_page=${page}`;
