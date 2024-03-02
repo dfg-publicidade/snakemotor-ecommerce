@@ -8,7 +8,7 @@ export class CategoriaService {
   urlServico: string;
   prefix: string = 'categoria';
   KEY_SESSION: string = 'categorias_principais';
-  categoriasPrincipais: string = 'capacetes,vestuario,acessorios,escapamentos,pneu';
+  categoriasPrincipais: string = 'capacetes,vestuario,acessorios,escapamentos,pneus';
 
   constructor(private http: HttpClient) {
     this.urlServico = `${environment.urlServico}${environment.apiApp}/${environment.versao}/categorias`;
