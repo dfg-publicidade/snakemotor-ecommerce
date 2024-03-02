@@ -92,9 +92,15 @@
           >
             <span
               class="badge position-absolute top-0 start-100 translate-middle bg-danger border border-light rounded-circle"
-              *ngIf="(getCarrinho()?.produtos?.length > 0) || (getCarrinhoWp()?.produtos?.length > 0)"
+              *ngIf="
+                getCarrinho()?.produtos?.length > 0 ||
+                getCarrinhoWp()?.produtos?.length > 0
+              "
             >
-              <span>{{ getCarrinho()?.produtos?.length + getCarrinhoWp()?.produtos?.length }}</span>
+              <span>{{
+                getCarrinho()?.produtos?.length +
+                  getCarrinhoWp()?.produtos?.length
+              }}</span>
             </span>
             <i class="fas fa-shopping-cart"></i>
           </button>
@@ -127,10 +133,18 @@
             }} d-xl-block d-sm-none d-md-flex d-lg-flex"
             *ngFor="let categoria of categorias"
           >
-            <a (click)="openMenu(categoria[0])">
-              <i class="icon icon-{{ categoria[0] }} outline"></i>
-              <span>{{ categoria[1].nome }}</span>
-            </a>
+            <ng-container *ngIf="categoria[1].nome !== 'Pneu'">
+              <a (click)="openMenu(categoria[0])">
+                <i class="icon icon-{{ categoria[0] }} outline"></i>
+                <span>{{ categoria[1].nome }}</span>
+              </a>
+            </ng-container>
+            <ng-container *ngIf="categoria[1].nome === 'Pneu'">
+              <a [routerLink]="['c', categoria[1].nome.toLowerCase()]">
+                <i class="icon icon-{{ categoria[0] }} outline"></i>
+                <span>{{ categoria[1].nome }}</span>
+              </a>
+            </ng-container>
             <div class="categoria-hover menu-{{ categoria[0] }}">
               <div class="bg">
                 <div
