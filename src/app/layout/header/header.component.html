@@ -133,13 +133,13 @@
             }} d-xl-block d-sm-none d-md-flex d-lg-flex"
             *ngFor="let categoria of categorias"
           >
-            <ng-container *ngIf="categoria[1].nome !== 'Pneu'">
+            <ng-container *ngIf="categoria[1].nome !== 'Pneus'">
               <a (click)="openMenu(categoria[0])">
                 <i class="icon icon-{{ categoria[0] }} outline"></i>
                 <span>{{ categoria[1].nome }}</span>
               </a>
             </ng-container>
-            <ng-container *ngIf="categoria[1].nome === 'Pneu'">
+            <ng-container *ngIf="categoria[1].nome === 'Pneus'">
               <a [routerLink]="['c', categoria[1].nome.toLowerCase()]">
                 <i class="icon icon-{{ categoria[0] }} outline"></i>
                 <span>{{ categoria[1].nome }}</span>
