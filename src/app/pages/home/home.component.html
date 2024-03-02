@@ -39,10 +39,10 @@
 </section>
 
 <!-- PRODUTOS COMPRAS POR WHATSAPP -->
-<section *ngIf="produtosPorCategoriaWhatsapp.length > 0">
+<section *ngIf="produtosPorCategoriaWhatsapp?.length > 0">
     <div class="container">
         <h1>
-            <strong class="left">Compra pelo whatsapp</strong>
+            <strong class="left">{{produtosPorCategoriaWhatsapp && produtosPorCategoriaWhatsapp[0].produto.categoria.nome}}</strong>
             <a [routerLink]="['/produtos']" [queryParams]="{q: 'whatsapp'}" routerLinkActive="router-link-active" class="right">veja mais +</a>
         </h1>
         <div class="produtos">
