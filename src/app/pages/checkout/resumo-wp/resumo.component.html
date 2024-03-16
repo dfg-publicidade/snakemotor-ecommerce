@@ -113,30 +113,6 @@
                   </span>
                 </td>
               </tr>
-              <tr *ngIf="endereco">
-                <td colspan="3">
-                  <p class="mb-0"><strong>Endereço de entrega</strong></p>
-                  <span>
-                    {{ endereco.logradouro }},
-                    {{ endereco.numero ? endereco.numero : "S/Nº"
-                    }}{{ endereco.complemento ? ", " : ""
-                    }}{{ endereco.complemento }}<br />
-                    {{ endereco.bairro }} - {{ endereco.cidade.nome }}/{{
-                      endereco.cidade.estado.sigla
-                    }}<br />
-                    CEP {{ endereco.cep }}
-                  </span>
-                </td>
-              </tr>
-              <tr *ngIf="formaEntrega">
-                <td colspan="3" class="last">
-                  <p class="mb-0"><strong>Forma de entrega</strong></p>
-                  <span>
-                    {{ formaEntrega.nome }} <br />
-                    Prazo de entrega: {{ formaEntrega.prazoEntrega }}
-                  </span>
-                </td>
-              </tr>
             </tbody>
           </table>
         </div>

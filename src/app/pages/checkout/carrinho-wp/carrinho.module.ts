@@ -7,6 +7,7 @@ import { ProdutoComponentModule } from 'src/app/componentes/produto/produto.modu
 import { CarrinhoWhatsappService } from 'src/app/service/carrinhoWhatsapp.service';
 import { CarrinhoDetailWhatsappComponent } from './carrinho-detail.component';
 import { CarrinhoRoutingWhatsappModule } from './carrinho-routing.module';
+import { PedidoWhatsappService } from 'src/app/service/pedidoWhatspapp.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CarrinhoRoutingWhatsappModule } from './carrinho-routing.module';
     })
   ],
   providers: [
-    CarrinhoWhatsappService
+    CarrinhoWhatsappService,
+    PedidoWhatsappService
   ]
 })
 export class CarrinhoWhatsappModule { }

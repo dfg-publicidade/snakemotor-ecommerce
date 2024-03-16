@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CarrinhoService } from 'src/app/service/carrinho.service';
 import { CarrinhoWhatsappService } from 'src/app/service/carrinhoWhatsapp.service';
 import { MetadataService } from 'src/app/service/metaData.service';
+import { PedidoWhatsappService } from 'src/app/service/pedidoWhatspapp.service';
 import { ProdutoUtil } from 'src/app/util/produtoUtil';
+
+declare var $: any;
 
 @Component({
   selector: 'app-carrinho-detail-whatsapp',
@@ -19,7 +21,10 @@ export class CarrinhoDetailWhatsappComponent implements OnInit {
   formaEntrega: any;
   formasEntrega: any;
   loadingServiceFrete: boolean = false;
+  response: any;
   private subscription: any;
+
+  loadingService: boolean = false;
 
   metatag: any = {};
 
@@ -27,7 +32,8 @@ export class CarrinhoDetailWhatsappComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private carrinhoService: CarrinhoWhatsappService,
-    private metadataService: MetadataService
+    private metadataService: MetadataService,
+    private pedidoWpService: PedidoWhatsappService
   ) {
     this.formFrete = formBuilder.group({
       cep: new FormControl('', [
@@ -108,6 +114,39 @@ export class CarrinhoDetailWhatsappComponent implements OnInit {
     this.atualizaValorCarrinho();
   }
 
+  finalizarCompra() {
+    this.loadingService = true;
+    let carrinho = this.carrinhoService.getCarrinho();
+
+    this.pedidoWpService.concluirPedido(carrinho)
+      .subscribe(
+        result => {
+          this.loadingService = false;
+
+          if (result.status === 'success') {
+            this.carrinhoService.removerCarrinho();
+            this.pedidoWpService.setPedidoCache(result);
+
+            setTimeout(() => {
+              this.router.navigate(['/resumo-wp']);
+            }, 100);
+
+          } else {
+            this.response = result;
+            this.scrollTopCarrinho();
+          }
+        },
+        error => {
+          this.loadingService = false;
+          this.response = error.error;
+          this.scrollTopCarrinho();
+        },
+        () => {
+          this.loadingService = false;
+        }
+      )
+  }
+
   consultarFrete() {
     delete this.formasEntrega;
     this.formFrete.controls.formaEntrega.setValue('');
@@ -141,5 +180,11 @@ export class CarrinhoDetailWhatsappComponent implements OnInit {
     } else {
       this.carrinho = {};
     }
+  }
+
+  scrollTopCarrinho() {
+    setTimeout(() => {
+      $('html, body').animate({ scrollTop: $('div.carrinho').offset().top - 200 }, 300);
+    }, 100);
   }
 }

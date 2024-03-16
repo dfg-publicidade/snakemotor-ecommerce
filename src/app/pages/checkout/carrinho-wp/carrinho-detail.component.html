@@ -85,47 +85,6 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="frete" *ngIf="carrinho">
-                    <form [formGroup]="formFrete" (submit)="consultarFrete()">
-                        <div class="form-group row">
-                            <label class="titulo">calcule o frete/prazo</label>
-                            <div class="col-sm-6 col-md-6 col-lg-4 pe-0">
-                                <input type="text" class="form-control" formControlName="cep" mask="00.000-000">
-                            </div>
-                            <div class="col-xs-3 col-sm-4 col-md-6 col-lg-1 ms-2 ps-0">
-                                <button type="submit" class="btn" [disabled]="formFrete.status === 'INVALID' || loadingServiceFrete">
-                                    <span *ngIf="!loadingServiceFrete">OK</span>
-                                    <span *ngIf="loadingServiceFrete" class="loading">
-                                        <img src="/res/imagens/spinner-white.svg" style="width: 22px;" />
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-lg-6 center">
-                                <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank"><small id="emailHelp" class="form-text text-muted">não sei meu CEP</small></a>
-                            </div>
-                        </div>
-
-                        <div class="frete-tipos">
-                            <!-- LISTA DE FORMAS DE ENTREGA -->
-                            <div class="form-group form-check mb-1" *ngFor="let formaEntrega of formasEntrega">
-                                <label>
-                                    <!-- <input type="radio" class="form-check-input" name="formaEntrega" formControlName="formaEntrega" [value]="formaEntrega.permalink"> -->
-                                    <span>
-                                        {{formaEntrega.nome}}:
-                                        <span [ngClass]="{gratis: !formaEntrega.valor}"> {{formaEntrega.valor ? formaEntrega.valor : 'Grátis'}} </span>
-                                        <ng-container *ngIf="formaEntrega.prazoEntrega">( {{formaEntrega.prazoEntrega}} )</ng-container>
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="cupom">
-                    <p>
-                        <strong>CUPONS E VALES</strong> <br />
-                        Possui um Cupom de desconto ou Vale-troca? Utilize-o na página de pagamento e aproveite!
-                    </p>
-                </div>
             </div>
             <div class="info" *ngIf="carrinho && carrinho.produtos">
                 <h3>Resumo</h3>
@@ -148,14 +107,22 @@
                 </p>
                 <p class="valor-avista" *ngIf="carrinho.valorAVista"><strong>{{carrinho.valorAVista}}</strong></p>
                 <div class="botoes">
-                    <a [routerLink]="['/endereco-wp']">
-                        <button type="button" class="custom buy">
-                            Continuar
-                        </button>
-                    </a>
-                    <p><small><i>próxima etapa: endereço</i></small></p>
+                    <button
+                      (click)="finalizarCompra()"
+                      type="button"
+                      class="custom buy"
+                      [disabled]="loadingServiceFrete"
+                    >
+                      <span class="loading" *ngIf="loadingServiceFrete"
+                        ><img src="/res/imagens/spinner-white.svg"
+                      /></span>
+                      Concluir pedido
+                    </button>
                     <a class="link" [routerLink]="['/']">escolher mais produtos</a>
-                </div>
+                    <a class="link" [routerLink]="['/carrinho']"
+                      >alterar item do carrinho</a
+                    >
+                  </div>
             </div>
             <div class="carrinho-vazio" *ngIf="carrinho && (!carrinho.produtos || (carrinho.produtos && carrinho.produtos.length === 0))">
                 <span class="icone">

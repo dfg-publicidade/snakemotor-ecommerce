@@ -49,7 +49,6 @@ export class HeaderComponent implements OnInit {
       .subscribe((result) => {
         this.categorias = Object.entries(result.content);
 
-        console.log(this.categorias);
         this.categoriaService.setCategoriasPrincipais(this.categorias);
 
         setTimeout(() => {

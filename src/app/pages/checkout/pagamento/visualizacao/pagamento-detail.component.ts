@@ -282,7 +282,7 @@ export class PagamentoDetailComponent implements OnInit {
       let hash = '';
 
       if (response.status == 'error') {
-        console.log(response.message);
+        console.error(response.message);
       } else {
         hash = response.senderHash;
       }
@@ -302,9 +302,7 @@ export class PagamentoDetailComponent implements OnInit {
         this.verificaQtdeParcelas();
       },
       error: (response: any) => {
-        // this.form.controls['numeroCartao'].setErrors({ invalid: true });
-        // this.form.controls['numeroCartao'].updateValueAndValidity();
-        console.log('erro tipo cartao', response);
+        console.error('erro tipo cartao', response);
       },
       complete: (response: any) => {
         //
@@ -325,7 +323,7 @@ export class PagamentoDetailComponent implements OnInit {
         this.scrollTop();
       },
       error: (response: any) => {
-        console.log('erro parcelas', response);
+        console.error('erro parcelas', response);
       },
       complete: (response: any) => {
         //
@@ -348,7 +346,7 @@ export class PagamentoDetailComponent implements OnInit {
         this.finalizarCompra();
       },
       error: (response: any) => {
-        console.log('erro', response);
+        console.error('erro', response);
       },
       complete: (response: any) => {
         //

@@ -51,11 +51,6 @@ const routes: Routes = [
         loadChildren: () => import('./pages/checkout/endereco/endereco.module').then(m => m.EnderecoModule)
       },
       {
-        path: 'endereco-wp',
-        'canActivate': [AuthGuard],
-        loadChildren: () => import('./pages/checkout/endereco-wp/endereco.module').then(m => m.EnderecoWhatsappModule)
-      },
-      {
         path: 'pagamento',
         'canActivate': [AuthGuard],
         loadChildren: () => import('./pages/checkout/pagamento/pagamento.module').then(m => m.PagamentoModule)
