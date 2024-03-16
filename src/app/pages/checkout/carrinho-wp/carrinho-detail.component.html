@@ -119,9 +119,6 @@
                       Concluir pedido
                     </button>
                     <a class="link" [routerLink]="['/']">escolher mais produtos</a>
-                    <a class="link" [routerLink]="['/carrinho']"
-                      >alterar item do carrinho</a
-                    >
                   </div>
             </div>
             <div class="carrinho-vazio" *ngIf="carrinho && (!carrinho.produtos || (carrinho.produtos && carrinho.produtos.length === 0))">
