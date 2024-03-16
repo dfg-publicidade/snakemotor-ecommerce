@@ -111,9 +111,9 @@
                       (click)="finalizarCompra()"
                       type="button"
                       class="custom buy"
-                      [disabled]="loadingServiceFrete"
+                      [disabled]="loadingService || loadingServiceFrete"
                     >
-                      <span class="loading" *ngIf="loadingServiceFrete"
+                      <span class="loading" *ngIf="loadingService || loadingServiceFrete"
                         ><img src="/res/imagens/spinner-white.svg"
                       /></span>
                       Concluir pedido
