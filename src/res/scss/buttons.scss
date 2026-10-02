@@ -1,8 +1,11 @@
 @import "../variables.scss";
 
-button.custom {
+button.custom, a.custom {
     border: none;
     padding: 10px 50px;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
 
     &.buy {
         font-weight: bold;
@@ -13,6 +16,25 @@ button.custom {
         &:disabled{
             background: #e68181;
             cursor: no-drop;
+        }
+
+        & > i {
+            padding-right: 10px;
+        }
+    }
+
+    &.whatsapp {
+        font-weight: bold;
+        font-size: 18px;
+        background: #25d366;
+        color: #fff;
+        border-radius: 4px;
+        text-align: center;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background: #20ba5a;
+            color: #fff;
         }
 
         & > i {

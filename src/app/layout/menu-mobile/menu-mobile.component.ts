@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { CarrinhoWhatsappService } from 'src/app/service/carrinhoWhatsapp.service';
 import { CategoriaService } from 'src/app/service/categoria.service';
 import { PerfilService } from 'src/app/service/perfil.service';
 declare var $: any;
@@ -13,8 +13,11 @@ export class MenuMobileComponent implements OnInit {
 
   configAlert: any = {};
 
-  constructor(private categoriaService: CategoriaService, private perfilService: PerfilService) {
-  }
+  constructor(
+    private categoriaService: CategoriaService,
+    private perfilService: PerfilService,
+    private carrinhoWpService: CarrinhoWhatsappService
+  ) {}
 
   ngOnInit() {
     this.listarCategorias();
@@ -36,6 +39,10 @@ export class MenuMobileComponent implements OnInit {
 
   getUsuario() {
     return this.perfilService.getSession();
+  }
+
+  getCarrinhoWp() {
+    return this.carrinhoWpService.getCarrinho();
   }
 
   public toggleMenu() {

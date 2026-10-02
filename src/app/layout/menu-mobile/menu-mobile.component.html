@@ -24,7 +24,7 @@
             <strong>Meu carrinho (site)</strong>
           </a>
         </li>
-        <li>
+        <li *ngIf="getCarrinhoWp()?.produtos?.length > 0">
           <a class="destaque" [routerLink]="['/carrinho-wp']">
             <span>&bull;&nbsp;</span>
             <strong>Meu carrinho (whatsapp)</strong>

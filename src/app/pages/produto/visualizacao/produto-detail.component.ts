@@ -24,6 +24,8 @@ export class ProdutoDetailComponent implements OnInit {
   url: string = '/produtos';
   urlCarrinho: string = '/carrinho';
   urlCarrinhoWp: string = '/carrinho-wp';
+  whatsappNumero: string = '5519996257084';
+  urlWhatsapp: any;
 
   produtoOpcao: any;
   cores: any;
@@ -138,6 +140,15 @@ export class ProdutoDetailComponent implements OnInit {
 
       this.getQtdes();
 
+      if (this.isProdutoPneu()) {
+        this.formVariacao.get('tamanho').clearValidators();
+        this.formVariacao.get('tamanho').updateValueAndValidity();
+        this.formVariacao.get('qtde').clearValidators();
+        this.formVariacao.get('qtde').updateValueAndValidity();
+      }
+
+      this.atualizarUrlWhatsapp();
+
       //INICIO META TAG
       this.metatag.url = this.router.url;
       this.metatag.title = `${this.produtoOpcao.produto.nome} | ${environment.title}`;
@@ -153,6 +164,61 @@ export class ProdutoDetailComponent implements OnInit {
         true
       );
     });
+  }
+
+  isProdutoPneu(): boolean {
+    if (!this.produtoOpcao || !this.produtoOpcao.produto || !this.produtoOpcao.produto.categoria) {
+      return false;
+    }
+    const categoria = this.produtoOpcao.produto.categoria;
+    const nome = (categoria.nome || '').toLowerCase().trim();
+    const permalink = (categoria.permalink || '').toLowerCase().trim();
+    const superNome = (categoria.supercategoria?.nome || '').toLowerCase().trim();
+    const superPermalink = (categoria.supercategoria?.permalink || '').toLowerCase().trim();
+
+    return (
+      categoria.whatsapp === true ||
+      categoria.whatsapp === 'true' ||
+      nome === 'pneus' ||
+      nome === 'pneu' ||
+      permalink === 'pneus' ||
+      permalink === 'pneu' ||
+      superNome === 'pneus' ||
+      superNome === 'pneu' ||
+      superPermalink === 'pneus' ||
+      superPermalink === 'pneu'
+    );
+  }
+
+  atualizarUrlWhatsapp() {
+    if (!this.produtoOpcao || !this.produtoOpcao.produto) {
+      this.urlWhatsapp = this.sanitizer.bypassSecurityTrustUrl(
+        `https://api.whatsapp.com/send?phone=${this.whatsappNumero}&app_absent=0`
+      );
+      return;
+    }
+
+    let texto = `Olá! Tenho interesse no produto: ${this.produtoOpcao.produto.nome}`;
+
+    const opcaoAtual = this.produtoOpcaoSelecionado || this.produtoOpcao;
+    if (opcaoAtual && opcaoAtual.tamanhoOpcao && opcaoAtual.tamanhoOpcao.nome) {
+      texto += ` (Tamanho/Medida: ${opcaoAtual.tamanhoOpcao.nome})`;
+    }
+
+    const valor =
+      opcaoAtual.precoPromocional ||
+      opcaoAtual.precoVenda ||
+      this.produtoOpcao.precoPromocional ||
+      this.produtoOpcao.precoVenda;
+    if (valor && valor !== 'Preços sob consulta') {
+      texto += ` - Valor: ${valor}`;
+    }
+
+    this.urlWhatsapp = this.sanitizer.bypassSecurityTrustUrl(
+      `https://api.whatsapp.com/send?phone=${this.whatsappNumero}&text=${encodeURIComponent(
+        texto
+      )}&app_absent=0`
+    );
   }
 
   listarProdutosPorCategoria(
@@ -174,9 +240,12 @@ export class ProdutoDetailComponent implements OnInit {
       (pOpcao: any) => pOpcao && pOpcao.id === this.op
     );
 
-    this.produtoOpcaoSelecionado.adicionadoCarrinho = this.jaPossuiCarrinho(this.produtoOpcaoSelecionado.id);
+    if (this.produtoOpcaoSelecionado) {
+      this.produtoOpcaoSelecionado.adicionadoCarrinho = this.jaPossuiCarrinho(this.produtoOpcaoSelecionado.id);
+    }
 
     this.getQtdes();
+    this.atualizarUrlWhatsapp();
   }
 
   getQtdes() {
@@ -204,6 +273,10 @@ export class ProdutoDetailComponent implements OnInit {
   }
 
   comprar() {
+    if (this.isProdutoPneu()) {
+      return;
+    }
+
     let carrinho = this.carrinhoService.getCarrinho();
 
     if (!carrinho) {
@@ -223,6 +296,10 @@ export class ProdutoDetailComponent implements OnInit {
   }
 
   comprarWp() {
+    if (this.isProdutoPneu()) {
+      return;
+    }
+
     let carrinho = this.carrinhoWpService.getCarrinho();
 
     if (!carrinho) {

@@ -97,61 +97,110 @@
                     </span> -->
             <p>{{ produtoOpcao?.produto?.descricaoCurta }}</p>
           </div>
-          <div class="preco" *ngIf="qtdes && qtdes.length > 0">
+          <div class="preco" *ngIf="(qtdes && qtdes.length > 0) || isProdutoPneu()">
             <!-- PRECO VALOR PADRÃO RISCADO, POIS EXISTE VALOR PROMOCIONAL -->
             <p
               class="valor-normal"
-              [ngClass]="{ empty: !produtoOpcao.precoPromocional }"
+              [ngClass]="{
+                empty: !(
+                  produtoOpcaoSelecionado?.precoPromocional ||
+                  produtoOpcao.precoPromocional
+                )
+              }"
             >
               {{
-                produtoOpcao.precoPromocional
-                  ? produtoOpcao.precoVenda
+                (produtoOpcaoSelecionado?.precoPromocional ||
+                produtoOpcao.precoPromocional)
+                  ? (produtoOpcaoSelecionado?.precoVenda ||
+                    produtoOpcao.precoVenda)
                   : "&nbsp;"
               }}
             </p>
 
             <!-- PRECO VALOR PROMOCIONAL -->
-            <p class="valor-vigente" *ngIf="produtoOpcao.precoPromocional">
-              {{ produtoOpcao.precoPromocional }}
+            <p
+              class="valor-vigente"
+              *ngIf="
+                produtoOpcaoSelecionado?.precoPromocional ||
+                produtoOpcao.precoPromocional
+              "
+            >
+              {{
+                produtoOpcaoSelecionado?.precoPromocional ||
+                  produtoOpcao.precoPromocional
+              }}
             </p>
             <p
               class="valor-parcelado"
               *ngIf="
-                produtoOpcao.precoPromocional &&
-                produtoOpcao.precoPromocionalParcelado
+                (produtoOpcaoSelecionado?.precoPromocional ||
+                  produtoOpcao.precoPromocional) &&
+                (produtoOpcaoSelecionado?.precoPromocionalParcelado ||
+                  produtoOpcao.precoPromocionalParcelado)
               "
             >
-              {{ produtoOpcao.precoPromocionalParcelado }}
+              {{
+                produtoOpcaoSelecionado?.precoPromocionalParcelado ||
+                  produtoOpcao.precoPromocionalParcelado
+              }}
             </p>
 
             <!-- PRECO VALOR PADRÃO -->
-            <p class="valor-vigente" *ngIf="!produtoOpcao.precoPromocional">
-              {{ produtoOpcao.precoVenda }}
+            <p
+              class="valor-vigente"
+              *ngIf="
+                !(
+                  produtoOpcaoSelecionado?.precoPromocional ||
+                  produtoOpcao.precoPromocional
+                )
+              "
+            >
+              {{
+                produtoOpcaoSelecionado?.precoVenda ||
+                  produtoOpcao.precoVenda
+              }}
             </p>
             <p
               class="valor-parcelado"
               *ngIf="
-                !produtoOpcao.precoPromocional &&
-                produtoOpcao.precoVendaParcelado
+                !(
+                  produtoOpcaoSelecionado?.precoPromocional ||
+                  produtoOpcao.precoPromocional
+                ) &&
+                (produtoOpcaoSelecionado?.precoVendaParcelado ||
+                  produtoOpcao.precoVendaParcelado)
               "
             >
-              {{ produtoOpcao.precoVendaParcelado }} ou
+              {{
+                produtoOpcaoSelecionado?.precoVendaParcelado ||
+                  produtoOpcao.precoVendaParcelado
+              }} ou
             </p>
             <p
               class="valor-avista text-success"
-              *ngIf="produtoOpcao.precoAVista"
+              *ngIf="
+                produtoOpcaoSelecionado?.precoAVista ||
+                produtoOpcao.precoAVista
+              "
             >
-              <strong>{{ produtoOpcao.precoAVista }}</strong>
+              <strong>{{
+                produtoOpcaoSelecionado?.precoAVista ||
+                  produtoOpcao.precoAVista
+              }}</strong>
             </p>
 
             <!-- TAGS de destaque -->
             <span class="tag lancamento" *ngIf="produtoOpcao.lancamento"
               >Lançamento</span
             >
-            <span class="tag exclusivo" *ngIf="produtoOpcao.exclusivoSite"
+            <span
+              class="tag exclusivo"
+              *ngIf="produtoOpcao.exclusivoSite && !isProdutoPneu()"
               >Exclusivo no site</span
             >
-            <span class="tag frete-gratis" *ngIf="produtoOpcao.freteGratis"
+            <span
+              class="tag frete-gratis"
+              *ngIf="produtoOpcao.freteGratis && !isProdutoPneu()"
               >Frete Grátis</span
             >
             <span class="tag desconto" *ngIf="produtoOpcao.emOferta"
@@ -192,14 +241,15 @@
                     [value]="pOpcao.id"
                     *ngFor="let pOpcao of tamanhos"
                     [disabled]="
-                      !pOpcao.estoqueAtual ||
-                      (pOpcao.estoqueAtual && pOpcao.estoqueAtual === 0)
+                      !isProdutoPneu() &&
+                      (!pOpcao.estoqueAtual ||
+                        (pOpcao.estoqueAtual && pOpcao.estoqueAtual === 0))
                     "
                     >{{ pOpcao.tamanhoOpcao.nome }}</ng-option
                   >
                 </ng-select>
               </div>
-              <div *ngIf="qtdes && qtdes.length > 0">
+              <div *ngIf="qtdes && qtdes.length > 0 && !isProdutoPneu()">
                 <label>Quantidade</label>
                 <ng-select
                   formControlName="qtde"
@@ -213,29 +263,41 @@
               </div>
             </div>
           </form>
-          <ng-container
-            *ngIf="produtoOpcao.precoVenda !== 'Preços sob consulta'"
-          >
-            <button
-              *ngIf="qtdes && qtdes.length > 0"
-              type="button"
-              class="custom buy"
-              (click)="
-                !produtoOpcao.produto.categoria.whatsapp
-                  ? comprar()
-                  : comprarWp()
-              "
-              [disabled]="
-                formVariacao.status === 'INVALID' ||
-                jaPossuiCarrinho(op) ||
-                (produtoOpcaoSelecionado &&
-                  produtoOpcaoSelecionado.adicionadoCarrinho)
-              "
+
+          <!-- SE FOR PNEU: BOTÃO WHATSAPP (NÃO PERMITE COMPRA PELO SITE) -->
+          <ng-container *ngIf="isProdutoPneu()">
+            <a
+              [href]="urlWhatsapp"
+              target="_blank"
+              class="custom whatsapp"
             >
-              <i class="fas fa-shopping-cart"></i>
-              {{ jaPossuiCarrinho(op) ? "Adicionado no carrinho" : "Comprar" }}
-            </button>
-            <h3 *ngIf="qtdes && qtdes.length === 0">Produto indisponível</h3>
+              <i class="fab fa-whatsapp"></i>
+              Chamar no WhatsApp
+            </a>
+          </ng-container>
+
+          <!-- SE NÃO FOR PNEU: COMPRA NORMAL PELO SITE -->
+          <ng-container *ngIf="!isProdutoPneu()">
+            <ng-container
+              *ngIf="produtoOpcao.precoVenda !== 'Preços sob consulta'"
+            >
+              <button
+                *ngIf="qtdes && qtdes.length > 0"
+                type="button"
+                class="custom buy"
+                (click)="comprar()"
+                [disabled]="
+                  formVariacao.status === 'INVALID' ||
+                  jaPossuiCarrinho(op) ||
+                  (produtoOpcaoSelecionado &&
+                    produtoOpcaoSelecionado.adicionadoCarrinho)
+                "
+              >
+                <i class="fas fa-shopping-cart"></i>
+                {{ jaPossuiCarrinho(op) ? "Adicionado no carrinho" : "Comprar" }}
+              </button>
+              <h3 *ngIf="qtdes && qtdes.length === 0">Produto indisponível</h3>
+            </ng-container>
           </ng-container>
         </div>
       </ng-container>
