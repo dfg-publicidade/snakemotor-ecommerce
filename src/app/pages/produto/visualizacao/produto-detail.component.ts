@@ -167,27 +167,7 @@ export class ProdutoDetailComponent implements OnInit {
   }
 
   isProdutoPneu(): boolean {
-    if (!this.produtoOpcao || !this.produtoOpcao.produto || !this.produtoOpcao.produto.categoria) {
-      return false;
-    }
-    const categoria = this.produtoOpcao.produto.categoria;
-    const nome = (categoria.nome || '').toLowerCase().trim();
-    const permalink = (categoria.permalink || '').toLowerCase().trim();
-    const superNome = (categoria.supercategoria?.nome || '').toLowerCase().trim();
-    const superPermalink = (categoria.supercategoria?.permalink || '').toLowerCase().trim();
-
-    return (
-      categoria.whatsapp === true ||
-      categoria.whatsapp === 'true' ||
-      nome === 'pneus' ||
-      nome === 'pneu' ||
-      permalink === 'pneus' ||
-      permalink === 'pneu' ||
-      superNome === 'pneus' ||
-      superNome === 'pneu' ||
-      superPermalink === 'pneus' ||
-      superPermalink === 'pneu'
-    );
+    return ProdutoUtil.isProdutoPneu(this.produtoOpcao);
   }
 
   atualizarUrlWhatsapp() {

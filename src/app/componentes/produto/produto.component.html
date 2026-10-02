@@ -1,8 +1,8 @@
 <a [routerLink]="[url, item.produto.permalink]" [queryParams]="{op: item.id}" class="produto tag" *ngIf="item && item.produto">
     <div class="tags">
         <span class="tag lancamento" *ngIf="item.lancamento">Lançamento</span>
-        <span class="tag exclusivo" *ngIf="item.exclusivoSite">Exclusivo no site</span>
-        <span class="tag frete-gratis" *ngIf="item.freteGratis">Frete Grátis</span>
+        <span class="tag exclusivo" *ngIf="item.exclusivoSite && !isProdutoPneu()">Exclusivo no site</span>
+        <span class="tag frete-gratis" *ngIf="item.freteGratis && !isProdutoPneu()">Frete Grátis</span>
         <span class="tag desconto" *ngIf="item.emOferta">Promoção</span>
     </div>
     <div class="imagem" [ngStyle]="{'background-image': 'url(' + item.imagem + ')'}"></div>
@@ -30,25 +30,25 @@
 
     </div>
     
-    <!-- PRODUTO DISPONÍVEL -->
-    <div class="preco" *ngIf="item.estoqueAtual && item.estoqueAtual > 0">
+    <!-- PRODUTO DISPONÍVEL OU PNEU -->
+    <div class="preco" *ngIf="(item.estoqueAtual && item.estoqueAtual > 0) || isProdutoPneu()">
         <!-- PRECO VALOR PADRÃO RISCADO, POIS EXISTE VALOR PROMOCIONAL -->
         <p class="valor-normal" [ngClass]="{empty: !item.precoPromocional}">{{item.precoPromocional ? item.precoVenda : '&nbsp;'}}</p>
 
         <!-- PRECO VALOR PROMOCIONAL -->
         <p class="valor-vigente" *ngIf="item.precoPromocional">{{item.precoPromocional}}</p>
-        <p class="valor-parcelado" *ngIf="item.precoPromocional && item.precoPromocionalParcelado">{{item.precoPromocionalParcelado}}</p>
+        <p class="valor-parcelado" *ngIf="!isProdutoPneu() && item.precoPromocional && item.precoPromocionalParcelado">{{item.precoPromocionalParcelado}}</p>
 
         <!-- PRECO VALOR PADRÃO -->
         <p class="valor-vigente" *ngIf="!item.precoPromocional">{{item.precoVenda}}</p>
-        <p class="valor-parcelado" *ngIf="!item.precoPromocional && item.precoVendaParcelado">{{item.precoVendaParcelado}}</p>
+        <p class="valor-parcelado" *ngIf="!isProdutoPneu() && !item.precoPromocional && item.precoVendaParcelado">{{item.precoVendaParcelado}}</p>
 
         <!-- PRECO A VISTA-->
-        <p class="valor-avista text-success" *ngIf="item.precoAVista"><strong>{{item.precoAVista}}</strong></p>
+        <p class="valor-avista text-success" *ngIf="!isProdutoPneu() && item.precoAVista"><strong>{{item.precoAVista}}</strong></p>
     </div>
 
     <!-- PRODUTO INDISPONÍVEL -->
-    <div class="preco indisponivel" *ngIf="!item.estoqueAtual || (item.estoqueAtual && item.estoqueAtual === 0)">
+    <div class="preco indisponivel" *ngIf="!isProdutoPneu() && (!item.estoqueAtual || (item.estoqueAtual && item.estoqueAtual === 0))">
         <p class="valor-vigente">Produto indisponível</p>
     </div>
 </a>

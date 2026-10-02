@@ -35,4 +35,8 @@ export class ProdutoCComponent implements OnInit {
       }
     }
   }
+
+  isProdutoPneu(): boolean {
+    return ProdutoUtil.isProdutoPneu(this.item);
+  }
 }

@@ -133,6 +133,7 @@
             <p
               class="valor-parcelado"
               *ngIf="
+                !isProdutoPneu() &&
                 (produtoOpcaoSelecionado?.precoPromocional ||
                   produtoOpcao.precoPromocional) &&
                 (produtoOpcaoSelecionado?.precoPromocionalParcelado ||
@@ -163,6 +164,7 @@
             <p
               class="valor-parcelado"
               *ngIf="
+                !isProdutoPneu() &&
                 !(
                   produtoOpcaoSelecionado?.precoPromocional ||
                   produtoOpcao.precoPromocional
@@ -179,8 +181,9 @@
             <p
               class="valor-avista text-success"
               *ngIf="
-                produtoOpcaoSelecionado?.precoAVista ||
-                produtoOpcao.precoAVista
+                !isProdutoPneu() &&
+                (produtoOpcaoSelecionado?.precoAVista ||
+                  produtoOpcao.precoAVista)
               "
             >
               <strong>{{

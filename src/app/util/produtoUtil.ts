@@ -47,4 +47,33 @@ export class ProdutoUtil {
 
         return galeria;
     }
+
+    static isProdutoPneu(item: any): boolean {
+        if (!item) {
+            return false;
+        }
+        let categoria = item.categoria || (item.produto ? item.produto.categoria : null) || (item.nome && (item.permalink || item.whatsapp !== undefined) ? item : null);
+        if (!categoria) {
+            return false;
+        }
+        const nome = (categoria.nome || '').toLowerCase().trim();
+        const permalink = (categoria.permalink || '').toLowerCase().trim();
+        const superNome = (categoria.supercategoria?.nome || '').toLowerCase().trim();
+        const superPermalink = (categoria.supercategoria?.permalink || '').toLowerCase().trim();
+
+        return (
+            categoria.whatsapp === true ||
+            categoria.whatsapp === 'true' ||
+            categoria.whatsapp === 1 ||
+            categoria.whatsapp === '1' ||
+            nome === 'pneus' ||
+            nome === 'pneu' ||
+            permalink === 'pneus' ||
+            permalink === 'pneu' ||
+            superNome === 'pneus' ||
+            superNome === 'pneu' ||
+            superPermalink === 'pneus' ||
+            superPermalink === 'pneu'
+        );
+    }
 }
