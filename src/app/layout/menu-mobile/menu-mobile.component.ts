@@ -1,3 +1,4 @@
+import { Component, OnInit } from '@angular/core';
 import { CarrinhoWhatsappService } from 'src/app/service/carrinhoWhatsapp.service';
 import { CategoriaService } from 'src/app/service/categoria.service';
 import { PerfilService } from 'src/app/service/perfil.service';
