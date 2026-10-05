@@ -177,8 +177,9 @@
                             <small class="form-text text-danger" *ngIf="form.controls.cpfCnpj.touched && form.controls.cpfCnpj.hasError('required')">Preencha o {{form.value.tipo === 'JURIDICA' ? 'CNPJ' : 'CPF'}}</small>
                         </div>
                         <div class="form-floating col-xs-12 col-sm-12 col-md-6 col-lg-4 mb-2" *ngIf="!form.value.tipo || (form.value.tipo === 'FISICA')">
-                            <input type="text" formControlName="dataNascto" class="form-control" placeholder="Data de nascimento" mask="00/00/0000">
+                            <input type="text" formControlName="dataNascto" class="form-control" placeholder="Data de nascimento" mask="00/00/0000" required>
                             <label>Data de Nascimento</label>
+                            <small class="form-text text-danger" *ngIf="form.controls.dataNascto.touched && form.controls.dataNascto.hasError('required')">Preencha a data de nascimento</small>
                         </div>
                         <!-- CAMPO DE PARCELAMENTO com VALORES PREENCHIDOS -->
                         <div class="col-xs-12 col-sm-12 col-lg-12 mb-2" *ngIf="parcelamento && parcelamento.installments">

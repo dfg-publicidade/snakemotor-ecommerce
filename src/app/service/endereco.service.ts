@@ -28,14 +28,15 @@ export class EnderecoService {
     let url = this.urlServico;
 
     let body = new FormData();
+    const data = entity && typeof entity.getRawValue === 'function' ? entity.getRawValue() : (entity?.value || entity || {});
 
-    body.append('cep', entity.value.cep ? entity.value.cep : '');
-    body.append('logradouro', entity.value.logradouro ? entity.value.logradouro : '');
-    body.append('numero', entity.value.numero ? entity.value.numero : '');
-    body.append('complemento', entity.value.complemento ? entity.value.complemento : '');
-    body.append('bairro', entity.value.bairro ? entity.value.bairro : '');
-    body.append('cidade', entity.value.cidade ? entity.value.cidade : '');
-    body.append('principal', entity.value.principal ? entity.value.principal : false);
+    body.append('cep', data.cep ? data.cep : '');
+    body.append('logradouro', data.logradouro ? data.logradouro : '');
+    body.append('numero', data.numero ? data.numero : '');
+    body.append('complemento', data.complemento ? data.complemento : '');
+    body.append('bairro', data.bairro ? data.bairro : '');
+    body.append('cidade', data.cidade ? data.cidade : '');
+    body.append('principal', data.principal ? data.principal : false);
 
     return this.http.post(url, body);
   }
@@ -50,14 +51,15 @@ export class EnderecoService {
     let url = `${this.urlServico}/${enderecoId}`;
 
     let body = new FormData();
+    const data = entity && typeof entity.getRawValue === 'function' ? entity.getRawValue() : (entity?.value || entity || {});
 
-    body.append('cep', entity.value.cep ? entity.value.cep : '');
-    body.append('logradouro', entity.value.logradouro ? entity.value.logradouro : '');
-    body.append('numero', entity.value.numero ? entity.value.numero : '');
-    body.append('complemento', entity.value.complemento ? entity.value.complemento : '');
-    body.append('bairro', entity.value.bairro ? entity.value.bairro : '');
-    body.append('cidade', entity.value.cidade ? entity.value.cidade : '');
-    body.append('principal', entity.value.principal ? entity.value.principal : false);
+    body.append('cep', data.cep ? data.cep : '');
+    body.append('logradouro', data.logradouro ? data.logradouro : '');
+    body.append('numero', data.numero ? data.numero : '');
+    body.append('complemento', data.complemento ? data.complemento : '');
+    body.append('bairro', data.bairro ? data.bairro : '');
+    body.append('cidade', data.cidade ? data.cidade : '');
+    body.append('principal', data.principal ? data.principal : false);
 
     return this.http.put(url, body);
   }

@@ -244,6 +244,12 @@ export class EnderecoComponent implements OnInit {
 
   inserirEndereco() {
     delete this.responseEnderecoCreate;
+
+    if (this.formEnderecoCreate.invalid) {
+      this.formEnderecoCreate.markAllAsTouched();
+      return;
+    }
+
     this.loadingServiceEnderecoCreate = true;
     this.enderecoService.inserir(this.formEnderecoCreate)
       .subscribe(
@@ -362,7 +368,13 @@ export class EnderecoComponent implements OnInit {
               this.formEnderecoCreate.controls.cidade.enable();
 
               if (this.formEnderecoCreate.value.nomeCidade) {
-                let cidade = this.cidades.find((cidade: any) => cidade.nome === this.formEnderecoCreate.value.nomeCidade);
+                const norm = (str: string) => (str || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase();
+                const buscaNome = norm(this.formEnderecoCreate.value.nomeCidade);
+                let cidade = this.cidades.find((item: any) => norm(item.nome) === buscaNome);
+
+                if (!cidade && this.cidades.length === 1) {
+                  cidade = this.cidades[0];
+                }
 
                 if (cidade) {
                   this.formEnderecoCreate.controls.cidade.setValue(cidade.id);

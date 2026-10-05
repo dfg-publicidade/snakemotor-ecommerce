@@ -135,7 +135,9 @@ export class PagamentoDetailComponent implements OnInit {
                     cpfCnpj: new FormControl('', [
                       Validators.required
                     ]),
-                    dataNascto: new FormControl(''),
+                    dataNascto: new FormControl('', [
+                      Validators.required
+                    ]),
                     cvv: new FormControl('', [
                       Validators.required
                     ]),
@@ -150,6 +152,15 @@ export class PagamentoDetailComponent implements OnInit {
                   );
                   this.form.controls.formaPagamento.setValue('creditCard');
                   this.form.controls.qtdeParcelas.disable();
+
+                  this.form.controls.tipo.valueChanges.subscribe((tipo: string) => {
+                    if (tipo === 'JURIDICA') {
+                      this.form.controls.dataNascto.clearValidators();
+                    } else {
+                      this.form.controls.dataNascto.setValidators([Validators.required]);
+                    }
+                    this.form.controls.dataNascto.updateValueAndValidity();
+                  });
 
                   this.form.controls.numeroCartao.valueChanges.subscribe(() => {
                     setTimeout(() => {

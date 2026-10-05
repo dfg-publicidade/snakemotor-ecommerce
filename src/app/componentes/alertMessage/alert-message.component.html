@@ -4,7 +4,7 @@
   <p [innerHtml]="result.content.message | sanitizeHtml"></p>
   <div *ngIf="result.content.messageExtra" [innerHtml]="result.content.messageExtra | sanitizeHtml"></div>
   <ul *ngIf="result.content.errors_validation">
-      <li *ngFor="let erro of result.content.errors_validation">{{erro}}</li>
+      <li *ngFor="let erro of result.content.errors_validation">{{erro?.message || erro?.mensagem || (erro?.code ? (erro.code + ': ' + (erro.message || erro.mensagem)) : erro)}}</li>
   </ul>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
